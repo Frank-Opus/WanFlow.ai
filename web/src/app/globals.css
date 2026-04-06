@@ -378,3 +378,411 @@ textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+:root {
+  --mk-bg-0: #06111f;
+  --mk-bg-1: #0a1b2f;
+  --mk-bg-2: #102742;
+  --mk-bg-3: #15324f;
+  --mk-line-1: rgba(91, 154, 197, 0.18);
+  --mk-line-2: rgba(91, 154, 197, 0.34);
+  --mk-text-0: #f3fbff;
+  --mk-text-1: #cadce7;
+  --mk-text-2: #88a6ba;
+  --mk-brand-0: #00b8e6;
+  --mk-brand-1: #1fd1b0;
+  --mk-brand-2: #7be3ff;
+  --mk-proof-0: #f4a524;
+  --mk-shadow: 0 28px 80px rgba(2, 8, 16, 0.38);
+}
+
+body {
+  color: var(--mk-text-0);
+  font-family: var(--font-body), 'Helvetica Neue', Arial, sans-serif;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(0, 184, 230, 0.14), transparent 24%),
+    radial-gradient(circle at 82% 6%, rgba(31, 209, 176, 0.08), transparent 18%),
+    linear-gradient(180deg, #04101b 0%, #071423 46%, #0a1727 100%);
+}
+
+body::before {
+  background-image:
+    linear-gradient(rgba(88, 138, 180, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 138, 180, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.48) 34%, transparent 100%);
+  opacity: 0.24;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(123, 227, 255, 0.08), transparent 18%),
+    radial-gradient(circle at 86% 16%, rgba(31, 209, 176, 0.08), transparent 16%);
+}
+
+.display-face {
+  font-family: var(--font-display), 'Segoe UI', sans-serif;
+}
+
+.mono-face {
+  font-family: var(--font-mono), 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+.site-header-shell {
+  border-bottom: 1px solid var(--mk-line-1);
+  background: rgba(5, 16, 28, 0.84);
+  backdrop-filter: blur(18px);
+}
+
+.site-topline {
+  border-bottom: 1px solid rgba(91, 154, 197, 0.1);
+  background: rgba(4, 13, 23, 0.58);
+}
+
+.site-pill {
+  border: 1px solid var(--mk-line-1);
+  background: rgba(15, 39, 66, 0.6);
+}
+
+.site-brand-frame {
+  border: 1px solid var(--mk-line-1);
+  background: linear-gradient(180deg, rgba(9, 25, 42, 0.9), rgba(7, 20, 33, 0.94));
+  box-shadow: inset 0 1px 0 rgba(123, 227, 255, 0.12);
+}
+
+.site-nav-link-active {
+  background: linear-gradient(135deg, rgba(14, 53, 88, 0.88), rgba(0, 184, 230, 0.2));
+  color: var(--mk-text-0);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+}
+
+.site-nav-link-idle {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--mk-text-1);
+}
+
+.site-nav-link-idle:hover {
+  border-color: var(--mk-line-1);
+  background: rgba(15, 39, 66, 0.42);
+  color: var(--mk-text-0);
+}
+
+.focus-ring:focus-visible,
+.mkt-input:focus-visible,
+.mkt-menu-button:focus-visible,
+.mkt-lang-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 184, 230, 0.2);
+}
+
+.marketing-main {
+  position: relative;
+  padding: 1.25rem 1rem 4rem;
+}
+
+.mkt-shell {
+  margin: 0 auto;
+  display: flex;
+  max-width: 88rem;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mkt-panel,
+.mkt-card,
+.mkt-case-card,
+.mkt-proof-panel,
+.mkt-form-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--mk-line-1);
+  background: linear-gradient(180deg, rgba(9, 24, 40, 0.88), rgba(7, 18, 31, 0.94));
+  box-shadow: var(--mk-shadow);
+}
+
+.mkt-panel,
+.mkt-proof-panel,
+.mkt-form-panel {
+  border-radius: 1.75rem;
+}
+
+.mkt-card,
+.mkt-case-card {
+  border-radius: 1.4rem;
+}
+
+.mkt-panel-strong {
+  background:
+    linear-gradient(180deg, rgba(11, 28, 47, 0.96), rgba(7, 18, 31, 0.98));
+}
+
+.mkt-card-highlight {
+  border-color: var(--mk-line-2);
+  background:
+    linear-gradient(180deg, rgba(10, 33, 56, 0.96), rgba(7, 21, 36, 0.98));
+}
+
+.mkt-grid-lines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(122, 170, 210, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 170, 210, 0.08) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+.mkt-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.mkt-orb-cyan {
+  right: -5rem;
+  top: -4rem;
+  width: 16rem;
+  height: 16rem;
+  background: rgba(0, 184, 230, 0.18);
+}
+
+.mkt-orb-teal {
+  left: 24%;
+  bottom: -6rem;
+  width: 14rem;
+  height: 14rem;
+  background: rgba(31, 209, 176, 0.12);
+}
+
+.mkt-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mk-brand-2);
+}
+
+.mkt-kicker::before {
+  content: '';
+  width: 1.6rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.mkt-display {
+  font-family: var(--font-display), 'Segoe UI', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  color: var(--mk-text-0);
+}
+
+.mkt-title {
+  font-family: var(--font-display), 'Segoe UI', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: var(--mk-text-0);
+}
+
+.mkt-copy {
+  color: var(--mk-text-1);
+  line-height: 1.78;
+}
+
+.mkt-button-primary,
+.mkt-button-secondary,
+.mkt-menu-button,
+.mkt-lang-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.mkt-button-primary,
+.mkt-button-secondary {
+  padding: 0.8rem 1.25rem;
+}
+
+.mkt-button-compact {
+  min-height: 40px;
+  padding: 0.62rem 1rem;
+  font-size: 0.82rem;
+}
+
+.mkt-button-primary {
+  border: 1px solid rgba(81, 217, 255, 0.2);
+  background: linear-gradient(135deg, #0a7ab6 0%, #00b8e6 55%, #1fd1b0 100%);
+  color: #07111d;
+  box-shadow: 0 18px 30px rgba(0, 184, 230, 0.18);
+}
+
+.mkt-button-primary:hover,
+.mkt-button-secondary:hover,
+.mkt-menu-button:hover,
+.mkt-lang-button:hover {
+  transform: translateY(-1px);
+}
+
+.mkt-button-secondary,
+.mkt-menu-button,
+.mkt-lang-button {
+  border: 1px solid var(--mk-line-1);
+  background: rgba(14, 36, 58, 0.68);
+  color: var(--mk-text-0);
+}
+
+.mkt-lang-button {
+  padding: 0.62rem 0.9rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.mkt-lang-button-active {
+  border-color: rgba(81, 217, 255, 0.38);
+  background: rgba(81, 217, 255, 0.14);
+}
+
+.mkt-menu-button {
+  padding: 0.7rem 1rem;
+  color: var(--mk-text-0);
+}
+
+.mkt-chip {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(81, 217, 255, 0.18);
+  background: rgba(81, 217, 255, 0.08);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mk-brand-2);
+}
+
+.mkt-chip-subtle {
+  border-color: rgba(244, 165, 36, 0.14);
+  background: rgba(244, 165, 36, 0.08);
+  color: #ffd38a;
+}
+
+.mkt-card-index {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mk-text-2);
+}
+
+.mkt-metric-value {
+  font-family: var(--font-display), 'Segoe UI', sans-serif;
+  font-size: clamp(2.4rem, 4vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: var(--mk-text-0);
+}
+
+.mkt-flow-step {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 1fr;
+  border: 1px solid var(--mk-line-1);
+  border-radius: 1.4rem;
+  padding: 1.25rem;
+  background: rgba(10, 27, 46, 0.78);
+}
+
+.mkt-flow-marker {
+  display: inline-flex;
+  min-width: 3rem;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(81, 217, 255, 0.22);
+  background: rgba(81, 217, 255, 0.08);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.86rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mk-brand-2);
+}
+
+.mkt-list-item,
+.mkt-list-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.mkt-list-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0.45rem;
+  border-radius: 999px;
+  background: var(--mk-brand-1);
+  flex: 0 0 auto;
+}
+
+.mkt-form-panel {
+  padding: 1.5rem;
+}
+
+.mkt-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: var(--mk-text-1);
+}
+
+.mkt-input {
+  min-height: 48px;
+  border: 1px solid var(--mk-line-1);
+  border-radius: 1rem;
+  background: rgba(12, 29, 48, 0.88);
+  padding: 0.85rem 1rem;
+  color: var(--mk-text-0);
+}
+
+.mkt-input::placeholder {
+  color: var(--mk-text-2);
+}
+
+.mkt-field-error,
+.mkt-status-error {
+  font-style: normal;
+  color: #ff9e9e;
+}
+
+.mkt-status-success {
+  color: #8cf1dd;
+}
+
+@media (min-width: 640px) {
+  .marketing-main {
+    padding: 1.4rem 1.25rem 4.6rem;
+  }
+
+  .mkt-form-panel {
+    padding: 2rem;
+  }
+}

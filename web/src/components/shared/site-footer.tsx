@@ -2,50 +2,56 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCopy } from '@/components/shared/locale-provider';
-import { siteMeta } from '@/lib/proofbench';
+import { useLocale } from '@/components/shared/locale-provider';
+import { getMarketingCopy } from '@/lib/marketing';
 
 export default function SiteFooter() {
-  const text = useCopy();
+  const { locale } = useLocale();
+  const copy = getMarketingCopy(locale);
 
   return (
-    <footer className="mt-14 border-t border-[rgba(25,40,72,0.1)] bg-[rgba(248,250,253,0.96)]">
-      <div className="w-full px-5 py-8 lg:px-8 lg:py-10 xl:px-10">
-        <div className="grid gap-8 border-b border-[rgba(25,40,72,0.08)] pb-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-4">
-            <p className="text-[0.72rem] uppercase tracking-[0.22em] text-[var(--mist)]">Enterprise release</p>
-            <Link href="/" className="focus-ring inline-flex items-center rounded-[18px] border border-[rgba(25,40,72,0.08)] bg-[rgba(255,255,255,0.98)] px-3 py-2">
-              <Image
-                src="/brand/logo-wide.png"
-                alt={`${siteMeta.brand} ${siteMeta.moduleName}`}
-                width={220}
-                height={75}
-                className="h-auto w-[168px] sm:w-[200px]"
-                priority={false}
-              />
+    <footer className="mt-16 border-t border-[var(--mk-line-1)] bg-[rgba(5,15,26,0.94)]">
+      <div className="mx-auto grid max-w-[88rem] gap-10 px-5 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 xl:px-10 xl:py-12">
+        <div className="space-y-5">
+          <p className="mkt-kicker">{copy.site.tagline}</p>
+          <Link href="/" className="site-brand-frame focus-ring inline-flex items-center rounded-[20px] px-3 py-2">
+            <Image
+              src="/brand/logo-wide.png"
+              alt={copy.site.brandFull}
+              width={220}
+              height={75}
+              className="h-auto w-[170px] sm:w-[204px]"
+            />
+          </Link>
+          <p className="mkt-copy max-w-2xl">{copy.footer.description}</p>
+          <div className="flex flex-wrap gap-3 pt-1">
+            <Link href="/contact" className="mkt-button-primary mkt-button-compact">
+              {copy.common.primaryCta}
             </Link>
-            <p className="max-w-3xl text-sm leading-7 text-[var(--mist)]">{text.home.footerBody}</p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-            <div className="border-l border-[rgba(25,40,72,0.08)] pl-4">
-              <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--mist)]">Module</p>
-              <p className="mt-2 text-sm leading-7 text-ink">{text.home.footerPrimary}</p>
-            </div>
-            <div className="border-l border-[rgba(25,40,72,0.08)] pl-4">
-              <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--mist)]">Stack</p>
-              <p className="mt-2 text-sm leading-7 text-ink">{text.home.footerSecondary}</p>
-            </div>
-            <div className="border-l border-[rgba(25,40,72,0.08)] pl-4">
-              <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--mist)]">Positioning</p>
-              <p className="mt-2 text-sm leading-7 text-ink">{siteMeta.tagline}</p>
-            </div>
+            <Link href="/proofbench" className="mkt-button-secondary mkt-button-compact">
+              {copy.common.workbenchCta}
+            </Link>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 pt-4 text-sm text-[var(--mist)] sm:flex-row sm:items-center sm:justify-between">
-          <p>Copyright 2026 WanFlow.ai. All rights reserved.</p>
-          <p>{siteMeta.moduleName} · Enterprise Evaluation Workspace</p>
+        <div className="grid gap-5 sm:grid-cols-3">
+          {copy.footer.columns.map((column) => (
+            <section key={column.title} className="space-y-3 border-l border-[var(--mk-line-1)] pl-4">
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{column.title}</p>
+              <div className="space-y-2 text-sm text-[var(--mk-text-1)]">
+                {column.items.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-t border-[var(--mk-line-1)]">
+        <div className="mx-auto flex max-w-[88rem] flex-col gap-2 px-5 py-4 text-sm text-[var(--mk-text-2)] sm:flex-row sm:items-center sm:justify-between lg:px-8 xl:px-10">
+          <p>{copy.footer.copyright}</p>
+          <p>{copy.footer.legal}</p>
         </div>
       </div>
     </footer>
