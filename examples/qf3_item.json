@@ -1,0 +1,36 @@
+{
+  "序号": 1,
+  "问题": "In four-dimensional Minkowski spacetime, consider an $SU(2)$ Yang--Mills theory with gauge potential $A_0^a = 0$ and $A_i^a = \\sum_{b=1}^{3} \\epsilon_{aib}\\,\\frac{x^b}{g r^2}[1+\\phi(r)]$, where $r^2=(x^1)^2+(x^2)^2+(x^3)^2$. Starting from the Yang--Mills Lagrangian and assuming $\\phi'(0)=0$, derive the second-order differential equation for $\\phi(r)$ and give $\\phi''(r)$ explicitly in terms of $\\phi(r)$ and $r$.",
+  "适合年级": "研究生",
+  "领域类型": "数学物理（Yang--Mills 场论）",
+  "考察知识点": [
+    "Yang--Mills 场强张量",
+    "Wu--Yang 磁单极子",
+    "Euler--Lagrange 方程",
+    "球对称化简",
+    "非阿贝尔规范场"
+  ],
+  "易错点": [
+    "场强张量中的非线性项 $-g\\epsilon_{abc}A_\\mu^bA_\\nu^c$ 漏写或符号错误",
+    "将空间指标升降与 Minkowski 度规混淆",
+    "把 $\\phi''(r)$ 写成含 $\\phi'(r)$ 的未化简形式"
+  ],
+  "思考过程/分析": "先把 Wu--Yang 型规范势展开成各个非零分量，逐项计算 $F_{ij}^a$，再对 $F_{\\mu\\nu}^aF^{a,\\mu\\nu}$ 做颜色与空间求和。利用球对称性把四维作用量化为只含 $r$ 的径向泛函，最后对 $\\phi(r)$ 应用 Euler--Lagrange 方程得到常微分方程。",
+  "解题过程": [
+    "写出非零规范势分量，并用 $F_{\\mu\\nu}^a=\\partial_\\mu A_\\nu^a-\\partial_\\nu A_\\mu^a-g\\epsilon_{abc}A_\\mu^bA_\\nu^c$ 逐项计算空间场强分量。",
+    "将所有非零 $F_{ij}^a$ 代入 $\\sum_a F_{\\mu\\nu}^aF^{a,\\mu\\nu}$，利用只存在空间分量这一事实化简指标升降。",
+    "对颜色指标求和后得到有效拉氏密度 $\\mathcal{L}_{YM}=\\frac{4}{g^2r^2}\\phi'^2(r)+\\frac{2}{g^2r^4}(\\phi^2(r)-1)^2$。",
+    "把四维积分写成球坐标形式，积分角变量后得到径向作用量 $L=-\\frac{4\\pi}{g^2}\\int dt\\int_0^\\infty\\left[\\phi'^2(r)+\\frac{(\\phi^2(r)-1)^2}{2r^2}\\right]dr$。",
+    "对径向拉氏密度应用 Euler--Lagrange 方程，得到 $\\frac{2(\\phi^2(r)-1)\\phi(r)}{r^2}-2\\phi''(r)=0$，整理即得最终结果。"
+  ],
+  "最终答案": "\\frac{\\phi(r)[\\phi^2(r)-1]}{r^2}",
+  "源文件": [
+    "samples/reference/QF3.pdf",
+    "samples/reference/QF3-yang-mills-monopole.tex",
+    "samples/reference/数学竞赛题(1).docx"
+  ],
+  "校验备注": [
+    "该题来自物理背景，是否纳入纯数学竞赛数据集需要业务侧再确认。",
+    "最终答案符合 LaTeX 简洁公式约束。"
+  ]
+}

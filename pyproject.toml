@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "math-eval-framework"
+version = "0.1.0"
+description = "Framework for structured math item evaluation against Qwen-compatible chat APIs."
+requires-python = ">=3.10"
+dependencies = [
+  "openpyxl",
+  "pydantic>=2",
+  "PyMuPDF",
+  "python-docx",
+  "rapidocr-onnxruntime>=1.4.4",
+  "requests",
+  "sympy",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

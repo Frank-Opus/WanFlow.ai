@@ -1,0 +1,485 @@
+\documentclass[12pt, a4paper]{article}
+
+% Packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{physics}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{enumitem}
+\geometry{margin=2.5cm}
+\setstretch{1.2}
+
+\begin{document}
+
+\section*{Problem}
+
+In the framework of quantum chromodynamics (QCD), monopole solutions are
+important topological soliton configurations. Here we consider the non-Abelian
+generalization of the Dirac monopole, namely the Wu--Yang monopole in an
+$SU(2)$ Yang--Mills theory on four-dimensional Minkowski spacetime.
+
+The Yang--Mills Lagrangian is
+\[
+L = -\frac{1}{4} \int d^4 x \sum_{a=1}^{3} F^a_{\mu\nu} F^{a,\mu\nu}.
+\]
+
+The Minkowski metric is chosen as
+\[
+\eta_{\mu\nu} = \eta^{\mu\nu}
+=
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & -1 & 0 \\
+0 & 0 & 0 & -1
+\end{pmatrix}.
+\]
+
+We introduce the generalized Wu--Yang monopole gauge field
+\[
+A_0^a = 0,
+\qquad
+A_i^a = \sum_{b=1}^{3} \epsilon_{aib}\,\frac{x^b}{g\,r^2}\qty[1 + \phi(r)],
+\]
+with
+\[
+r^2 = (x^1)^2 + (x^2)^2 + (x^3)^2.
+\]
+Here $\epsilon_{aib}$ is the Levi-Civita symbol in three spatial dimensions
+and $g$ is the Yang--Mills coupling constant.
+
+Under the condition $\phi'(0)=0$, derive the second-order differential
+equation satisfied by $\phi(r)$ and express $\phi''(r)$ purely in terms of
+$\phi(r)$ and $r$.
+
+\section*{Answer}
+
+\[
+\phi''(r) = \frac{\phi(r)\qty[\phi^2(r)-1]}{r^2}.
+\]
+
+\section*{Derivation}
+
+Since there is no electric field and the configuration is static, only the
+spatial components of the gauge field are nonzero. Writing out the gauge
+potential explicitly gives the following nonzero components:
+
+\[
+\begin{aligned}
+&\text{For } a=1: &&
+A_1^1 = 0, \qquad
+A_2^1 = \frac{x^3}{g\,r^2}\qty[1+\phi(r)], \qquad
+A_3^1 = -\frac{x^2}{g\,r^2}\qty[1+\phi(r)], \\[4pt]
+&\text{For } a=2: &&
+A_1^2 = -\frac{x^3}{g\,r^2}\qty[1+\phi(r)], \qquad
+A_2^2 = 0, \qquad
+A_3^2 = \frac{x^1}{g\,r^2}\qty[1+\phi(r)], \\[4pt]
+&\text{For } a=3: &&
+A_1^3 = \frac{x^2}{g\,r^2}\qty[1+\phi(r)], \qquad
+A_2^3 = -\frac{x^1}{g\,r^2}\qty[1+\phi(r)], \qquad
+A_3^3 = 0.
+\end{aligned}
+\]
+
+% [Please verify: the PDF writes the monopole ansatz with Levi-Civita symbols;
+% the explicit component signs above are the convention consistent with the
+% subsequent field-strength identities and the final equation of motion.]
+
+The Yang--Mills field strength is defined by
+\[
+F_{\mu\nu}^a
+=
+\partial_\mu A_\nu^a
+- \partial_\nu A_\mu^a
+- g\,\epsilon_{abc} A_\mu^b A_\nu^c.
+\]
+
+We first compute the derivative of the scalar factor:
+\[
+\partial_i r = \pdv{r}{x^i} = \frac{x^i}{r},
+\]
+and therefore
+\[
+\partial_i\qty(\frac{1+\phi(r)}{r^2})
+=
+\frac{x^i}{r}\,\dv{r}\qty(\frac{1+\phi(r)}{r^2})
+=
+\frac{x^i}{r^4}\qty[r\phi'(r)-2r(1+\phi(r))]
+=
+\frac{x^i}{r^4}\qty[r\phi'(r)-2\phi(r)-2].
+\]
+
+\subsection*{Color component $a=1$}
+
+For the first color component, we compute:
+\[
+\begin{aligned}
+F_{12}^1
+&=
+\partial_1 A_2^1 - \partial_2 A_1^1 - g\,\epsilon_{1bc} A_1^b A_2^c \\
+&=
+\partial_1 A_2^1 - g\,\epsilon_{123} A_1^2 A_2^3 - g\,\epsilon_{132} A_1^3 A_2^2 \\
+&=
+\partial_1 A_2^1 - g A_1^2 A_2^3 \\
+&=
+\frac{x^1 x^3}{g\,r^4}\qty[r\phi'(r)-2\phi(r)-2]
+- g\qty[-\frac{x^3}{g\,r^2}\qty(1+\phi(r))]\qty[-\frac{x^1}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+\frac{x^1 x^3}{g\,r^4}\qty[r\phi'(r)-2\phi(r)-2]
+- \frac{x^1 x^3}{g\,r^4}\qty[1+\phi(r)]^2 \\
+&=
+-\frac{x^1 x^3}{g\,r^4}\qty[r\phi'(r)+\phi^2(r)-1]
+= -F_{21}^1.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+F_{23}^1
+&=
+\partial_2 A_3^1 - \partial_3 A_2^1 - g\,\epsilon_{1bc} A_2^b A_3^c \\
+&=
+\partial_2 A_3^1 - \partial_3 A_2^1
+- g\,\epsilon_{123} A_2^2 A_3^3
+- g\,\epsilon_{132} A_2^3 A_3^2 \\
+&=
+\partial_2 A_3^1 - \partial_3 A_2^1 + g A_2^3 A_3^2 \\
+&=
+-\partial_2\qty[\frac{x^2}{g\,r^2}\qty(1+\phi(r))]
+-\partial_3\qty[\frac{x^3}{g\,r^2}\qty(1+\phi(r))]
++ g\qty[\frac{x^1}{g\,r^2}\qty(1+\phi(r))]\qty[\frac{x^1}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+-\frac{1}{g\,r^4}\qty[(r^2-(x^2)^2)\qty(1+\phi(r)) + x_2^2\qty(r\phi'(r)-2\phi(r)-2)] \\
+&\quad
+-\frac{1}{g\,r^4}\qty[(r^2-(x^3)^2)\qty(1+\phi(r)) + x_3^2\qty(r\phi'(r)-2\phi(r)-2)] \\
+&\quad
++ \frac{(x^1)^2}{g\,r^4}\qty[1+\phi(r)]^2 \\
+&=
+\frac{1}{g\,r^4}
+\qty[
+\qty(r^2-(x^1)^2) r\phi'(r)
++ \qty(\phi^2(r)-1)(x^1)^2
+] \\
+&=
+-F_{32}^1.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+F_{13}^1
+&=
+\partial_1 A_3^1 - \partial_3 A_1^1 - g\,\epsilon_{1bc} A_1^b A_3^c \\
+&=
+\partial_1 A_3^1
+- g\,\epsilon_{123} A_1^2 A_3^3
+- g\,\epsilon_{132} A_1^3 A_3^2 \\
+&=
+\partial_1 A_3^1 + g A_1^3 A_3^2 \\
+&=
+-\frac{x^1 x^2}{g\,r^4}\qty[r\phi'(r)-2\phi(r)-2]
++ g\qty[\frac{x^2}{g\,r^2}\qty(1+\phi(r))]\qty[\frac{x^1}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+\frac{x^1 x^2}{g\,r^4}\qty[r\phi'(r)+\phi^2(r)-1]
+= -F_{31}^1.
+\end{aligned}
+\]
+
+\subsection*{Color component $a=2$}
+
+Similarly,
+\[
+\begin{aligned}
+F_{12}^2
+&=
+\partial_1 A_2^2 - \partial_2 A_1^2 - g\,\epsilon_{2bc} A_1^b A_2^c \\
+&=
+-\partial_2 A_1^2 - g\,\epsilon_{213} A_1^1 A_2^3 - g\,\epsilon_{231} A_1^3 A_2^1 \\
+&=
+-\partial_2 A_1^2 - g A_1^3 A_2^1 \\
+&=
+\frac{x^2 x^3}{g\,r^4}\qty[r\phi'(r)-2\phi(r)-2]
+- g\qty[\frac{x^2}{g\,r^2}\qty(1+\phi(r))]\qty[\frac{x^3}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+-\frac{x^2 x^3}{g\,r^4}\qty[r\phi'(r)+\phi^2(r)-1]
+= -F_{21}^2.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+F_{23}^2
+&=
+\partial_2 A_3^2 - \partial_3 A_2^2 - g\,\epsilon_{2bc} A_2^b A_3^c \\
+&=
+\partial_2 A_3^2 - g\,\epsilon_{213} A_2^1 A_3^3 - g\,\epsilon_{231} A_2^3 A_3^1 \\
+&=
+\partial_2 A_3^2 - g A_2^3 A_3^1 \\
+&=
+\frac{x^1 x^2}{g\,r^4}\qty[r\phi'(r)-2\phi(r)-2]
+- g\qty[\frac{x^1}{g\,r^2}\qty(1+\phi(r))]\qty[-\frac{x^2}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+\frac{x^1 x^2}{g\,r^4}\qty[r\phi'(r)+\phi^2(r)-1]
+= -F_{32}^2.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+F_{13}^2
+&=
+\partial_1 A_3^2 - \partial_3 A_1^2 - g\,\epsilon_{2bc} A_1^b A_3^c \\
+&=
+\partial_1 A_3^2 - \partial_3 A_1^2
+- g\,\epsilon_{213} A_1^1 A_3^3
+- g\,\epsilon_{231} A_1^3 A_3^1 \\
+&=
+\partial_1 A_3^2 - \partial_3 A_1^2 - g A_1^3 A_3^1 \\
+&=
+\partial_1\qty[\frac{x^1}{g\,r^2}\qty(1+\phi(r))]
++ \partial_3\qty[\frac{x^3}{g\,r^2}\qty(1+\phi(r))]
+- g\qty[\frac{x^2}{g\,r^2}\qty(1+\phi(r))]\qty[-\frac{x^2}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+\frac{1}{g\,r^4}
+\qty[
+\qty(r^2-(x^2)^2) r\phi'(r)
++ \qty(\phi^2(r)-1)(x^2)^2
+] \\
+&=
+-F_{31}^2.
+\end{aligned}
+\]
+
+\subsection*{Color component $a=3$}
+
+Finally,
+\[
+\begin{aligned}
+F_{12}^3
+&=
+\partial_1 A_2^3 - \partial_2 A_1^3 - g\,\epsilon_{3bc} A_1^b A_2^c \\
+&=
+-\partial_1 A_2^3 - \partial_2 A_1^3
+- g\,\epsilon_{312} A_1^1 A_2^2
+- g\,\epsilon_{321} A_1^2 A_2^1 \\
+&=
+-\partial_1 A_2^3 - \partial_2 A_1^3 + g A_1^2 A_2^1 \\
+&=
+\frac{1}{g\,r^4}
+\qty[
+\qty(r^2-(x^3)^2) r\phi'(r)
++ \qty(\phi^2(r)-1)(x^3)^2
+] \\
+&=
+-F_{21}^3.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+F_{23}^3
+&=
+\partial_2 A_3^3 - \partial_3 A_2^3 - g\,\epsilon_{3bc} A_2^b A_3^c \\
+&=
+-\partial_3 A_2^3
+- g\,\epsilon_{312} A_2^1 A_3^2
+- g\,\epsilon_{321} A_2^2 A_3^1 \\
+&=
+-\partial_3 A_2^3 - g A_2^1 A_3^2 \\
+&=
+-\frac{x^1 x^3}{g\,r^4}\qty[r\phi'(r)-2\phi(r)-2]
+- g\qty[\frac{x^3}{g\,r^2}\qty(1+\phi(r))]\qty[\frac{x^1}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+-\frac{x^1 x^3}{g\,r^4}\qty[r\phi'(r)+\phi^2(r)-1]
+= -F_{32}^3.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+F_{13}^3
+&=
+\partial_1 A_3^3 - \partial_3 A_1^3 - g\,\epsilon_{3bc} A_1^b A_3^c \\
+&=
+-\partial_3 A_1^3
+- g\,\epsilon_{312} A_1^1 A_3^2
+- g\,\epsilon_{321} A_1^2 A_3^1 \\
+&=
+-\partial_3 A_1^3 + g A_1^2 A_3^1 \\
+&=
+\frac{x^2 x^3}{g\,r^4}\qty[r\phi'(r)-2\phi(r)-2]
+- g\qty[-\frac{x^3}{g\,r^2}\qty(1+\phi(r))]\qty[-\frac{x^2}{g\,r^2}\qty(1+\phi(r))] \\
+&=
+-\frac{x^2 x^3}{g\,r^4}\qty[r\phi'(r)+\phi^2(r)-1]
+= -F_{31}^3.
+\end{aligned}
+\]
+
+\subsection*{Contraction of the field strength}
+
+Since the only nonzero components are spatial,
+\[
+F^{a,\mu\nu} = \eta^{\mu\rho}\eta^{\nu\sigma} F^a_{\rho\sigma},
+\qquad
+\mu,\nu = 1,2,3,
+\]
+and therefore
+\[
+F^{a,ij} = \eta^{ik}\eta^{jl} F^a_{kl}
+= (-\delta^{ik})(-\delta^{jl}) F^a_{kl}
+= F^a_{ij}.
+\]
+
+Hence the Yang--Mills density becomes
+\[
+\begin{aligned}
+\mathcal{L}_{YM}
+&=
+\sum_{a=1}^{3} F^a_{\mu\nu} F^{a,\mu\nu} \\
+&=
+2\qty[(F_{12}^1)^2 + (F_{13}^1)^2 + (F_{23}^1)^2] \\
+&\quad
++ 2\qty[(F_{12}^2)^2 + (F_{13}^2)^2 + (F_{23}^2)^2] \\
+&\quad
++ 2\qty[(F_{12}^3)^2 + (F_{13}^3)^2 + (F_{23}^3)^2].
+\end{aligned}
+\]
+
+Denote these three color contributions by
+\[
+\mathcal{L}_{YM} = \mathcal{L}_1 + \mathcal{L}_2 + \mathcal{L}_3.
+\]
+
+For $a=1$ one obtains
+\[
+\mathcal{L}_1
+=
+\frac{2}{g^2 r^8}
+\qty[
+r^2 \phi'^2(r)\qty(r^2-(x^1)^2)
++ (x^1)^2\qty(\phi^2(r)-1)^2
+].
+\]
+
+By symmetry, the $a=2$ and $a=3$ parts are
+\[
+\mathcal{L}_2
+=
+\frac{2}{g^2 r^8}
+\qty[
+r^2 \phi'^2(r)\qty(r^2-(x^2)^2)
++ (x^2)^2\qty(\phi^2(r)-1)^2
+],
+\]
+\[
+\mathcal{L}_3
+=
+\frac{2}{g^2 r^8}
+\qty[
+r^2 \phi'^2(r)\qty(r^2-(x^3)^2)
++ (x^3)^2\qty(\phi^2(r)-1)^2
+].
+\]
+
+Adding them together gives
+\[
+\begin{aligned}
+\mathcal{L}_{YM}
+&=
+\frac{2}{g^2 r^8}\Bigl[
+r^2 \phi'^2(r)\Bigl(
+\qty(r^2-(x^1)^2)
++ \qty(r^2-(x^2)^2)
++ \qty(r^2-(x^3)^2)
+\Bigr) \\
+&\quad
++ \qty((x^1)^2 + (x^2)^2 + (x^3)^2)\qty(\phi^2(r)-1)^2
+\Bigr] \\
+&=
+\frac{2}{g^2 r^8}
+\qty{
+2 r^4 \phi'^2(r) + r^2 \qty(\phi^2(r)-1)^2
+} \\
+&=
+\frac{4}{g^2 r^4}
+\qty[
+r^2 \phi'^2(r) + \frac{1}{2}\qty(\phi^2(r)-1)^2
+] \\
+&=
+\frac{4}{g^2 r^2}\phi'^2(r)
++ \frac{2}{g^2 r^4}\qty(\phi^2(r)-1)^2.
+\end{aligned}
+\]
+
+\subsection*{Reduced radial action}
+
+Using spherical coordinates, the four-dimensional integral becomes
+\[
+\int d^4 x
+=
+\int dt \int d^3 x
+=
+\int dt \int_0^{2\pi} d\varphi \int_0^\pi \sin\theta\,d\theta \int_0^\infty r^2\,dr
+=
+4\pi \int dt \int_0^\infty r^2\,dr.
+\]
+
+Therefore,
+\[
+\begin{aligned}
+L
+&=
+-\frac{1}{4}\,4\pi \int dt \int_0^\infty
+r^2 \qty[
+\frac{4}{g^2 r^2}\phi'^2(r)
++ \frac{2}{g^2 r^4}\qty(\phi^2(r)-1)^2
+]\,dr \\
+&=
+-\frac{4\pi}{g^2} \int dt \int_0^\infty
+\qty[
+\phi'^2(r)
++ \frac{\qty(\phi^2(r)-1)^2}{2r^2}
+]\,dr.
+\end{aligned}
+\]
+
+Define the reduced radial density
+\[
+\mathcal{L}(\phi,\phi')
+=
+\phi'^2(r) + \frac{\qty(\phi^2(r)-1)^2}{2r^2}.
+\]
+
+The Euler--Lagrange equation is
+\[
+\pdv{\mathcal{L}}{\phi(r)} - \dv{r}\qty(\pdv{\mathcal{L}}{\phi'(r)}) = 0.
+\]
+
+Its two ingredients are
+\[
+\pdv{\mathcal{L}}{\phi(r)}
+=
+\frac{2\qty[\phi^2(r)-1]\phi(r)}{r^2},
+\qquad
+\pdv{\mathcal{L}}{\phi'(r)}
+=
+2\phi'(r).
+\]
+
+Substituting into the Euler--Lagrange equation yields
+\[
+\frac{2\qty[\phi^2(r)-1]\phi(r)}{r^2} - 2\phi''(r) = 0.
+\]
+
+Hence,
+\[
+\boxed{
+\phi''(r) = \frac{\phi(r)\qty[\phi^2(r)-1]}{r^2}
+}.
+\]
+
+\end{document}
