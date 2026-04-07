@@ -1,7 +1,8 @@
 'use client';
 
 import ContactForm from '@/components/marketing/contact-form';
-import { PageHero, useMarketingCopy } from '@/components/marketing/primitives';
+import { PageHero } from '@/components/marketing/primitives';
+import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingContactPage() {
   const copy = useMarketingCopy();

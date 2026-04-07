@@ -1,6 +1,7 @@
 'use client';
 
-import { FinalCtaBand, PageHero, SectionHeading, useMarketingCopy } from '@/components/marketing/primitives';
+import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
+import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingCasesPage() {
   const copy = useMarketingCopy();

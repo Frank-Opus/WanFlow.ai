@@ -37,7 +37,7 @@ export default function SiteFooter() {
         <div className="grid gap-5 sm:grid-cols-3">
           {copy.footer.columns.map((column) => (
             <section key={column.title} className="mkt-rail-card space-y-3 p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{column.title}</p>
+              <h2 className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{column.title}</h2>
               <div className="space-y-2 text-sm text-[var(--mk-text-1)]">
                 {column.items.map((item) => (
                   <p key={item}>{item}</p>

@@ -13,12 +13,13 @@ export default function SiteHeader() {
   const copy = getMarketingCopy(locale);
   const [open, setOpen] = useState(false);
   const mobileMenuLabel = open ? (locale === 'zh' ? '关闭' : 'Close') : locale === 'zh' ? '菜单' : 'Menu';
+  const primaryNavLabel = locale === 'zh' ? '主导航' : 'Primary navigation';
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
-  const isMarketingRoute = pathname === '/' || pathname.startsWith('/solutions') || pathname.startsWith('/cases') || pathname.startsWith('/about') || pathname.startsWith('/contact');
+  const isMarketingRoute = copy.nav.some((item) => (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)));
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function SiteHeader() {
           </div>
 
           <nav
-            aria-label="Primary"
+            aria-label={primaryNavLabel}
             className="hidden items-center gap-1.5 rounded-full border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.7)] px-2 py-1 lg:flex"
           >
             {copy.nav.map((item) => {

@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { FinalCtaBand, PageHero, SectionHeading, WorkbenchProofCard, useMarketingCopy } from '@/components/marketing/primitives';
+import { FinalCtaBand, PageHero, SectionHeading, WorkbenchProofCard } from '@/components/marketing/primitives';
+import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingHomePage() {
   const copy = useMarketingCopy();
@@ -17,7 +18,12 @@ export default function MarketingHomePage() {
           secondary={copy.home.hero.secondary}
           aside={
             <div className="grid gap-4">
-              <WorkbenchProofCard />
+              <WorkbenchProofCard
+                proofLabel={copy.common.proofLabel}
+                workbenchNote={copy.common.workbenchNote}
+                proofNote={copy.common.proofNote}
+                workbenchCta={copy.common.workbenchCta}
+              />
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {copy.home.metrics.map((metric) => (
                   <article key={metric.label} className="mkt-panel px-5 py-5">

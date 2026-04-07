@@ -1,14 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { useLocale } from '@/components/shared/locale-provider';
-import { getMarketingCopy } from '@/lib/marketing';
-
-export function useMarketingCopy() {
-  const { locale } = useLocale();
-  return getMarketingCopy(locale);
-}
 
 type LinkTarget = {
   href: string;
@@ -118,22 +109,29 @@ export function FinalCtaBand({
   );
 }
 
-export function WorkbenchProofCard() {
-  const copy = useMarketingCopy();
+export function WorkbenchProofCard({
+  proofLabel,
+  workbenchNote,
+  proofNote,
+  workbenchCta,
+}: {
+  proofLabel: string;
+  workbenchNote: string;
+  proofNote: string;
+  workbenchCta: string;
+}) {
   return (
     <div className="mkt-proof-panel p-5 sm:p-6">
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="mkt-chip">BenchmarkOps</span>
-          <span className="mkt-chip mkt-chip-subtle">{copy.common.proofLabel}</span>
+          <span className="mkt-chip mkt-chip-subtle">{proofLabel}</span>
         </div>
         <h3 className="text-[1.32rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.52rem]">
-          {copy.common.workbenchNote}
+          {workbenchNote}
         </h3>
-        <p className="mkt-copy text-sm">{copy.common.proofNote}</p>
-        <Link href="/proofbench" className="mkt-button-secondary inline-flex w-fit">
-          {copy.common.workbenchCta}
-        </Link>
+        <p className="mkt-copy text-sm">{proofNote}</p>
+        <Link href="/proofbench" className="mkt-button-secondary inline-flex w-fit">{workbenchCta}</Link>
       </div>
     </div>
   );

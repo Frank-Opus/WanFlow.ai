@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useMarketingCopy } from '@/components/marketing/primitives';
+import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 type FormState = {
   name: string;
