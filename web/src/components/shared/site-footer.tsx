@@ -10,11 +10,11 @@ export default function SiteFooter() {
   const copy = getMarketingCopy(locale);
 
   return (
-    <footer className="mt-16 border-t border-[var(--mk-line-1)] bg-[rgba(5,15,26,0.94)]">
+    <footer className="mt-16 border-t border-[var(--mk-line-1)] bg-[linear-gradient(180deg,rgba(244,249,251,0.95),rgba(229,239,244,0.92))]">
       <div className="mx-auto grid max-w-[88rem] gap-10 px-5 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 xl:px-10 xl:py-12">
         <div className="space-y-5">
           <p className="mkt-kicker">{copy.site.tagline}</p>
-          <Link href="/" className="site-brand-frame focus-ring inline-flex items-center rounded-[20px] px-3 py-2">
+          <Link href="/" className="site-brand-frame mkt-focus-ring inline-flex items-center rounded-[20px] px-3 py-2">
             <Image
               src="/brand/logo-wide.png"
               alt={copy.site.brandFull}
@@ -36,7 +36,7 @@ export default function SiteFooter() {
 
         <div className="grid gap-5 sm:grid-cols-3">
           {copy.footer.columns.map((column) => (
-            <section key={column.title} className="space-y-3 border-l border-[var(--mk-line-1)] pl-4">
+            <section key={column.title} className="mkt-rail-card space-y-3 p-4">
               <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{column.title}</p>
               <div className="space-y-2 text-sm text-[var(--mk-text-1)]">
                 {column.items.map((item) => (
@@ -48,7 +48,7 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-[var(--mk-line-1)]">
+      <div className="border-t border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.6)]">
         <div className="mx-auto flex max-w-[88rem] flex-col gap-2 px-5 py-4 text-sm text-[var(--mk-text-2)] sm:flex-row sm:items-center sm:justify-between lg:px-8 xl:px-10">
           <p>{copy.footer.copyright}</p>
           <p>{copy.footer.legal}</p>

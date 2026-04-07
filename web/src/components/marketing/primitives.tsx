@@ -31,26 +31,30 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="mkt-panel mkt-panel-strong mkt-grid-lines overflow-hidden px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
-      <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
-        <div className="relative z-[1] space-y-6">
+    <section className="mkt-panel mkt-panel-strong mkt-grid-lines overflow-hidden px-6 py-9 sm:px-8 lg:px-12 lg:py-12">
+      <div className="relative z-[1] grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+        <div className="space-y-7">
           <p className="mkt-kicker">{eyebrow}</p>
-          <div className="space-y-4">
-            <h1 className="mkt-display max-w-5xl">{title}</h1>
-            <p className="mkt-copy max-w-3xl text-base sm:text-lg">{body}</p>
+          <div className="space-y-5">
+            <h1 className="mkt-display max-w-4xl text-balance">{title}</h1>
+            <p className="mkt-copy max-w-2xl text-base sm:text-[1.08rem]">{body}</p>
           </div>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex flex-wrap gap-3">
             <Link href={primary.href} className="mkt-button-primary">
               {primary.label}
             </Link>
             {secondary ? (
               <Link href={secondary.href} className="mkt-button-secondary">
-                {secondary.label}
-              </Link>
-            ) : null}
+              {secondary.label}
+            </Link>
+          ) : null}
           </div>
         </div>
-        {aside ? <div className="relative z-[1]">{aside}</div> : null}
+        {aside ? (
+          <aside className="mkt-rail-card self-end p-5 sm:p-6">
+            <div className="space-y-4">{aside}</div>
+          </aside>
+        ) : null}
       </div>
       <div className="mkt-orb mkt-orb-cyan" />
       <div className="mkt-orb mkt-orb-teal" />
@@ -72,8 +76,8 @@ export function SectionHeading({
   return (
     <div className={align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'}>
       <p className="mkt-kicker">{eyebrow}</p>
-      <h2 className="mkt-title mt-4">{title}</h2>
-      {body ? <p className="mkt-copy mt-4">{body}</p> : null}
+      <h2 className="mkt-title mt-5 text-balance">{title}</h2>
+      {body ? <p className="mkt-copy mt-5 max-w-2xl text-[0.99rem] sm:text-base">{body}</p> : null}
     </div>
   );
 }
@@ -92,14 +96,14 @@ export function FinalCtaBand({
   secondary?: LinkTarget;
 }) {
   return (
-    <section className="mkt-panel overflow-hidden px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
-      <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-        <div className="space-y-4">
+    <section className="mkt-editorial-band overflow-hidden px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
+      <div className="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-10">
+        <div className="space-y-5">
           <p className="mkt-kicker">{eyebrow}</p>
-          <h2 className="mkt-title max-w-4xl">{title}</h2>
-          <p className="mkt-copy max-w-3xl">{body}</p>
+          <h2 className="mkt-title max-w-4xl text-balance">{title}</h2>
+          <p className="mkt-copy max-w-3xl text-[0.99rem] sm:text-base">{body}</p>
         </div>
-        <div className="flex flex-wrap gap-3 lg:justify-end">
+        <div className="flex flex-wrap gap-3 lg:justify-end lg:pb-1">
           <Link href={primary.href} className="mkt-button-primary">
             {primary.label}
           </Link>
@@ -117,13 +121,13 @@ export function FinalCtaBand({
 export function WorkbenchProofCard() {
   const copy = useMarketingCopy();
   return (
-    <div className="mkt-proof-panel">
+    <div className="mkt-proof-panel p-5 sm:p-6">
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="mkt-chip">BenchmarkOps</span>
           <span className="mkt-chip mkt-chip-subtle">{copy.common.proofLabel}</span>
         </div>
-        <h3 className="text-[1.35rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.6rem]">
+        <h3 className="text-[1.32rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.52rem]">
           {copy.common.workbenchNote}
         </h3>
         <p className="mkt-copy text-sm">{copy.common.proofNote}</p>
