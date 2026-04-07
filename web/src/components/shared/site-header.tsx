@@ -105,7 +105,7 @@ export default function SiteHeader() {
         </div>
 
         {open ? (
-          <div id="mobile-marketing-nav" className="border-t border-[var(--mk-line-1)] bg-[rgba(6,17,31,0.96)] px-5 py-4 lg:hidden">
+          <div id="mobile-marketing-nav" className="border-t border-[var(--mk-line-1)] px-5 py-4 lg:hidden">
             <div className="mx-auto flex max-w-[88rem] flex-col gap-3">
               <div className="grid gap-2">
                 {copy.nav.map((item) => {
