@@ -1,0 +1,83 @@
+<style>
+.flow { display:grid; gap:14px; }
+.stage { border:1px solid rgba(104,163,196,.18); background:rgba(5,20,31,.78); padding:18px; }
+.stage .num { display:inline-flex; min-width:36px; height:36px; align-items:center; justify-content:center; border-radius:999px; background:rgba(95,224,255,.12); color:#8feeff; font-size:12px; font-weight:800; letter-spacing:.12em; }
+.stage h3 { margin:12px 0 8px; color:#f3fbff; font-size:22px; letter-spacing:-.03em; }
+.stage p { margin:0; color:#96adbe; font-size:14px; line-height:1.65; max-width:78ch; }
+.stage .mini { margin-top:10px; color:#7fa1b7; font-size:12px; text-transform:uppercase; letter-spacing:.14em; }
+.hero-box { display:grid; gap:18px; border:1px solid rgba(95,224,255,.22); background:linear-gradient(135deg, rgba(8,24,36,.96), rgba(3,12,19,.98)); padding:24px; }
+.hero-grid { display:grid; gap:18px; }
+@media (min-width: 1000px) { .hero-grid { grid-template-columns: 1.25fr .75fr; align-items:end; } }
+.hero-title { font-size:64px; line-height:.92; font-weight:900; letter-spacing:-.06em; color:#f5fcff; max-width:9ch; }
+.hero-copy { color:#9bb3c3; font-size:14px; line-height:1.7; max-width:36ch; }
+.side-proof { border-left:1px solid rgba(95,224,255,.2); padding-left:18px; display:grid; gap:12px; }
+.side-proof .k { color:#7d98aa; font-size:11px; text-transform:uppercase; letter-spacing:.18em; }
+.side-proof .v { color:#effbff; font-size:18px; font-weight:700; }
+.band { display:grid; gap:10px; margin-top:10px; }
+.band .item { border-top:1px solid rgba(104,163,196,.16); padding-top:10px; color:#93afc0; font-size:13px; }
+</style>
+
+<h2>设计第 1 部分：首页结构骨架</h2>
+<p class="subtitle">这一版不是“把现有卡片重新排一排”，而是把首页重构成更接近 ClickHouse 的强节奏品牌页面。</p>
+
+<div class="mockup section">
+  <div class="mockup-header">首页主结构</div>
+  <div class="mockup-body">
+    <div class="hero-box">
+      <div class="label">Hero / Brand Statement</div>
+      <div class="hero-grid">
+        <div>
+          <div class="hero-title">让 AI 交付 真正跑成系统</div>
+          <p class="hero-copy">首屏用品牌宣言式大标题建立压强，只保留极少说明文字和两个 CTA，不在第一屏堆服务说明。</p>
+        </div>
+        <div class="side-proof">
+          <div>
+            <div class="k">Support Signals</div>
+            <div class="v">5 个核心模块 / Ops 闭环 / PaaS</div>
+          </div>
+          <div class="band">
+            <div class="item">轻量信任信号，而不是销售说明墙</div>
+            <div class="item">右侧信息作为“结构支撑”而非第二主叙事</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow" style="margin-top:18px">
+      <div class="stage">
+        <span class="num">01</span>
+        <h3>平台化视角段</h3>
+        <p>承接 Hero，解释 WanFlow 不是单点服务商，而是把数据、流程、模型运营归到同一条执行链里的“平台化交付能力”。</p>
+        <div class="mini">类似 ClickHouse 的“先定义世界观”段</div>
+      </div>
+
+      <div class="stage">
+        <span class="num">02</span>
+        <h3>五大能力段</h3>
+        <p>不再是普通服务卡片宫格，而是更强分区、更大标题、更有工业化感的能力分层，把 AI 数据标注、自动化数据处理、流程自动化、PaaS、模型运营串成系统。</p>
+        <div class="mini">能力不是并列售卖项，而是系统模块</div>
+      </div>
+
+      <div class="stage">
+        <span class="num">03</span>
+        <h3>执行骨架 / 交付方法段</h3>
+        <p>把“怎么做”做成一个清晰的运营流程段：诊断、建骨架、跑通链路、持续运营。视觉上更像基础设施官网的架构章节，而不是普通流程卡片。</p>
+        <div class="mini">把方法论做成结构证明</div>
+      </div>
+
+      <div class="stage">
+        <span class="num">04</span>
+        <h3>证明层</h3>
+        <p>首页中后段再引出 BenchmarkOps / 内部平台 / 交付证明，把它作为可信执行能力的证据层，不抢首页主角，但要明显让人感到“这家公司是真的在运行系统”。</p>
+        <div class="mini">你之前选的是 B：适度露出</div>
+      </div>
+
+      <div class="stage">
+        <span class="num">05</span>
+        <h3>匿名案例 + 收口 CTA</h3>
+        <p>最后再进入案例与联系转化，形成“品牌宣言 -> 系统结构 -> 能力模块 -> 证明层 -> 案例 -> 联系”的压缩漏斗。</p>
+        <div class="mini">比现在更强，更像一条完整叙事链</div>
+      </div>
+    </div>
+  </div>
+</div>

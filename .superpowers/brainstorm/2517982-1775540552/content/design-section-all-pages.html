@@ -1,0 +1,76 @@
+<style>
+.pages { display:grid; gap:16px; }
+@media (min-width: 980px) { .pages { grid-template-columns: 1fr 1fr; } }
+.page { border:1px solid rgba(87,118,140,.18); background:#f6fafb; }
+.page-head { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-bottom:1px solid rgba(87,118,140,.14); background:#eef4f6; }
+.page-head h3 { margin:0; font-size:16px; color:#162430; }
+.page-head span { font-size:11px; text-transform:uppercase; letter-spacing:.16em; color:#69808f; }
+.page-body { padding:16px; display:grid; gap:10px; }
+.block { border:1px solid rgba(87,118,140,.14); background:white; padding:12px; }
+.block strong { display:block; margin-bottom:6px; color:#152430; font-size:12px; text-transform:uppercase; letter-spacing:.12em; }
+.block p { margin:0; color:#58707f; font-size:13px; line-height:1.6; }
+.hero { background:linear-gradient(180deg, #dfe8ec, #edf3f5); }
+.hero strong { color:#20313d; }
+.hero p { color:#4f6676; }
+.full { grid-column:1 / -1; }
+.note-list { display:grid; gap:10px; margin-top:18px; }
+.note-item { border-left:2px solid rgba(44,95,128,.34); padding-left:12px; color:#5d7484; font-size:13px; line-height:1.6; }
+</style>
+
+<h2>设计第 3 部分：五个页面怎么一起改</h2>
+<p class="subtitle">现在整体视觉改成你选的 <strong>雾灰蓝底 B 方案</strong>：更亮、更高级，但版式骨架仍然贴近 ClickHouse 的强节奏结构。</p>
+
+<div class="pages">
+  <div class="page">
+    <div class="page-head"><h3>首页</h3><span>Brand-led</span></div>
+    <div class="page-body">
+      <div class="block hero"><strong>Hero 宣言</strong><p>超大标题 + 极少正文 + 双 CTA。把“让 AI 交付真正跑成系统”做成第一印象。</p></div>
+      <div class="block"><strong>平台化视角</strong><p>解释 WanFlow 不是单项服务，而是把数据、流程、模型运营组织成系统执行链。</p></div>
+      <div class="block"><strong>五大能力分层</strong><p>用更有结构感的模块段替代普通服务卡片网格。</p></div>
+      <div class="block"><strong>执行骨架</strong><p>诊断、建骨架、跑通链路、持续运营，做成架构式 section。</p></div>
+      <div class="block"><strong>证明层 + 案例 + CTA</strong><p>BenchmarkOps 中后段露出，最后落到案例和联系转化。</p></div>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="page-head"><h3>解决方案</h3><span>System Modules</span></div>
+    <div class="page-body">
+      <div class="block hero"><strong>页面开头</strong><p>不是平铺服务，而是先定义企业 AI 交付为什么会失控，再引出 WanFlow 的系统化解法。</p></div>
+      <div class="block"><strong>三层结构</strong><p>Data Foundation / Process Layer / Model Operations，做成更像平台架构图的分层叙事。</p></div>
+      <div class="block"><strong>五大模块展开</strong><p>每个模块都从“适用问题 / 交付物 / 结果”三个维度展开，不是单纯介绍。</p></div>
+      <div class="block"><strong>触发场景 + 交付模型</strong><p>保留销售转化逻辑，但版式更像工业技术品牌说明书。</p></div>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="page-head"><h3>案例</h3><span>Proof Stories</span></div>
+    <div class="page-body">
+      <div class="block hero"><strong>页面开头</strong><p>先讲“我们如何处理复杂交付”，再进入匿名化案例，而不是一上来堆案例卡。</p></div>
+      <div class="block"><strong>案例结构统一</strong><p>每个案例都按行业背景、问题、执行方式、结果四段展开，减少故事会感。</p></div>
+      <div class="block"><strong>证据表达</strong><p>加入更强的结果标签、流程骨架、交付证明语气，让案例像项目切片而不是宣传稿。</p></div>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="page-head"><h3>关于我们</h3><span>Positioning</span></div>
+    <div class="page-body">
+      <div class="block hero"><strong>页面开头</strong><p>先回答 WanFlow 是什么类型的公司：数据驱动型 AI 公司，擅长把复杂执行链真正组织起来。</p></div>
+      <div class="block"><strong>价值观表达</strong><p>强调“不是只给建议，而是把交付链搭起来并持续运营”。</p></div>
+      <div class="block"><strong>团队与方法</strong><p>不用堆传统公司介绍，而是用运营、系统、交付三条主线讲团队能力。</p></div>
+    </div>
+  </div>
+
+  <div class="page" style="grid-column:1 / -1">
+    <div class="page-head"><h3>联系我们</h3><span>Conversion</span></div>
+    <div class="page-body" style="grid-template-columns:1.1fr .9fr; align-items:start;">
+      <div class="block hero"><strong>联系页主叙事</strong><p>保持简洁，不像传统表单页。左侧仍是品牌式说明：适合什么问题、我们怎么开始合作、多久响应。</p></div>
+      <div class="block"><strong>表单 / 联系方式</strong><p>右侧是清晰的联系卡和表单。视觉上延续首页的版式系统，而不是独立一套 UI。</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="note-list">
+  <div class="note-item">这次不是只改首页，五个页面会统一成同一套版式逻辑、留白、边界线和标题系统。</div>
+  <div class="note-item">默认中文，英文继续保留切换，但中文页面的气质必须先成立。</div>
+  <div class="note-item">因为你选了 B 配色，最终成品会比原来更明亮，也更接近“高端科技品牌官网”，但骨架仍然会明显参考 ClickHouse。</div>
+</div>
