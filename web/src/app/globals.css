@@ -380,44 +380,52 @@ textarea {
 }
 
 :root {
-  --mk-bg-0: #06111f;
-  --mk-bg-1: #0a1b2f;
-  --mk-bg-2: #102742;
-  --mk-bg-3: #15324f;
-  --mk-line-1: rgba(91, 154, 197, 0.18);
-  --mk-line-2: rgba(91, 154, 197, 0.34);
-  --mk-text-0: #f3fbff;
-  --mk-text-1: #cadce7;
-  --mk-text-2: #88a6ba;
-  --mk-brand-0: #00b8e6;
-  --mk-brand-1: #1fd1b0;
-  --mk-brand-2: #7be3ff;
-  --mk-proof-0: #f4a524;
-  --mk-shadow: 0 28px 80px rgba(2, 8, 16, 0.38);
+  --mk-bg: #edf3f5;
+  --mk-bg-alt: #e2ebef;
+  --mk-surface-0: rgba(255, 255, 255, 0.92);
+  --mk-surface-1: rgba(247, 250, 251, 0.96);
+  --mk-surface-2: rgba(222, 232, 237, 0.9);
+  --mk-surface-strong: #20394c;
+  --mk-line-1: rgba(59, 88, 109, 0.14);
+  --mk-line-2: rgba(44, 95, 128, 0.22);
+  --mk-text-0: #12202b;
+  --mk-text-1: #566b79;
+  --mk-text-2: #738795;
+  --mk-brand-1: #2f8fb8;
+  --mk-brand-2: #44c4d9;
+  --mk-brand-3: #2f9195;
+  --mk-proof: #b78b45;
+  --mk-shadow: 0 24px 70px rgba(18, 32, 43, 0.08);
+  --mk-bg-0: var(--mk-bg);
+  --mk-bg-1: var(--mk-bg-alt);
+  --mk-bg-2: var(--mk-surface-2);
+  --mk-bg-3: var(--mk-surface-strong);
+  --mk-brand-0: var(--mk-brand-1);
+  --mk-proof-0: var(--mk-proof);
 }
 
 body {
   color: var(--mk-text-0);
   font-family: var(--font-body), 'Helvetica Neue', Arial, sans-serif;
   background:
-    radial-gradient(circle at 12% 18%, rgba(0, 184, 230, 0.14), transparent 24%),
-    radial-gradient(circle at 82% 6%, rgba(31, 209, 176, 0.08), transparent 18%),
-    linear-gradient(180deg, #04101b 0%, #071423 46%, #0a1727 100%);
+    radial-gradient(circle at 12% 16%, rgba(68, 196, 217, 0.18), transparent 28%),
+    radial-gradient(circle at 86% 10%, rgba(47, 143, 184, 0.12), transparent 22%),
+    linear-gradient(180deg, var(--mk-bg) 0%, var(--mk-bg-alt) 50%, #dce7ec 100%);
 }
 
 body::before {
   background-image:
-    linear-gradient(rgba(88, 138, 180, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(88, 138, 180, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(83, 124, 149, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(83, 124, 149, 0.12) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.48) 34%, transparent 100%);
-  opacity: 0.24;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.22) 38%, transparent 100%);
+  opacity: 0.18;
 }
 
 body::after {
   background:
-    radial-gradient(circle at 16% 10%, rgba(123, 227, 255, 0.08), transparent 18%),
-    radial-gradient(circle at 86% 16%, rgba(31, 209, 176, 0.08), transparent 16%);
+    radial-gradient(circle at 16% 10%, rgba(68, 196, 217, 0.12), transparent 18%),
+    radial-gradient(circle at 86% 16%, rgba(47, 145, 149, 0.1), transparent 16%);
 }
 
 .display-face {
@@ -430,30 +438,31 @@ body::after {
 
 .site-header-shell {
   border-bottom: 1px solid var(--mk-line-1);
-  background: rgba(5, 16, 28, 0.84);
-  backdrop-filter: blur(18px);
+  background: rgba(247, 250, 251, 0.9);
+  backdrop-filter: blur(14px);
 }
 
 .site-topline {
-  border-bottom: 1px solid rgba(91, 154, 197, 0.1);
-  background: rgba(4, 13, 23, 0.58);
+  border-bottom: 1px solid rgba(59, 88, 109, 0.1);
+  background: rgba(255, 255, 255, 0.78);
 }
 
 .site-pill {
   border: 1px solid var(--mk-line-1);
-  background: rgba(15, 39, 66, 0.6);
+  background: rgba(255, 255, 255, 0.76);
 }
 
 .site-brand-frame {
   border: 1px solid var(--mk-line-1);
-  background: linear-gradient(180deg, rgba(9, 25, 42, 0.9), rgba(7, 20, 33, 0.94));
-  box-shadow: inset 0 1px 0 rgba(123, 227, 255, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 247, 249, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .site-nav-link-active {
-  background: linear-gradient(135deg, rgba(14, 53, 88, 0.88), rgba(0, 184, 230, 0.2));
+  border: 1px solid rgba(68, 196, 217, 0.4);
+  background: linear-gradient(135deg, rgba(68, 196, 217, 0.22), rgba(47, 143, 184, 0.12));
   color: var(--mk-text-0);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 12px 26px rgba(18, 32, 43, 0.08);
 }
 
 .site-nav-link-idle {
@@ -464,7 +473,7 @@ body::after {
 
 .site-nav-link-idle:hover {
   border-color: var(--mk-line-1);
-  background: rgba(15, 39, 66, 0.42);
+  background: rgba(255, 255, 255, 0.82);
   color: var(--mk-text-0);
 }
 
@@ -473,7 +482,7 @@ body::after {
 .mkt-menu-button:focus-visible,
 .mkt-lang-button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(0, 184, 230, 0.2);
+  box-shadow: 0 0 0 4px rgba(68, 196, 217, 0.28);
 }
 
 .marketing-main {
@@ -497,7 +506,7 @@ body::after {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--mk-line-1);
-  background: linear-gradient(180deg, rgba(9, 24, 40, 0.88), rgba(7, 18, 31, 0.94));
+  background: linear-gradient(180deg, var(--mk-surface-1), var(--mk-surface-0));
   box-shadow: var(--mk-shadow);
 }
 
@@ -513,14 +522,13 @@ body::after {
 }
 
 .mkt-panel-strong {
-  background:
-    linear-gradient(180deg, rgba(11, 28, 47, 0.96), rgba(7, 18, 31, 0.98));
+  border-color: rgba(43, 88, 116, 0.24);
+  background: linear-gradient(180deg, #e8f2f6 0%, #dde9ef 100%);
 }
 
 .mkt-card-highlight {
   border-color: var(--mk-line-2);
-  background:
-    linear-gradient(180deg, rgba(10, 33, 56, 0.96), rgba(7, 21, 36, 0.98));
+  background: linear-gradient(180deg, #eef5f8 0%, #e3edf2 100%);
 }
 
 .mkt-grid-lines::before {
@@ -528,11 +536,11 @@ body::after {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(122, 170, 210, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(122, 170, 210, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(83, 124, 149, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(83, 124, 149, 0.12) 1px, transparent 1px);
   background-size: 52px 52px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-  opacity: 0.24;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -548,7 +556,7 @@ body::after {
   top: -4rem;
   width: 16rem;
   height: 16rem;
-  background: rgba(0, 184, 230, 0.18);
+  background: rgba(68, 196, 217, 0.2);
 }
 
 .mkt-orb-teal {
@@ -556,7 +564,7 @@ body::after {
   bottom: -6rem;
   width: 14rem;
   height: 14rem;
-  background: rgba(31, 209, 176, 0.12);
+  background: rgba(47, 145, 149, 0.14);
 }
 
 .mkt-kicker {
@@ -566,7 +574,7 @@ body::after {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--mk-brand-2);
+  color: var(--mk-brand-3);
 }
 
 .mkt-kicker::before {
@@ -624,10 +632,10 @@ body::after {
 }
 
 .mkt-button-primary {
-  border: 1px solid rgba(81, 217, 255, 0.2);
-  background: linear-gradient(135deg, #0a7ab6 0%, #00b8e6 55%, #1fd1b0 100%);
-  color: #07111d;
-  box-shadow: 0 18px 30px rgba(0, 184, 230, 0.18);
+  border: 1px solid rgba(47, 143, 184, 0.24);
+  background: linear-gradient(135deg, #2f8fb8 0%, #44c4d9 58%, #2f9195 100%);
+  color: #f6fcff;
+  box-shadow: 0 14px 30px rgba(34, 101, 128, 0.18);
 }
 
 .mkt-button-primary:hover,
@@ -641,7 +649,7 @@ body::after {
 .mkt-menu-button,
 .mkt-lang-button {
   border: 1px solid var(--mk-line-1);
-  background: rgba(14, 36, 58, 0.68);
+  background: rgba(255, 255, 255, 0.76);
   color: var(--mk-text-0);
 }
 
@@ -653,8 +661,8 @@ body::after {
 }
 
 .mkt-lang-button-active {
-  border-color: rgba(81, 217, 255, 0.38);
-  background: rgba(81, 217, 255, 0.14);
+  border-color: rgba(47, 143, 184, 0.36);
+  background: rgba(68, 196, 217, 0.18);
 }
 
 .mkt-menu-button {
@@ -668,20 +676,20 @@ body::after {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  border: 1px solid rgba(81, 217, 255, 0.18);
-  background: rgba(81, 217, 255, 0.08);
+  border: 1px solid rgba(47, 143, 184, 0.24);
+  background: rgba(68, 196, 217, 0.14);
   padding: 0.35rem 0.8rem;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--mk-brand-2);
+  color: var(--mk-brand-3);
 }
 
 .mkt-chip-subtle {
-  border-color: rgba(244, 165, 36, 0.14);
-  background: rgba(244, 165, 36, 0.08);
-  color: #ffd38a;
+  border-color: rgba(183, 139, 69, 0.28);
+  background: rgba(183, 139, 69, 0.12);
+  color: #7b5d29;
 }
 
 .mkt-card-index {
@@ -707,7 +715,7 @@ body::after {
   border: 1px solid var(--mk-line-1);
   border-radius: 1.4rem;
   padding: 1.25rem;
-  background: rgba(10, 27, 46, 0.78);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .mkt-flow-marker {
@@ -717,13 +725,13 @@ body::after {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  border: 1px solid rgba(81, 217, 255, 0.22);
-  background: rgba(81, 217, 255, 0.08);
+  border: 1px solid rgba(47, 143, 184, 0.24);
+  background: rgba(68, 196, 217, 0.14);
   font-family: var(--font-mono), monospace;
   font-size: 0.86rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--mk-brand-2);
+  color: var(--mk-brand-3);
 }
 
 .mkt-list-item,
@@ -738,7 +746,7 @@ body::after {
   height: 0.55rem;
   margin-top: 0.45rem;
   border-radius: 999px;
-  background: var(--mk-brand-1);
+  background: var(--mk-brand-3);
   flex: 0 0 auto;
 }
 
@@ -758,7 +766,7 @@ body::after {
   min-height: 48px;
   border: 1px solid var(--mk-line-1);
   border-radius: 1rem;
-  background: rgba(12, 29, 48, 0.88);
+  background: rgba(255, 255, 255, 0.9);
   padding: 0.85rem 1rem;
   color: var(--mk-text-0);
 }
@@ -770,11 +778,46 @@ body::after {
 .mkt-field-error,
 .mkt-status-error {
   font-style: normal;
-  color: #ff9e9e;
+  color: #b64a52;
 }
 
 .mkt-status-success {
-  color: #8cf1dd;
+  color: #2f9195;
+}
+
+.mkt-editorial-band {
+  border: 1px solid var(--mk-line-1);
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.38)),
+    linear-gradient(135deg, rgba(68, 196, 217, 0.1), rgba(47, 143, 184, 0.06));
+  box-shadow: var(--mk-shadow);
+}
+
+.mkt-split-callout {
+  border: 1px solid var(--mk-line-2);
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(180deg, rgba(245, 250, 252, 0.98), rgba(233, 241, 246, 0.9));
+  box-shadow: 0 16px 36px rgba(18, 32, 43, 0.07);
+}
+
+.mkt-rail-card {
+  border: 1px solid var(--mk-line-1);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 12px 28px rgba(18, 32, 43, 0.06);
+}
+
+.mkt-module-card {
+  border: 1px solid rgba(59, 88, 109, 0.16);
+  border-radius: 1.4rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(240, 247, 250, 0.92));
+  box-shadow: 0 18px 34px rgba(18, 32, 43, 0.06);
+}
+
+#mobile-marketing-nav {
+  background: rgba(247, 250, 251, 0.96);
 }
 
 @media (min-width: 640px) {
