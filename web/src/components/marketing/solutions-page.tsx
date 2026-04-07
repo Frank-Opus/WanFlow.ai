@@ -1,10 +1,27 @@
 'use client';
 
+import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingSolutionsPage() {
   const copy = useMarketingCopy();
+  const { locale } = useLocale();
+  const labels = locale === 'zh'
+    ? {
+        modulesEyebrow: '服务模块',
+        modulesTitle: '五大模块如何落到可执行交付',
+        deliverables: '交付物',
+        outcomes: '结果',
+        contact: '联系我们',
+      }
+    : {
+        modulesEyebrow: 'Service modules',
+        modulesTitle: 'How the modules turn into executable delivery',
+        deliverables: 'Deliverables',
+        outcomes: 'Outcomes',
+        contact: 'Contact',
+      };
 
   return (
     <main id="main-content" className="marketing-main">
@@ -29,7 +46,7 @@ export default function MarketingSolutionsPage() {
         />
 
         <section className="space-y-6">
-          <SectionHeading eyebrow="Service modules" title={copy.solutions.hero.body} body={copy.common.proofNote} />
+          <SectionHeading eyebrow={labels.modulesEyebrow} title={labels.modulesTitle} body={copy.common.proofNote} />
           <div className="grid gap-4 lg:grid-cols-2">
             {copy.solutions.modules.map((module, index) => (
               <article key={module.title} className={index % 2 === 0 ? 'mkt-card mkt-card-highlight px-6 py-6' : 'mkt-card px-6 py-6'}>
@@ -38,7 +55,7 @@ export default function MarketingSolutionsPage() {
                 <p className="mkt-copy mt-3">{module.body}</p>
                 <div className="mt-5 grid gap-5 md:grid-cols-2">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">Deliverables</p>
+                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
                     <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
                       {module.deliverables.map((item) => (
                         <li key={item} className="mkt-list-item">{item}</li>
@@ -46,7 +63,7 @@ export default function MarketingSolutionsPage() {
                     </ul>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">Outcomes</p>
+                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
                     <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
                       {module.outcomes.map((item) => (
                         <li key={item} className="mkt-list-item">{item}</li>
@@ -86,7 +103,7 @@ export default function MarketingSolutionsPage() {
         </section>
 
         <FinalCtaBand
-          eyebrow="Contact"
+          eyebrow={labels.contact}
           title={copy.solutions.finalCta.title}
           body={copy.solutions.finalCta.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}

@@ -112,7 +112,7 @@ export default function SiteHeader() {
         </div>
 
         {open ? (
-          <div id="mobile-marketing-nav" className="border-t border-[var(--mk-line-1)] px-5 py-4 lg:hidden">
+          <nav id="mobile-marketing-nav" aria-label={primaryNavLabel} className="border-t border-[var(--mk-line-1)] px-5 py-4 lg:hidden">
             <div className="mx-auto flex max-w-[88rem] flex-col gap-3">
               <div className="grid gap-2 rounded-[1.35rem] border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.72)] p-2">
                 {copy.nav.map((item) => {
@@ -155,7 +155,7 @@ export default function SiteHeader() {
                 })}
               </div>
             </div>
-          </div>
+          </nav>
         ) : null}
       </header>
     </>

@@ -1,11 +1,32 @@
 'use client';
 
+import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingCasesPage() {
   const copy = useMarketingCopy();
+  const { locale } = useLocale();
   const featured = copy.cases.featured;
+  const labels = locale === 'zh'
+    ? {
+        challenge: '挑战',
+        intervention: '执行方式',
+        outcome: '结果',
+        caseGrid: '案例结构',
+        action: '动作',
+        proof: '证明层',
+        nextStep: '下一步',
+      }
+    : {
+        challenge: 'Challenge',
+        intervention: 'Intervention',
+        outcome: 'Outcome',
+        caseGrid: 'Case grid',
+        action: 'Action',
+        proof: 'Proof',
+        nextStep: 'Next step',
+      };
 
   return (
     <main id="main-content" className="marketing-main">
@@ -31,9 +52,9 @@ export default function MarketingCasesPage() {
               <p className="mkt-kicker">{featured.eyebrow}</p>
               <h2 className="mkt-title">{featured.title}</h2>
               <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
-                <p><strong className="text-[var(--mk-text-0)]">Challenge:</strong> {featured.challenge}</p>
-                <p><strong className="text-[var(--mk-text-0)]">Intervention:</strong> {featured.intervention}</p>
-                <p><strong className="text-[var(--mk-text-0)]">Outcome:</strong> {featured.outcome}</p>
+                <p><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {featured.challenge}</p>
+                <p><strong className="text-[var(--mk-text-0)]">{labels.intervention}:</strong> {featured.intervention}</p>
+                <p><strong className="text-[var(--mk-text-0)]">{labels.outcome}:</strong> {featured.outcome}</p>
               </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
@@ -49,14 +70,14 @@ export default function MarketingCasesPage() {
         </section>
 
         <section className="space-y-6">
-          <SectionHeading eyebrow="Case grid" title={copy.cases.proof.title} body={copy.cases.hero.body} />
+          <SectionHeading eyebrow={labels.caseGrid} title={copy.cases.proof.title} body={copy.cases.hero.body} />
           <div className="grid gap-4 lg:grid-cols-3">
             {copy.cases.cards.map((item) => (
               <article key={item.title} className="mkt-case-card px-5 py-5">
                 <span className="mkt-chip">{item.sector}</span>
                 <h3 className="mt-4 text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">Challenge:</strong> {item.challenge}</p>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">Action:</strong> {item.action}</p>
+                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
+                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.action}:</strong> {item.action}</p>
                 <p className="mt-4 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-2)]">{item.outcome}</p>
               </article>
             ))}
@@ -68,7 +89,7 @@ export default function MarketingCasesPage() {
           <div className="grid gap-4 lg:grid-cols-3">
             {copy.cases.proof.items.map((item, index) => (
               <article key={item.title} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
-                <span className="mkt-card-index">Proof</span>
+                <span className="mkt-card-index">{labels.proof}</span>
                 <h3 className="mt-4 text-[1.18rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3">{item.body}</p>
               </article>
@@ -77,7 +98,7 @@ export default function MarketingCasesPage() {
         </section>
 
         <FinalCtaBand
-          eyebrow="Next step"
+          eyebrow={labels.nextStep}
           title={copy.cases.finalCta.title}
           body={copy.cases.finalCta.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}

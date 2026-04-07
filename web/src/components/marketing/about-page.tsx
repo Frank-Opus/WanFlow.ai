@@ -1,10 +1,13 @@
 'use client';
 
+import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingAboutPage() {
   const copy = useMarketingCopy();
+  const { locale } = useLocale();
+  const finalEyebrow = locale === 'zh' ? '与 WanFlow 沟通' : 'Talk to WanFlow';
 
   return (
     <main id="main-content" className="marketing-main">
@@ -71,7 +74,7 @@ export default function MarketingAboutPage() {
         </section>
 
         <FinalCtaBand
-          eyebrow="Talk to WanFlow"
+          eyebrow={finalEyebrow}
           title={copy.about.finalCta.title}
           body={copy.about.finalCta.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}

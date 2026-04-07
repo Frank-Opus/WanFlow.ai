@@ -1,11 +1,16 @@
 'use client';
 
 import Link from 'next/link';
+import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading, WorkbenchProofCard } from '@/components/marketing/primitives';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingHomePage() {
   const copy = useMarketingCopy();
+  const { locale } = useLocale();
+  const labels = locale === 'zh'
+    ? { caseTag: '案例', challenge: '挑战' }
+    : { caseTag: 'Case', challenge: 'Challenge' };
 
   return (
     <main id="main-content" className="marketing-main">
@@ -116,10 +121,10 @@ export default function MarketingHomePage() {
               <article key={item.title} className="mkt-case-card px-5 py-5">
                 <div className="flex items-center justify-between gap-3">
                   <span className="mkt-chip">{item.sector}</span>
-                  <span className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">Case</span>
+                  <span className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.caseTag}</span>
                 </div>
                 <h3 className="mt-4 text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">Challenge:</strong> {item.challenge}</p>
+                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
                 <p className="mt-4 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-2)]">{item.outcome}</p>
               </article>
             ))}

@@ -1,11 +1,14 @@
 'use client';
 
 import ContactForm from '@/components/marketing/contact-form';
+import { useLocale } from '@/components/shared/locale-provider';
 import { PageHero } from '@/components/marketing/primitives';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingContactPage() {
   const copy = useMarketingCopy();
+  const { locale } = useLocale();
+  const faqLabel = locale === 'zh' ? '常见问题' : 'FAQ';
 
   return (
     <main id="main-content" className="marketing-main">
@@ -52,7 +55,7 @@ export default function MarketingContactPage() {
             </section>
 
             <section className="mkt-card px-6 py-6">
-              <p className="mkt-kicker">FAQ</p>
+              <p className="mkt-kicker">{faqLabel}</p>
               <div className="mt-4 space-y-4">
                 {copy.contact.faq.map((item) => (
                   <article key={item.question} className="border-t border-[var(--mk-line-1)] pt-4 first:border-t-0 first:pt-0">
