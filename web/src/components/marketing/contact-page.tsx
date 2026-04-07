@@ -8,6 +8,7 @@ import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 export default function MarketingContactPage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
+  const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const faqLabel = locale === 'zh' ? '常见问题' : 'FAQ';
 
   return (
@@ -18,7 +19,7 @@ export default function MarketingContactPage() {
           title={copy.contact.hero.title}
           body={copy.contact.hero.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/solutions', label: copy.nav[1].label }}
+          secondary={{ href: '/solutions', label: navLabel('/solutions') }}
           aside={
             <div className="mkt-proof-panel space-y-4">
               <p className="mkt-kicker">{copy.contact.side.responseTitle}</p>

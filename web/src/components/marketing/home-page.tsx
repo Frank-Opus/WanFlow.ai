@@ -9,8 +9,8 @@ export default function MarketingHomePage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
   const labels = locale === 'zh'
-    ? { caseTag: '案例', challenge: '挑战' }
-    : { caseTag: 'Case', challenge: 'Challenge' };
+    ? { caseTag: '案例', challenge: '挑战', flow: '流程' }
+    : { caseTag: 'Case', challenge: 'Challenge', flow: 'Flow' };
 
   return (
     <main id="main-content" className="marketing-main">
@@ -52,7 +52,7 @@ export default function MarketingHomePage() {
             <div className="grid gap-3 md:grid-cols-2">
               {copy.home.spotlight.bullets.map((bullet) => (
                 <article key={bullet} className="mkt-card px-5 py-5">
-                  <span className="mkt-card-index">Flow</span>
+                  <span className="mkt-card-index">{labels.flow}</span>
                   <p className="mt-4 text-base font-semibold text-[var(--mk-text-0)]">{bullet}</p>
                 </article>
               ))}

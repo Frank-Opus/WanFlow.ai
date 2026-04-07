@@ -7,6 +7,7 @@ import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 export default function MarketingAboutPage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
+  const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const finalEyebrow = locale === 'zh' ? '与 WanFlow 沟通' : 'Talk to WanFlow';
 
   return (
@@ -17,7 +18,7 @@ export default function MarketingAboutPage() {
           title={copy.about.hero.title}
           body={copy.about.hero.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: copy.nav[2].label }}
+          secondary={{ href: '/cases', label: navLabel('/cases') }}
           aside={
             <div className="mkt-proof-panel">
               <p className="mkt-kicker">{copy.about.trust.eyebrow}</p>
@@ -78,7 +79,7 @@ export default function MarketingAboutPage() {
           title={copy.about.finalCta.title}
           body={copy.about.finalCta.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: copy.nav[2].label }}
+          secondary={{ href: '/cases', label: navLabel('/cases') }}
         />
       </div>
     </main>

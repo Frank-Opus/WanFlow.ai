@@ -8,6 +8,7 @@ export default function MarketingCasesPage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
   const featured = copy.cases.featured;
+  const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const labels = locale === 'zh'
     ? {
         challenge: '挑战',
@@ -36,7 +37,7 @@ export default function MarketingCasesPage() {
           title={copy.cases.hero.title}
           body={copy.cases.hero.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/solutions', label: copy.nav[1].label }}
+          secondary={{ href: '/solutions', label: navLabel('/solutions') }}
           aside={
             <div className="mkt-proof-panel space-y-4">
               <span className="mkt-chip">{featured.sector}</span>
@@ -102,7 +103,7 @@ export default function MarketingCasesPage() {
           title={copy.cases.finalCta.title}
           body={copy.cases.finalCta.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/solutions', label: copy.nav[1].label }}
+          secondary={{ href: '/solutions', label: navLabel('/solutions') }}
         />
       </div>
     </main>

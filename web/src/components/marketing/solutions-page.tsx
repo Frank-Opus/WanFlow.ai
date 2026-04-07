@@ -7,6 +7,7 @@ import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 export default function MarketingSolutionsPage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
+  const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const labels = locale === 'zh'
     ? {
         modulesEyebrow: '服务模块',
@@ -14,6 +15,7 @@ export default function MarketingSolutionsPage() {
         deliverables: '交付物',
         outcomes: '结果',
         contact: '联系我们',
+        layer: '层级',
       }
     : {
         modulesEyebrow: 'Service modules',
@@ -21,6 +23,7 @@ export default function MarketingSolutionsPage() {
         deliverables: 'Deliverables',
         outcomes: 'Outcomes',
         contact: 'Contact',
+        layer: 'Layer',
       };
 
   return (
@@ -31,12 +34,12 @@ export default function MarketingSolutionsPage() {
           title={copy.solutions.hero.title}
           body={copy.solutions.hero.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: copy.nav[2].label }}
+          secondary={{ href: '/cases', label: navLabel('/cases') }}
           aside={
             <div className="grid gap-3">
               {copy.solutions.architecture.map((item) => (
                 <article key={item.title} className="mkt-card px-5 py-5">
-                  <span className="mkt-card-index">Layer</span>
+                  <span className="mkt-card-index">{labels.layer}</span>
                   <h3 className="mt-4 text-[1.15rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
                   <p className="mkt-copy mt-3 text-sm">{item.body}</p>
                 </article>
@@ -107,7 +110,7 @@ export default function MarketingSolutionsPage() {
           title={copy.solutions.finalCta.title}
           body={copy.solutions.finalCta.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: copy.nav[2].label }}
+          secondary={{ href: '/cases', label: navLabel('/cases') }}
         />
       </div>
     </main>
