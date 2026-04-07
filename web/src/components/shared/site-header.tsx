@@ -12,6 +12,7 @@ export default function SiteHeader() {
   const { locale, setLocale } = useLocale();
   const copy = getMarketingCopy(locale);
   const [open, setOpen] = useState(false);
+  const mobileMenuLabel = open ? (locale === 'zh' ? '关闭' : 'Close') : locale === 'zh' ? '菜单' : 'Menu';
 
   useEffect(() => {
     setOpen(false);
@@ -21,7 +22,7 @@ export default function SiteHeader() {
 
   return (
     <>
-      <a href="#main-content" className="mkt-skip-link focus-ring sr-only z-50 rounded-full px-4 py-2 text-sm focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+      <a href="#main-content" className="mkt-skip-link mkt-focus-ring sr-only z-50 rounded-full px-4 py-2 text-sm focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
         {copy.common.skip}
       </a>
 
@@ -35,7 +36,7 @@ export default function SiteHeader() {
 
         <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-4 px-5 py-3 lg:px-8 xl:px-10">
           <div className="flex min-w-0 items-center gap-4">
-            <Link href="/" className="site-brand-frame focus-ring inline-flex items-center rounded-[20px] px-3 py-2">
+            <Link href="/" className="site-brand-frame mkt-focus-ring inline-flex items-center rounded-[20px] px-3 py-2">
               <Image
                 src="/brand/logo-wide.png"
                 alt={copy.site.brandFull}
@@ -60,7 +61,7 @@ export default function SiteHeader() {
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
                   className={[
-                    'site-nav-link focus-ring rounded-full px-4 py-2 text-[0.92rem] font-medium transition',
+                    'site-nav-link mkt-focus-ring rounded-full px-4 py-2 text-[0.92rem] font-medium transition',
                     active ? 'site-nav-link-active' : 'site-nav-link-idle',
                   ].join(' ')}
                 >
@@ -98,9 +99,9 @@ export default function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-marketing-nav"
             onClick={() => setOpen((current) => !current)}
-            className="mkt-menu-button focus-ring lg:hidden"
+            className="mkt-menu-button mkt-focus-ring lg:hidden"
           >
-            <span>{open ? 'Close' : 'Menu'}</span>
+            <span>{mobileMenuLabel}</span>
           </button>
         </div>
 
