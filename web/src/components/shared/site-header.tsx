@@ -21,7 +21,7 @@ export default function SiteHeader() {
 
   return (
     <>
-      <a href="#main-content" className="focus-ring sr-only z-50 rounded-full bg-[rgba(7,24,40,0.98)] px-4 py-2 text-sm text-[var(--mk-text-0)] focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+      <a href="#main-content" className="mkt-skip-link focus-ring sr-only z-50 rounded-full px-4 py-2 text-sm focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
         {copy.common.skip}
       </a>
 
@@ -117,7 +117,7 @@ export default function SiteHeader() {
                       aria-current={active ? 'page' : undefined}
                       className={[
                         'rounded-[18px] px-4 py-3 text-sm font-medium transition',
-                        active ? 'bg-[rgba(81,217,255,0.14)] text-[var(--mk-text-0)]' : 'border border-[var(--mk-line-1)] text-[var(--mk-text-1)]',
+                        active ? 'mkt-mobile-link-active' : 'border border-[var(--mk-line-1)] text-[var(--mk-text-1)]',
                       ].join(' ')}
                     >
                       {item.label}

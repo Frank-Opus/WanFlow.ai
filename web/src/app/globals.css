@@ -485,9 +485,29 @@ body::after {
   box-shadow: 0 0 0 4px rgba(68, 196, 217, 0.28);
 }
 
+.mkt-skip-link {
+  border: 1px solid var(--mk-line-2);
+  background: linear-gradient(180deg, var(--mk-surface-1), rgba(238, 245, 248, 0.96));
+  color: var(--mk-text-0);
+  box-shadow: 0 14px 28px rgba(18, 32, 43, 0.16);
+}
+
 .marketing-main {
   position: relative;
   padding: 1.25rem 1rem 4rem;
+  border-top: 1px solid rgba(59, 88, 109, 0.14);
+  background:
+    radial-gradient(circle at 85% -10%, rgba(68, 196, 217, 0.16), transparent 46%),
+    radial-gradient(circle at 12% 0%, rgba(47, 143, 184, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(244, 249, 251, 0.9) 0%, rgba(233, 241, 246, 0.76) 100%);
+}
+
+.marketing-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.48), transparent 42%);
 }
 
 .mkt-shell {
@@ -667,6 +687,12 @@ body::after {
 
 .mkt-menu-button {
   padding: 0.7rem 1rem;
+  color: var(--mk-text-0);
+}
+
+.mkt-mobile-link-active {
+  border: 1px solid rgba(68, 196, 217, 0.4);
+  background: linear-gradient(135deg, rgba(68, 196, 217, 0.22), rgba(47, 143, 184, 0.12));
   color: var(--mk-text-0);
 }
 
