@@ -6,7 +6,7 @@ export const siteContact = {
   responseWindow: '24 hours',
 } as const;
 
-export const marketingCopy = {
+const marketingCopyBase = {
   zh: {
     site: {
       title: 'WanFlow | 数据驱动的 AI 运营与交付伙伴',
@@ -135,6 +135,7 @@ export const marketingCopy = {
       proofLayer: {
         eyebrow: '证明层',
         title: '我们更像一支 AI 运营团队，而不是只交一份方案。',
+        body: 'BenchmarkOps 不作为首页主角出现，而是作为中段证明层，说明 WanFlow 如何把内部执行方法真正沉淀为可展示、可复盘、可验证的运营系统。',
         items: [
           {
             title: '数据与流程一体化看问题',
@@ -179,119 +180,9 @@ export const marketingCopy = {
         title: '如果你正在搭建企业 AI 执行链，我们可以直接聊真实问题。',
         body: '从数据准备到流程编排，再到模型运营与交付证明，WanFlow 更适合在复杂系统里一起把事情做成。',
       },
-      metrics: [
-        { value: '5', label: '核心服务模块', detail: '覆盖数据、流程与模型运营全链路' },
-        { value: 'PaaS', label: 'Process as a Service', detail: '把复杂业务流程封装为稳定执行能力' },
-        { value: 'Ops', label: 'Model Operations', detail: '支持从数据到运行再到复盘的持续运营' },
-      ],
-      spotlight: {
-        label: '平台 / 系统视角',
-        title: '像建设运营系统一样建设 AI 交付，而不是像做一次 demo。',
-        body:
-          '对企业来说，真正难的不是“模型能不能跑起来”，而是数据如何准备、流程如何协同、人工与自动化如何编排、交付物如何稳定复现。WanFlow 的价值在于把这些环节连成一张可运营的网。',
-        bullets: [
-          '业务流程梳理与执行链设计',
-          '复杂数据处理与结构化治理',
-          '人机协同流程与质量控制',
-          '面向客户交付与持续优化的模型运营',
-        ],
-      },
-      services: {
-        eyebrow: '能力模块',
-        title: '五个模块，一条执行链。',
-        body:
-          '官网不把服务拆成彼此孤立的售卖项，而是让客户看到：这些模块如何从同一条数据与流程骨架里协同工作。',
-        items: [
-          {
-            title: 'AI 数据标注',
-            body: '围绕业务目标设计标注规范、质检机制与产能节奏，而不是单纯堆人力。',
-            outcome: '形成可扩展的数据生产与验收机制。',
-          },
-          {
-            title: '自动化数据处理',
-            body: '把清洗、抽取、归一化、结构化等高重复任务沉淀为可复用能力。',
-            outcome: '让数据从原料更快进入可用状态。',
-          },
-          {
-            title: '流程自动化',
-            body: '把人工审批、任务流转、质检回路与系统动作编排成稳定流程。',
-            outcome: '降低跨团队协作摩擦与交付波动。',
-          },
-          {
-            title: 'Process as a Service',
-            body: '把企业难以标准化的运营流程产品化，形成可持续外包与协同接口。',
-            outcome: '让复杂流程可以被持续执行与放大。',
-          },
-          {
-            title: '模型运营服务',
-            body: '围绕模型表现、数据反馈、运行监控和交付证明，建立持续迭代闭环。',
-            outcome: '让模型能力成为一项被运营的业务资产。',
-          },
-        ],
-      },
-      process: {
-        eyebrow: '交付框架',
-        title: '从问题梳理，到执行闭环，再到可证明结果。',
-        body:
-          'WanFlow 的官网叙事不是“功能介绍”，而是“交付结构”。企业买的不只是能力点，而是一套可落地、可扩展、可追踪的运营系统。',
-        steps: [
-          { step: '01', title: '诊断业务瓶颈', body: '识别数据、流程、角色协作与模型运行中的真正卡点。' },
-          { step: '02', title: '设计执行骨架', body: '把任务接口、质检规则、自动化节点和责任边界定义清楚。' },
-          { step: '03', title: '跑通交付链路', body: '把数据处理、流程编排、运营动作与交付产物串成真实运行链。' },
-          { step: '04', title: '持续运营优化', body: '围绕结果、质量、成本与时效做持续迭代，而不是一次性交付。' },
-        ],
-      },
-      differentiators: {
-        eyebrow: '证明层',
-        title: '我们更像一支 AI 运营团队，而不是只交一份方案。',
-        items: [
-          {
-            title: '数据与流程一体化看问题',
-            body: '不把“数据问题”“流程问题”“模型问题”割裂开，而是从执行链角度统一设计。',
-          },
-          {
-            title: '服务不是黑盒外包',
-            body: '每个环节都强调规范、质检、节奏、反馈与可复盘性，方便企业长期协作。',
-          },
-          {
-            title: '把内部平台当成证明层',
-            body: 'WanFlow 现有内部平台 BenchmarkOps 展示了我们对流程、产物与评测闭环的真实理解。',
-          },
-        ],
-      },
-      casesTeaser: {
-        eyebrow: '案例预览',
-        title: '不是行业故事会，而是匿名化的交付结构样本。',
-        items: [
-          {
-            title: '大模型团队数据治理加速',
-            sector: '模型训练与运营',
-            challenge: '多来源样本标准不统一，质检回路长，产能不稳定。',
-            outcome: '建立统一标注规范与自动化流转，缩短迭代周期。',
-          },
-          {
-            title: '复杂文档处理流程重构',
-            sector: '企业数据处理',
-            challenge: 'PDF、表格、文本混杂，人工整理成本高。',
-            outcome: '搭建自动化抽取与结构化处理链，减少重复人力。',
-          },
-          {
-            title: '运营流程作为服务输出',
-            sector: 'Process as a Service',
-            challenge: '客户流程复杂、跨角色协作混乱、交付标准难固定。',
-            outcome: '把流程变成服务化接口，形成稳定协同机制。',
-          },
-        ],
-      },
     },
     solutions: {
       problemFrame: {
-        eyebrow: '解决方案',
-        title: '把碎片化 AI 工作流，重组为可运营、可扩展、可交付的企业系统。',
-        body:
-          'WanFlow 的服务结构不是简单的“人力包 + 工具包”，而是围绕企业 AI 交付的真实运行逻辑，把数据、流程和模型运营放回同一套系统里。',
-      },
-      hero: {
         eyebrow: '解决方案',
         title: '把碎片化 AI 工作流，重组为可运营、可扩展、可交付的企业系统。',
         body:
@@ -370,11 +261,6 @@ export const marketingCopy = {
     },
     cases: {
       intro: {
-        eyebrow: '案例',
-        title: '看结果，也看执行骨架。',
-        body: '以下案例以匿名化方式呈现，重点展示 WanFlow 如何处理真实运营问题，而不是只展示漂亮结论。',
-      },
-      hero: {
         eyebrow: '案例',
         title: '看结果，也看执行骨架。',
         body: '以下案例以匿名化方式呈现，重点展示 WanFlow 如何处理真实运营问题，而不是只展示漂亮结论。',
@@ -475,24 +361,6 @@ export const marketingCopy = {
         ],
       },
       collaborationModel: {
-        eyebrow: '协作方式',
-        title: '从对齐业务目标，到落地执行，再到持续优化。',
-        items: [
-          { title: '诊断', body: '识别数据、流程与协作问题的根本约束。', },
-          { title: '设计', body: '抽象出能长期运行的执行骨架与交付边界。', },
-          { title: '运行', body: '把人、流程、系统与产物真正接进业务日常。', },
-          { title: '优化', body: '根据结果、时效与质量做持续运营。', },
-        ],
-      },
-      story: {
-        eyebrow: '我们的视角',
-        title: '从“项目交付”切入，而不是只从“模型能力”切入。',
-        paragraphs: [
-          '很多企业 AI 项目并不是输在算法，而是输在前后的执行链：数据准备不稳定、人工与系统配合不顺、流程职责不清、结果难以证明。',
-          'WanFlow 的工作方式是把这些问题重新拉通。我们把数据、流程、角色、产物和运营指标放在同一张图里思考，确保系统真的能跑，而不是只在方案汇报中看起来合理。',
-        ],
-      },
-      model: {
         eyebrow: '协作方式',
         title: '从对齐业务目标，到落地执行，再到持续优化。',
         items: [
@@ -709,6 +577,7 @@ export const marketingCopy = {
       proofLayer: {
         eyebrow: 'Proof layer',
         title: 'We work more like an AI operations team than a presentation-only consultancy.',
+        body: 'BenchmarkOps appears as supporting evidence rather than the homepage lead, showing how WanFlow turns internal operating methods into an inspectable delivery system.',
         items: [
           {
             title: 'Data and process in one frame',
@@ -753,119 +622,9 @@ export const marketingCopy = {
         title: 'If you are building an enterprise AI execution chain, let’s discuss the real bottlenecks.',
         body: 'From data preparation to workflow orchestration and model operations, WanFlow is strongest when the system is too complex for one-off fixes.',
       },
-      metrics: [
-        { value: '5', label: 'service modules', detail: 'covering data, process, and model operations' },
-        { value: 'PaaS', label: 'Process as a Service', detail: 'turning complex workflows into stable execution capacity' },
-        { value: 'Ops', label: 'Model operations', detail: 'from data feedback to operational proof' },
-      ],
-      spotlight: {
-        label: 'Platform / system view',
-        title: 'Build AI delivery the way you build an operating system, not a one-off demo.',
-        body:
-          'For enterprises, the hard part is rarely whether a model can run once. The hard part is how data is prepared, how workflows are coordinated, how humans and automation are orchestrated, and how outputs become reliable deliverables. WanFlow connects those pieces into one working network.',
-        bullets: [
-          'Workflow design and execution architecture',
-          'Complex data processing and structured governance',
-          'Human-in-the-loop operations with quality control',
-          'Model operations and delivery proof for client-facing teams',
-        ],
-      },
-      services: {
-        eyebrow: 'Capability modules',
-        title: 'Five modules, one execution chain.',
-        body:
-          'The site does not frame services as isolated line items. It shows how they fit into a shared operating backbone for enterprise AI delivery.',
-        items: [
-          {
-            title: 'AI data labeling',
-            body: 'Design labeling specs, quality loops, and production cadence around business outcomes, not raw labor alone.',
-            outcome: 'Create scalable and governable data production capacity.',
-          },
-          {
-            title: 'Automated data processing',
-            body: 'Turn repetitive cleaning, extraction, normalization, and structuring tasks into reusable execution modules.',
-            outcome: 'Move data into usable form faster.',
-          },
-          {
-            title: 'Workflow automation',
-            body: 'Connect approvals, routing, quality loops, and system actions into repeatable enterprise workflows.',
-            outcome: 'Reduce coordination drag and delivery volatility.',
-          },
-          {
-            title: 'Process as a Service',
-            body: 'Package difficult-to-standardize business workflows into stable service interfaces with room for human judgment.',
-            outcome: 'Make complex operations continuously executable.',
-          },
-          {
-            title: 'Model operations services',
-            body: 'Build the feedback, evaluation, monitoring, and proof layer that keeps model performance tied to the business.',
-            outcome: 'Turn model capability into an operated asset.',
-          },
-        ],
-      },
-      process: {
-        eyebrow: 'Delivery framework',
-        title: 'From operational diagnosis to measurable proof.',
-        body:
-          'WanFlow tells a delivery story, not just a feature story. Enterprises are buying a working system with traceable outputs and operational control.',
-        steps: [
-          { step: '01', title: 'Diagnose the bottleneck', body: 'Identify the real points of failure across data, process, and team coordination.' },
-          { step: '02', title: 'Design the execution spine', body: 'Define interfaces, quality rules, automation points, and ownership boundaries.' },
-          { step: '03', title: 'Run the chain', body: 'Connect data handling, workflow orchestration, operating actions, and delivery outputs into a live system.' },
-          { step: '04', title: 'Operate and optimize', body: 'Iterate on quality, speed, cost, and outcomes over time instead of treating delivery as one-off.' },
-        ],
-      },
-      differentiators: {
-        eyebrow: 'Proof layer',
-        title: 'We work more like an AI operations team than a presentation-only consultancy.',
-        items: [
-          {
-            title: 'Data and process in one frame',
-            body: 'We do not split data problems, workflow problems, and model problems into disconnected workstreams.',
-          },
-          {
-            title: 'Services that stay inspectable',
-            body: 'Specs, quality logic, cadence, and feedback loops remain visible so enterprise collaboration stays governable.',
-          },
-          {
-            title: 'Internal platform as proof layer',
-            body: 'BenchmarkOps reflects WanFlow’s real understanding of process, artifacts, and benchmark evidence.',
-          },
-        ],
-      },
-      casesTeaser: {
-        eyebrow: 'Case teaser',
-        title: 'Not brand theatre — anonymized delivery patterns.',
-        items: [
-          {
-            title: 'Data governance for a model ops team',
-            sector: 'Model training and operations',
-            challenge: 'Multiple data sources, inconsistent specs, unstable quality loops.',
-            outcome: 'A unified operating rhythm with clearer quality controls and faster iteration.',
-          },
-          {
-            title: 'Complex document-processing redesign',
-            sector: 'Enterprise data processing',
-            challenge: 'Mixed PDFs, spreadsheets, and text created expensive manual cleanup.',
-            outcome: 'An automated extraction and structuring chain reduced repetitive human work.',
-          },
-          {
-            title: 'Process as a Service rollout',
-            sector: 'Process as a Service',
-            challenge: 'The client workflow was too complex to stabilize through ad hoc coordination.',
-            outcome: 'A service interface and execution model made the process reusable and scalable.',
-          },
-        ],
-      },
     },
     solutions: {
       problemFrame: {
-        eyebrow: 'Solutions',
-        title: 'Rebuild fragmented AI workflows into an enterprise operating system.',
-        body:
-          'WanFlow is not selling an isolated labor layer or a software layer. We connect data, process, and model operations into a working delivery system.',
-      },
-      hero: {
         eyebrow: 'Solutions',
         title: 'Rebuild fragmented AI workflows into an enterprise operating system.',
         body:
@@ -944,11 +703,6 @@ export const marketingCopy = {
     },
     cases: {
       intro: {
-        eyebrow: 'Cases',
-        title: 'See the outcome, but also the execution spine behind it.',
-        body: 'These anonymized cases focus on how WanFlow solves operational AI problems instead of presenting only polished end-state claims.',
-      },
-      hero: {
         eyebrow: 'Cases',
         title: 'See the outcome, but also the execution spine behind it.',
         body: 'These anonymized cases focus on how WanFlow solves operational AI problems instead of presenting only polished end-state claims.',
@@ -1058,24 +812,6 @@ export const marketingCopy = {
           { title: 'Improve', body: 'Use results, speed, quality, and cost to refine the system over time.' },
         ],
       },
-      story: {
-        eyebrow: 'How we see the problem',
-        title: 'We start from delivery, not from model spectacle.',
-        paragraphs: [
-          'Most enterprise AI programs do not fail because the model is impossible. They fail because data preparation is unstable, human and system work does not connect cleanly, ownership is vague, and results cannot be proven when the pressure rises.',
-          'WanFlow reconnects those layers. We think in terms of data, process, roles, artifacts, and operating metrics on the same map so the system can actually run in production conditions.',
-        ],
-      },
-      model: {
-        eyebrow: 'How we work',
-        title: 'Align the target, run the chain, improve the system.',
-        items: [
-          { title: 'Diagnose', body: 'Surface the true constraints across data, process, and operating ownership.' },
-          { title: 'Design', body: 'Abstract the execution spine and define what should become system behavior.' },
-          { title: 'Run', body: 'Connect people, workflows, systems, and deliverables into live business motion.' },
-          { title: 'Improve', body: 'Use results, speed, quality, and cost to refine the system over time.' },
-        ],
-      },
       trust: {
         eyebrow: 'Why clients trust us',
         title: 'We behave more like system builders inside operations than external decorators around them.',
@@ -1157,6 +893,115 @@ export const marketingCopy = {
     },
   },
 } as const;
+
+type MarketingLocaleBase = (typeof marketingCopyBase)[keyof typeof marketingCopyBase];
+
+type MarketingHomeBase = MarketingLocaleBase['home'];
+type MarketingSolutionsBase = MarketingLocaleBase['solutions'];
+type MarketingCasesBase = MarketingLocaleBase['cases'];
+type MarketingAboutBase = MarketingLocaleBase['about'];
+
+type MarketingHomeWithLegacy<T extends MarketingHomeBase> = T & {
+  metrics: T['supportSignals'];
+  spotlight: {
+    label: T['platformView']['eyebrow'];
+    title: T['platformView']['title'];
+    body: T['platformView']['body'];
+    bullets: T['platformView']['bullets'];
+  };
+  services: T['capabilityModules'];
+  process: T['deliveryFramework'];
+  differentiators: T['proofLayer'];
+  casesTeaser: T['caseTeaser'];
+};
+
+type MarketingSolutionsWithLegacy<T extends MarketingSolutionsBase> = T & {
+  hero: T['problemFrame'];
+};
+
+type MarketingCasesWithLegacy<T extends MarketingCasesBase> = T & {
+  hero: T['intro'];
+};
+
+type MarketingAboutWithLegacy<T extends MarketingAboutBase> = T & {
+  story: T['positioning'];
+  model: T['collaborationModel'];
+};
+
+type MarketingLocaleWithLegacy<T extends MarketingLocaleBase> = Omit<T, 'home' | 'solutions' | 'cases' | 'about'> & {
+  home: MarketingHomeWithLegacy<T['home']>;
+  solutions: MarketingSolutionsWithLegacy<T['solutions']>;
+  cases: MarketingCasesWithLegacy<T['cases']>;
+  about: MarketingAboutWithLegacy<T['about']>;
+};
+
+function withLegacyHome<T extends {
+  supportSignals: readonly unknown[];
+  platformView: { eyebrow: string; title: string; body: string; bullets: readonly string[] };
+  capabilityModules: { eyebrow: string; title: string; body: string; items: readonly unknown[] };
+  deliveryFramework: { eyebrow: string; title: string; body: string; steps: readonly unknown[] };
+  proofLayer: { eyebrow: string; title: string; items: readonly unknown[] };
+  caseTeaser: { eyebrow: string; title: string; items: readonly unknown[] };
+}>(home: T): MarketingHomeWithLegacy<T & MarketingHomeBase> {
+  return {
+    ...home,
+    metrics: home.supportSignals,
+    spotlight: {
+      label: home.platformView.eyebrow,
+      title: home.platformView.title,
+      body: home.platformView.body,
+      bullets: home.platformView.bullets,
+    },
+    services: home.capabilityModules,
+    process: home.deliveryFramework,
+    differentiators: home.proofLayer,
+    casesTeaser: home.caseTeaser,
+  } as MarketingHomeWithLegacy<T & MarketingHomeBase>;
+}
+
+function withLegacySolutions<T extends { problemFrame: { eyebrow: string; title: string; body: string } }>(
+  solutions: T,
+): MarketingSolutionsWithLegacy<T & MarketingSolutionsBase> {
+  return {
+    ...solutions,
+    hero: solutions.problemFrame,
+  } as MarketingSolutionsWithLegacy<T & MarketingSolutionsBase>;
+}
+
+function withLegacyCases<T extends { intro: { eyebrow: string; title: string; body: string } }>(
+  cases: T,
+): MarketingCasesWithLegacy<T & MarketingCasesBase> {
+  return {
+    ...cases,
+    hero: cases.intro,
+  } as MarketingCasesWithLegacy<T & MarketingCasesBase>;
+}
+
+function withLegacyAbout<T extends {
+  positioning: { eyebrow: string; title: string; paragraphs: readonly string[] };
+  collaborationModel: { eyebrow: string; title: string; items: readonly unknown[] };
+}>(about: T): MarketingAboutWithLegacy<T & MarketingAboutBase> {
+  return {
+    ...about,
+    story: about.positioning,
+    model: about.collaborationModel,
+  } as MarketingAboutWithLegacy<T & MarketingAboutBase>;
+}
+
+function withLegacyLocale<T extends MarketingLocaleBase>(copy: T): MarketingLocaleWithLegacy<T> {
+  return {
+    ...copy,
+    home: withLegacyHome(copy.home),
+    solutions: withLegacySolutions(copy.solutions),
+    cases: withLegacyCases(copy.cases),
+    about: withLegacyAbout(copy.about),
+  } as MarketingLocaleWithLegacy<T>;
+}
+
+export const marketingCopy = {
+  zh: withLegacyLocale(marketingCopyBase.zh),
+  en: withLegacyLocale(marketingCopyBase.en),
+} as const satisfies Record<Locale, MarketingLocaleWithLegacy<MarketingLocaleBase>>;
 
 export function getMarketingCopy(locale: Locale) {
   return marketingCopy[locale];

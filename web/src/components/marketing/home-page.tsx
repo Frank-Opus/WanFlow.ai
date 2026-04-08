@@ -9,8 +9,21 @@ export default function MarketingHomePage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
   const labels = locale === 'zh'
-    ? { caseTag: '案例', challenge: '挑战', flow: '流程' }
-    : { caseTag: 'Case', challenge: 'Challenge', flow: 'Flow' };
+    ? {
+        caseTag: '案例',
+        challenge: '挑战',
+        flow: '骨架',
+        brief: '品牌摘要',
+        outcome: '结果',
+      }
+    : {
+        caseTag: 'Case',
+        challenge: 'Challenge',
+        flow: 'Spine',
+        brief: 'Brand brief',
+        outcome: 'Outcome',
+      };
+  const casesLabel = copy.nav.find((item) => item.href === '/cases')?.label ?? '/cases';
 
   return (
     <main id="main-content" className="marketing-main">
@@ -18,20 +31,18 @@ export default function MarketingHomePage() {
         <PageHero
           eyebrow={copy.home.hero.eyebrow}
           title={copy.home.hero.title}
-          body={copy.home.hero.body}
+          body={copy.home.hero.statement}
           primary={copy.home.hero.primary}
           secondary={copy.home.hero.secondary}
           aside={
-            <div className="grid gap-4">
-              <WorkbenchProofCard
-                proofLabel={copy.common.proofLabel}
-                workbenchNote={copy.common.workbenchNote}
-                proofNote={copy.common.proofNote}
-                workbenchCta={copy.common.workbenchCta}
-              />
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <p className="mkt-kicker">{labels.brief}</p>
+                <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{copy.home.hero.body}</p>
+              </div>
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                {copy.home.metrics.map((metric) => (
-                  <article key={metric.label} className="mkt-panel px-5 py-5">
+                {copy.home.supportSignals.map((metric) => (
+                  <article key={metric.label} className="mkt-card px-5 py-5">
                     <p className="mkt-metric-value">{metric.value}</p>
                     <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{metric.label}</p>
                     <p className="mkt-copy mt-2 text-sm">{metric.detail}</p>
@@ -42,17 +53,20 @@ export default function MarketingHomePage() {
           }
         />
 
-        <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
-          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+        <section className="mkt-panel mkt-editorial-band px-6 py-8 sm:px-8 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <SectionHeading
-              eyebrow={copy.home.spotlight.label}
-              title={copy.home.spotlight.title}
-              body={copy.home.spotlight.body}
+              eyebrow={copy.home.platformView.eyebrow}
+              title={copy.home.platformView.title}
+              body={copy.home.platformView.body}
             />
             <div className="grid gap-3 md:grid-cols-2">
-              {copy.home.spotlight.bullets.map((bullet) => (
-                <article key={bullet} className="mkt-card px-5 py-5">
-                  <span className="mkt-card-index">{labels.flow}</span>
+              {copy.home.platformView.bullets.map((bullet, index) => (
+                <article
+                  key={bullet}
+                  className={index === 0 ? 'mkt-split-callout px-5 py-5 md:col-span-2' : 'mkt-rail-card px-5 py-5'}
+                >
+                  <span className="mkt-card-index">{labels.flow} 0{index + 1}</span>
                   <p className="mt-4 text-base font-semibold text-[var(--mk-text-0)]">{bullet}</p>
                 </article>
               ))}
@@ -62,17 +76,29 @@ export default function MarketingHomePage() {
 
         <section className="space-y-6">
           <SectionHeading
-            eyebrow={copy.home.services.eyebrow}
-            title={copy.home.services.title}
-            body={copy.home.services.body}
+            eyebrow={copy.home.capabilityModules.eyebrow}
+            title={copy.home.capabilityModules.title}
+            body={copy.home.capabilityModules.body}
           />
-          <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-            {copy.home.services.items.map((item, index) => (
-              <article key={item.title} className={index === 1 || index === 4 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
+          <div className="grid gap-4 lg:grid-cols-12">
+            {copy.home.capabilityModules.items.map((item, index) => (
+              <article
+                key={item.title}
+                className={[
+                  'mkt-module-card px-5 py-5 sm:px-6 sm:py-6',
+                  index === 0 ? 'lg:col-span-5 lg:row-span-2' : '',
+                  index === 1 ? 'lg:col-span-7' : '',
+                  index === 2 ? 'lg:col-span-4' : '',
+                  index === 3 ? 'lg:col-span-3' : '',
+                  index === 4 ? 'lg:col-span-5' : '',
+                ].filter(Boolean).join(' ')}
+              >
                 <span className="mkt-card-index">0{index + 1}</span>
                 <h3 className="mt-4 text-[1.2rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3">{item.body}</p>
-                <p className="mt-4 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-2)]">{item.outcome}</p>
+                <p className="mt-6 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-1)]">
+                  {labels.outcome}: {item.outcome}
+                </p>
               </article>
             ))}
           </div>
@@ -81,12 +107,12 @@ export default function MarketingHomePage() {
         <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <SectionHeading
-              eyebrow={copy.home.process.eyebrow}
-              title={copy.home.process.title}
-              body={copy.home.process.body}
+              eyebrow={copy.home.deliveryFramework.eyebrow}
+              title={copy.home.deliveryFramework.title}
+              body={copy.home.deliveryFramework.body}
             />
             <div className="space-y-3">
-              {copy.home.process.steps.map((step) => (
+              {copy.home.deliveryFramework.steps.map((step) => (
                 <article key={step.step} className="mkt-flow-step">
                   <div className="mkt-flow-marker">{step.step}</div>
                   <div>
@@ -100,39 +126,64 @@ export default function MarketingHomePage() {
         </section>
 
         <section className="space-y-6">
-          <SectionHeading eyebrow={copy.home.differentiators.eyebrow} title={copy.home.differentiators.title} />
-          <div className="grid gap-4 lg:grid-cols-3">
-            {copy.home.differentiators.items.map((item) => (
-              <article key={item.title} className="mkt-card px-5 py-5">
-                <h3 className="text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3">{item.body}</p>
-              </article>
-            ))}
+          <SectionHeading
+            eyebrow={copy.home.proofLayer.eyebrow}
+            title={copy.home.proofLayer.title}
+            body={copy.home.proofLayer.body}
+          />
+          <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
+            <WorkbenchProofCard
+              proofLabel={copy.common.proofLabel}
+              workbenchNote={copy.common.workbenchNote}
+              proofNote={copy.common.proofNote}
+              workbenchCta={copy.common.workbenchCta}
+            />
+            <div className="grid gap-4 md:grid-cols-2">
+              {copy.home.proofLayer.items.map((item, index) => (
+                <article key={item.title} className={index === 0 ? 'mkt-card px-5 py-5 md:col-span-2' : 'mkt-card px-5 py-5'}>
+                  <span className="mkt-card-index">{labels.flow}</span>
+                  <h3 className="mt-4 text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                  <p className="mkt-copy mt-3">{item.body}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="space-y-6">
-          <SectionHeading
-            eyebrow={copy.home.casesTeaser.eyebrow}
-            title={copy.home.casesTeaser.title}
-          />
-          <div className="grid gap-4 lg:grid-cols-3">
-            {copy.home.casesTeaser.items.map((item) => (
-              <article key={item.title} className="mkt-case-card px-5 py-5">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeading
+              eyebrow={copy.home.caseTeaser.eyebrow}
+              title={copy.home.caseTeaser.title}
+            />
+            <Link href="/cases" className="mkt-button-secondary">
+              {casesLabel}
+            </Link>
+          </div>
+          <div className="grid gap-4 lg:grid-cols-12">
+            {copy.home.caseTeaser.items.map((item, index) => (
+              <article
+                key={item.title}
+                className={[
+                  'mkt-case-card px-5 py-5 sm:px-6 sm:py-6',
+                  index === 0 ? 'lg:col-span-7' : '',
+                  index === 1 ? 'lg:col-span-5' : '',
+                  index === 2 ? 'lg:col-span-12' : '',
+                ].filter(Boolean).join(' ')}
+              >
                 <div className="flex items-center justify-between gap-3">
                   <span className="mkt-chip">{item.sector}</span>
                   <span className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.caseTag}</span>
                 </div>
-                <h3 className="mt-4 text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
-                <p className="mt-4 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-2)]">{item.outcome}</p>
+                <h3 className="mt-4 max-w-[22ch] text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                <p className="mkt-copy mt-3 text-sm">
+                  <strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}
+                </p>
+                <p className="mt-5 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-1)]">
+                  {labels.outcome}: {item.outcome}
+                </p>
               </article>
             ))}
-          </div>
-          <div className="flex justify-end">
-            <Link href="/cases" className="mkt-button-secondary">
-              {copy.common.secondaryCta}
-            </Link>
           </div>
         </section>
 
