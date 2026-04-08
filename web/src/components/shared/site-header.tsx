@@ -29,15 +29,15 @@ export default function SiteHeader() {
 
       <header id="site-top" className="site-header-shell sticky top-0 z-40">
         <div className="site-topline">
-          <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-4 px-5 py-2 text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mk-text-2)] lg:px-8 xl:px-10">
+          <div className="mkt-frame flex items-center justify-between gap-4 px-5 py-2 text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mk-text-2)] lg:px-8 xl:px-10">
             <p className="truncate">{copy.common.metaKicker}</p>
-            <span className="site-pill hidden rounded-full px-3 py-1 text-[var(--mk-text-1)] lg:inline-flex">
+            <span className="site-pill hidden rounded-full px-3 py-1 text-[var(--mk-text-1)] xl:inline-flex">
               {copy.site.location}
             </span>
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-4 px-5 py-3.5 lg:px-8 xl:px-10">
+        <div className="mkt-frame flex items-center justify-between gap-4 px-5 py-3.5 lg:px-8 xl:px-10">
           <div className="flex min-w-0 items-center gap-4">
             <Link href="/" className="site-brand-frame mkt-focus-ring inline-flex items-center rounded-[20px] px-3.5 py-2.5">
               <Image
@@ -49,7 +49,7 @@ export default function SiteHeader() {
                 priority
               />
             </Link>
-            <div className="hidden min-w-0 lg:block">
+            <div className="hidden min-w-0 xl:block">
               <p className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{copy.site.brand}</p>
               <p className="mt-1 text-sm text-[var(--mk-text-1)]">{copy.site.tagline}</p>
             </div>
@@ -57,7 +57,7 @@ export default function SiteHeader() {
 
           <nav
             aria-label={primaryNavLabel}
-            className="hidden items-center gap-1.5 rounded-full border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.7)] px-2 py-1 lg:flex"
+            className="hidden items-center gap-1.5 rounded-full border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.7)] px-2 py-1 xl:flex"
           >
             {copy.nav.map((item) => {
               const active = pathname === item.href;
@@ -77,7 +77,7 @@ export default function SiteHeader() {
             })}
           </nav>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-2 xl:flex">
             <Link href="/proofbench" className={isMarketingRoute ? 'mkt-button-secondary mkt-button-compact' : 'mkt-button-primary mkt-button-compact'}>
               {copy.common.workbenchCta}
             </Link>
@@ -105,15 +105,15 @@ export default function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-marketing-nav"
             onClick={() => setOpen((current) => !current)}
-            className="mkt-menu-button mkt-focus-ring lg:hidden"
+            className="mkt-menu-button mkt-focus-ring xl:hidden"
           >
             <span>{mobileMenuLabel}</span>
           </button>
         </div>
 
         {open ? (
-          <nav id="mobile-marketing-nav" aria-label={primaryNavLabel} className="border-t border-[var(--mk-line-1)] px-5 py-4 lg:hidden">
-            <div className="mx-auto flex max-w-[88rem] flex-col gap-3">
+          <nav id="mobile-marketing-nav" aria-label={primaryNavLabel} className="border-t border-[var(--mk-line-1)] px-5 py-4 xl:hidden">
+            <div className="mkt-frame flex flex-col gap-3">
               <div className="grid gap-2 rounded-[1.35rem] border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.72)] p-2">
                 {copy.nav.map((item) => {
                   const active = pathname === item.href;

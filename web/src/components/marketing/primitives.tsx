@@ -22,13 +22,13 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="mkt-panel mkt-panel-strong mkt-grid-lines overflow-hidden px-6 py-9 sm:px-8 lg:px-12 lg:py-12">
-      <div className="relative z-[1] grid gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:items-end lg:gap-10">
-        <div className="mkt-hero-copy space-y-7">
+    <section className="mkt-panel mkt-panel-strong mkt-grid-lines overflow-hidden px-6 py-9 sm:px-8 lg:px-12 lg:py-12 xl:px-14 xl:py-14">
+      <div className="relative z-[1] grid gap-8 lg:grid-cols-[minmax(0,1.28fr)_minmax(20rem,0.72fr)] lg:items-end lg:gap-10 xl:gap-14">
+        <div className="mkt-hero-copy max-w-[56rem] space-y-7">
           <p className="mkt-kicker">{eyebrow}</p>
           <div className="space-y-5">
-            <h1 className="mkt-display max-w-4xl text-balance">{title}</h1>
-            <p className="mkt-copy max-w-2xl text-base sm:text-[1.08rem]">{body}</p>
+            <h1 className="mkt-display max-w-[11ch] text-balance xl:max-w-[12ch]">{title}</h1>
+            <p className="mkt-copy max-w-2xl text-base sm:text-[1.08rem] xl:max-w-[46rem]">{body}</p>
           </div>
           <div className="mkt-hero-actions flex flex-wrap gap-3">
             <Link href={primary.href} className="mkt-button-primary">
@@ -42,7 +42,7 @@ export function PageHero({
           </div>
         </div>
         {aside ? (
-          <aside className="mkt-rail-card mkt-hero-rail self-end p-5 sm:p-6">
+          <aside className="mkt-rail-card mkt-hero-rail w-full self-end p-5 sm:p-6 xl:max-w-[26rem] xl:p-7">
             <div className="space-y-4">{aside}</div>
           </aside>
         ) : null}
@@ -65,10 +65,10 @@ export function SectionHeading({
   align?: 'left' | 'center';
 }) {
   return (
-    <div className={align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'}>
+    <div className={align === 'center' ? 'mx-auto max-w-[52rem] text-center' : 'max-w-[52rem]'}>
       <p className="mkt-kicker">{eyebrow}</p>
       <h2 className="mkt-title mt-5 text-balance">{title}</h2>
-      {body ? <p className="mkt-copy mt-5 max-w-2xl text-[0.99rem] sm:text-base">{body}</p> : null}
+      {body ? <p className="mkt-copy mt-5 max-w-[44rem] text-[0.99rem] sm:text-base">{body}</p> : null}
     </div>
   );
 }
@@ -88,11 +88,11 @@ export function FinalCtaBand({
 }) {
   return (
     <section className="mkt-editorial-band mkt-grid-lines overflow-hidden px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
-      <div className="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-10">
+      <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-10 xl:gap-12">
         <div className="space-y-5">
           <p className="mkt-kicker">{eyebrow}</p>
-          <h2 className="mkt-title max-w-4xl text-balance">{title}</h2>
-          <p className="mkt-copy max-w-3xl text-[0.99rem] sm:text-base">{body}</p>
+          <h2 className="mkt-title max-w-[18ch] text-balance">{title}</h2>
+          <p className="mkt-copy max-w-[48rem] text-[0.99rem] sm:text-base">{body}</p>
         </div>
         <div className="mkt-cta-actions flex flex-wrap gap-3 lg:justify-end lg:pb-1">
           <Link href={primary.href} className="mkt-button-primary">

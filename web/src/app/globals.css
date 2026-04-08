@@ -433,6 +433,12 @@ textarea {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.48), transparent 42%);
 }
 
+.mkt-frame {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 88rem;
+}
+
 .mkt-shell {
   margin: 0 auto;
   display: flex;
@@ -818,6 +824,46 @@ textarea {
 
   .mkt-form-panel {
     padding: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .marketing-main {
+    padding: 1.8rem 1.6rem 5rem;
+  }
+
+  .mkt-frame {
+    max-width: 96rem;
+  }
+
+  .mkt-shell {
+    max-width: 96rem;
+    gap: 1.75rem;
+  }
+
+  .mkt-grid-lines::before {
+    background-size: 60px 60px;
+    opacity: 0.16;
+  }
+
+  .mkt-hero-rail {
+    justify-self: end;
+  }
+
+  .mkt-hero-copy::after {
+    width: min(24rem, 42%);
+  }
+}
+
+@media (min-width: 1536px) {
+  .mkt-frame,
+  .mkt-shell {
+    max-width: 100rem;
+  }
+
+  .marketing-main {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 

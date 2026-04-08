@@ -11,7 +11,7 @@ export default function SiteFooter() {
 
   return (
     <footer className="mt-16 border-t border-[var(--mk-line-1)] bg-[linear-gradient(180deg,rgba(244,249,251,0.95),rgba(229,239,244,0.92))]">
-      <div className="mx-auto grid max-w-[88rem] gap-10 px-5 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 xl:px-10 xl:py-12">
+      <div className="mkt-frame grid gap-10 px-5 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 xl:px-10 xl:py-12">
         <div className="space-y-5">
           <p className="mkt-kicker">{copy.site.tagline}</p>
           <Link href="/" className="site-brand-frame mkt-focus-ring inline-flex items-center rounded-[20px] px-3 py-2">
@@ -49,7 +49,7 @@ export default function SiteFooter() {
       </div>
 
       <div className="border-t border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.6)]">
-        <div className="mx-auto flex max-w-[88rem] flex-col gap-2 px-5 py-4 text-sm text-[var(--mk-text-2)] sm:flex-row sm:items-center sm:justify-between lg:px-8 xl:px-10">
+        <div className="mkt-frame flex flex-col gap-2 px-5 py-4 text-sm text-[var(--mk-text-2)] sm:flex-row sm:items-center sm:justify-between lg:px-8 xl:px-10">
           <p>{copy.footer.copyright}</p>
           <p>{copy.footer.legal}</p>
         </div>
