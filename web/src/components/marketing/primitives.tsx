@@ -23,26 +23,26 @@ export function PageHero({
 }) {
   return (
     <section className="mkt-panel mkt-panel-strong mkt-grid-lines overflow-hidden px-6 py-9 sm:px-8 lg:px-12 lg:py-12">
-      <div className="relative z-[1] grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
-        <div className="space-y-7">
+      <div className="relative z-[1] grid gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:items-end lg:gap-10">
+        <div className="mkt-hero-copy space-y-7">
           <p className="mkt-kicker">{eyebrow}</p>
           <div className="space-y-5">
             <h1 className="mkt-display max-w-4xl text-balance">{title}</h1>
             <p className="mkt-copy max-w-2xl text-base sm:text-[1.08rem]">{body}</p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="mkt-hero-actions flex flex-wrap gap-3">
             <Link href={primary.href} className="mkt-button-primary">
               {primary.label}
             </Link>
             {secondary ? (
               <Link href={secondary.href} className="mkt-button-secondary">
-              {secondary.label}
-            </Link>
-          ) : null}
+                {secondary.label}
+              </Link>
+            ) : null}
           </div>
         </div>
         {aside ? (
-          <aside className="mkt-rail-card self-end p-5 sm:p-6">
+          <aside className="mkt-rail-card mkt-hero-rail self-end p-5 sm:p-6">
             <div className="space-y-4">{aside}</div>
           </aside>
         ) : null}
@@ -87,14 +87,14 @@ export function FinalCtaBand({
   secondary?: LinkTarget;
 }) {
   return (
-    <section className="mkt-editorial-band overflow-hidden px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
+    <section className="mkt-editorial-band mkt-grid-lines overflow-hidden px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
       <div className="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-10">
         <div className="space-y-5">
           <p className="mkt-kicker">{eyebrow}</p>
           <h2 className="mkt-title max-w-4xl text-balance">{title}</h2>
           <p className="mkt-copy max-w-3xl text-[0.99rem] sm:text-base">{body}</p>
         </div>
-        <div className="flex flex-wrap gap-3 lg:justify-end lg:pb-1">
+        <div className="mkt-cta-actions flex flex-wrap gap-3 lg:justify-end lg:pb-1">
           <Link href={primary.href} className="mkt-button-primary">
             {primary.label}
           </Link>
@@ -121,7 +121,7 @@ export function WorkbenchProofCard({
   workbenchCta: string;
 }) {
   return (
-    <div className="mkt-proof-panel p-5 sm:p-6">
+    <div className="mkt-proof-panel mkt-grid-lines p-5 sm:p-6">
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="mkt-chip">BenchmarkOps</span>
