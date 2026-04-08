@@ -43,8 +43,8 @@ export default function MarketingContactPage() {
           }
         />
 
-        <section className="grid gap-5 xl:grid-cols-[1.04fr_0.96fr] xl:items-start">
-          <div className="grid gap-5">
+        <section className="grid gap-5 xl:grid-cols-[minmax(0,0.98fr)_minmax(22rem,1.02fr)] xl:items-start xl:gap-7">
+          <div className="grid gap-5 xl:grid-cols-2">
             <section className="mkt-card px-6 py-6">
               <p className="mkt-kicker">{copy.contact.side.title}</p>
               <div className="mt-4 space-y-3">
@@ -70,7 +70,7 @@ export default function MarketingContactPage() {
               </div>
             </section>
 
-            <section className="mkt-card px-6 py-6">
+            <section className="mkt-card px-6 py-6 xl:col-span-2">
               <p className="mkt-kicker">{labels.faq}</p>
               <div className="mt-4 space-y-4">
                 {copy.contact.faq.map((item) => (
@@ -83,7 +83,9 @@ export default function MarketingContactPage() {
             </section>
           </div>
 
-          <ContactForm />
+          <div className="xl:sticky xl:top-28">
+            <ContactForm />
+          </div>
         </section>
       </div>
     </main>

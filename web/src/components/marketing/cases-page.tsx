@@ -55,8 +55,8 @@ export default function MarketingCasesPage() {
         />
 
         <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-            <div className="space-y-5">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.08fr)_minmax(22rem,0.92fr)] xl:items-start xl:gap-10">
+            <div className="max-w-[46rem] space-y-5">
               <p className="mkt-kicker">{featured.eyebrow}</p>
               <h2 className="mkt-title max-w-[12ch]">{featured.title}</h2>
               <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
@@ -66,9 +66,12 @@ export default function MarketingCasesPage() {
                 <p><strong className="text-[var(--mk-text-0)]">{labels.outcome}:</strong> {featured.outcome}</p>
               </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-              {featured.stats.map((stat) => (
-                <article key={stat.label} className="mkt-card px-5 py-5">
+            <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-2 xl:self-start">
+              {featured.stats.map((stat, index) => (
+                <article
+                  key={stat.label}
+                  className={index === 0 ? 'mkt-card px-5 py-5 xl:col-span-2' : 'mkt-card px-5 py-5'}
+                >
                   <p className="mkt-metric-value text-[2.2rem]">{stat.value}</p>
                   <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{stat.label}</p>
                   <p className="mkt-copy mt-2 text-sm">{stat.detail}</p>
@@ -86,8 +89,8 @@ export default function MarketingCasesPage() {
                 key={item.title}
                 className={[
                   'mkt-case-card px-5 py-5 sm:px-6 sm:py-6',
-                  index === 0 ? 'lg:col-span-7' : '',
-                  index === 1 ? 'lg:col-span-5' : '',
+                  index === 0 ? 'lg:col-span-7 xl:col-span-8' : '',
+                  index === 1 ? 'lg:col-span-5 xl:col-span-4' : '',
                   index === 2 ? 'lg:col-span-12' : '',
                 ].filter(Boolean).join(' ')}
               >
