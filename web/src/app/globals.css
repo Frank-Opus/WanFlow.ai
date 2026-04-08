@@ -778,3 +778,17 @@ textarea {
     padding: 2rem;
   }
 }
+
+@media (max-width: 767px) {
+  .mkt-display {
+    font-size: clamp(2.4rem, 14vw, 4rem);
+  }
+
+  .mkt-title {
+    font-size: clamp(1.75rem, 10vw, 2.6rem);
+  }
+
+  .mkt-flow-step {
+    grid-template-columns: 1fr;
+  }
+}

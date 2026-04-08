@@ -10,16 +10,26 @@ export default function MarketingSolutionsPage() {
   const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const labels = locale === 'zh'
     ? {
+        problem: '企业问题',
+        architectureEyebrow: '系统架构',
+        architectureTitle: '先把数据、流程、模型运营放回同一张架构图里。',
+        architectureBody: '对 WanFlow 来说，解决方案不是服务堆叠，而是把企业 AI 交付拆回三个互相咬合的层级。',
         modulesEyebrow: '服务模块',
-        modulesTitle: '五大模块如何落到可执行交付',
+        modulesTitle: '五大模块如何变成可执行交付系统',
+        modulesBody: '每个模块都对应清晰的交付物与业务结果，但真正重要的是它们如何拼成统一的运行骨架。',
         deliverables: '交付物',
         outcomes: '结果',
         contact: '联系我们',
         layer: '层级',
       }
     : {
+        problem: 'Enterprise problem',
+        architectureEyebrow: 'Architecture',
+        architectureTitle: 'Put data, process, and model operations back into one operating stack.',
+        architectureBody: 'WanFlow does not stack services on top of each other. We rebuild enterprise AI delivery as three connected layers.',
         modulesEyebrow: 'Service modules',
-        modulesTitle: 'How the modules turn into executable delivery',
+        modulesTitle: 'How the modules become an executable delivery system',
+        modulesBody: 'Each module has concrete deliverables and business outcomes, but the real value is how they lock together into one operating spine.',
         deliverables: 'Deliverables',
         outcomes: 'Outcomes',
         contact: 'Contact',
@@ -30,38 +40,75 @@ export default function MarketingSolutionsPage() {
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
         <PageHero
-          eyebrow={copy.solutions.hero.eyebrow}
-          title={copy.solutions.hero.title}
-          body={copy.solutions.hero.body}
+          eyebrow={copy.solutions.problemFrame.eyebrow}
+          title={copy.solutions.problemFrame.title}
+          body={copy.solutions.problemFrame.body}
           primary={{ href: '/contact', label: copy.common.primaryCta }}
           secondary={{ href: '/cases', label: navLabel('/cases') }}
           aside={
-            <div className="grid gap-3">
-              {copy.solutions.architecture.map((item) => (
-                <article key={item.title} className="mkt-card px-5 py-5">
-                  <span className="mkt-card-index">{labels.layer}</span>
-                  <h3 className="mt-4 text-[1.15rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
-                  <p className="mkt-copy mt-3 text-sm">{item.body}</p>
-                </article>
-              ))}
+            <div className="space-y-4">
+              <p className="mkt-kicker">{labels.problem}</p>
+              <div className="space-y-3">
+                {copy.solutions.triggers.items.slice(0, 3).map((item) => (
+                  <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
+                    <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           }
         />
 
         <section className="space-y-6">
-          <SectionHeading eyebrow={labels.modulesEyebrow} title={labels.modulesTitle} body={copy.common.proofNote} />
-          <div className="grid gap-4 lg:grid-cols-2">
+          <SectionHeading
+            eyebrow={labels.architectureEyebrow}
+            title={labels.architectureTitle}
+            body={labels.architectureBody}
+          />
+          <div className="grid gap-4 lg:grid-cols-12">
+            {copy.solutions.architecture.map((item, index) => (
+              <article
+                key={item.title}
+                className={[
+                  'mkt-card px-6 py-6',
+                  index === 1 ? 'mkt-card-highlight lg:col-span-5' : '',
+                  index === 0 ? 'lg:col-span-3' : '',
+                  index === 2 ? 'lg:col-span-4' : '',
+                ].filter(Boolean).join(' ')}
+              >
+                <span className="mkt-card-index">{labels.layer} 0{index + 1}</span>
+                <h3 className="mt-4 text-[1.35rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                <p className="mkt-copy mt-3">{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <SectionHeading eyebrow={labels.modulesEyebrow} title={labels.modulesTitle} body={labels.modulesBody} />
+          <div className="grid gap-4 lg:grid-cols-12">
             {copy.solutions.modules.map((module, index) => (
-              <article key={module.title} className={index % 2 === 0 ? 'mkt-card mkt-card-highlight px-6 py-6' : 'mkt-card px-6 py-6'}>
+              <article
+                key={module.title}
+                className={[
+                  'mkt-module-card px-6 py-6',
+                  index === 0 ? 'mkt-card-highlight lg:col-span-7' : '',
+                  index === 1 ? 'lg:col-span-5' : '',
+                  index >= 2 ? 'lg:col-span-4' : '',
+                ].filter(Boolean).join(' ')}
+              >
                 <span className="mkt-card-index">0{index + 1}</span>
-                <h2 className="mt-4 text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{module.title}</h2>
+                <h2 className="mt-4 text-[1.42rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{module.title}</h2>
                 <p className="mkt-copy mt-3">{module.body}</p>
                 <div className="mt-5 grid gap-5 md:grid-cols-2">
                   <div>
                     <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
                     <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
                       {module.deliverables.map((item) => (
-                        <li key={item} className="mkt-list-item">{item}</li>
+                        <li key={item} className="mkt-list-item">
+                          <span className="mkt-list-dot" />
+                          <span>{item}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -69,7 +116,10 @@ export default function MarketingSolutionsPage() {
                     <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
                     <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
                       {module.outcomes.map((item) => (
-                        <li key={item} className="mkt-list-item">{item}</li>
+                        <li key={item} className="mkt-list-item">
+                          <span className="mkt-list-dot" />
+                          <span>{item}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -79,12 +129,12 @@ export default function MarketingSolutionsPage() {
           </div>
         </section>
 
-        <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <section className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
             <SectionHeading eyebrow={copy.solutions.triggers.eyebrow} title={copy.solutions.triggers.title} />
             <div className="grid gap-3 sm:grid-cols-2">
-              {copy.solutions.triggers.items.map((item) => (
-                <article key={item} className="mkt-card px-5 py-5">
+              {copy.solutions.triggers.items.map((item, index) => (
+                <article key={item} className={index === 0 ? 'mkt-split-callout px-5 py-5 sm:col-span-2' : 'mkt-rail-card px-5 py-5'}>
                   <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
                 </article>
               ))}
@@ -93,10 +143,13 @@ export default function MarketingSolutionsPage() {
         </section>
 
         <section className="space-y-6">
-          <SectionHeading eyebrow={copy.solutions.delivery.eyebrow} title={copy.solutions.delivery.title} />
-          <div className="grid gap-4 lg:grid-cols-4">
-            {copy.solutions.delivery.steps.map((step) => (
-              <article key={step.step} className="mkt-card px-5 py-5">
+          <SectionHeading
+            eyebrow={copy.solutions.delivery.eyebrow}
+            title={copy.solutions.delivery.title}
+          />
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {copy.solutions.delivery.steps.map((step, index) => (
+              <article key={step.step} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
                 <div className="mkt-flow-marker">{step.step}</div>
                 <h3 className="mt-4 text-[1.15rem] font-semibold text-[var(--mk-text-0)]">{step.title}</h3>
                 <p className="mkt-copy mt-3 text-sm">{step.body}</p>
