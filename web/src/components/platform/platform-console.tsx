@@ -1,6 +1,22 @@
 'use client';
 
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import GovernancePanel from '@dataflow/proofbench/modules/governance/governance-panel';
+import ItemsPanel from '@dataflow/proofbench/modules/items/items-panel';
+import ProjectsPanel from '@dataflow/proofbench/modules/projects/projects-panel';
+import ResultsPanel from '@dataflow/proofbench/modules/results/results-panel';
+import RunsPanel from '@dataflow/proofbench/modules/runs/runs-panel';
+import SourcesPanel from '@dataflow/proofbench/modules/sources/sources-panel';
+import {
+  benchmarkOpsAdminViews,
+  type BenchmarkOpsAdminView,
+  type BenchmarkOpsConsoleCopy,
+  type BenchmarkOpsItemDraft,
+  type BenchmarkOpsRunConfig,
+  type BenchmarkOpsSectionIntro,
+  type BenchmarkOpsViewIds,
+} from '@dataflow/proofbench/lib/view-model';
+import { BENCHMARKOPS_PRODUCT_TITLE } from '@dataflow/proofbench/lib/constants';
 import { useLocale } from '@/components/shared/locale-provider';
 import { buildArtifactFromFrameworkJson, type ProofBenchArtifact, type ProofBenchExport } from '@/lib/proofbench';
 import type {
@@ -8,112 +24,15 @@ import type {
   PlatformBenchmarkRun,
   PlatformProjectBundle,
   PlatformProblemItem,
-  PlatformSourceFile,
 } from '@/lib/platform-types';
 
 const DISPLAY_MODEL = 'Qwen/Qwen3-235B-A22B-Thinking-2507';
 const DEFAULT_BASE_URL = 'http://35.220.164.252:3888/v1/';
 
-type ConsoleCopy = {
-  heroEyebrow: string;
-  heroTitle: string;
-  heroBody: string;
-  heroPrimary: string;
-  heroSecondary: string;
-  summaryCards: Array<{ label: string; hint: string }>;
-  workspaceTitle: string;
-  workspaceHeadline: string;
-  workspaceBody: string;
-  projectName: string;
-  projectDescription: string;
-  createProject: string;
-  intakeTitle: string;
-  intakeHeadline: string;
-  intakeBody: string;
-  uploadSource: string;
-  uploadFolder: string;
-  uploadHint: string;
-  problemTitle: string;
-  problemHeadline: string;
-  problemBody: string;
-  createItem: string;
-  runTitle: string;
-  runHeadline: string;
-  runBody: string;
-  resultsTitle: string;
-  resultsHeadline: string;
-  resultsBody: string;
-  previewTitle: string;
-  previewHeadline: string;
-  previewBody: string;
-  governanceTitle: string;
-  governanceHeadline: string;
-  governanceBody: string;
-  emptyProjects: string;
-  emptyItems: string;
-  emptyRuns: string;
-  emptyPreview: string;
-  selectedItem: string;
-  selectedProject: string;
-  syncMode: string;
-  asyncMode: string;
-  startRun: string;
-  refresh: string;
-  preview: string;
-  download: string;
-  running: string;
-  queued: string;
-  completed: string;
-  failed: string;
-  draftItemTitle: string;
-  draftItemPrompt: string;
-  draftItemAnswer: string;
-  subject: string;
-  gradeLevel: string;
-  difficulty: string;
-  itemType: string;
-  tags: string;
-  notes: string;
-  members: string;
-  permissions: string;
-  sourceFiles: string;
-  runMode: string;
-  baseUrl: string;
-  modelName: string;
-  runs: string;
-  parallelism: string;
-  temperature: string;
-  maxTokens: string;
-  lastUpdate: string;
-  accuracy: string;
-  artifacts: string;
-  diagnostics: string;
-  manualItemHint: string;
-  supportedFiles: string;
-  enterpriseNotice: string;
-  genericExport: string;
-  countSuffix: string;
-  uploadFieldLabel: string;
-  projectCountLabel: string;
-  itemCountLabel: string;
-  runCountLabel: string;
-  artifactCountLabel: string;
-  importedCountLabel: string;
-  sourcePathLabel: string;
-  sourceArtifactsLabel: string;
-  sourceOriginalLabel: string;
-  sourceNormalizedLabel: string;
-  sourceTextLabel: string;
-  sourceLatexLabel: string;
-  runIdentifierLabel: string;
-  answerValidationTitle: string;
-  latencyLabel: string;
-};
-
-const COPY: Record<'zh' | 'en', ConsoleCopy> = {
+const COPY: Record<'zh' | 'en', BenchmarkOpsConsoleCopy> = {
   zh: {
     heroEyebrow: 'WanFlow.ai 主版块',
-    heroTitle: 'BenchmarkOps 企业评测中台',
+    heroTitle: `${BENCHMARKOPS_PRODUCT_TITLE} 企业评测中台`,
     heroBody:
       '把题源导入、题目管理、同步/异步评测、结果回看与交付导出放到一个工作台里。默认中文，默认接到 Qwen 评测服务，后续可继续扩到更多模型与队列。',
     heroPrimary: '跳到运行中心',
@@ -131,7 +50,8 @@ const COPY: Record<'zh' | 'en', ConsoleCopy> = {
     createProject: '新建项目',
     intakeTitle: '文件导入中心',
     intakeHeadline: '先统一输入，再抽取题目',
-    intakeBody: '支持多文件与文件夹导入，接受 PDF、DOCX、JSON、TXT、Markdown、TeX。非 JSON 文件会进入 Python 归一化链，生成统一文本/LaTeX/标准化 JSON 后再抽取题目。',
+    intakeBody:
+      '支持多文件与文件夹导入，接受 PDF、DOCX、JSON、TXT、Markdown、TeX。非 JSON 文件会进入 Python 归一化链，生成统一文本/LaTeX/标准化 JSON 后再抽取题目。',
     uploadSource: '上传文件',
     uploadFolder: '上传文件夹',
     uploadHint: '上传后自动归一化并刷新当前项目；会保留相对路径，并提供原文件、标准化 JSON、提取文本、LaTeX 下载入口。',
@@ -213,7 +133,7 @@ const COPY: Record<'zh' | 'en', ConsoleCopy> = {
   },
   en: {
     heroEyebrow: 'WanFlow.ai flagship module',
-    heroTitle: 'BenchmarkOps enterprise evaluation hub',
+    heroTitle: `${BENCHMARKOPS_PRODUCT_TITLE} enterprise evaluation hub`,
     heroBody:
       'One workspace for source intake, item management, sync/async benchmark runs, result review, and client-ready exports. Chinese is the default locale and the Qwen evaluation endpoint is wired in by default.',
     heroPrimary: 'Jump to run center',
@@ -231,7 +151,8 @@ const COPY: Record<'zh' | 'en', ConsoleCopy> = {
     createProject: 'Create project',
     intakeTitle: 'File intake center',
     intakeHeadline: 'Normalize first, extract items second',
-    intakeBody: 'Upload multiple files or whole folders with PDF, DOCX, JSON, TXT, Markdown, and TeX. Non-JSON inputs flow through the Python normalization chain before item extraction.',
+    intakeBody:
+      'Upload multiple files or whole folders with PDF, DOCX, JSON, TXT, Markdown, and TeX. Non-JSON inputs flow through the Python normalization chain before item extraction.',
     uploadSource: 'Upload file',
     uploadFolder: 'Upload folder',
     uploadHint: 'Uploads refresh the current project after normalization and preserve relative paths with original, normalized, text, and LaTeX downloads.',
@@ -313,31 +234,7 @@ const COPY: Record<'zh' | 'en', ConsoleCopy> = {
   },
 };
 
-type RunConfig = {
-  mode: 'sync' | 'async';
-  baseUrl: string;
-  modelName: string;
-  runs: number;
-  parallelism: number;
-  temperature: number;
-  maxTokens: number;
-};
-
-type UploadableFile = File & {
-  webkitRelativePath?: string;
-};
-
-type SourceDownloadLink = {
-  kind: 'original' | 'normalized' | 'text' | 'latex';
-  label: string;
-  href: string;
-};
-
-type AdminView = 'projects' | 'items' | 'sources';
-
-const adminViews: AdminView[] = ['projects', 'items', 'sources'];
-
-const defaultRunConfig: RunConfig = {
+const defaultRunConfig: BenchmarkOpsRunConfig = {
   mode: 'sync',
   baseUrl: DEFAULT_BASE_URL,
   modelName: DISPLAY_MODEL,
@@ -346,110 +243,6 @@ const defaultRunConfig: RunConfig = {
   temperature: 0.1,
   maxTokens: 1024,
 };
-
-function statusLabel(locale: 'zh' | 'en', status: PlatformBenchmarkRun['status']) {
-  const map = {
-    zh: {
-      queued: '排队中',
-      running: '运行中',
-      completed: '已完成',
-      failed: '失败',
-      cancelled: '已取消',
-    },
-    en: {
-      queued: 'Queued',
-      running: 'Running',
-      completed: 'Completed',
-      failed: 'Failed',
-      cancelled: 'Cancelled',
-    },
-  };
-  return map[locale][status];
-}
-
-function statusClass(status: PlatformBenchmarkRun['status']) {
-  if (status === 'completed') return 'status-chip-success';
-  if (status === 'failed') return 'status-chip-danger';
-  if (status === 'running') return 'status-chip-info';
-  return 'status-chip-warning';
-}
-
-function sourceParseStatusLabel(locale: 'zh' | 'en', status: PlatformSourceFile['parseStatus']) {
-  const map = {
-    zh: {
-      uploaded: '已上传',
-      classifying: '分类中',
-      extracting: '抽取中',
-      normalized: '已标准化',
-      itemized: '已生成题目',
-      pending: '待处理',
-      parsing: '解析中',
-      parsed: '已解析',
-      failed: '解析失败',
-    },
-    en: {
-      uploaded: 'Uploaded',
-      classifying: 'Classifying',
-      extracting: 'Extracting',
-      normalized: 'Normalized',
-      itemized: 'Itemized',
-      pending: 'Pending',
-      parsing: 'Parsing',
-      parsed: 'Parsed',
-      failed: 'Failed',
-    },
-  };
-  return map[locale][status];
-}
-
-function sourceStatusClass(status: PlatformSourceFile['parseStatus']) {
-  if (status === 'itemized' || status === 'parsed') {
-    return 'status-chip-success';
-  }
-  if (status === 'normalized') {
-    return 'status-chip-info';
-  }
-  if (status === 'failed') {
-    return 'status-chip-danger';
-  }
-  return 'status-chip-warning';
-}
-
-function roleLabel(locale: 'zh' | 'en', role: 'owner' | 'editor' | 'viewer' | 'runner') {
-  const map = {
-    zh: {
-      owner: '负责人',
-      editor: '编辑',
-      viewer: '查看者',
-      runner: '执行者',
-    },
-    en: {
-      owner: 'Owner',
-      editor: 'Editor',
-      viewer: 'Viewer',
-      runner: 'Runner',
-    },
-  };
-  return map[locale][role];
-}
-
-function previewRunStatusLabel(locale: 'zh' | 'en', status: ProofBenchArtifact['runs'][number]['status']) {
-  const map = {
-    zh: {
-      correct: '命中',
-      incorrect: '未命中',
-      timeout: '超时',
-      error: '错误',
-    },
-    en: {
-      correct: 'Correct',
-      incorrect: 'Incorrect',
-      timeout: 'Timeout',
-      error: 'Error',
-    },
-  };
-  return map[locale][status];
-}
 
 function formatDate(locale: 'zh' | 'en', value?: string | null) {
   if (!value) return '—';
@@ -464,11 +257,6 @@ function formatDate(locale: 'zh' | 'en', value?: string | null) {
   }).format(date);
 }
 
-function formatPercent(value?: number | null) {
-  if (typeof value !== 'number' || Number.isNaN(value)) return '—';
-  return `${(value * 100).toFixed(1)}%`;
-}
-
 function artifactExports(artifacts: PlatformArtifact[]): ProofBenchExport[] {
   return artifacts.map((artifact) => ({
     kind: artifact.kind === 'xlsx' ? 'artifact_workbook' : 'artifact_json',
@@ -477,71 +265,6 @@ function artifactExports(artifacts: PlatformArtifact[]): ProofBenchExport[] {
     relativePath: artifact.storagePath,
     downloadPath: `/api/platform/artifacts/download?artifactId=${artifact.id}`,
   }));
-}
-
-function buildSourceDownloadLinks(locale: 'zh' | 'en', source: PlatformSourceFile): SourceDownloadLink[] {
-  const links: SourceDownloadLink[] = [
-    {
-      kind: 'original',
-      label: locale === 'zh' ? '原文件' : 'Original',
-      href: `/api/platform/sources/download?sourceId=${source.id}&kind=original`,
-    },
-  ];
-
-  if (source.metadata?.normalizedArtifactPath) {
-    links.push({
-      kind: 'normalized',
-      label: locale === 'zh' ? '标准化 JSON' : 'Normalized JSON',
-      href: `/api/platform/sources/download?sourceId=${source.id}&kind=normalized`,
-    });
-  }
-  if (source.metadata?.extractedTextPath) {
-    links.push({
-      kind: 'text',
-      label: locale === 'zh' ? '提取文本' : 'Extracted text',
-      href: `/api/platform/sources/download?sourceId=${source.id}&kind=text`,
-    });
-  }
-  if (source.metadata?.latexArtifactPath) {
-    links.push({
-      kind: 'latex',
-      label: locale === 'zh' ? 'LaTeX' : 'LaTeX',
-      href: `/api/platform/sources/download?sourceId=${source.id}&kind=latex`,
-    });
-  }
-
-  return links;
-}
-
-function FieldLabel({ label, htmlFor, helper }: { label: string; htmlFor: string; helper?: string }) {
-  return (
-    <div className="space-y-1">
-      <label htmlFor={htmlFor} className="block text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--mist)]">
-        {label}
-      </label>
-      {helper ? <p className="text-xs leading-5 text-[var(--mist)]">{helper}</p> : null}
-    </div>
-  );
-}
-
-function SectionIntro({
-  eyebrow,
-  title,
-  body,
-  align = 'start',
-}: {
-  eyebrow: string;
-  title: string;
-  body: string;
-  align?: 'start' | 'compact';
-}) {
-  return (
-    <div className={align === 'compact' ? 'max-w-xl' : 'max-w-2xl'}>
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="mt-2 max-w-[20ch] text-xl font-semibold leading-snug text-ink sm:text-[1.65rem]">{title}</h2>
-      <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--mist)] sm:text-[0.96rem]">{body}</p>
-    </div>
-  );
 }
 
 function buildDefaultProjectDraft(locale: 'zh' | 'en') {
@@ -556,7 +279,7 @@ function buildDefaultProjectDraft(locale: 'zh' | 'en') {
       };
 }
 
-function buildDefaultItemForm(locale: 'zh' | 'en') {
+function buildDefaultItemForm(locale: 'zh' | 'en'): BenchmarkOpsItemDraft {
   return locale === 'zh'
     ? {
         title: '',
@@ -582,11 +305,26 @@ function buildDefaultItemForm(locale: 'zh' | 'en') {
       };
 }
 
+function relativePathForUpload(file: File) {
+  const fileWithRelativePath = file as File & { webkitRelativePath?: string };
+  return fileWithRelativePath.webkitRelativePath?.trim() || file.name;
+}
+
+function SectionIntro({ intro }: { intro: BenchmarkOpsSectionIntro }) {
+  return (
+    <div className={intro.align === 'compact' ? 'max-w-xl' : 'max-w-2xl'}>
+      <p className="eyebrow">{intro.eyebrow}</p>
+      <h2 className="mt-2 max-w-[20ch] text-xl font-semibold leading-snug text-ink sm:text-[1.65rem]">{intro.title}</h2>
+      <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--mist)] sm:text-[0.96rem]">{intro.body}</p>
+    </div>
+  );
+}
+
 export default function PlatformConsole() {
   const { locale } = useLocale();
   const t = COPY[locale];
   const localeKey = locale as 'zh' | 'en';
-  const ids = {
+  const ids: BenchmarkOpsViewIds = {
     adminTabs: useId(),
     projectName: useId(),
     projectDescription: useId(),
@@ -612,12 +350,12 @@ export default function PlatformConsole() {
   const [bundles, setBundles] = useState<PlatformProjectBundle[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState('');
   const [selectedItemId, setSelectedItemId] = useState('');
-  const [adminView, setAdminView] = useState<AdminView>('projects');
-  const [runConfig, setRunConfig] = useState<RunConfig>(defaultRunConfig);
+  const [adminView, setAdminView] = useState<BenchmarkOpsAdminView>('projects');
+  const [runConfig, setRunConfig] = useState<BenchmarkOpsRunConfig>(defaultRunConfig);
   const projectDraft = buildDefaultProjectDraft(localeKey);
   const [projectName, setProjectName] = useState(projectDraft.name);
   const [projectDescription, setProjectDescription] = useState(projectDraft.description);
-  const [itemForm, setItemForm] = useState(() => buildDefaultItemForm(localeKey));
+  const [itemForm, setItemForm] = useState<BenchmarkOpsItemDraft>(() => buildDefaultItemForm(localeKey));
   const [banner, setBanner] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busyKey, setBusyKey] = useState<string | null>(null);
@@ -626,11 +364,11 @@ export default function PlatformConsole() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const folderInputRef = useRef<HTMLInputElement | null>(null);
 
-  function adminTabId(view: AdminView) {
+  function adminTabId(view: BenchmarkOpsAdminView) {
     return `${ids.adminTabs}-${view}-tab`;
   }
 
-  function adminPanelId(view: AdminView) {
+  function adminPanelId(view: BenchmarkOpsAdminView) {
     return `${ids.adminTabs}-${view}-panel`;
   }
 
@@ -708,7 +446,7 @@ export default function PlatformConsole() {
   );
   const latestRun = recentRuns[0] ?? null;
 
-  const adminMeta = {
+  const adminMeta: Record<BenchmarkOpsAdminView, BenchmarkOpsSectionIntro> = {
     projects: {
       eyebrow: t.workspaceTitle,
       title: t.workspaceHeadline,
@@ -724,33 +462,33 @@ export default function PlatformConsole() {
       title: t.intakeHeadline,
       body: t.intakeBody,
     },
-  } satisfies Record<AdminView, { eyebrow: string; title: string; body: string }>;
+  };
 
-  const adminTabs = [
+  const adminTabs: Array<{ key: BenchmarkOpsAdminView; label: string }> = [
     { key: 'projects', label: t.workspaceTitle },
     { key: 'items', label: t.problemTitle },
     { key: 'sources', label: t.intakeTitle },
-  ] as const;
+  ];
 
-  function focusAdminTab(view: AdminView) {
+  function focusAdminTab(view: BenchmarkOpsAdminView) {
     window.requestAnimationFrame(() => {
       document.getElementById(adminTabId(view))?.focus();
     });
   }
 
-  function handleAdminTabKeyDown(currentView: AdminView, event: KeyboardEvent<HTMLButtonElement>) {
-    const currentIndex = adminViews.indexOf(currentView);
+  function handleAdminTabKeyDown(currentView: BenchmarkOpsAdminView, event: KeyboardEvent<HTMLButtonElement>) {
+    const currentIndex = benchmarkOpsAdminViews.indexOf(currentView);
     if (currentIndex === -1) return;
 
-    let nextView: AdminView | null = null;
+    let nextView: BenchmarkOpsAdminView | null = null;
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-      nextView = adminViews[(currentIndex + 1) % adminViews.length];
+      nextView = benchmarkOpsAdminViews[(currentIndex + 1) % benchmarkOpsAdminViews.length];
     } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-      nextView = adminViews[(currentIndex - 1 + adminViews.length) % adminViews.length];
+      nextView = benchmarkOpsAdminViews[(currentIndex - 1 + benchmarkOpsAdminViews.length) % benchmarkOpsAdminViews.length];
     } else if (event.key === 'Home') {
-      nextView = adminViews[0];
+      nextView = benchmarkOpsAdminViews[0];
     } else if (event.key === 'End') {
-      nextView = adminViews[adminViews.length - 1];
+      nextView = benchmarkOpsAdminViews[benchmarkOpsAdminViews.length - 1];
     }
 
     if (!nextView) return;
@@ -789,23 +527,21 @@ export default function PlatformConsole() {
     }
   }
 
-  async function handleUpload(files: UploadableFile[]) {
-    if (!selectedBundle) return;
-    if (!files.length) return;
+  async function handleUpload(files: File[]) {
+    if (!selectedBundle || files.length === 0) return;
     try {
       setBusyKey('upload');
       setError(null);
       const formData = new FormData();
       for (const file of files) {
         formData.append('file', file);
-        formData.append('relativePath', file.webkitRelativePath?.trim() || file.name);
+        formData.append('relativePath', relativePathForUpload(file));
       }
       const response = await fetch(`/api/platform/projects/${selectedBundle.project.id}/sources`, {
         method: 'POST',
         body: formData,
       });
       const payload = (await response.json()) as {
-        sources?: PlatformSourceFile[];
         importedItems?: PlatformProblemItem[];
         warnings?: string[];
         error?: string;
@@ -851,7 +587,15 @@ export default function PlatformConsole() {
         throw new Error(payload.error ?? 'Failed to create item.');
       }
       setBanner(localeKey === 'zh' ? '题目已创建。' : 'Item created.');
-      setItemForm((current) => ({ ...current, ...buildDefaultItemForm(localeKey), title: '', prompt: '', answerKey: '', tags: '', notes: '' }));
+      setItemForm((current) => ({
+        ...current,
+        ...buildDefaultItemForm(localeKey),
+        title: '',
+        prompt: '',
+        answerKey: '',
+        tags: '',
+        notes: '',
+      }));
       await loadProjects(true);
       setSelectedItemId(payload.item.id);
     } catch (itemError) {
@@ -1026,237 +770,30 @@ export default function PlatformConsole() {
 
       <div className="grid items-start gap-6 xl:grid-cols-[1.04fr_0.96fr]">
         <div className="space-y-6">
-          <section id="run-center" className="panel rounded-[26px] p-6 sm:p-8">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <SectionIntro eyebrow={t.runTitle} title={t.runHeadline} body={t.runBody} />
-              <div className="surface-muted max-w-md rounded-[20px] px-4 py-3 text-sm leading-7 text-[var(--mist)]">
-                {t.enterpriseNotice}
-              </div>
-            </div>
-            <div className="mt-6 grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
-              <div className="dark-card rounded-[24px] p-5">
-                <p className="text-[0.7rem] uppercase tracking-[0.22em] text-[rgba(248,250,252,0.62)]">{t.selectedItem}</p>
-                <p className="mt-3 text-2xl font-semibold">{selectedItem?.title ?? '—'}</p>
-                <p className="mt-3 text-sm leading-7 text-[rgba(248,250,252,0.76)]">{selectedItem?.prompt ?? t.emptyItems}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {(selectedItem?.metadata.tags ?? []).map((tag) => (
-                    <span key={tag} className="rounded-[12px] bg-[rgba(248,250,252,0.08)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[rgba(248,250,252,0.74)]">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="soft-rule mt-5 grid gap-4 pt-5 sm:grid-cols-2">
-                  <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(248,250,252,0.6)]">{t.modelName}</p>
-                    <p className="mt-2 text-sm leading-7 text-[rgba(248,250,252,0.82)]">{runConfig.modelName}</p>
-                  </div>
-                  <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(248,250,252,0.6)]">{t.runMode}</p>
-                    <p className="mt-2 text-sm leading-7 text-[rgba(248,250,252,0.82)]">
-                      {runConfig.mode === 'sync' ? t.syncMode : t.asyncMode}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <RunsPanel
+            selectedItem={selectedItem}
+            runConfig={runConfig}
+            busyKey={busyKey}
+            ids={ids}
+            intro={{ eyebrow: t.runTitle, title: t.runHeadline, body: t.runBody }}
+            copy={t}
+            onUpdateRunConfig={(patch) => setRunConfig((current) => ({ ...current, ...patch }))}
+            onRun={() => void handleRun()}
+          />
 
-              <div className="quiet-card rounded-[24px] p-5">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <FieldLabel htmlFor={ids.runMode} label={t.runMode} />
-                    <select id={ids.runMode} value={runConfig.mode} onChange={(event) => setRunConfig((current) => ({ ...current, mode: event.target.value as RunConfig['mode'] }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm">
-                      <option value="sync">{t.syncMode}</option>
-                      <option value="async">{t.asyncMode}</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <FieldLabel htmlFor={ids.runModelName} label={t.modelName} />
-                    <input id={ids.runModelName} value={runConfig.modelName} onChange={(event) => setRunConfig((current) => ({ ...current, modelName: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.modelName} />
-                  </div>
-                  <div className="space-y-2 sm:col-span-2">
-                    <FieldLabel htmlFor={ids.runBaseUrl} label={t.baseUrl} />
-                    <input id={ids.runBaseUrl} value={runConfig.baseUrl} onChange={(event) => setRunConfig((current) => ({ ...current, baseUrl: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.baseUrl} />
-                  </div>
-                  <div className="space-y-2">
-                    <FieldLabel htmlFor={ids.runRuns} label={t.runs} />
-                    <input id={ids.runRuns} type="number" min={1} max={8} value={runConfig.runs} onChange={(event) => setRunConfig((current) => ({ ...current, runs: Number(event.target.value || 1) }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.runs} />
-                  </div>
-                  <div className="space-y-2">
-                    <FieldLabel htmlFor={ids.runParallelism} label={t.parallelism} />
-                    <input id={ids.runParallelism} type="number" min={1} max={8} value={runConfig.parallelism} onChange={(event) => setRunConfig((current) => ({ ...current, parallelism: Number(event.target.value || 1) }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.parallelism} />
-                  </div>
-                  <div className="space-y-2">
-                    <FieldLabel htmlFor={ids.runTemperature} label={t.temperature} />
-                    <input id={ids.runTemperature} type="number" min={0} max={2} step={0.1} value={runConfig.temperature} onChange={(event) => setRunConfig((current) => ({ ...current, temperature: Number(event.target.value || 0) }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.temperature} />
-                  </div>
-                  <div className="space-y-2">
-                    <FieldLabel htmlFor={ids.runMaxTokens} label={t.maxTokens} />
-                    <input id={ids.runMaxTokens} type="number" min={64} max={4096} step={64} value={runConfig.maxTokens} onChange={(event) => setRunConfig((current) => ({ ...current, maxTokens: Number(event.target.value || 64) }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.maxTokens} />
-                  </div>
-                </div>
-
-                <div className="soft-rule mt-5 flex flex-wrap items-center justify-between gap-3 pt-5">
-                  <div className="text-sm leading-7 text-[var(--mist)]">
-                    {t.runs}: {runConfig.runs} · {t.parallelism}: {runConfig.parallelism}
-                  </div>
-                  <button type="button" onClick={handleRun} disabled={!selectedItem || busyKey === 'run'} className="btn-primary rounded-[16px] px-5 py-3 text-sm font-semibold">
-                    {busyKey === 'run' ? '...' : `${t.startRun} · ${runConfig.mode === 'sync' ? t.syncMode : t.asyncMode}`}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="panel rounded-[26px] p-6 sm:p-8">
-            <div className="flex items-start justify-between gap-4">
-              <SectionIntro eyebrow={t.resultsTitle} title={t.resultsHeadline} body={t.resultsBody} align="compact" />
-              <button type="button" onClick={() => void loadProjects()} className="btn-secondary rounded-[14px] px-4 py-2 text-sm font-semibold">
-                {t.refresh}
-              </button>
-            </div>
-            <div className="surface-muted mt-6 rounded-[28px] p-3">
-              <div className="max-h-[30rem] space-y-3 overflow-y-auto pr-1">
-                {recentRuns.length === 0 && (
-                  <div className="rounded-[26px] border border-dashed border-[rgba(25,40,72,0.14)] px-5 py-6 text-sm text-[var(--mist)]">{t.emptyRuns}</div>
-                )}
-                {recentRuns.map((run) => {
-                  const artifacts = artifactMap.get(run.id) ?? [];
-                  return (
-                    <article key={run.id} className="quiet-card rounded-[20px] p-5">
-                      <div className="flex flex-wrap items-start justify-between gap-3">
-                        <div className="space-y-2">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <p className="text-base font-semibold text-ink">{run.modelName}</p>
-                            <span className={['status-chip rounded-[12px] px-3 py-1 text-xs uppercase tracking-[0.16em]', statusClass(run.status)].join(' ')}>
-                              {statusLabel(localeKey, run.status)}
-                            </span>
-                          </div>
-                          <p className="text-xs uppercase tracking-[0.18em] text-[var(--mist)]">
-                            {t.runIdentifierLabel} #{run.id}
-                          </p>
-                          <p className="text-sm text-[var(--mist)]">{formatDate(localeKey, run.createdAt)}</p>
-                        </div>
-
-                        <div className="text-right">
-                          <p className="text-sm font-semibold text-ink">{formatPercent(run.scoreSummary?.accuracy)}</p>
-                          <p className="mt-1 text-sm text-[var(--mist)]">{run.scoreSummary?.latencyBand ?? '—'}</p>
-                        </div>
-                      </div>
-
-                      <div className="soft-rule mt-4 flex flex-wrap items-center justify-between gap-3 pt-4">
-                        <div className="flex flex-wrap gap-2">
-                          {artifacts.map((artifact) => (
-                            <a
-                              key={artifact.id}
-                              href={`/api/platform/artifacts/download?artifactId=${artifact.id}`}
-                              className="control-chip-sm rounded-[12px] px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em]"
-                            >
-                              {t.download} · {artifact.kind}
-                            </a>
-                          ))}
-                        </div>
-                        {artifacts.some((artifact) => artifact.kind === 'json') && (
-                          <button type="button" onClick={() => void handlePreview(run)} className="btn-secondary rounded-[14px] px-4 py-2 text-sm font-semibold">
-                            {busyKey === `preview-${run.id}` ? '...' : t.preview}
-                          </button>
-                        )}
-                      </div>
-
-                      {run.errorMessage ? <p className="status-danger mt-4 text-sm">{run.errorMessage}</p> : null}
-                    </article>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-          <section className="panel rounded-[26px] p-6 sm:p-8">
-            <SectionIntro eyebrow={t.previewTitle} title={t.previewHeadline} body={t.previewBody} align="compact" />
-            {!liveArtifact ? (
-              <div className="mt-6 rounded-[26px] border border-dashed border-[rgba(25,40,72,0.14)] px-5 py-6 text-sm leading-7 text-[var(--mist)]">{t.emptyPreview}</div>
-            ) : (
-              <div className="mt-6 space-y-4">
-                <div className="grid gap-3 sm:grid-cols-3">
-                  <div className="quiet-card rounded-[20px] p-4">
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mist)]">{t.accuracy}</p>
-                    <p className="mt-3 text-[1.7rem] font-semibold text-ink">{formatPercent(liveArtifact.summary.accuracy)}</p>
-                  </div>
-                  <div className="quiet-card rounded-[20px] p-4">
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mist)]">{t.runCountLabel}</p>
-                    <p className="mt-3 text-[1.7rem] font-semibold text-ink">{liveArtifact.summary.totalRuns}</p>
-                  </div>
-                  <div className="quiet-card rounded-[20px] p-4">
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mist)]">{t.latencyLabel}</p>
-                    <p className="mt-3 text-lg font-semibold text-ink">{liveArtifact.summary.latencyBand}</p>
-                  </div>
-                </div>
-
-                <div className="grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
-                  <div className="dark-card rounded-[24px] p-5">
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(248,250,252,0.62)]">
-                      {t.runIdentifierLabel} #{liveRunId ?? liveArtifact.runId ?? '—'}
-                    </p>
-                    <p className="mt-3 text-2xl font-semibold">{liveArtifact.item.title}</p>
-                    <p className="mt-3 text-sm leading-7 text-[rgba(248,250,252,0.76)]">{liveArtifact.item.question}</p>
-                    <div className="soft-rule mt-5 pt-5">
-                      <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(248,250,252,0.62)]">{t.answerValidationTitle}</p>
-                      <p className="mt-3 text-sm leading-7 text-[rgba(248,250,252,0.84)]">{liveArtifact.item.finalAnswer}</p>
-                    </div>
-                  </div>
-
-                  <div className="quiet-card rounded-[24px] p-5">
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="text-base font-semibold text-ink">{liveArtifact.summary.modelName}</p>
-                      <p className="text-sm text-[var(--mist)]">{liveArtifact.summary.generatedAt}</p>
-                    </div>
-                    <div className="soft-rule mt-4 space-y-3 pt-4">
-                      {liveArtifact.exportFiles.length === 0 ? (
-                        <p className="text-sm leading-7 text-[var(--mist)]">{t.emptyPreview}</p>
-                      ) : (
-                        liveArtifact.exportFiles.map((file) => (
-                          <a
-                            key={`${file.kind}-${file.relativePath}`}
-                            href={file.downloadPath ?? '#'}
-                            className="flex items-center justify-between gap-3 rounded-[20px] border border-[rgba(25,40,72,0.08)] bg-[rgba(255,255,255,0.9)] px-4 py-3 text-sm text-ink"
-                          >
-                            <span>{file.label}</span>
-                            <span className="text-[var(--mist)]">{t.download}</span>
-                          </a>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="surface-muted rounded-[24px] p-3">
-                  <div className="grid max-h-[28rem] gap-3 overflow-y-auto pr-1 md:grid-cols-2">
-                    {liveArtifact.runs.map((run) => (
-                      <div key={run.runIndex} className="quiet-card rounded-[18px] px-4 py-4">
-                        <div className="flex flex-wrap items-center justify-between gap-3">
-                          <p className="text-sm font-semibold text-ink">{localeKey === 'zh' ? `运行 ${run.runIndex}` : `Run ${run.runIndex}`}</p>
-                          <span
-                            className={[
-                              'status-chip rounded-[12px] px-3 py-1 text-xs uppercase tracking-[0.16em]',
-                              run.status === 'correct'
-                                ? 'status-chip-success'
-                                : run.status === 'error'
-                                  ? 'status-chip-info'
-                                  : run.status === 'timeout'
-                                    ? 'status-chip-warning'
-                                    : 'status-chip-danger',
-                            ].join(' ')}
-                          >
-                            {previewRunStatusLabel(localeKey, run.status)}
-                          </span>
-                        </div>
-                        <p className="mt-3 text-sm leading-7 text-[var(--mist)]">{run.answer}</p>
-                        <p className="mt-3 text-xs uppercase tracking-[0.16em] text-[var(--mist)]">{run.note}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </section>
+          <ResultsPanel
+            locale={localeKey}
+            recentRuns={recentRuns}
+            artifactMap={artifactMap}
+            liveArtifact={liveArtifact}
+            liveRunId={liveRunId}
+            busyKey={busyKey}
+            resultsIntro={{ eyebrow: t.resultsTitle, title: t.resultsHeadline, body: t.resultsBody, align: 'compact' }}
+            previewIntro={{ eyebrow: t.previewTitle, title: t.previewHeadline, body: t.previewBody, align: 'compact' }}
+            copy={t}
+            onRefresh={() => void loadProjects()}
+            onPreview={(run) => void handlePreview(run)}
+          />
         </div>
 
         <div className="space-y-6">
@@ -1290,7 +827,7 @@ export default function PlatformConsole() {
               </div>
 
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                <SectionIntro eyebrow={adminMeta[adminView].eyebrow} title={adminMeta[adminView].title} body={adminMeta[adminView].body} />
+                <SectionIntro intro={adminMeta[adminView]} />
                 {adminView === 'items' ? <p className="max-w-md text-sm leading-7 text-[var(--mist)]">{t.manualItemHint}</p> : null}
                 {adminView === 'sources' ? (
                   <div className="rounded-[14px] border border-[rgba(145,97,28,0.16)] bg-[rgba(145,97,28,0.06)] px-4 py-2 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--brass)]">
@@ -1299,275 +836,61 @@ export default function PlatformConsole() {
                 ) : null}
               </div>
 
-              <div id={adminPanelId(adminView)} role="tabpanel" aria-labelledby={adminTabId(adminView)}>
-                  {adminView === 'projects' ? (
-                  <>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <FieldLabel htmlFor={ids.projectName} label={t.projectName} />
-                      <input id={ids.projectName} value={projectName} onChange={(event) => setProjectName(event.target.value)} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.projectName} />
-                    </div>
-                    <div className="space-y-2">
-                      <FieldLabel htmlFor={ids.projectDescription} label={t.projectDescription} />
-                      <input id={ids.projectDescription} value={projectDescription} onChange={(event) => setProjectDescription(event.target.value)} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.projectDescription} />
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-3">
-                    <button type="button" onClick={handleCreateProject} disabled={busyKey === 'project'} className="btn-primary rounded-[16px] px-5 py-3 text-sm font-semibold">
-                      {busyKey === 'project' ? '...' : t.createProject}
-                    </button>
-                    <button type="button" onClick={() => void loadProjects()} disabled={busyKey === 'loading'} className="btn-secondary rounded-[16px] px-5 py-3 text-sm font-semibold">
-                      {t.refresh}
-                    </button>
-                  </div>
-                  <div className="surface-muted rounded-[24px] p-3">
-                    <div className="max-h-[24rem] space-y-3 overflow-y-auto pr-1">
-                      {bundles.length === 0 && <div className="rounded-[26px] border border-dashed border-[rgba(25,40,72,0.14)] px-5 py-6 text-sm text-[var(--mist)]">{t.emptyProjects}</div>}
-                      {bundles.map((bundle) => {
-                        const active = bundle.project.id === selectedProjectId;
-                        return (
-                          <button
-                            key={bundle.project.id}
-                            type="button"
-                            onClick={() => setSelectedProjectId(bundle.project.id)}
-                            aria-pressed={active}
-                            className={[
-                              'w-full rounded-[20px] border px-5 py-5 text-left transition',
-                              active
-                                ? 'border-[rgba(21,70,199,0.22)] bg-[rgba(21,70,199,0.08)] shadow-[0_12px_28px_rgba(21,70,199,0.08)]'
-                                : 'border-[rgba(25,40,72,0.08)] bg-[rgba(255,255,255,0.8)] hover:bg-[rgba(255,255,255,0.94)]',
-                            ].join(' ')}
-                          >
-                            <div className="flex flex-wrap items-start justify-between gap-3">
-                              <div>
-                                <p className="text-base font-semibold text-ink">{bundle.project.name}</p>
-                                <p className="mt-2 text-sm leading-7 text-[var(--mist)]">{bundle.project.description}</p>
-                              </div>
-                              <div className="surface-muted rounded-[12px] px-3 py-1 text-xs uppercase tracking-[0.18em] text-[var(--mist)]">
-                                {bundle.problemItems.length} {t.countSuffix}
-                              </div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  </>
+              <div id={adminPanelId(adminView)} role="tabpanel" aria-labelledby={adminTabId(adminView)} className="space-y-5">
+                {adminView === 'projects' ? (
+                  <ProjectsPanel
+                    bundles={bundles}
+                    selectedProjectId={selectedProjectId}
+                    projectName={projectName}
+                    projectDescription={projectDescription}
+                    busyKey={busyKey}
+                    ids={ids}
+                    copy={t}
+                    onProjectNameChange={setProjectName}
+                    onProjectDescriptionChange={setProjectDescription}
+                    onCreateProject={() => void handleCreateProject()}
+                    onRefresh={() => void loadProjects()}
+                    onSelectProject={setSelectedProjectId}
+                  />
                 ) : null}
 
                 {adminView === 'items' ? (
-                  <div className="grid gap-4 lg:grid-cols-[1fr_0.94fr]">
-                  <div className="surface-muted rounded-[24px] p-3">
-                    <div className="max-h-[28rem] space-y-3 overflow-y-auto pr-1">
-                      {(selectedBundle?.problemItems ?? []).length === 0 && (
-                        <div className="rounded-[26px] border border-dashed border-[rgba(25,40,72,0.14)] px-5 py-6 text-sm text-[var(--mist)]">{t.emptyItems}</div>
-                      )}
-                      {(selectedBundle?.problemItems ?? []).map((item) => {
-                        const active = item.id === selectedItemId;
-                        return (
-                          <button
-                            key={item.id}
-                            type="button"
-                            onClick={() => setSelectedItemId(item.id)}
-                            aria-pressed={active}
-                            className={[
-                              'w-full rounded-[20px] border px-5 py-5 text-left transition',
-                              active
-                                ? 'border-[rgba(15,118,110,0.2)] bg-[rgba(15,118,110,0.08)] shadow-[0_12px_28px_rgba(15,118,110,0.08)]'
-                                : 'border-[rgba(25,40,72,0.08)] bg-[rgba(255,255,255,0.8)] hover:bg-[rgba(255,255,255,0.94)]',
-                            ].join(' ')}
-                          >
-                            <div className="flex flex-wrap items-start justify-between gap-3">
-                              <div>
-                                <p className="text-base font-semibold text-ink">{item.title}</p>
-                                <p className="mt-2 line-clamp-3 text-sm leading-7 text-[var(--mist)]">{item.prompt}</p>
-                              </div>
-                              <div className="control-chip-sm rounded-[12px] px-3 py-1 text-xs uppercase tracking-[0.18em]">
-                                {item.metadata.subject}
-                              </div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <div className="quiet-card rounded-[24px] p-5">
-                    <div className="grid gap-3">
-                      <div className="space-y-2">
-                        <FieldLabel htmlFor={ids.itemTitle} label={t.draftItemTitle} />
-                        <input id={ids.itemTitle} value={itemForm.title} onChange={(event) => setItemForm((current) => ({ ...current, title: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.draftItemTitle} />
-                      </div>
-                      <div className="space-y-2">
-                        <FieldLabel htmlFor={ids.itemPrompt} label={t.draftItemPrompt} />
-                        <textarea id={ids.itemPrompt} value={itemForm.prompt} onChange={(event) => setItemForm((current) => ({ ...current, prompt: event.target.value }))} className="input-shell min-h-28 w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.draftItemPrompt} />
-                      </div>
-                      <div className="space-y-2">
-                        <FieldLabel htmlFor={ids.itemAnswer} label={t.draftItemAnswer} />
-                        <textarea id={ids.itemAnswer} value={itemForm.answerKey} onChange={(event) => setItemForm((current) => ({ ...current, answerKey: event.target.value }))} className="input-shell min-h-20 w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.draftItemAnswer} />
-                      </div>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        <div className="space-y-2">
-                          <FieldLabel htmlFor={ids.itemSubject} label={t.subject} />
-                          <input id={ids.itemSubject} value={itemForm.subject} onChange={(event) => setItemForm((current) => ({ ...current, subject: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.subject} />
-                        </div>
-                        <div className="space-y-2">
-                          <FieldLabel htmlFor={ids.itemGradeLevel} label={t.gradeLevel} />
-                          <input id={ids.itemGradeLevel} value={itemForm.gradeLevel} onChange={(event) => setItemForm((current) => ({ ...current, gradeLevel: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.gradeLevel} />
-                        </div>
-                        <div className="space-y-2">
-                          <FieldLabel htmlFor={ids.itemDifficulty} label={t.difficulty} />
-                          <input id={ids.itemDifficulty} value={itemForm.difficulty} onChange={(event) => setItemForm((current) => ({ ...current, difficulty: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.difficulty} />
-                        </div>
-                        <div className="space-y-2">
-                          <FieldLabel htmlFor={ids.itemType} label={t.itemType} />
-                          <input id={ids.itemType} value={itemForm.itemType} onChange={(event) => setItemForm((current) => ({ ...current, itemType: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.itemType} />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <FieldLabel htmlFor={ids.itemTags} label={t.tags} />
-                        <input id={ids.itemTags} value={itemForm.tags} onChange={(event) => setItemForm((current) => ({ ...current, tags: event.target.value }))} className="input-shell w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.tags} />
-                      </div>
-                      <div className="space-y-2">
-                        <FieldLabel htmlFor={ids.itemNotes} label={t.notes} />
-                        <textarea id={ids.itemNotes} value={itemForm.notes} onChange={(event) => setItemForm((current) => ({ ...current, notes: event.target.value }))} className="input-shell min-h-24 w-full rounded-2xl px-4 py-3 text-sm" placeholder={t.notes} />
-                      </div>
-                      <button type="button" onClick={handleCreateItem} disabled={busyKey === 'item'} className="btn-primary rounded-[16px] px-5 py-3 text-sm font-semibold">
-                        {busyKey === 'item' ? '...' : t.createItem}
-                      </button>
-                    </div>
-                  </div>
-                  </div>
+                  <ItemsPanel
+                    selectedBundle={selectedBundle}
+                    selectedItemId={selectedItemId}
+                    itemForm={itemForm}
+                    busyKey={busyKey}
+                    ids={ids}
+                    copy={t}
+                    onSelectItem={setSelectedItemId}
+                    onUpdateItemForm={(patch) => setItemForm((current) => ({ ...current, ...patch }))}
+                    onCreateItem={() => void handleCreateItem()}
+                  />
                 ) : null}
 
                 {adminView === 'sources' ? (
-                  <>
-                  <div className="flex flex-wrap gap-3">
-                    <div className="space-y-2">
-                      <FieldLabel htmlFor={`${ids.sourceUpload}-button`} label={t.uploadFieldLabel} helper={t.supportedFiles} />
-                      <input
-                        id={ids.sourceUpload}
-                        ref={fileInputRef}
-                        type="file"
-                        multiple
-                        className="sr-only"
-                        tabIndex={-1}
-                        onChange={(event) => {
-                          const files = Array.from(event.target.files ?? []) as UploadableFile[];
-                          if (files.length) void handleUpload(files);
-                        }}
-                      />
-                      <button
-                        id={`${ids.sourceUpload}-button`}
-                        type="button"
-                        onClick={() => triggerUpload('file')}
-                        className="btn-secondary inline-flex rounded-[16px] px-5 py-3 text-sm font-semibold"
-                      >
-                        {busyKey === 'upload' ? '...' : t.uploadSource}
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      <FieldLabel htmlFor={`${ids.sourceUpload}-folder-button`} label={t.uploadFolder} helper={t.supportedFiles} />
-                      <input
-                        id={`${ids.sourceUpload}-folder`}
-                        ref={folderInputRef}
-                        type="file"
-                        multiple
-                        className="sr-only"
-                        tabIndex={-1}
-                        onChange={(event) => {
-                          const files = Array.from(event.target.files ?? []) as UploadableFile[];
-                          if (files.length) void handleUpload(files);
-                        }}
-                      />
-                      <button
-                        id={`${ids.sourceUpload}-folder-button`}
-                        type="button"
-                        onClick={() => triggerUpload('folder')}
-                        className="btn-secondary inline-flex rounded-[16px] px-5 py-3 text-sm font-semibold"
-                      >
-                        {busyKey === 'upload' ? '...' : t.uploadFolder}
-                      </button>
-                    </div>
-                  </div>
-                  <p className="text-sm text-[var(--mist)]">{t.uploadHint}</p>
-                  <div className="surface-muted rounded-[24px] p-3">
-                    <div className="max-h-[28rem] space-y-3 overflow-y-auto pr-1">
-                      {(selectedBundle?.sourceFiles ?? []).length === 0 && (
-                        <div className="rounded-[26px] border border-dashed border-[rgba(25,40,72,0.14)] px-5 py-6 text-sm text-[var(--mist)]">
-                          {t.supportedFiles}
-                        </div>
-                      )}
-                      {(selectedBundle?.sourceFiles ?? []).map((source) => (
-                        <div key={source.id} className="quiet-card rounded-[20px] px-5 py-4">
-                          <div className="flex flex-wrap items-start justify-between gap-3">
-                            <div>
-                              <p className="text-sm font-semibold text-ink">{source.fileName}</p>
-                              <div className="mt-2 flex flex-wrap items-center gap-2">
-                                <span className="text-xs uppercase tracking-[0.18em] text-[var(--mist)]">{source.fileType}</span>
-                                <span className={['status-chip rounded-[12px] px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em]', sourceStatusClass(source.parseStatus)].join(' ')}>
-                                  {sourceParseStatusLabel(localeKey, source.parseStatus)}
-                                </span>
-                              </div>
-                              <p className="mt-3 text-xs leading-6 text-[var(--mist)]">
-                                {t.sourcePathLabel}: {source.metadata?.relativePath ?? source.fileName}
-                              </p>
-                              {source.metadata?.classifier ? (
-                                <p className="text-xs leading-6 text-[var(--mist)]">classifier: {source.metadata.classifier}</p>
-                              ) : null}
-                              {source.parseError ? <p className="status-danger text-xs leading-6">{source.parseError}</p> : null}
-                            </div>
-                            <div className="space-y-3 text-right">
-                              <div className="text-xs text-[var(--mist)]">
-                                {source.importedItemIds.length} {t.importedCountLabel}
-                              </div>
-                              <div className="flex flex-wrap justify-end gap-2">
-                                {buildSourceDownloadLinks(localeKey, source).map((link) => (
-                                  <a
-                                    key={`${source.id}-${link.kind}`}
-                                    href={link.href}
-                                    className="control-chip-sm rounded-[12px] px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em]"
-                                  >
-                                    {link.label}
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  </>
+                  <SourcesPanel
+                    locale={localeKey}
+                    selectedBundle={selectedBundle}
+                    busyKey={busyKey}
+                    ids={ids}
+                    fileInputRef={fileInputRef}
+                    folderInputRef={folderInputRef}
+                    copy={t}
+                    onTriggerUpload={triggerUpload}
+                    onFilesSelected={(files) => void handleUpload(files)}
+                  />
                 ) : null}
               </div>
             </div>
           </section>
 
-          <section className="panel rounded-[26px] p-6 sm:p-8">
-            <SectionIntro eyebrow={t.governanceTitle} title={t.governanceHeadline} body={t.governanceBody} align="compact" />
-            <div className="mt-5 grid gap-4 md:grid-cols-3">
-              <div className="quiet-card rounded-[20px] p-5">
-                <p className="text-sm font-semibold text-ink">{t.members}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {(selectedBundle?.members ?? []).map((member) => (
-                    <span key={member.userId} className="control-chip-sm rounded-[12px] px-3 py-2 text-xs uppercase tracking-[0.16em]">
-                      {member.name} · {roleLabel(localeKey, member.role)}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="quiet-card rounded-[20px] p-5">
-                <p className="text-sm font-semibold text-ink">{t.permissions}</p>
-                <p className="mt-3 text-sm leading-7 text-[var(--mist)]">
-                  {localeKey === 'zh' ? '负责人 / 编辑 / 查看者 / 执行者' : 'Owner / Editor / Viewer / Runner'}
-                </p>
-              </div>
-              <div className="quiet-card rounded-[20px] p-5">
-                <p className="text-sm font-semibold text-ink">{t.genericExport}</p>
-                <p className="mt-3 text-sm leading-7 text-[var(--mist)]">{t.enterpriseNotice}</p>
-              </div>
-            </div>
-          </section>
+          <GovernancePanel
+            locale={localeKey}
+            selectedBundle={selectedBundle}
+            intro={{ eyebrow: t.governanceTitle, title: t.governanceHeadline, body: t.governanceBody, align: 'compact' }}
+            copy={t}
+          />
         </div>
       </div>
     </div>
