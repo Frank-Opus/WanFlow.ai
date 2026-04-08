@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useCopy } from '@/components/shared/locale-provider';
-import { productStats } from '@/lib/proofbench';
+import { productStats } from '@/lib/benchmarkops';
 
 export function CapabilityGrid() {
   const text = useCopy();
@@ -14,7 +14,7 @@ export function CapabilityGrid() {
           <p className="eyebrow">{text.home.systemEyebrow}</p>
           <h2 className="display-face mt-3 text-4xl text-ink sm:text-5xl">{text.home.systemTitle}</h2>
         </div>
-        <Link href="/proofbench" className="btn-secondary focus-ring inline-flex w-fit rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em]">
+        <Link href="/dataflow/proofbench" className="btn-secondary focus-ring inline-flex w-fit rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em]">
           {text.home.systemCta}
         </Link>
       </div>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useCopy } from '@/components/shared/locale-provider';
-import { seededArtifact } from '@/lib/proofbench';
+import { seededArtifact } from '@/lib/benchmarkops';
 
 export function SamplePreview() {
   const text = useCopy();
@@ -38,7 +38,7 @@ export function SamplePreview() {
             <p className="eyebrow">{text.home.resultTeaser}</p>
             <h3 className="mt-3 text-2xl font-semibold text-ink">{text.home.sampleRunsTitle}</h3>
           </div>
-          <Link href="/proofbench" className="btn-secondary focus-ring rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em]">
+          <Link href="/dataflow/proofbench" className="btn-secondary focus-ring rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em]">
             {text.home.sampleCta}
           </Link>
         </div>

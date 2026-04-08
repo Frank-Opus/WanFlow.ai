@@ -1,16 +1,14 @@
-import type { KeyboardEvent, RefObject } from 'react';
-import type { ProofBenchArtifact } from '@/lib/proofbench';
-import type {
-  PlatformArtifact,
-  PlatformBenchmarkRun,
-  PlatformProjectBundle,
-  PlatformProblemItem,
-} from '@/lib/platform-types';
+import type { ProofBenchArtifact } from '@/lib/benchmarkops';
+import type { PlatformArtifact, PlatformBenchmarkRun, PlatformProjectBundle, PlatformProblemItem } from '@/lib/platform-types';
 
 export const benchmarkOpsAdminViews = ['projects', 'items', 'sources'] as const;
 
 export type BenchmarkOpsAdminView = (typeof benchmarkOpsAdminViews)[number];
-export type BenchmarkOpsLocale = 'zh' | 'en';
+
+export type BenchmarkOpsAdminTab = {
+  key: BenchmarkOpsAdminView;
+  label: string;
+};
 
 export type BenchmarkOpsSectionIntro = {
   eyebrow: string;
@@ -62,6 +60,28 @@ export type BenchmarkOpsItemDraft = {
   itemType: string;
   tags: string;
   notes: string;
+};
+
+export type BenchmarkOpsViewModel = {
+  bundles: PlatformProjectBundle[];
+  selectedProjectId: string;
+  selectedItemId: string;
+  adminView: BenchmarkOpsAdminView;
+  runConfig: BenchmarkOpsRunConfig;
+  itemForm: BenchmarkOpsItemDraft;
+  projectName: string;
+  projectDescription: string;
+  selectedBundle: PlatformProjectBundle | null;
+  selectedItem: PlatformProblemItem | null;
+  recentRuns: PlatformBenchmarkRun[];
+  latestRun: PlatformBenchmarkRun | null;
+  artifactMap: Map<string, PlatformArtifact[]>;
+  liveArtifact: ProofBenchArtifact | null;
+  liveRunId: string | null;
+  banner: string | null;
+  error: string | null;
+  busyKey: string | null;
+  lastUpdatedText: string;
 };
 
 export type BenchmarkOpsConsoleCopy = {
@@ -158,56 +178,4 @@ export type BenchmarkOpsConsoleCopy = {
   runIdentifierLabel: string;
   answerValidationTitle: string;
   latencyLabel: string;
-};
-
-export type BenchmarkOpsAdminTab = {
-  key: BenchmarkOpsAdminView;
-  label: string;
-};
-
-export type BenchmarkOpsViewModel = {
-  locale: BenchmarkOpsLocale;
-  copy: BenchmarkOpsConsoleCopy;
-  ids: BenchmarkOpsViewIds;
-  bundles: PlatformProjectBundle[];
-  selectedProjectId: string;
-  selectedItemId: string;
-  selectedBundle: PlatformProjectBundle | null;
-  selectedItem: PlatformProblemItem | null;
-  adminView: BenchmarkOpsAdminView;
-  adminMeta: Record<BenchmarkOpsAdminView, BenchmarkOpsSectionIntro>;
-  adminTabs: BenchmarkOpsAdminTab[];
-  runConfig: BenchmarkOpsRunConfig;
-  projectName: string;
-  projectDescription: string;
-  itemForm: BenchmarkOpsItemDraft;
-  banner: string | null;
-  error: string | null;
-  busyKey: string | null;
-  liveArtifact: ProofBenchArtifact | null;
-  liveRunId: string | null;
-  artifactMap: Map<string, PlatformArtifact[]>;
-  recentRuns: PlatformBenchmarkRun[];
-  latestRun: PlatformBenchmarkRun | null;
-  fileInputRef: RefObject<HTMLInputElement | null>;
-  folderInputRef: RefObject<HTMLInputElement | null>;
-  actions: {
-    adminPanelId: (view: BenchmarkOpsAdminView) => string;
-    adminTabId: (view: BenchmarkOpsAdminView) => string;
-    createItem: () => Promise<void>;
-    createProject: () => Promise<void>;
-    handleAdminTabKeyDown: (currentView: BenchmarkOpsAdminView, event: KeyboardEvent<HTMLButtonElement>) => void;
-    previewRun: (run: PlatformBenchmarkRun) => Promise<void>;
-    refreshProjects: (silent?: boolean) => Promise<void>;
-    runBenchmark: () => Promise<void>;
-    selectAdminView: (view: BenchmarkOpsAdminView) => void;
-    selectItem: (itemId: string) => void;
-    selectProject: (projectId: string) => void;
-    triggerUpload: (kind: 'file' | 'folder') => void;
-    updateItemForm: (patch: Partial<BenchmarkOpsItemDraft>) => void;
-    updateProjectDescription: (value: string) => void;
-    updateProjectName: (value: string) => void;
-    updateRunConfig: (patch: Partial<BenchmarkOpsRunConfig>) => void;
-    uploadFiles: (files: File[]) => Promise<void>;
-  };
 };

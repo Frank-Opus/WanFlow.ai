@@ -124,14 +124,14 @@ export function WorkbenchProofCard({
     <div className="mkt-proof-panel mkt-grid-lines p-5 sm:p-6">
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="mkt-chip">BenchmarkOps</span>
+          <span className="mkt-chip">WanFlow BenchmarkOps</span>
           <span className="mkt-chip mkt-chip-subtle">{proofLabel}</span>
         </div>
         <h3 className="text-[1.32rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.52rem]">
           {workbenchNote}
         </h3>
         <p className="mkt-copy text-sm">{proofNote}</p>
-        <Link href="/proofbench" className="mkt-button-secondary inline-flex w-fit">{workbenchCta}</Link>
+        <Link href="/dataflow/proofbench" className="mkt-button-secondary inline-flex w-fit">{workbenchCta}</Link>
       </div>
     </div>
   );

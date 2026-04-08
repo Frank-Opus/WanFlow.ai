@@ -199,7 +199,7 @@ export default function MarketingHomePage() {
             title={copy.home.finalCta.title}
             body={copy.home.finalCta.body}
             primary={{ href: '/contact', label: copy.common.finalPrimary }}
-            secondary={{ href: '/proofbench', label: copy.common.finalSecondary }}
+            secondary={{ href: '/dataflow/proofbench', label: copy.common.finalSecondary }}
           />
         </MotionReveal>
       </div>

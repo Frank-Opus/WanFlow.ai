@@ -78,7 +78,7 @@ export default function SiteHeader() {
           </nav>
 
           <div className="hidden items-center gap-2 xl:flex">
-            <Link href="/proofbench" className={isMarketingRoute ? 'mkt-button-secondary mkt-button-compact' : 'mkt-button-primary mkt-button-compact'}>
+            <Link href="/dataflow/proofbench" className={isMarketingRoute ? 'mkt-button-secondary mkt-button-compact' : 'mkt-button-primary mkt-button-compact'}>
               {copy.common.workbenchCta}
             </Link>
             {(['zh', 'en'] as const).map((lang) => {
@@ -136,7 +136,7 @@ export default function SiteHeader() {
                 <Link href="/contact" className="mkt-button-primary">
                   {copy.common.primaryCta}
                 </Link>
-                <Link href="/proofbench" className="mkt-button-secondary">
+                <Link href="/dataflow/proofbench" className="mkt-button-secondary">
                   {copy.common.workbenchCta}
                 </Link>
                 {(['zh', 'en'] as const).map((lang) => {

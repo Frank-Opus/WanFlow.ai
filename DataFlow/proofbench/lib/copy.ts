@@ -9,12 +9,12 @@ export type BenchmarkOpsShellCopy = {
 const SHELL_COPY: Record<'zh' | 'en', BenchmarkOpsShellCopy> = {
   zh: {
     shellBadge: '正式产品壳层',
-    shellBody: 'DataFlow / proofbench 正式产品入口，保留可测试的正式产品标识。',
+    shellBody: 'DataFlow 正式产品入口，保留可测试的 WanFlow BenchmarkOps 产品标识。',
     formalTitle: BENCHMARKOPS_PRODUCT_TITLE,
   },
   en: {
     shellBadge: 'Formal product shell',
-    shellBody: 'The formal DataFlow / proofbench entry with a testable product identifier.',
+    shellBody: 'The formal DataFlow entry with a testable WanFlow BenchmarkOps product identifier.',
     formalTitle: BENCHMARKOPS_PRODUCT_TITLE,
   },
 };

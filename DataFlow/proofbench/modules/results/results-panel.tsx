@@ -1,7 +1,7 @@
 'use client';
 
 import type { PlatformArtifact, PlatformBenchmarkRun } from '@/lib/platform-types';
-import type { ProofBenchArtifact } from '@/lib/proofbench';
+import type { ProofBenchArtifact } from '@/lib/benchmarkops';
 import type { BenchmarkOpsConsoleCopy, BenchmarkOpsSectionIntro } from '@dataflow/proofbench/lib/view-model';
 
 type ResultsPanelProps = {

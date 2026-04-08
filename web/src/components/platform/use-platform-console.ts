@@ -1,24 +1,20 @@
 'use client';
 
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
-import GovernancePanel from '@dataflow/proofbench/modules/governance/governance-panel';
-import ItemsPanel from '@dataflow/proofbench/modules/items/items-panel';
-import ProjectsPanel from '@dataflow/proofbench/modules/projects/projects-panel';
-import ResultsPanel from '@dataflow/proofbench/modules/results/results-panel';
-import RunsPanel from '@dataflow/proofbench/modules/runs/runs-panel';
-import SourcesPanel from '@dataflow/proofbench/modules/sources/sources-panel';
+import { BENCHMARKOPS_PRODUCT_TITLE } from '@dataflow/proofbench/lib/constants';
 import {
   benchmarkOpsAdminViews,
+  type BenchmarkOpsAdminTab,
   type BenchmarkOpsAdminView,
   type BenchmarkOpsConsoleCopy,
   type BenchmarkOpsItemDraft,
   type BenchmarkOpsRunConfig,
   type BenchmarkOpsSectionIntro,
   type BenchmarkOpsViewIds,
+  type BenchmarkOpsViewModel,
 } from '@dataflow/proofbench/lib/view-model';
-import { BENCHMARKOPS_PRODUCT_TITLE } from '@dataflow/proofbench/lib/constants';
 import { useLocale } from '@/components/shared/locale-provider';
-import { buildArtifactFromFrameworkJson, type ProofBenchArtifact, type ProofBenchExport } from '@/lib/proofbench';
+import { buildArtifactFromFrameworkJson, type ProofBenchArtifact, type ProofBenchExport } from '@/lib/benchmarkops';
 import type {
   PlatformArtifact,
   PlatformBenchmarkRun,
@@ -113,7 +109,7 @@ const COPY: Record<'zh' | 'en', BenchmarkOpsConsoleCopy> = {
     manualItemHint: '这里不绑定具体题目类型，保留通用字段，方便后面接 OCR/解析/审核流程。',
     supportedFiles: '支持 PDF / DOCX / JSON / TXT / MD / TEX / 文件夹',
     enterpriseNotice: '默认模型展示为用户指定的 Qwen/Qwen3-235B-A22B-Thinking-2507；实际调用时会自动归一化为服务端可识别的模型 ID。',
-    genericExport: '导出的 Excel 已去掉旧单题演示方案的模型名硬编码，改为通用企业产物结构。',
+    genericExport: '导出的 Excel 采用通用企业交付结构，方便评测结果统一归档与复用。',
     countSuffix: '项',
     uploadFieldLabel: '上传源文件',
     projectCountLabel: '项目数',
@@ -214,7 +210,7 @@ const COPY: Record<'zh' | 'en', BenchmarkOpsConsoleCopy> = {
     manualItemHint: 'This stays generic on purpose so OCR, parsing, and review workflows can plug in later.',
     supportedFiles: 'Supports PDF / DOCX / JSON / TXT / MD / TEX / folders',
     enterpriseNotice: 'The UI shows the requested Qwen/Qwen3-235B-A22B-Thinking-2507 label; execution normalizes it to the provider-supported model ID.',
-    genericExport: 'The Excel export no longer carries legacy single-item naming and now uses a generic enterprise workbook shape.',
+    genericExport: 'The Excel export uses a shared enterprise delivery shape for easier archiving and reuse.',
     countSuffix: 'items',
     uploadFieldLabel: 'Upload source file',
     projectCountLabel: 'Projects',
@@ -310,19 +306,9 @@ function relativePathForUpload(file: File) {
   return fileWithRelativePath.webkitRelativePath?.trim() || file.name;
 }
 
-function SectionIntro({ intro }: { intro: BenchmarkOpsSectionIntro }) {
-  return (
-    <div className={intro.align === 'compact' ? 'max-w-xl' : 'max-w-2xl'}>
-      <p className="eyebrow">{intro.eyebrow}</p>
-      <h2 className="mt-2 max-w-[20ch] text-xl font-semibold leading-snug text-ink sm:text-[1.65rem]">{intro.title}</h2>
-      <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--mist)] sm:text-[0.96rem]">{intro.body}</p>
-    </div>
-  );
-}
-
-export default function PlatformConsole() {
+export function useBenchmarkOpsConsole() {
   const { locale } = useLocale();
-  const t = COPY[locale];
+  const copy = COPY[locale];
   const localeKey = locale as 'zh' | 'en';
   const ids: BenchmarkOpsViewIds = {
     adminTabs: useId(),
@@ -381,8 +367,11 @@ export default function PlatformConsole() {
         throw new Error(payload.error ?? 'Failed to load projects.');
       }
       const projects = payload.projects ?? [];
+      setError(null);
       setBundles(projects);
-      setSelectedProjectId((current) => (current && projects.some((bundle) => bundle.project.id === current) ? current : projects[0]?.project.id ?? ''));
+      setSelectedProjectId((current) =>
+        current && projects.some((bundle) => bundle.project.id === current) ? current : projects[0]?.project.id ?? ''
+      );
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : 'Failed to load projects.');
     } finally {
@@ -413,6 +402,8 @@ export default function PlatformConsole() {
   );
 
   useEffect(() => {
+    setLiveArtifact(null);
+    setLiveRunId(null);
     if (!selectedBundle) {
       setSelectedItemId('');
       return;
@@ -448,26 +439,26 @@ export default function PlatformConsole() {
 
   const adminMeta: Record<BenchmarkOpsAdminView, BenchmarkOpsSectionIntro> = {
     projects: {
-      eyebrow: t.workspaceTitle,
-      title: t.workspaceHeadline,
-      body: t.workspaceBody,
+      eyebrow: copy.workspaceTitle,
+      title: copy.workspaceHeadline,
+      body: copy.workspaceBody,
     },
     items: {
-      eyebrow: t.problemTitle,
-      title: t.problemHeadline,
-      body: t.problemBody,
+      eyebrow: copy.problemTitle,
+      title: copy.problemHeadline,
+      body: copy.problemBody,
     },
     sources: {
-      eyebrow: t.intakeTitle,
-      title: t.intakeHeadline,
-      body: t.intakeBody,
+      eyebrow: copy.intakeTitle,
+      title: copy.intakeHeadline,
+      body: copy.intakeBody,
     },
   };
 
-  const adminTabs: Array<{ key: BenchmarkOpsAdminView; label: string }> = [
-    { key: 'projects', label: t.workspaceTitle },
-    { key: 'items', label: t.problemTitle },
-    { key: 'sources', label: t.intakeTitle },
+  const adminTabs: BenchmarkOpsAdminTab[] = [
+    { key: 'projects', label: copy.workspaceTitle },
+    { key: 'items', label: copy.problemTitle },
+    { key: 'sources', label: copy.intakeTitle },
   ];
 
   function focusAdminTab(view: BenchmarkOpsAdminView) {
@@ -629,6 +620,9 @@ export default function PlatformConsole() {
       if (payload.artifact) {
         setLiveArtifact(payload.artifact);
         setLiveRunId(payload.runId ?? null);
+      } else {
+        setLiveArtifact(null);
+        setLiveRunId(null);
       }
       setBanner(
         runConfig.mode === 'sync'
@@ -676,223 +670,53 @@ export default function PlatformConsole() {
     }
   }
 
-  return (
-    <div className="space-y-7">
-      <section className="panel-strong overflow-hidden rounded-[28px] px-6 py-7 sm:px-8 lg:px-10 lg:py-10">
-        <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
-          <div className="hero-haze relative space-y-5">
-            <p className="section-kicker">{t.heroEyebrow}</p>
-            <div className="space-y-3">
-              <h1 className="display-face max-w-3xl text-[2.25rem] leading-[1.02] text-ink sm:text-[2.95rem] lg:text-[3.7rem]">
-                {t.heroTitle}
-              </h1>
-              <p className="max-w-2xl text-sm leading-7 text-[var(--mist)] sm:text-[1rem]">{t.heroBody}</p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a href="#run-center" className="btn-primary rounded-[16px] px-5 py-3 text-sm font-semibold">
-                {t.heroPrimary}
-              </a>
-              <button type="button" onClick={() => void loadProjects()} className="btn-secondary rounded-[16px] px-5 py-3 text-sm font-semibold">
-                {t.heroSecondary}
-              </button>
-            </div>
-            <div className="surface-shell rounded-[22px]">
-              {t.summaryCards.map((card, index) => (
-                <div
-                  key={card.label}
-                  className={[
-                    'grid gap-2 px-4 py-3 sm:grid-cols-[8rem_1fr]',
-                    index > 0 ? 'border-t border-[rgba(25,40,72,0.08)]' : '',
-                  ].join(' ')}
-                >
-                  <p className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--mist)]">{card.label}</p>
-                  <p className="text-sm text-[var(--ink-soft)]">{card.hint}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+  const viewModel: BenchmarkOpsViewModel = {
+    bundles,
+    selectedProjectId,
+    selectedItemId,
+    adminView,
+    runConfig,
+    itemForm,
+    projectName,
+    projectDescription,
+    selectedBundle,
+    selectedItem,
+    recentRuns,
+    latestRun,
+    artifactMap,
+    liveArtifact,
+    liveRunId,
+    banner,
+    error,
+    busyKey,
+    lastUpdatedText: formatDate(localeKey, latestRun?.createdAt ?? selectedBundle?.project.updatedAt),
+  };
 
-          <div className="grid gap-4">
-            <div className="dark-card rounded-[24px] p-6 shadow-[0_20px_42px_rgba(18,25,38,0.14)]">
-              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[rgba(248,250,252,0.62)]">{t.selectedProject}</p>
-              <p className="mt-3 text-[1.4rem] font-semibold leading-snug">{selectedBundle?.project.name ?? '—'}</p>
-              <p className="mt-3 text-sm leading-7 text-[rgba(248,250,252,0.74)]">{selectedBundle?.project.description ?? t.emptyProjects}</p>
-              <div className="soft-rule mt-5 grid gap-4 pt-5 sm:grid-cols-2">
-                <div>
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(248,250,252,0.6)]">{t.selectedItem}</p>
-                  <p className="mt-2 text-sm leading-7 text-[rgba(248,250,252,0.82)]">{selectedItem?.title ?? t.emptyItems}</p>
-                </div>
-                <div>
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(248,250,252,0.6)]">{t.lastUpdate}</p>
-                  <p className="mt-2 text-sm leading-7 text-[rgba(248,250,252,0.82)]">{formatDate(localeKey, latestRun?.createdAt ?? selectedBundle?.project.updatedAt)}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="quiet-card rounded-[20px] p-4">
-                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mist)]">{t.projectCountLabel}</p>
-                <p className="mt-3 text-[1.8rem] font-semibold text-ink">{bundles.length}</p>
-              </div>
-              <div className="quiet-card rounded-[20px] p-4">
-                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mist)]">{t.itemCountLabel}</p>
-                <p className="mt-3 text-[1.8rem] font-semibold text-ink">{selectedBundle?.problemItems.length ?? 0}</p>
-              </div>
-              <div className="quiet-card rounded-[20px] p-4">
-                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mist)]">{t.runCountLabel}</p>
-                <p className="mt-3 text-[1.8rem] font-semibold text-ink">{selectedBundle?.benchmarkRuns.length ?? 0}</p>
-              </div>
-              <div className="quiet-card rounded-[20px] p-4">
-                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mist)]">{t.artifactCountLabel}</p>
-                <p className="mt-3 text-[1.8rem] font-semibold text-ink">{selectedBundle?.artifacts.length ?? 0}</p>
-              </div>
-            </div>
-
-            <div className="surface-muted rounded-[20px] px-5 py-4 text-sm leading-7 text-[var(--mist)]">{t.enterpriseNotice}</div>
-          </div>
-        </div>
-      </section>
-
-      {(banner || error) && (
-        <div className="grid gap-3 lg:grid-cols-2">
-          {banner && (
-            <div role="status" aria-live="polite" className="status-chip status-chip-success rounded-[24px] px-5 py-4 text-sm">
-              {banner}
-            </div>
-          )}
-          {error && (
-            <div role="alert" aria-live="assertive" className="status-chip status-chip-danger rounded-[24px] px-5 py-4 text-sm">
-              {error}
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="grid items-start gap-6 xl:grid-cols-[1.04fr_0.96fr]">
-        <div className="space-y-6">
-          <RunsPanel
-            selectedItem={selectedItem}
-            runConfig={runConfig}
-            busyKey={busyKey}
-            ids={ids}
-            intro={{ eyebrow: t.runTitle, title: t.runHeadline, body: t.runBody }}
-            copy={t}
-            onUpdateRunConfig={(patch) => setRunConfig((current) => ({ ...current, ...patch }))}
-            onRun={() => void handleRun()}
-          />
-
-          <ResultsPanel
-            locale={localeKey}
-            recentRuns={recentRuns}
-            artifactMap={artifactMap}
-            liveArtifact={liveArtifact}
-            liveRunId={liveRunId}
-            busyKey={busyKey}
-            resultsIntro={{ eyebrow: t.resultsTitle, title: t.resultsHeadline, body: t.resultsBody, align: 'compact' }}
-            previewIntro={{ eyebrow: t.previewTitle, title: t.previewHeadline, body: t.previewBody, align: 'compact' }}
-            copy={t}
-            onRefresh={() => void loadProjects()}
-            onPreview={(run) => void handlePreview(run)}
-          />
-        </div>
-
-        <div className="space-y-6">
-          <section className="panel rounded-[26px] p-6 sm:p-8">
-            <div className="flex flex-col gap-5">
-              <div role="tablist" aria-label={localeKey === 'zh' ? '工作台分区' : 'Workspace sections'} className="surface-muted flex flex-wrap gap-2 rounded-[20px] p-2">
-                {adminTabs.map((tab) => {
-                  const active = adminView === tab.key;
-                  return (
-                    <button
-                      id={adminTabId(tab.key)}
-                      key={tab.key}
-                      type="button"
-                      role="tab"
-                      aria-selected={active}
-                      aria-controls={adminPanelId(tab.key)}
-                      tabIndex={active ? 0 : -1}
-                      onClick={() => setAdminView(tab.key)}
-                      onKeyDown={(event) => handleAdminTabKeyDown(tab.key, event)}
-                      className={[
-                        'control-chip rounded-[14px] px-4 py-2 text-sm font-semibold transition',
-                        active
-                          ? 'bg-[rgba(18,25,38,0.94)] text-[var(--paper)] shadow-[0_12px_28px_rgba(18,25,38,0.14)]'
-                          : 'border-transparent bg-transparent text-[var(--mist)] hover:bg-[rgba(255,255,255,0.82)] hover:text-ink',
-                      ].join(' ')}
-                    >
-                      {tab.label}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                <SectionIntro intro={adminMeta[adminView]} />
-                {adminView === 'items' ? <p className="max-w-md text-sm leading-7 text-[var(--mist)]">{t.manualItemHint}</p> : null}
-                {adminView === 'sources' ? (
-                  <div className="rounded-[14px] border border-[rgba(145,97,28,0.16)] bg-[rgba(145,97,28,0.06)] px-4 py-2 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--brass)]">
-                    {t.supportedFiles}
-                  </div>
-                ) : null}
-              </div>
-
-              <div id={adminPanelId(adminView)} role="tabpanel" aria-labelledby={adminTabId(adminView)} className="space-y-5">
-                {adminView === 'projects' ? (
-                  <ProjectsPanel
-                    bundles={bundles}
-                    selectedProjectId={selectedProjectId}
-                    projectName={projectName}
-                    projectDescription={projectDescription}
-                    busyKey={busyKey}
-                    ids={ids}
-                    copy={t}
-                    onProjectNameChange={setProjectName}
-                    onProjectDescriptionChange={setProjectDescription}
-                    onCreateProject={() => void handleCreateProject()}
-                    onRefresh={() => void loadProjects()}
-                    onSelectProject={setSelectedProjectId}
-                  />
-                ) : null}
-
-                {adminView === 'items' ? (
-                  <ItemsPanel
-                    selectedBundle={selectedBundle}
-                    selectedItemId={selectedItemId}
-                    itemForm={itemForm}
-                    busyKey={busyKey}
-                    ids={ids}
-                    copy={t}
-                    onSelectItem={setSelectedItemId}
-                    onUpdateItemForm={(patch) => setItemForm((current) => ({ ...current, ...patch }))}
-                    onCreateItem={() => void handleCreateItem()}
-                  />
-                ) : null}
-
-                {adminView === 'sources' ? (
-                  <SourcesPanel
-                    locale={localeKey}
-                    selectedBundle={selectedBundle}
-                    busyKey={busyKey}
-                    ids={ids}
-                    fileInputRef={fileInputRef}
-                    folderInputRef={folderInputRef}
-                    copy={t}
-                    onTriggerUpload={triggerUpload}
-                    onFilesSelected={(files) => void handleUpload(files)}
-                  />
-                ) : null}
-              </div>
-            </div>
-          </section>
-
-          <GovernancePanel
-            locale={localeKey}
-            selectedBundle={selectedBundle}
-            intro={{ eyebrow: t.governanceTitle, title: t.governanceHeadline, body: t.governanceBody, align: 'compact' }}
-            copy={t}
-          />
-        </div>
-      </div>
-    </div>
-  );
+  return {
+    locale: localeKey,
+    copy,
+    ids,
+    viewModel,
+    adminMeta,
+    adminTabs,
+    fileInputRef,
+    folderInputRef,
+    adminTabId,
+    adminPanelId,
+    setAdminView,
+    handleAdminTabKeyDown,
+    setProjectName,
+    setProjectDescription,
+    setSelectedProjectId,
+    setSelectedItemId,
+    updateItemForm: (patch: Partial<BenchmarkOpsItemDraft>) => setItemForm((current) => ({ ...current, ...patch })),
+    updateRunConfig: (patch: Partial<BenchmarkOpsRunConfig>) => setRunConfig((current) => ({ ...current, ...patch })),
+    refreshProjects: () => void loadProjects(),
+    createProject: () => void handleCreateProject(),
+    uploadFiles: (files: File[]) => void handleUpload(files),
+    triggerUpload,
+    createItem: () => void handleCreateItem(),
+    runBenchmark: () => void handleRun(),
+    previewRun: (run: PlatformBenchmarkRun) => void handlePreview(run),
+  };
 }

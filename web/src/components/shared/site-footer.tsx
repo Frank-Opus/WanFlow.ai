@@ -28,7 +28,7 @@ export default function SiteFooter() {
             <Link href="/contact" className="mkt-button-primary mkt-button-compact">
               {copy.common.primaryCta}
             </Link>
-            <Link href="/proofbench" className="mkt-button-secondary mkt-button-compact">
+            <Link href="/dataflow/proofbench" className="mkt-button-secondary mkt-button-compact">
               {copy.common.workbenchCta}
             </Link>
           </div>

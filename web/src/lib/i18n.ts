@@ -7,9 +7,9 @@ export const copy = {
   zh: {
     header: {
       navHome: '首页',
-      navWorkbench: 'BenchmarkOps',
+      navWorkbench: 'WanFlow BenchmarkOps',
       homeBadge: '企业评测基础设施',
-      workbenchBadge: 'BenchmarkOps 企业工作台',
+      workbenchBadge: 'WanFlow BenchmarkOps 企业工作台',
       tagline: '企业评测工作台，覆盖导入、运行、回放与交付。',
       language: '语言',
       zh: '中文',
@@ -20,7 +20,7 @@ export const copy = {
       heroEyebrow: 'WanFlow.ai 核心模块',
       heroTitle: '让推理评测可阅读、可复现、可交付。',
       heroBody:
-        'BenchmarkOps 把单题演示升级成企业评测工作台：围绕 Project、SourceFile、ProblemItem、BenchmarkRun、Artifact 五个核心对象组织导入、运行、回看与交付。',
+        'WanFlow BenchmarkOps 把单题演示升级成企业评测工作台：围绕 Project、SourceFile、ProblemItem、BenchmarkRun、Artifact 五个核心对象组织导入、运行、回看与交付。',
       heroPrimary: '进入实时工作台',
       heroSecondary: '查看系统设计',
       spotlightTitle: '基准样例聚焦',
@@ -35,7 +35,7 @@ export const copy = {
       ],
       systemEyebrow: '系统架构',
       systemTitle: '不是截图演示，而是为数据公司准备的证据型评测界面。',
-      systemCta: '进入 BenchmarkOps',
+      systemCta: '进入 WanFlow BenchmarkOps',
       pillars: [
         {
           title: '先做题目契约',
@@ -43,7 +43,7 @@ export const copy = {
         },
         {
           title: '多次采样，不赌单次',
-          body: 'BenchmarkOps 默认关注多次运行后的波动、命中率与耗时，而不是一条幸运回答。',
+          body: 'WanFlow BenchmarkOps 默认关注多次运行后的波动、命中率与耗时，而不是一条幸运回答。',
         },
         {
           title: '判定逻辑可检查',
@@ -73,7 +73,7 @@ export const copy = {
       resultTeaser: '结果预览',
       footerBody:
         '面向数据公司、评测团队与客户交付场景的企业级评测站点。核心不是展示一个分数，而是把源文件、题目、运行、答案与产物组织成可检查的证据链。',
-      footerPrimary: '主模块：BenchmarkOps 企业工作台',
+      footerPrimary: '主模块：WanFlow BenchmarkOps 企业工作台',
       footerSecondary: '统一执行链：Next.js + Route Handlers + Python CLI + Artifact Export',
       productStatMeta: {
         schema_fields: { label: '字段契约', note: '单题统一结构', value: '8' },
@@ -205,9 +205,9 @@ export const copy = {
   en: {
     header: {
       navHome: 'Home',
-      navWorkbench: 'BenchmarkOps',
+      navWorkbench: 'WanFlow BenchmarkOps',
       homeBadge: 'Enterprise evaluation infrastructure',
-      workbenchBadge: 'BenchmarkOps enterprise workbench',
+      workbenchBadge: 'WanFlow BenchmarkOps enterprise workbench',
       tagline: 'Enterprise evaluation workspace for intake, execution, replay, and delivery.',
       language: 'Language',
       zh: '中文',
@@ -218,7 +218,7 @@ export const copy = {
       heroEyebrow: 'WanFlow.ai flagship module',
       heroTitle: 'Readable, replayable, client-ready reasoning evaluation.',
       heroBody:
-        'BenchmarkOps upgrades a one-off evaluation flow into an enterprise workspace, organized around Project, SourceFile, ProblemItem, BenchmarkRun, and Artifact.',
+        'WanFlow BenchmarkOps upgrades a one-off evaluation flow into an enterprise workspace, organized around Project, SourceFile, ProblemItem, BenchmarkRun, and Artifact.',
       heroPrimary: 'Open live workbench',
       heroSecondary: 'Review system design',
       spotlightTitle: 'Benchmark spotlight',
@@ -233,7 +233,7 @@ export const copy = {
       ],
       systemEyebrow: 'System architecture',
       systemTitle: 'Built for data companies that need benchmark evidence, not screenshot theatre.',
-      systemCta: 'Enter BenchmarkOps',
+      systemCta: 'Enter WanFlow BenchmarkOps',
       pillars: [
         {
           title: 'Contract-first dataset intake',
@@ -241,7 +241,7 @@ export const copy = {
         },
         {
           title: 'Repeated model sweeps',
-          body: 'BenchmarkOps measures run-to-run variance, accuracy, and latency instead of trusting a single answer.',
+          body: 'WanFlow BenchmarkOps measures run-to-run variance, accuracy, and latency instead of trusting a single answer.',
         },
         {
           title: 'Inspectable verdict logic',
@@ -271,7 +271,7 @@ export const copy = {
       resultTeaser: 'Result teaser',
       footerBody:
         'An enterprise evaluation site for data companies, benchmark operators, and client delivery teams. The product is built to organize sources, items, runs, answers, and artifacts into an inspectable evidence chain.',
-      footerPrimary: 'Primary module: BenchmarkOps enterprise workbench',
+      footerPrimary: 'Primary module: WanFlow BenchmarkOps enterprise workbench',
       footerSecondary: 'Unified execution chain: Next.js + Route Handlers + Python CLI + artifact export',
       productStatMeta: {
         schema_fields: { label: 'Schema fields', note: 'single canonical item contract', value: '8' },

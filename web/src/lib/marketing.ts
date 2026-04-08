@@ -36,8 +36,8 @@ const marketingCopyBase = {
       proofLabel: '可交付的 AI 运营系统',
       proofNote: '从数据标注到模型运营，不止讲方法，更交付执行链。',
       finalPrimary: '发起业务沟通',
-      finalSecondary: '查看 BenchmarkOps',
-      workbenchNote: '现有内部平台 BenchmarkOps 可作为运营与交付证明层。',
+      finalSecondary: '查看 WanFlow BenchmarkOps',
+      workbenchNote: '现有内部平台 WanFlow BenchmarkOps 可作为运营与交付证明层。',
     },
     footer: {
       description:
@@ -57,7 +57,7 @@ const marketingCopyBase = {
         },
       ],
       copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
-      legal: 'BenchmarkOps 作为内部运营平台持续提供能力证明。',
+      legal: 'WanFlow BenchmarkOps 作为内部运营平台持续提供能力证明。',
     },
     home: {
       hero: {
@@ -135,7 +135,7 @@ const marketingCopyBase = {
       proofLayer: {
         eyebrow: '证明层',
         title: '我们更像一支 AI 运营团队，而不是只交一份方案。',
-        body: 'BenchmarkOps 不作为首页主角出现，而是作为中段证明层，说明 WanFlow 如何把内部执行方法真正沉淀为可展示、可复盘、可验证的运营系统。',
+        body: 'WanFlow BenchmarkOps 不作为首页主角出现，而是作为中段证明层，说明 WanFlow 如何把内部执行方法真正沉淀为可展示、可复盘、可验证的运营系统。',
         items: [
           {
             title: '数据与流程一体化看问题',
@@ -147,7 +147,7 @@ const marketingCopyBase = {
           },
           {
             title: '把内部平台当成证明层',
-            body: 'WanFlow 现有内部平台 BenchmarkOps 展示了我们对流程、产物与评测闭环的真实理解。',
+            body: 'WanFlow BenchmarkOps 展示了我们对流程编排、交付产物与评测闭环的真实理解。',
           },
         ],
       },
@@ -471,7 +471,7 @@ const marketingCopyBase = {
       skip: 'Skip to main content',
       primaryCta: 'Book an Ops Review',
       secondaryCta: 'Explore Solutions',
-      workbenchCta: 'Open BenchmarkOps',
+      workbenchCta: 'Open WanFlow BenchmarkOps',
       language: 'Language',
       zh: '中文',
       en: 'EN',
@@ -479,8 +479,8 @@ const marketingCopyBase = {
       proofLabel: 'Enterprise-ready AI delivery',
       proofNote: 'From data labeling to model operations, WanFlow builds the execution chain instead of stopping at strategy.',
       finalPrimary: 'Start the conversation',
-      finalSecondary: 'See BenchmarkOps',
-      workbenchNote: 'The internal BenchmarkOps platform remains available as a proof layer for operations and delivery.',
+      finalSecondary: 'See WanFlow BenchmarkOps',
+      workbenchNote: 'WanFlow BenchmarkOps remains available as a proof layer for operations and delivery.',
     },
     footer: {
       description:
@@ -500,7 +500,7 @@ const marketingCopyBase = {
         },
       ],
       copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
-      legal: 'BenchmarkOps continues to serve as the internal proof layer behind delivery.',
+      legal: 'WanFlow BenchmarkOps continues to serve as the internal proof layer behind delivery.',
     },
     home: {
       hero: {
@@ -577,7 +577,7 @@ const marketingCopyBase = {
       proofLayer: {
         eyebrow: 'Proof layer',
         title: 'We work more like an AI operations team than a presentation-only consultancy.',
-        body: 'BenchmarkOps appears as supporting evidence rather than the homepage lead, showing how WanFlow turns internal operating methods into an inspectable delivery system.',
+        body: 'WanFlow BenchmarkOps appears as supporting evidence rather than the homepage lead, showing how WanFlow turns internal operating methods into an inspectable delivery system.',
         items: [
           {
             title: 'Data and process in one frame',
@@ -589,7 +589,7 @@ const marketingCopyBase = {
           },
           {
             title: 'Internal platform as proof layer',
-            body: 'BenchmarkOps reflects WanFlow’s real understanding of process, artifacts, and benchmark evidence.',
+            body: 'WanFlow BenchmarkOps reflects WanFlow’s real understanding of process, artifacts, and benchmark evidence.',
           },
         ],
       },

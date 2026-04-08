@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { deriveRunNote, deriveRunStatus } from './proofbench';
+import { deriveRunNote, deriveRunStatus } from './benchmarkops';
 
 test('deriveRunStatus maps unauthorized model calls to error instead of incorrect', () => {
   const error = '401 Client Error: Unauthorized for url: http://35.220.164.252:3888/v1/chat/completions';
