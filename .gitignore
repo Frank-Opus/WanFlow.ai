@@ -11,6 +11,8 @@ web/.next/
 web/.next-dev/
 web/.vercel/
 web/*.tsbuildinfo
+web/playwright-report/
+web/test-results/
 
 # Local environment
 .env

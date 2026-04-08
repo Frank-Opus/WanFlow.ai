@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading, WorkbenchProofCard } from '@/components/marketing/primitives';
+import MotionReveal from '@/components/shared/motion-reveal';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingHomePage() {
@@ -28,42 +29,44 @@ export default function MarketingHomePage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <PageHero
-          eyebrow={copy.home.hero.eyebrow}
-          title={copy.home.hero.title}
-          body={copy.home.hero.statement}
-          primary={copy.home.hero.primary}
-          secondary={copy.home.hero.secondary}
-          aside={
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <p className="mkt-kicker">{labels.brief}</p>
-                <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{copy.home.hero.body}</p>
+        <MotionReveal delay={0}>
+          <PageHero
+            eyebrow={copy.home.hero.eyebrow}
+            title={copy.home.hero.title}
+            body={copy.home.hero.statement}
+            primary={copy.home.hero.primary}
+            secondary={copy.home.hero.secondary}
+            aside={
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <p className="mkt-kicker">{labels.brief}</p>
+                  <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{copy.home.hero.body}</p>
+                </div>
+                <div className="mkt-stagger-grid grid gap-3 sm:grid-cols-3 xl:grid-cols-2">
+                  {copy.home.supportSignals.map((metric, index) => (
+                    <article
+                      key={metric.label}
+                      className={index === copy.home.supportSignals.length - 1 ? 'mkt-card px-5 py-5 xl:col-span-2' : 'mkt-card px-5 py-5'}
+                    >
+                      <p className="mkt-metric-value">{metric.value}</p>
+                      <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{metric.label}</p>
+                      <p className="mkt-copy mt-2 text-sm">{metric.detail}</p>
+                    </article>
+                  ))}
+                </div>
               </div>
-              <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-2">
-                {copy.home.supportSignals.map((metric, index) => (
-                  <article
-                    key={metric.label}
-                    className={index === copy.home.supportSignals.length - 1 ? 'mkt-card px-5 py-5 xl:col-span-2' : 'mkt-card px-5 py-5'}
-                  >
-                    <p className="mkt-metric-value">{metric.value}</p>
-                    <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{metric.label}</p>
-                    <p className="mkt-copy mt-2 text-sm">{metric.detail}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          }
-        />
+            }
+          />
+        </MotionReveal>
 
-        <section className="mkt-panel mkt-editorial-band px-6 py-8 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={60} className="mkt-panel mkt-editorial-band px-6 py-8 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <SectionHeading
               eyebrow={copy.home.platformView.eyebrow}
               title={copy.home.platformView.title}
               body={copy.home.platformView.body}
             />
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="mkt-stagger-grid grid gap-3 md:grid-cols-2">
               {copy.home.platformView.bullets.map((bullet, index) => (
                 <article
                   key={bullet}
@@ -75,15 +78,15 @@ export default function MarketingHomePage() {
               ))}
             </div>
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
+        <MotionReveal as="section" delay={90} className="space-y-6">
           <SectionHeading
             eyebrow={copy.home.capabilityModules.eyebrow}
             title={copy.home.capabilityModules.title}
             body={copy.home.capabilityModules.body}
           />
-          <div className="grid gap-4 lg:grid-cols-12">
+          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
             {copy.home.capabilityModules.items.map((item, index) => (
               <article
                 key={item.title}
@@ -105,16 +108,16 @@ export default function MarketingHomePage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={110} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <SectionHeading
               eyebrow={copy.home.deliveryFramework.eyebrow}
               title={copy.home.deliveryFramework.title}
               body={copy.home.deliveryFramework.body}
             />
-            <div className="space-y-3">
+            <div className="mkt-stagger-grid space-y-3">
               {copy.home.deliveryFramework.steps.map((step) => (
                 <article key={step.step} className="mkt-flow-step">
                   <div className="mkt-flow-marker">{step.step}</div>
@@ -126,9 +129,9 @@ export default function MarketingHomePage() {
               ))}
             </div>
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
+        <MotionReveal as="section" delay={130} className="space-y-6">
           <SectionHeading
             eyebrow={copy.home.proofLayer.eyebrow}
             title={copy.home.proofLayer.title}
@@ -141,7 +144,7 @@ export default function MarketingHomePage() {
               proofNote={copy.common.proofNote}
               workbenchCta={copy.common.workbenchCta}
             />
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2">
               {copy.home.proofLayer.items.map((item, index) => (
                 <article key={item.title} className={index === 0 ? 'mkt-card px-5 py-5 md:col-span-2' : 'mkt-card px-5 py-5'}>
                   <span className="mkt-card-index">{labels.flow}</span>
@@ -151,9 +154,9 @@ export default function MarketingHomePage() {
               ))}
             </div>
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
+        <MotionReveal as="section" delay={150} className="space-y-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeading
               eyebrow={copy.home.caseTeaser.eyebrow}
@@ -163,7 +166,7 @@ export default function MarketingHomePage() {
               {casesLabel}
             </Link>
           </div>
-          <div className="grid gap-4 lg:grid-cols-12">
+          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
             {copy.home.caseTeaser.items.map((item, index) => (
               <article
                 key={item.title}
@@ -188,15 +191,17 @@ export default function MarketingHomePage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <FinalCtaBand
-          eyebrow={copy.home.finalCta.eyebrow}
-          title={copy.home.finalCta.title}
-          body={copy.home.finalCta.body}
-          primary={{ href: '/contact', label: copy.common.finalPrimary }}
-          secondary={{ href: '/proofbench', label: copy.common.finalSecondary }}
-        />
+        <MotionReveal delay={170}>
+          <FinalCtaBand
+            eyebrow={copy.home.finalCta.eyebrow}
+            title={copy.home.finalCta.title}
+            body={copy.home.finalCta.body}
+            primary={{ href: '/contact', label: copy.common.finalPrimary }}
+            secondary={{ href: '/proofbench', label: copy.common.finalSecondary }}
+          />
+        </MotionReveal>
       </div>
     </main>
   );

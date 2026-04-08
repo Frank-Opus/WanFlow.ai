@@ -3,6 +3,7 @@
 import ContactForm from '@/components/marketing/contact-form';
 import { useLocale } from '@/components/shared/locale-provider';
 import { PageHero } from '@/components/marketing/primitives';
+import MotionReveal from '@/components/shared/motion-reveal';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingContactPage() {
@@ -22,29 +23,35 @@ export default function MarketingContactPage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <PageHero
-          eyebrow={copy.contact.hero.eyebrow}
-          title={copy.contact.hero.title}
-          body={copy.contact.hero.body}
-          primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/solutions', label: navLabel('/solutions') }}
-          aside={
-            <div className="space-y-4">
-              <p className="mkt-kicker">{labels.reach}</p>
-              <h3 className="text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.contact.side.responseTitle}</h3>
-              <div className="space-y-3">
-                {copy.contact.side.contactItems.map((item) => (
-                  <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
-                    <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
-                  </div>
-                ))}
+        <MotionReveal delay={0}>
+          <PageHero
+            eyebrow={copy.contact.hero.eyebrow}
+            title={copy.contact.hero.title}
+            body={copy.contact.hero.body}
+            primary={{ href: '/contact', label: copy.common.primaryCta }}
+            secondary={{ href: '/solutions', label: navLabel('/solutions') }}
+            aside={
+              <div className="space-y-4">
+                <p className="mkt-kicker">{labels.reach}</p>
+                <h3 className="text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.contact.side.responseTitle}</h3>
+                <div className="space-y-3">
+                  {copy.contact.side.contactItems.map((item) => (
+                    <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
+                      <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          }
-        />
+            }
+          />
+        </MotionReveal>
 
-        <section className="grid gap-5 xl:grid-cols-[minmax(0,0.98fr)_minmax(22rem,1.02fr)] xl:items-start xl:gap-7">
-          <div className="grid gap-5 xl:grid-cols-2">
+        <MotionReveal
+          as="section"
+          delay={80}
+          className="grid gap-5 xl:grid-cols-[minmax(0,0.98fr)_minmax(22rem,1.02fr)] xl:items-start xl:gap-7"
+        >
+          <div className="mkt-stagger-grid grid gap-5 xl:grid-cols-2">
             <section className="mkt-card px-6 py-6">
               <p className="mkt-kicker">{copy.contact.side.title}</p>
               <div className="mt-4 space-y-3">
@@ -86,7 +93,7 @@ export default function MarketingContactPage() {
           <div className="xl:sticky xl:top-28">
             <ContactForm />
           </div>
-        </section>
+        </MotionReveal>
       </div>
     </main>
   );

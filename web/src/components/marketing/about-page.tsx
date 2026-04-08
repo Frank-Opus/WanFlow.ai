@@ -2,6 +2,7 @@
 
 import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
+import MotionReveal from '@/components/shared/motion-reveal';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingAboutPage() {
@@ -11,36 +12,38 @@ export default function MarketingAboutPage() {
   const finalEyebrow = locale === 'zh' ? '与 WanFlow 沟通' : 'Talk to WanFlow';
   const labels = locale === 'zh'
     ? {
-      trust: '信任理由',
-    }
+        trust: '信任理由',
+      }
     : {
-      trust: 'Trust signals',
-    };
+        trust: 'Trust signals',
+      };
 
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <PageHero
-          eyebrow={copy.about.hero.eyebrow}
-          title={copy.about.hero.title}
-          body={copy.about.hero.body}
-          primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: navLabel('/cases') }}
-          aside={
-            <div className="space-y-4">
-              <p className="mkt-kicker">{labels.trust}</p>
-              <div className="space-y-3">
-                {copy.about.trust.items.slice(0, 2).map((item) => (
-                  <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
-                    <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
-                  </div>
-                ))}
+        <MotionReveal delay={0}>
+          <PageHero
+            eyebrow={copy.about.hero.eyebrow}
+            title={copy.about.hero.title}
+            body={copy.about.hero.body}
+            primary={{ href: '/contact', label: copy.common.primaryCta }}
+            secondary={{ href: '/cases', label: navLabel('/cases') }}
+            aside={
+              <div className="space-y-4">
+                <p className="mkt-kicker">{labels.trust}</p>
+                <div className="space-y-3">
+                  {copy.about.trust.items.slice(0, 2).map((item) => (
+                    <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
+                      <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          }
-        />
+            }
+          />
+        </MotionReveal>
 
-        <section className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={70} className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
             <SectionHeading eyebrow={copy.about.positioning.eyebrow} title={copy.about.positioning.title} />
             <div className="space-y-4">
@@ -49,11 +52,11 @@ export default function MarketingAboutPage() {
               ))}
             </div>
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
+        <MotionReveal as="section" delay={95} className="space-y-6">
           <SectionHeading eyebrow={copy.about.principles.eyebrow} title={copy.about.principles.title} />
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-3">
             {copy.about.principles.items.map((item, index) => (
               <article key={item.title} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
                 <h3 className="text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
@@ -61,11 +64,11 @@ export default function MarketingAboutPage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={120} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <SectionHeading eyebrow={copy.about.collaborationModel.eyebrow} title={copy.about.collaborationModel.title} />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {copy.about.collaborationModel.items.map((item) => (
               <article key={item.title} className="mkt-card px-5 py-5">
                 <div className="mkt-flow-marker">{item.title.slice(0, 1)}</div>
@@ -74,11 +77,11 @@ export default function MarketingAboutPage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={145} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <SectionHeading eyebrow={copy.about.trust.eyebrow} title={copy.about.trust.title} />
-          <div className="mt-6 grid gap-3 lg:grid-cols-12">
+          <div className="mkt-stagger-grid mt-6 grid gap-3 lg:grid-cols-12">
             {copy.about.trust.items.map((item, index) => (
               <article
                 key={item}
@@ -94,15 +97,17 @@ export default function MarketingAboutPage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <FinalCtaBand
-          eyebrow={finalEyebrow}
-          title={copy.about.finalCta.title}
-          body={copy.about.finalCta.body}
-          primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: navLabel('/cases') }}
-        />
+        <MotionReveal delay={170}>
+          <FinalCtaBand
+            eyebrow={finalEyebrow}
+            title={copy.about.finalCta.title}
+            body={copy.about.finalCta.body}
+            primary={{ href: '/contact', label: copy.common.primaryCta }}
+            secondary={{ href: '/cases', label: navLabel('/cases') }}
+          />
+        </MotionReveal>
       </div>
     </main>
   );

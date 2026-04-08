@@ -25,12 +25,12 @@ export function PageHero({
     <section className="mkt-panel mkt-panel-strong mkt-grid-lines overflow-hidden px-6 py-9 sm:px-8 lg:px-12 lg:py-12 xl:px-14 xl:py-14">
       <div className="relative z-[1] grid gap-8 lg:grid-cols-[minmax(0,1.32fr)_minmax(19rem,0.68fr)] lg:items-end lg:gap-10 xl:grid-cols-[minmax(0,1.4fr)_minmax(22rem,0.6fr)] xl:gap-14">
         <div className="mkt-hero-copy max-w-[58rem] space-y-7">
-          <p className="mkt-kicker">{eyebrow}</p>
-          <div className="space-y-5">
+          <p className="mkt-kicker mkt-hero-stage mkt-hero-stage-1">{eyebrow}</p>
+          <div className="mkt-hero-stage mkt-hero-stage-2 space-y-5">
             <h1 className="mkt-display max-w-[11.5ch] text-balance xl:max-w-[13ch] 2xl:max-w-[13.5ch]">{title}</h1>
             <p className="mkt-copy max-w-2xl text-base sm:text-[1.08rem] xl:max-w-[48rem]">{body}</p>
           </div>
-          <div className="mkt-hero-actions flex flex-wrap gap-3">
+          <div className="mkt-hero-actions mkt-hero-stage mkt-hero-stage-3 flex flex-wrap gap-3">
             <Link href={primary.href} className="mkt-button-primary">
               {primary.label}
             </Link>
@@ -42,7 +42,7 @@ export function PageHero({
           </div>
         </div>
         {aside ? (
-          <aside className="mkt-rail-card mkt-hero-rail w-full self-end p-5 sm:p-6 xl:max-w-[24rem] xl:p-7">
+          <aside className="mkt-rail-card mkt-hero-rail mkt-hero-stage mkt-hero-stage-4 w-full self-end p-5 sm:p-6 xl:max-w-[24rem] xl:p-7">
             <div className="space-y-4">{aside}</div>
           </aside>
         ) : null}

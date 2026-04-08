@@ -2,6 +2,7 @@
 
 import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
+import MotionReveal from '@/components/shared/motion-reveal';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingSolutionsPage() {
@@ -39,33 +40,35 @@ export default function MarketingSolutionsPage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <PageHero
-          eyebrow={copy.solutions.problemFrame.eyebrow}
-          title={copy.solutions.problemFrame.title}
-          body={copy.solutions.problemFrame.body}
-          primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: navLabel('/cases') }}
-          aside={
-            <div className="space-y-4">
-              <p className="mkt-kicker">{labels.problem}</p>
-              <div className="space-y-3">
-                {copy.solutions.triggers.items.slice(0, 3).map((item) => (
-                  <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
-                    <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
-                  </div>
-                ))}
+        <MotionReveal delay={0}>
+          <PageHero
+            eyebrow={copy.solutions.problemFrame.eyebrow}
+            title={copy.solutions.problemFrame.title}
+            body={copy.solutions.problemFrame.body}
+            primary={{ href: '/contact', label: copy.common.primaryCta }}
+            secondary={{ href: '/cases', label: navLabel('/cases') }}
+            aside={
+              <div className="space-y-4">
+                <p className="mkt-kicker">{labels.problem}</p>
+                <div className="space-y-3">
+                  {copy.solutions.triggers.items.slice(0, 3).map((item) => (
+                    <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
+                      <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          }
-        />
+            }
+          />
+        </MotionReveal>
 
-        <section className="space-y-6">
+        <MotionReveal as="section" delay={70} className="space-y-6">
           <SectionHeading
             eyebrow={labels.architectureEyebrow}
             title={labels.architectureTitle}
             body={labels.architectureBody}
           />
-          <div className="grid gap-4 lg:grid-cols-12">
+          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
             {copy.solutions.architecture.map((item, index) => (
               <article
                 key={item.title}
@@ -82,11 +85,11 @@ export default function MarketingSolutionsPage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
+        <MotionReveal as="section" delay={95} className="space-y-6">
           <SectionHeading eyebrow={labels.modulesEyebrow} title={labels.modulesTitle} body={labels.modulesBody} />
-          <div className="grid gap-4 lg:grid-cols-12">
+          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
             {copy.solutions.modules.map((module, index) => (
               <article
                 key={module.title}
@@ -127,12 +130,12 @@ export default function MarketingSolutionsPage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={120} className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
             <SectionHeading eyebrow={copy.solutions.triggers.eyebrow} title={copy.solutions.triggers.title} />
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="mkt-stagger-grid grid gap-3 sm:grid-cols-2">
               {copy.solutions.triggers.items.map((item, index) => (
                 <article key={item} className={index === 0 ? 'mkt-split-callout px-5 py-5 sm:col-span-2' : 'mkt-rail-card px-5 py-5'}>
                   <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
@@ -140,14 +143,14 @@ export default function MarketingSolutionsPage() {
               ))}
             </div>
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
+        <MotionReveal as="section" delay={145} className="space-y-6">
           <SectionHeading
             eyebrow={copy.solutions.delivery.eyebrow}
             title={copy.solutions.delivery.title}
           />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {copy.solutions.delivery.steps.map((step, index) => (
               <article key={step.step} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
                 <div className="mkt-flow-marker">{step.step}</div>
@@ -156,15 +159,17 @@ export default function MarketingSolutionsPage() {
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <FinalCtaBand
-          eyebrow={labels.contact}
-          title={copy.solutions.finalCta.title}
-          body={copy.solutions.finalCta.body}
-          primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: navLabel('/cases') }}
-        />
+        <MotionReveal delay={170}>
+          <FinalCtaBand
+            eyebrow={labels.contact}
+            title={copy.solutions.finalCta.title}
+            body={copy.solutions.finalCta.body}
+            primary={{ href: '/contact', label: copy.common.primaryCta }}
+            secondary={{ href: '/cases', label: navLabel('/cases') }}
+          />
+        </MotionReveal>
       </div>
     </main>
   );
