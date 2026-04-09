@@ -20,8 +20,8 @@ web/test-results/
 *.local
 
 # Runtime state and logs
-platform-data/
-runs/
+/platform-data/
+/runs/
 *.log
 
 # OS / editor
