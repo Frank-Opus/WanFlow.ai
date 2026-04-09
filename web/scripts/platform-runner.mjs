@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(scriptDir, '..', '..');
-const platformDir = path.join(rootDir, 'platform-data');
+const configuredPlatformDir = (process.env.WANFLOW_PLATFORM_DIR || '').trim();
+const platformDir = configuredPlatformDir ? path.resolve(configuredPlatformDir) : path.join(rootDir, 'platform-data');
 const dbPath = path.join(platformDir, 'db.json');
 const dbLockPath = path.join(platformDir, 'db.lock');
 const defaultPythonBin = process.env.WANFLOW_PYTHON_BIN || path.join(process.env.HOME || '', 'miniconda3', 'bin', 'python3');

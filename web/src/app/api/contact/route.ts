@@ -2,6 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { NextResponse } from 'next/server';
+import { PLATFORM_DIR } from '@/lib/platform-store';
 
 type ContactPayload = {
   name?: string;
@@ -41,7 +42,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'Missing or invalid required fields.' }, { status: 400 });
   }
 
-  const leadsDir = path.resolve(process.cwd(), '..', 'platform-data', 'marketing-leads');
+  const configuredLeadsDir = process.env.WANFLOW_MARKETING_LEADS_DIR?.trim();
+  const leadsDir = configuredLeadsDir
+    ? path.resolve(configuredLeadsDir)
+    : path.join(PLATFORM_DIR, 'marketing-leads');
   await mkdir(leadsDir, { recursive: true });
   await writeFile(path.join(leadsDir, `${record.createdAt.replace(/[:.]/g, '-')}-${record.id}.json`), JSON.stringify(record, null, 2));
 

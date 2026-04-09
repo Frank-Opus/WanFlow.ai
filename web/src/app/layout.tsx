@@ -1,21 +1,21 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Mono, IBM_Plex_Sans, Sora } from 'next/font/google';
+import { IBM_Plex_Mono, Noto_Sans_SC, Noto_Serif_SC } from 'next/font/google';
 import { LocaleProvider } from '@/components/shared/locale-provider';
 import MarketingHeadSync from '@/components/shared/marketing-head-sync';
 import SiteFooter from '@/components/shared/site-footer';
 import SiteHeader from '@/components/shared/site-header';
 import './globals.css';
 
-const sora = Sora({
-  subsets: ['latin'],
+const notoSerifSc = Noto_Serif_SC({
   variable: '--font-display',
   weight: ['400', '500', '600', '700', '800'],
+  preload: false,
 });
 
-const plexSans = IBM_Plex_Sans({
-  subsets: ['latin'],
+const notoSansSc = Noto_Sans_SC({
   variable: '--font-body',
   weight: ['400', '500', '600', '700'],
+  preload: false,
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${sora.variable} ${plexSans.variable} ${plexMono.variable} min-h-screen antialiased`}>
+      <body className={`${notoSerifSc.variable} ${notoSansSc.variable} ${plexMono.variable} min-h-screen antialiased`}>
         <LocaleProvider>
           <MarketingHeadSync />
           <div className="flex min-h-screen flex-col">

@@ -13,7 +13,11 @@ import type {
 } from '@/lib/platform-types';
 
 const ROOT_DIR = path.resolve(process.cwd(), '..');
-export const PLATFORM_DIR = path.join(ROOT_DIR, 'platform-data');
+const configuredPlatformDir = process.env.WANFLOW_PLATFORM_DIR?.trim();
+
+export const PLATFORM_DIR = configuredPlatformDir
+  ? path.resolve(configuredPlatformDir)
+  : path.join(ROOT_DIR, 'platform-data');
 export const PLATFORM_DB_PATH = path.join(PLATFORM_DIR, 'db.json');
 export const PLATFORM_DB_LOCK_PATH = path.join(PLATFORM_DIR, 'db.lock');
 export const PLATFORM_UPLOADS_DIR = path.join(PLATFORM_DIR, 'uploads');
