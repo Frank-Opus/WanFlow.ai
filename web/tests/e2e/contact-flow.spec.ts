@@ -3,9 +3,27 @@ import path from 'node:path';
 import { expect, test } from '@playwright/test';
 
 const leadsDir = path.join(process.cwd(), '.playwright-runtime', 'marketing-leads');
+const canonicalEmail = 'wanflow@163.com';
+const canonicalWechat = 'FrankXu0303';
 
 test.describe('contact flow end-to-end', () => {
   test.skip(({ isMobile }) => isMobile);
+
+  test('shows canonical public contact details in zh/en and homepage JSON-LD', async ({ page }) => {
+    await page.goto('/contact');
+    await page.waitForLoadState('networkidle');
+
+    await expect(page.getByText(`邮箱：${canonicalEmail}`).first()).toBeVisible();
+    await expect(page.getByText(`WeChat：${canonicalWechat}`).first()).toBeVisible();
+
+    await page.getByRole('button', { name: 'EN' }).click();
+    await expect(page.getByText(`Email: ${canonicalEmail}`).first()).toBeVisible();
+    await expect(page.getByText(`WeChat: ${canonicalWechat}`).first()).toBeVisible();
+
+    await page.goto('/');
+    const schemaText = await page.locator('script[type="application/ld+json"]').first().textContent();
+    expect(schemaText).toContain(`\"email\":\"${canonicalEmail}\"`);
+  });
 
   test('submits the contact form into isolated lead storage', async ({ page }) => {
     await fs.rm(leadsDir, { recursive: true, force: true });

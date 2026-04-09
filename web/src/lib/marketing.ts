@@ -1,8 +1,8 @@
 import type { Locale } from '@/lib/i18n';
 
 export const siteContact = {
-  email: 'business@wanflow.ai',
-  wechat: 'WanFlow-AI',
+  email: 'wanflow@163.com',
+  wechat: 'FrankXu0303',
   responseWindow: '24 hours',
 } as const;
 
@@ -53,7 +53,7 @@ const marketingCopyBase = {
         },
         {
           title: '联络方式',
-          items: ['business@wanflow.ai', 'WeChat: WanFlow-AI', '24 小时内响应工作日咨询'],
+          items: ['wanflow@163.com', 'WeChat: FrankXu0303', '24 小时内响应工作日咨询'],
         },
       ],
       copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
@@ -414,7 +414,7 @@ const marketingCopyBase = {
         submit: '提交咨询',
         submitting: '提交中...',
         success: '已收到你的信息。我们会在工作日尽快通过邮箱联系你。',
-        error: '提交失败，请稍后重试，或直接发送邮件到 business@wanflow.ai。',
+        error: '提交失败，请稍后重试，或直接发送邮件到 wanflow@163.com。',
         privacy: '我们只将这些信息用于业务沟通，不会用于无关营销。',
         validation: {
           name: '请填写姓名。',
@@ -433,8 +433,8 @@ const marketingCopyBase = {
         responseTitle: '沟通方式',
         responseBody: '你可以通过表单发起，也可以直接邮件联系。对于方向不明确的情况，我们也可以先做一次问题拆解。',
         contactItems: [
-          '邮箱：business@wanflow.ai',
-          'WeChat：WanFlow-AI',
+          '邮箱：wanflow@163.com',
+          'WeChat：FrankXu0303',
           '响应：工作日 24 小时内',
         ],
       },
@@ -496,7 +496,7 @@ const marketingCopyBase = {
         },
         {
           title: 'Reach us',
-          items: ['business@wanflow.ai', 'WeChat: WanFlow-AI', 'Replies within one business day'],
+          items: ['wanflow@163.com', 'WeChat: FrankXu0303', 'Replies within one business day'],
         },
       ],
       copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
@@ -856,7 +856,7 @@ const marketingCopyBase = {
         submit: 'Send inquiry',
         submitting: 'Sending...',
         success: 'Your message has been received. We will follow up by email on the next business day.',
-        error: 'Submission failed. Please try again or email business@wanflow.ai directly.',
+        error: 'Submission failed. Please try again or email wanflow@163.com directly.',
         privacy: 'We only use this information for business follow-up.',
         validation: {
           name: 'Please enter your name.',
@@ -875,8 +875,8 @@ const marketingCopyBase = {
         responseTitle: 'Ways to reach us',
         responseBody: 'Use the form or email us directly. If the problem is still fuzzy, we can start with a structured problem-framing conversation.',
         contactItems: [
-          'Email: business@wanflow.ai',
-          'WeChat: WanFlow-AI',
+          'Email: wanflow@163.com',
+          'WeChat: FrankXu0303',
           'Response: within one business day',
         ],
       },
