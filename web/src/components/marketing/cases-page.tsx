@@ -50,7 +50,7 @@ export default function MarketingCasesPage() {
               <div className="space-y-4">
                 <p className="mkt-kicker">{labels.featured}</p>
                 <span className="mkt-chip">{featured.sector}</span>
-                <h3 className="text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{featured.title}</h3>
+                <h3 className="zh-card-title text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{featured.title}</h3>
                 <p className="mkt-copy text-sm">{featured.outcome}</p>
               </div>
             }
@@ -98,7 +98,7 @@ export default function MarketingCasesPage() {
                 ].filter(Boolean).join(' ')}
               >
                 <span className="mkt-chip">{item.sector}</span>
-                <h3 className="mt-4 text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                <h3 className="zh-card-title mt-4 text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.context}:</strong> {item.sector}</p>
                 <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
                 <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.action}:</strong> {item.action}</p>
@@ -114,7 +114,7 @@ export default function MarketingCasesPage() {
             {copy.cases.proof.items.map((item, index) => (
               <article key={item.title} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
                 <span className="mkt-card-index">{labels.proof}</span>
-                <h3 className="mt-4 text-[1.18rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
+                <h3 className="zh-card-title mt-4 text-[1.18rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3">{item.body}</p>
               </article>
             ))}

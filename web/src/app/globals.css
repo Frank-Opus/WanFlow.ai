@@ -109,6 +109,12 @@ textarea {
     serif;
 }
 
+html[lang='zh-CN'] .display-face {
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+}
+
 .mono-face {
   font-family: 'Fira Code', 'SFMono-Regular', 'SF Mono', Menlo, Consolas, monospace;
 }
@@ -238,6 +244,32 @@ textarea {
   width: 1.5rem;
   height: 1px;
   background: rgba(25, 40, 72, 0.2);
+}
+
+html[lang='zh-CN'] .eyebrow,
+html[lang='zh-CN'] .section-kicker {
+  letter-spacing: 0.14em;
+}
+
+html[lang='zh-CN'] .btn-primary,
+html[lang='zh-CN'] .btn-secondary {
+  letter-spacing: 0.08em;
+}
+
+.zh-card-title {
+  text-wrap: balance;
+}
+
+html[lang='zh-CN'] .zh-card-title {
+  font-family:
+    var(--font-display),
+    'Songti SC',
+    'STSong',
+    'Noto Serif CJK SC',
+    serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.016em;
 }
 
 .shell-stripe {
@@ -695,6 +727,10 @@ textarea {
   color: var(--mk-brand-3);
 }
 
+html[lang='zh-CN'] .mkt-kicker {
+  letter-spacing: 0.14em;
+}
+
 .mkt-kicker::before {
   content: '';
   width: 1.6rem;
@@ -712,6 +748,12 @@ textarea {
   text-wrap: balance;
 }
 
+html[lang='zh-CN'] .mkt-display {
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
 .mkt-title {
   font-family: var(--font-display), 'Segoe UI', sans-serif;
   font-size: clamp(2rem, 4vw, 3.6rem);
@@ -720,9 +762,19 @@ textarea {
   color: var(--mk-text-0);
 }
 
+html[lang='zh-CN'] .mkt-title {
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
 .mkt-copy {
   color: var(--mk-text-1);
   line-height: 1.78;
+}
+
+html[lang='zh-CN'] .mkt-copy {
+  letter-spacing: 0.01em;
 }
 
 .mkt-button-primary,
@@ -742,6 +794,13 @@ textarea {
     background 180ms var(--mk-ease-soft),
     color 180ms var(--mk-ease-soft),
     box-shadow 180ms var(--mk-ease-soft);
+}
+
+html[lang='zh-CN'] .mkt-button-primary,
+html[lang='zh-CN'] .mkt-button-secondary,
+html[lang='zh-CN'] .mkt-menu-button,
+html[lang='zh-CN'] .mkt-lang-button {
+  letter-spacing: 0.06em;
 }
 
 .mkt-button-primary,
@@ -843,6 +902,12 @@ textarea {
   line-height: 0.95;
   letter-spacing: -0.06em;
   color: var(--mk-text-0);
+}
+
+html[lang='zh-CN'] .mkt-metric-value {
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 600;
 }
 
 .mkt-flow-step {

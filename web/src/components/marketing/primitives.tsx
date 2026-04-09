@@ -127,7 +127,7 @@ export function WorkbenchProofCard({
           <span className="mkt-chip">WanFlow BenchmarkOps</span>
           <span className="mkt-chip mkt-chip-subtle">{proofLabel}</span>
         </div>
-        <h3 className="text-[1.32rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.52rem]">
+        <h3 className="zh-card-title text-[1.32rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.52rem]">
           {workbenchNote}
         </h3>
         <p className="mkt-copy text-sm">{proofNote}</p>

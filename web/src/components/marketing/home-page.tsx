@@ -100,7 +100,7 @@ export default function MarketingHomePage() {
                 ].filter(Boolean).join(' ')}
               >
                 <span className="mkt-card-index">0{index + 1}</span>
-                <h3 className="mt-4 text-[1.2rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                <h3 className="zh-card-title mt-4 text-[1.2rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3">{item.body}</p>
                 <p className="mt-6 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-1)]">
                   {labels.outcome}: {item.outcome}
@@ -122,7 +122,7 @@ export default function MarketingHomePage() {
                 <article key={step.step} className="mkt-flow-step">
                   <div className="mkt-flow-marker">{step.step}</div>
                   <div>
-                    <h3 className="text-lg font-semibold text-[var(--mk-text-0)]">{step.title}</h3>
+                    <h3 className="zh-card-title text-lg font-semibold text-[var(--mk-text-0)]">{step.title}</h3>
                     <p className="mkt-copy mt-2 text-sm">{step.body}</p>
                   </div>
                 </article>
@@ -148,7 +148,7 @@ export default function MarketingHomePage() {
               {copy.home.proofLayer.items.map((item, index) => (
                 <article key={item.title} className={index === 0 ? 'mkt-card px-5 py-5 md:col-span-2' : 'mkt-card px-5 py-5'}>
                   <span className="mkt-card-index">{labels.flow}</span>
-                  <h3 className="mt-4 text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                  <h3 className="zh-card-title mt-4 text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                   <p className="mkt-copy mt-3">{item.body}</p>
                 </article>
               ))}
@@ -181,7 +181,7 @@ export default function MarketingHomePage() {
                   <span className="mkt-chip">{item.sector}</span>
                   <span className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.caseTag}</span>
                 </div>
-                <h3 className="mt-4 max-w-[22ch] text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                <h3 className="zh-card-title mt-4 max-w-[22ch] text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3 text-sm">
                   <strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}
                 </p>

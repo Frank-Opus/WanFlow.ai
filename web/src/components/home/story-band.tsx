@@ -18,7 +18,7 @@ export function StoryBand() {
         {text.home.phases.map((phase) => (
           <article key={phase.step} className="rounded-[26px] border border-[rgba(23,18,15,0.08)] bg-[rgba(255,252,247,0.72)] p-5 backdrop-blur-sm transition hover:-translate-y-1">
             <p className="mono-face text-xs text-[var(--brass)]">{phase.step}</p>
-            <h3 className="mt-5 text-xl font-semibold text-ink">{phase.title}</h3>
+            <h3 className="zh-card-title mt-5 text-xl font-semibold text-ink">{phase.title}</h3>
             <p className="mt-3 text-sm leading-7 text-[var(--mist)]">{phase.text}</p>
           </article>
         ))}

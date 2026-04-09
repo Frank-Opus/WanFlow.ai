@@ -59,7 +59,7 @@ export default function MarketingAboutPage() {
           <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-3">
             {copy.about.principles.items.map((item, index) => (
               <article key={item.title} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
-                <h3 className="text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                <h3 className="zh-card-title text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3">{item.body}</p>
               </article>
             ))}
@@ -72,7 +72,7 @@ export default function MarketingAboutPage() {
             {copy.about.collaborationModel.items.map((item) => (
               <article key={item.title} className="mkt-card px-5 py-5">
                 <div className="mkt-flow-marker">{item.title.slice(0, 1)}</div>
-                <h3 className="mt-4 text-[1.1rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
+                <h3 className="zh-card-title mt-4 text-[1.1rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3 text-sm">{item.body}</p>
               </article>
             ))}

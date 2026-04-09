@@ -24,7 +24,7 @@ export function CapabilityGrid() {
           {text.home.pillars.map((pillar, index) => (
             <article key={pillar.title} className="panel rounded-[28px] p-6 transition hover:-translate-y-1">
               <p className="mono-face text-xs text-[var(--brass)]">0{index + 1}</p>
-              <h3 className="mt-6 text-2xl font-semibold text-ink">{pillar.title}</h3>
+              <h3 className="zh-card-title mt-6 text-2xl font-semibold text-ink">{pillar.title}</h3>
               <p className="mt-4 text-sm leading-7 text-[var(--mist)]">{pillar.body}</p>
             </article>
           ))}

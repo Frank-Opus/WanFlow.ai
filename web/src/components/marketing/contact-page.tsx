@@ -33,7 +33,7 @@ export default function MarketingContactPage() {
             aside={
               <div className="space-y-4">
                 <p className="mkt-kicker">{labels.reach}</p>
-                <h3 className="text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.contact.side.responseTitle}</h3>
+                <h3 className="zh-card-title text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.contact.side.responseTitle}</h3>
                 <div className="space-y-3">
                   {copy.contact.side.contactItems.map((item) => (
                     <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
@@ -82,7 +82,7 @@ export default function MarketingContactPage() {
               <div className="mt-4 space-y-4">
                 {copy.contact.faq.map((item) => (
                   <article key={item.question} className="border-t border-[var(--mk-line-1)] pt-4 first:border-t-0 first:pt-0">
-                    <h3 className="text-base font-semibold text-[var(--mk-text-0)]">{item.question}</h3>
+                    <h3 className="zh-card-title text-base font-semibold text-[var(--mk-text-0)]">{item.question}</h3>
                     <p className="mkt-copy mt-2 text-sm">{item.answer}</p>
                   </article>
                 ))}

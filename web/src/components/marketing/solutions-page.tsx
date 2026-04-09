@@ -80,7 +80,7 @@ export default function MarketingSolutionsPage() {
                 ].filter(Boolean).join(' ')}
               >
                 <span className="mkt-card-index">{labels.layer} 0{index + 1}</span>
-                <h3 className="mt-4 text-[1.35rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                <h3 className="zh-card-title mt-4 text-[1.35rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                 <p className="mkt-copy mt-3">{item.body}</p>
               </article>
             ))}
@@ -101,7 +101,7 @@ export default function MarketingSolutionsPage() {
                 ].filter(Boolean).join(' ')}
               >
                 <span className="mkt-card-index">0{index + 1}</span>
-                <h2 className="mt-4 text-[1.42rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{module.title}</h2>
+                <h2 className="zh-card-title mt-4 text-[1.42rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{module.title}</h2>
                 <p className="mkt-copy mt-3">{module.body}</p>
                 <div className="mt-5 grid gap-5 md:grid-cols-2">
                   <div>
@@ -154,7 +154,7 @@ export default function MarketingSolutionsPage() {
             {copy.solutions.delivery.steps.map((step, index) => (
               <article key={step.step} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
                 <div className="mkt-flow-marker">{step.step}</div>
-                <h3 className="mt-4 text-[1.15rem] font-semibold text-[var(--mk-text-0)]">{step.title}</h3>
+                <h3 className="zh-card-title mt-4 text-[1.15rem] font-semibold text-[var(--mk-text-0)]">{step.title}</h3>
                 <p className="mkt-copy mt-3 text-sm">{step.body}</p>
               </article>
             ))}
