@@ -61,6 +61,20 @@
 
 - `http://35.220.164.252:3888/v1/`
 
+### Standard auth environment variables
+
+- `WANFLOW_SESSION_COOKIE`
+- `WANFLOW_SESSION_SECRET`
+- `WANFLOW_SESSION_TTL_SECONDS`
+- `WANFLOW_ADMIN_EMAIL`
+- `WANFLOW_ADMIN_PASSWORD`
+- `WANFLOW_ADMIN_NAME`
+- `WANFLOW_ADMIN_ROLE`
+- `WANFLOW_AUTH_ENABLE_OAUTH`
+- `WANFLOW_AUTH_SSO_HINT`
+
+标准版当前使用 credentials auth，同时在 provider 配置中预留了 OAuth / enterprise SSO 扩展位。
+
 ## 5. 发布前必跑验证
 
 按下面顺序执行，不要跳步：
