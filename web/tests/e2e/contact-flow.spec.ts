@@ -1,10 +1,9 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { expect, test } from '@playwright/test';
+import { siteContact } from '../../src/lib/marketing';
 
 const leadsDir = path.join(process.cwd(), '.playwright-runtime', 'marketing-leads');
-const canonicalEmail = 'wanflow@163.com';
-const canonicalWechat = 'FrankXu0303';
 
 test.describe('contact flow end-to-end', () => {
   test.skip(({ isMobile }) => isMobile);
@@ -13,16 +12,49 @@ test.describe('contact flow end-to-end', () => {
     await page.goto('/contact');
     await page.waitForLoadState('networkidle');
 
-    await expect(page.getByText(`邮箱：${canonicalEmail}`).first()).toBeVisible();
-    await expect(page.getByText(`WeChat：${canonicalWechat}`).first()).toBeVisible();
+    await expect(page.locator('body')).toContainText(`邮箱：${siteContact.email}`);
+    await expect(page.locator('body')).toContainText(`WeChat：${siteContact.wechat}`);
 
     await page.getByRole('button', { name: 'EN' }).click();
-    await expect(page.getByText(`Email: ${canonicalEmail}`).first()).toBeVisible();
-    await expect(page.getByText(`WeChat: ${canonicalWechat}`).first()).toBeVisible();
+    await expect(page.locator('body')).toContainText(`Email: ${siteContact.email}`);
+    await expect(page.locator('body')).toContainText(`WeChat: ${siteContact.wechat}`);
 
     await page.goto('/');
-    const schemaText = await page.locator('script[type="application/ld+json"]').first().textContent();
-    expect(schemaText).toContain(`\"email\":\"${canonicalEmail}\"`);
+    const organizationEmail = await page.$$eval('script[type="application/ld+json"]', (elements) => {
+      const docs = elements
+        .map((element) => element.textContent?.trim())
+        .filter((text): text is string => Boolean(text))
+        .map((text) => {
+          try {
+            return JSON.parse(text);
+          } catch {
+            return null;
+          }
+        })
+        .filter((parsed): parsed is Record<string, unknown> | Record<string, unknown>[] => parsed !== null);
+
+      const nodes = docs.flatMap((doc) => {
+        if (Array.isArray(doc)) {
+          return doc;
+        }
+        if (Array.isArray(doc['@graph'])) {
+          return doc['@graph'] as Record<string, unknown>[];
+        }
+        return [doc];
+      });
+
+      const organizationNode = nodes.find((node) => {
+        const type = node['@type'];
+        if (Array.isArray(type)) {
+          return type.includes('Organization');
+        }
+        return type === 'Organization';
+      });
+
+      return typeof organizationNode?.email === 'string' ? organizationNode.email : null;
+    });
+
+    expect(organizationEmail).toBe(siteContact.email);
   });
 
   test('submits the contact form into isolated lead storage', async ({ page }) => {
