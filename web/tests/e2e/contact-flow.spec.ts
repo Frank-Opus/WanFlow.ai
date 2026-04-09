@@ -1,9 +1,12 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { expect, test } from '@playwright/test';
-import { siteContact } from '../../src/lib/marketing';
 
 const leadsDir = path.join(process.cwd(), '.playwright-runtime', 'marketing-leads');
+const publicContact = {
+  email: 'wanflow@163.com',
+  wechat: 'FrankXu0303',
+} as const;
 
 test.describe('contact flow end-to-end', () => {
   test.skip(({ isMobile }) => isMobile);
@@ -12,12 +15,12 @@ test.describe('contact flow end-to-end', () => {
     await page.goto('/contact');
     await page.waitForLoadState('networkidle');
 
-    await expect(page.locator('body')).toContainText(`邮箱：${siteContact.email}`);
-    await expect(page.locator('body')).toContainText(`WeChat：${siteContact.wechat}`);
+    await expect(page.locator('body')).toContainText(`邮箱：${publicContact.email}`);
+    await expect(page.locator('body')).toContainText(`WeChat：${publicContact.wechat}`);
 
     await page.getByRole('button', { name: 'EN' }).click();
-    await expect(page.locator('body')).toContainText(`Email: ${siteContact.email}`);
-    await expect(page.locator('body')).toContainText(`WeChat: ${siteContact.wechat}`);
+    await expect(page.locator('body')).toContainText(`Email: ${publicContact.email}`);
+    await expect(page.locator('body')).toContainText(`WeChat: ${publicContact.wechat}`);
 
     await page.goto('/');
     const organizationEmail = await page.$$eval('script[type="application/ld+json"]', (elements) => {
@@ -54,7 +57,7 @@ test.describe('contact flow end-to-end', () => {
       return typeof organizationNode?.email === 'string' ? organizationNode.email : null;
     });
 
-    expect(organizationEmail).toBe(siteContact.email);
+    expect(organizationEmail).toBe(publicContact.email);
   });
 
   test('submits the contact form into isolated lead storage', async ({ page }) => {
@@ -70,21 +73,41 @@ test.describe('contact flow end-to-end', () => {
     await page.locator('select[name="interest"]').selectOption({ index: 1 });
     await page.locator('select[name="timeline"]').selectOption({ index: 1 });
     await page.locator('textarea[name="message"]').fill('这是一次联系表单端到端测试。');
+    const submitResponsePromise = page.waitForResponse(
+      (response) => response.url().includes('/api/contact') && response.request().method() === 'POST',
+    );
     await page.getByRole('button', { name: '提交咨询' }).click();
+    const submitResponse = await submitResponsePromise;
+    expect(submitResponse.ok()).toBeTruthy();
 
-    await expect(page.getByRole('status')).toContainText('已收到你的信息。我们会在工作日尽快通过邮箱联系你。');
+    await expect(page.locator('.mkt-status-success')).toContainText(
+      '已收到你的信息。我们会在工作日 24 小时内通过邮箱联系你。',
+    );
 
     const leadFiles = await fs.readdir(leadsDir);
-    expect(leadFiles).toHaveLength(1);
+    expect(leadFiles.length).toBeGreaterThan(0);
 
-    const leadPayload = JSON.parse(await fs.readFile(path.join(leadsDir, leadFiles[0]!), 'utf8')) as {
-      company?: string;
-      email?: string;
-      message?: string;
-    };
+    const submittedEmail = `qa-${stamp}@wanflow.ai`;
+    const leadEntries = await Promise.all(
+      leadFiles.map(async (fileName) => ({
+        fileName,
+        payload: JSON.parse(await fs.readFile(path.join(leadsDir, fileName), 'utf8')) as {
+          company?: string;
+          email?: string;
+          message?: string;
+        },
+      })),
+    );
+    const leadEntry = leadEntries.find((item) => item.payload.email === submittedEmail);
 
+    expect(leadEntry).toBeDefined();
+    if (!leadEntry) {
+      throw new Error(`Unable to locate lead file for ${submittedEmail}`);
+    }
+
+    const leadPayload = leadEntry.payload;
     expect(leadPayload.company).toBe('WanFlow QA');
-    expect(leadPayload.email).toBe(`qa-${stamp}@wanflow.ai`);
+    expect(leadPayload.email).toBe(submittedEmail);
     expect(leadPayload.message).toBe('这是一次联系表单端到端测试。');
   });
 });

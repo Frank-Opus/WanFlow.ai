@@ -6,6 +6,14 @@ export const siteContact = {
   responseWindow: '24 hours',
 } as const;
 
+const responseWindowHours = Number.parseInt(siteContact.responseWindow, 10);
+const responseWindowLocalized = {
+  zh: Number.isFinite(responseWindowHours)
+    ? `工作日 ${responseWindowHours} 小时内`
+    : `工作日 ${siteContact.responseWindow} 内`,
+  en: `within ${siteContact.responseWindow} on business days`,
+} as const;
+
 const marketingCopyBase = {
   zh: {
     site: {
@@ -53,7 +61,7 @@ const marketingCopyBase = {
         },
         {
           title: '联络方式',
-          items: [siteContact.email, `WeChat: ${siteContact.wechat}`, '24 小时内响应工作日咨询'],
+          items: [siteContact.email, `WeChat: ${siteContact.wechat}`, `响应：${responseWindowLocalized.zh}`],
         },
       ],
       copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
@@ -393,7 +401,7 @@ const marketingCopyBase = {
       },
       form: {
         title: '发起业务沟通',
-        body: '填写下面的信息后，我们会按你的业务场景进行初步整理，并在工作日内尽快回复。',
+        body: `填写下面的信息后，我们会按你的业务场景进行初步整理，并在${responseWindowLocalized.zh}尽快回复。`,
         fields: {
           name: '姓名',
           company: '公司 / 团队',
@@ -413,7 +421,7 @@ const marketingCopyBase = {
         timelines: ['尽快开始', '1 个月内', '本季度内', '先交流判断'],
         submit: '提交咨询',
         submitting: '提交中...',
-        success: '已收到你的信息。我们会在工作日尽快通过邮箱联系你。',
+        success: `已收到你的信息。我们会在${responseWindowLocalized.zh}通过邮箱联系你。`,
         error: `提交失败，请稍后重试，或直接发送邮件到 ${siteContact.email}。`,
         privacy: '我们只将这些信息用于业务沟通，不会用于无关营销。',
         validation: {
@@ -435,7 +443,7 @@ const marketingCopyBase = {
         contactItems: [
           `邮箱：${siteContact.email}`,
           `WeChat：${siteContact.wechat}`,
-          '响应：工作日 24 小时内',
+          `响应：${responseWindowLocalized.zh}`,
         ],
       },
       faq: [
@@ -835,7 +843,7 @@ const marketingCopyBase = {
       },
       form: {
         title: 'Start the conversation',
-        body: 'Share your operating context and we will reply with an informed follow-up during the business week.',
+        body: `Share your operating context and we will reply ${responseWindowLocalized.en}.`,
         fields: {
           name: 'Name',
           company: 'Company / Team',
@@ -855,7 +863,7 @@ const marketingCopyBase = {
         timelines: ['As soon as possible', 'Within 1 month', 'This quarter', 'Exploratory conversation first'],
         submit: 'Send inquiry',
         submitting: 'Sending...',
-        success: 'Your message has been received. We will follow up by email on the next business day.',
+        success: `Your message has been received. We will follow up by email ${responseWindowLocalized.en}.`,
         error: `Submission failed. Please try again or email ${siteContact.email} directly.`,
         privacy: 'We only use this information for business follow-up.',
         validation: {
@@ -877,7 +885,7 @@ const marketingCopyBase = {
         contactItems: [
           `Email: ${siteContact.email}`,
           `WeChat: ${siteContact.wechat}`,
-          'Response: within one business day',
+          `Response: ${responseWindowLocalized.en}`,
         ],
       },
       faq: [
