@@ -407,13 +407,13 @@ html[lang='zh-CN'] .zh-card-title {
 @keyframes mkt-fade-up {
   from {
     opacity: 0;
-    transform: translate3d(0, 34px, 0) scale(0.952);
-    filter: blur(10px);
+    transform: translate3d(0, 28px, 0) scale(0.962);
+    filter: blur(8px);
   }
 
   62% {
     opacity: 1;
-    transform: translate3d(0, -6px, 0) scale(1.018);
+    transform: translate3d(0, -4px, 0) scale(1.012);
     filter: blur(0);
   }
 
@@ -427,13 +427,13 @@ html[lang='zh-CN'] .zh-card-title {
 @keyframes mkt-section-pop {
   from {
     opacity: 0;
-    transform: translate3d(0, 42px, 0) scale(0.934);
-    filter: blur(12px);
+    transform: translate3d(0, 34px, 0) scale(0.95);
+    filter: blur(10px);
   }
 
   58% {
     opacity: 1;
-    transform: translate3d(0, -8px, 0) scale(1.022);
+    transform: translate3d(0, -5px, 0) scale(1.014);
     filter: blur(0);
   }
 
@@ -447,13 +447,13 @@ html[lang='zh-CN'] .zh-card-title {
 @keyframes mkt-card-pop {
   from {
     opacity: 0;
-    transform: translate3d(0, 30px, 0) scale(0.948);
-    filter: blur(10px);
+    transform: translate3d(0, 24px, 0) scale(0.958);
+    filter: blur(8px);
   }
 
   64% {
     opacity: 1;
-    transform: translate3d(0, -5px, 0) scale(1.018);
+    transform: translate3d(0, -3px, 0) scale(1.01);
     filter: blur(0);
   }
 
@@ -506,12 +506,12 @@ html[lang='zh-CN'] .zh-card-title {
 
 .mkt-reveal {
   opacity: 0;
-  transform: translate3d(0, 28px, 0) scale(0.968);
-  filter: blur(9px);
+  transform: translate3d(0, 24px, 0) scale(0.976);
+  filter: blur(7px);
   transition:
-    opacity 720ms var(--mk-ease-out) var(--reveal-delay, 0ms),
-    transform 720ms var(--mk-ease-out) var(--reveal-delay, 0ms),
-    filter 720ms var(--mk-ease-out) var(--reveal-delay, 0ms);
+    opacity 820ms var(--mk-ease-out) var(--reveal-delay, 0ms),
+    transform 820ms var(--mk-ease-out) var(--reveal-delay, 0ms),
+    filter 820ms var(--mk-ease-out) var(--reveal-delay, 0ms);
   will-change: transform, opacity, filter;
 }
 
@@ -522,43 +522,43 @@ html[lang='zh-CN'] .zh-card-title {
 }
 
 .mkt-reveal-strong {
-  transform: translate3d(0, 34px, 0) scale(0.956);
-  filter: blur(10px);
+  transform: translate3d(0, 28px, 0) scale(0.966);
+  filter: blur(8px);
 }
 
 .mkt-reveal-hero {
-  transform: translate3d(0, 40px, 0) scale(0.944);
-  filter: blur(12px);
+  transform: translate3d(0, 32px, 0) scale(0.958);
+  filter: blur(10px);
 }
 
 .mkt-reveal[data-in-view='true'].mkt-reveal-strong,
 .mkt-reveal[data-in-view='true'].mkt-reveal-hero {
-  animation: mkt-section-pop 920ms var(--mk-ease-out) both;
+  animation: mkt-section-pop 1040ms var(--mk-ease-out) both;
   animation-delay: var(--reveal-delay, 0ms);
 }
 
 .mkt-reveal .mkt-stagger-grid > * {
   opacity: 0;
-  transform: translate3d(0, 24px, 0) scale(0.958);
+  transform: translate3d(0, 20px, 0) scale(0.968);
   transition:
-    opacity 620ms var(--mk-ease-soft),
-    transform 620ms var(--mk-ease-soft);
+    opacity 760ms var(--mk-ease-soft),
+    transform 760ms var(--mk-ease-soft);
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-stagger-grid > * {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
-  animation: mkt-fade-up 760ms var(--mk-ease-out) both;
+  animation: mkt-fade-up 860ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal-strong .mkt-stagger-grid > *,
 .mkt-reveal-hero .mkt-stagger-grid > * {
-  transform: translate3d(0, 28px, 0) scale(0.946);
+  transform: translate3d(0, 24px, 0) scale(0.958);
 }
 
 .mkt-reveal[data-in-view='true'].mkt-reveal-strong .mkt-stagger-grid > *,
 .mkt-reveal[data-in-view='true'].mkt-reveal-hero .mkt-stagger-grid > * {
-  animation: mkt-card-pop 860ms var(--mk-ease-out) both;
+  animation: mkt-card-pop 940ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-stagger-grid > *:nth-child(1) {
@@ -586,12 +586,12 @@ html[lang='zh-CN'] .zh-card-title {
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-hero-stage {
-  animation: mkt-fade-up 860ms var(--mk-ease-out) both;
+  animation: mkt-fade-up 940ms var(--mk-ease-out) both;
   transform-origin: 50% 100%;
 }
 
 .mkt-reveal[data-in-view='true'].mkt-reveal-hero .mkt-hero-stage {
-  animation: mkt-section-pop 980ms var(--mk-ease-out) both;
+  animation: mkt-section-pop 1100ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-hero-stage-1 {
