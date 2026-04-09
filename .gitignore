@@ -28,3 +28,6 @@ runs/
 .DS_Store
 .vscode/
 .idea/
+
+# Local git worktrees
+.worktrees/
