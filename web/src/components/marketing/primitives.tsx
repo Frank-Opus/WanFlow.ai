@@ -42,7 +42,7 @@ export function PageHero({
           </div>
         </div>
         {aside ? (
-          <aside className="mkt-rail-card mkt-hero-rail mkt-hero-stage mkt-hero-stage-4 w-full self-end p-5 sm:p-6 xl:max-w-[24rem] xl:p-7">
+          <aside className="mkt-pop-surface mkt-rail-card mkt-hero-rail mkt-hero-stage mkt-hero-stage-4 w-full self-end p-5 sm:p-6 xl:max-w-[24rem] xl:p-7">
             <div className="space-y-4">{aside}</div>
           </aside>
         ) : null}
@@ -87,7 +87,7 @@ export function FinalCtaBand({
   secondary?: LinkTarget;
 }) {
   return (
-    <section className="mkt-editorial-band mkt-grid-lines overflow-hidden px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
+    <section className="mkt-pop-surface mkt-editorial-band mkt-grid-lines overflow-hidden px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
       <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-10 xl:gap-12">
         <div className="space-y-5">
           <p className="mkt-kicker">{eyebrow}</p>
@@ -121,7 +121,7 @@ export function WorkbenchProofCard({
   workbenchCta: string;
 }) {
   return (
-    <div className="mkt-proof-panel mkt-grid-lines p-5 sm:p-6">
+    <div className="mkt-pop-surface mkt-proof-panel mkt-grid-lines p-5 sm:p-6">
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="mkt-chip">WanFlow BenchmarkOps</span>

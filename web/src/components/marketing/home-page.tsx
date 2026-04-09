@@ -29,7 +29,7 @@ export default function MarketingHomePage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <MotionReveal delay={0}>
+        <MotionReveal delay={0} intensity="hero">
           <PageHero
             eyebrow={copy.home.hero.eyebrow}
             title={copy.home.hero.title}
@@ -59,7 +59,7 @@ export default function MarketingHomePage() {
           />
         </MotionReveal>
 
-        <MotionReveal as="section" delay={60} className="mkt-panel mkt-editorial-band px-6 py-8 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={60} intensity="strong" className="mkt-panel mkt-editorial-band px-6 py-8 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <SectionHeading
               eyebrow={copy.home.platformView.eyebrow}
@@ -80,7 +80,7 @@ export default function MarketingHomePage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={90} className="space-y-6">
+        <MotionReveal as="section" delay={90} intensity="strong" className="space-y-6">
           <SectionHeading
             eyebrow={copy.home.capabilityModules.eyebrow}
             title={copy.home.capabilityModules.title}
@@ -110,7 +110,7 @@ export default function MarketingHomePage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={110} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={110} intensity="strong" className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <SectionHeading
               eyebrow={copy.home.deliveryFramework.eyebrow}
@@ -131,7 +131,7 @@ export default function MarketingHomePage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={130} className="space-y-6">
+        <MotionReveal as="section" delay={130} intensity="strong" className="space-y-6">
           <SectionHeading
             eyebrow={copy.home.proofLayer.eyebrow}
             title={copy.home.proofLayer.title}
@@ -156,7 +156,7 @@ export default function MarketingHomePage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={150} className="space-y-6">
+        <MotionReveal as="section" delay={150} intensity="strong" className="space-y-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeading
               eyebrow={copy.home.caseTeaser.eyebrow}
@@ -193,7 +193,7 @@ export default function MarketingHomePage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal delay={170}>
+        <MotionReveal delay={170} intensity="strong">
           <FinalCtaBand
             eyebrow={copy.home.finalCta.eyebrow}
             title={copy.home.finalCta.title}

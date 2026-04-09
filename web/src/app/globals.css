@@ -407,8 +407,54 @@ html[lang='zh-CN'] .zh-card-title {
 @keyframes mkt-fade-up {
   from {
     opacity: 0;
-    transform: translate3d(0, 26px, 0) scale(0.985);
-    filter: blur(8px);
+    transform: translate3d(0, 34px, 0) scale(0.952);
+    filter: blur(10px);
+  }
+
+  62% {
+    opacity: 1;
+    transform: translate3d(0, -6px, 0) scale(1.018);
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes mkt-section-pop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 42px, 0) scale(0.934);
+    filter: blur(12px);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate3d(0, -8px, 0) scale(1.022);
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes mkt-card-pop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0) scale(0.948);
+    filter: blur(10px);
+  }
+
+  64% {
+    opacity: 1;
+    transform: translate3d(0, -5px, 0) scale(1.018);
+    filter: blur(0);
   }
 
   to {
@@ -460,8 +506,8 @@ html[lang='zh-CN'] .zh-card-title {
 
 .mkt-reveal {
   opacity: 0;
-  transform: translate3d(0, 22px, 0);
-  filter: blur(8px);
+  transform: translate3d(0, 28px, 0) scale(0.968);
+  filter: blur(9px);
   transition:
     opacity 720ms var(--mk-ease-out) var(--reveal-delay, 0ms),
     transform 720ms var(--mk-ease-out) var(--reveal-delay, 0ms),
@@ -471,13 +517,29 @@ html[lang='zh-CN'] .zh-card-title {
 
 .mkt-reveal[data-in-view='true'] {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0) scale(1);
   filter: blur(0);
+}
+
+.mkt-reveal-strong {
+  transform: translate3d(0, 34px, 0) scale(0.956);
+  filter: blur(10px);
+}
+
+.mkt-reveal-hero {
+  transform: translate3d(0, 40px, 0) scale(0.944);
+  filter: blur(12px);
+}
+
+.mkt-reveal[data-in-view='true'].mkt-reveal-strong,
+.mkt-reveal[data-in-view='true'].mkt-reveal-hero {
+  animation: mkt-section-pop 920ms var(--mk-ease-out) both;
+  animation-delay: var(--reveal-delay, 0ms);
 }
 
 .mkt-reveal .mkt-stagger-grid > * {
   opacity: 0;
-  transform: translate3d(0, 18px, 0) scale(0.988);
+  transform: translate3d(0, 24px, 0) scale(0.958);
   transition:
     opacity 620ms var(--mk-ease-soft),
     transform 620ms var(--mk-ease-soft);
@@ -486,6 +548,17 @@ html[lang='zh-CN'] .zh-card-title {
 .mkt-reveal[data-in-view='true'] .mkt-stagger-grid > * {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
+  animation: mkt-fade-up 760ms var(--mk-ease-out) both;
+}
+
+.mkt-reveal-strong .mkt-stagger-grid > *,
+.mkt-reveal-hero .mkt-stagger-grid > * {
+  transform: translate3d(0, 28px, 0) scale(0.946);
+}
+
+.mkt-reveal[data-in-view='true'].mkt-reveal-strong .mkt-stagger-grid > *,
+.mkt-reveal[data-in-view='true'].mkt-reveal-hero .mkt-stagger-grid > * {
+  animation: mkt-card-pop 860ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-stagger-grid > *:nth-child(1) {
@@ -514,6 +587,11 @@ html[lang='zh-CN'] .zh-card-title {
 
 .mkt-reveal[data-in-view='true'] .mkt-hero-stage {
   animation: mkt-fade-up 860ms var(--mk-ease-out) both;
+  transform-origin: 50% 100%;
+}
+
+.mkt-reveal[data-in-view='true'].mkt-reveal-hero .mkt-hero-stage {
+  animation: mkt-section-pop 980ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-hero-stage-1 {
@@ -1092,6 +1170,10 @@ html[lang='zh-CN'] .mkt-metric-value {
     background 280ms var(--mk-ease-soft);
 }
 
+.mkt-pop-surface {
+  transform-origin: 50% 100%;
+}
+
 #mobile-marketing-nav {
   background: rgba(247, 250, 251, 0.96);
 }
@@ -1122,8 +1204,28 @@ html[lang='zh-CN'] .mkt-metric-value {
   .mkt-split-callout:hover,
   .mkt-flow-step:hover,
   .mkt-hero-rail:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 26px 44px rgba(18, 32, 43, 0.1);
+    transform: translate3d(0, -6px, 0) scale(1.015);
+    box-shadow: 0 30px 54px rgba(18, 32, 43, 0.14);
+  }
+
+  .mkt-reveal-hero .mkt-card:hover,
+  .mkt-reveal-hero .mkt-case-card:hover,
+  .mkt-reveal-hero .mkt-module-card:hover,
+  .mkt-reveal-hero .mkt-proof-panel:hover,
+  .mkt-reveal-hero .mkt-rail-card:hover,
+  .mkt-reveal-hero .mkt-split-callout:hover,
+  .mkt-reveal-hero .mkt-flow-step:hover,
+  .mkt-reveal-hero .mkt-hero-rail:hover,
+  .mkt-reveal-strong .mkt-card:hover,
+  .mkt-reveal-strong .mkt-case-card:hover,
+  .mkt-reveal-strong .mkt-module-card:hover,
+  .mkt-reveal-strong .mkt-proof-panel:hover,
+  .mkt-reveal-strong .mkt-rail-card:hover,
+  .mkt-reveal-strong .mkt-split-callout:hover,
+  .mkt-reveal-strong .mkt-flow-step:hover,
+  .mkt-reveal-strong .mkt-hero-rail:hover {
+    transform: translate3d(0, -8px, 0) scale(1.02);
+    box-shadow: 0 34px 62px rgba(18, 32, 43, 0.16);
   }
 
   .mkt-card:hover,
@@ -1137,12 +1239,14 @@ html[lang='zh-CN'] .mkt-metric-value {
   }
 
   .mkt-button-primary:hover {
+    transform: translate3d(0, -3px, 0) scale(1.02);
     box-shadow: 0 20px 36px rgba(34, 101, 128, 0.24);
   }
 
   .mkt-button-secondary:hover,
   .mkt-menu-button:hover,
   .mkt-lang-button:hover {
+    transform: translate3d(0, -2px, 0) scale(1.015);
     box-shadow: 0 14px 28px rgba(18, 32, 43, 0.08);
   }
 }

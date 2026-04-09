@@ -7,6 +7,7 @@ type MotionRevealProps = HTMLAttributes<HTMLElement> & {
   as?: ElementType;
   children: ReactNode;
   delay?: number;
+  intensity?: 'base' | 'strong' | 'hero';
   once?: boolean;
   threshold?: number;
   rootMargin?: string;
@@ -17,6 +18,7 @@ export default function MotionReveal({
   children,
   className,
   delay = 0,
+  intensity = 'base',
   once = true,
   threshold = 0.18,
   rootMargin = '0px 0px -10% 0px',
@@ -58,7 +60,7 @@ export default function MotionReveal({
     <Tag
       ref={ref}
       data-in-view={visible ? 'true' : 'false'}
-      className={['mkt-reveal', className].filter(Boolean).join(' ')}
+      className={['mkt-reveal', `mkt-reveal-${intensity}`, className].filter(Boolean).join(' ')}
       style={{ '--reveal-delay': `${delay}ms`, ...style } as CSSProperties}
       {...rest}
     >
