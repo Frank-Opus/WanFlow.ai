@@ -6,7 +6,6 @@ const desktopPages = [
   { name: 'cases', path: '/cases' },
   { name: 'about', path: '/about' },
   { name: 'contact', path: '/contact' },
-  { name: 'benchmarkops', path: '/dataflow/proofbench' },
 ] as const;
 
 test.describe('marketing desktop regressions', () => {
@@ -59,14 +58,12 @@ test.describe('marketing desktop regressions', () => {
     });
   });
 
-  test('operational sections stay visible on /dataflow/proofbench', async ({ page }) => {
+  test('proofbench entry redirects unauthenticated visitors to login', async ({ page }) => {
     await page.goto('/dataflow/proofbench');
     await page.waitForLoadState('networkidle');
 
-    await expect(page.getByText(/项目工作台|Project workspace/i).first()).toBeVisible();
-    await expect(page.getByText(/运行中心|Run center/i).first()).toBeVisible();
-    await expect(page.getByText(/结果中心|Results center/i).first()).toBeVisible();
-    await expect(page.getByText(/治理视角|Governance lane/i).first()).toBeVisible();
+    await expect(page).toHaveURL(/\/dataflow\/proofbench\/login\?next=%2Fdataflow%2Fproofbench$/);
+    await expect(page.getByRole('heading', { name: '登录 BenchmarkOps 企业评测台' })).toBeVisible();
   });
 });
 

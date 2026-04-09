@@ -1,6 +1,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { NextResponse } from 'next/server';
+import { requirePlatformSession } from '@/lib/auth/guards';
 import { readPlatformDb } from '@/lib/platform-store';
 
 export const runtime = 'nodejs';
@@ -54,6 +55,11 @@ function resolveDownloadTarget(kind: DownloadKind, source: Awaited<ReturnType<ty
 }
 
 export async function GET(request: Request) {
+  const auth = await requirePlatformSession();
+  if (!auth.ok) {
+    return auth.response;
+  }
+
   const { searchParams } = new URL(request.url);
   const sourceId = searchParams.get('sourceId') ?? '';
   const kind = (searchParams.get('kind') ?? 'original') as DownloadKind;

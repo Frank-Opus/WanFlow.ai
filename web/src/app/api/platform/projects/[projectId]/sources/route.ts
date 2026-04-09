@@ -2,6 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { NextResponse } from 'next/server';
+import { requirePlatformSession } from '@/lib/auth/guards';
 import { createSourceFile, getProjectBundle, getProjectUploadDir } from '@/lib/platform-store';
 import { inferSourceFileType, ingestStoredSource } from '@/lib/source-ingestion';
 
@@ -9,6 +10,10 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function GET(_: Request, context: { params: Promise<{ projectId: string }> }) {
+  const auth = await requirePlatformSession();
+  if (!auth.ok) {
+    return auth.response;
+  }
   const { projectId } = await context.params;
   const bundle = await getProjectBundle(projectId);
   if (!bundle) {
@@ -18,6 +23,10 @@ export async function GET(_: Request, context: { params: Promise<{ projectId: st
 }
 
 export async function POST(request: Request, context: { params: Promise<{ projectId: string }> }) {
+  const auth = await requirePlatformSession();
+  if (!auth.ok) {
+    return auth.response;
+  }
   const { projectId } = await context.params;
   const bundle = await getProjectBundle(projectId);
   if (!bundle) {
