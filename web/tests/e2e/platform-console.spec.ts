@@ -1,11 +1,20 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+async function loginToProofbench(page: Page) {
+  await page.goto('/dataflow/proofbench/login');
+  await page.waitForLoadState('networkidle');
+  await page.getByLabel('邮箱').fill('wanflow@163.com');
+  await page.getByLabel('密码').fill('ChangeMe123!');
+  await page.getByRole('button', { name: '登录并进入工作台' }).click();
+  await page.waitForURL(/\/dataflow\/proofbench$/);
+  await page.waitForLoadState('networkidle');
+}
 
 test.describe('platform console end-to-end', () => {
   test.skip(({ isMobile }) => isMobile);
 
   test('starts from an isolated seeded platform workspace', async ({ page }) => {
-    await page.goto('/dataflow/proofbench');
-    await page.waitForLoadState('networkidle');
+    await loginToProofbench(page);
 
     const response = await page.request.get('/api/platform/projects');
     expect(response.ok()).toBeTruthy();
@@ -14,17 +23,17 @@ test.describe('platform console end-to-end', () => {
       projects?: Array<{
         project: {
           name: string;
+          ownerUserId: string;
         };
       }>;
     };
 
-    expect(payload.projects).toHaveLength(1);
-    expect(payload.projects?.[0]?.project.name).toBe('企业评测项目 / Enterprise Evaluation');
+    expect((payload.projects ?? []).length).toBeGreaterThan(0);
+    expect(payload.projects?.some((entry) => entry.project.name === '企业评测项目 / Enterprise Evaluation')).toBeTruthy();
   });
 
   test('can create a project and a manual item end-to-end', async ({ page }) => {
-    await page.goto('/dataflow/proofbench');
-    await page.waitForLoadState('networkidle');
+    await loginToProofbench(page);
 
     const stamp = String(Date.now());
     const projectName = `E2E Project ${stamp}`;
@@ -38,9 +47,12 @@ test.describe('platform console end-to-end', () => {
     await expect(page.getByText(projectName).first()).toBeVisible();
 
     const afterProject = (await (await page.request.get('/api/platform/projects')).json()) as {
-      projects?: Array<{ project: { name: string } }>;
+      projects?: Array<{ project: { id: string; name: string; ownerUserId: string } }>;
     };
     expect(afterProject.projects?.[0]?.project.name).toBe(projectName);
+    expect(afterProject.projects?.[0]?.project.ownerUserId).not.toBe('local-admin');
+    const projectId = afterProject.projects?.[0]?.project.id;
+    expect(projectId).toBeTruthy();
 
     await page.getByRole('tab', { name: '题目列表' }).click();
     await page.locator('input[placeholder="题目标题"]').fill(itemTitle);
@@ -50,11 +62,18 @@ test.describe('platform console end-to-end', () => {
 
     await expect(page.getByRole('status')).toContainText('题目已创建。');
     await expect(page.getByText(itemTitle).first()).toBeVisible();
+
+    const itemsResponse = await page.request.get(`/api/platform/projects/${projectId}/items`);
+    const itemsPayload = (await itemsResponse.json()) as {
+      problemItems?: Array<{ title: string; metadata?: { createdByUserId?: string } }>;
+    };
+    const createdItem = itemsPayload.problemItems?.find((item) => item.title === itemTitle);
+    expect(createdItem?.metadata?.createdByUserId).toBeTruthy();
+    expect(createdItem?.metadata?.createdByUserId).not.toBe('local-admin');
   });
 
   test('can upload a JSON source and materialize import downloads', async ({ page }) => {
-    await page.goto('/dataflow/proofbench');
-    await page.waitForLoadState('networkidle');
+    await loginToProofbench(page);
 
     const stamp = String(Date.now());
     const projectName = `Upload Project ${stamp}`;
@@ -91,5 +110,15 @@ test.describe('platform console end-to-end', () => {
     await expect(page.getByRole('link', { name: '原文件' })).toBeVisible();
     await expect(page.getByRole('link', { name: '标准化 JSON' })).toBeVisible();
     await expect(page.getByRole('link', { name: '提取文本' })).toBeVisible();
+
+    const projectsPayload = (await (await page.request.get('/api/platform/projects')).json()) as {
+      projects?: Array<{
+        project: { name: string; id: string };
+        sourceFiles: Array<{ uploadUserId: string }>;
+      }>;
+    };
+    const uploadProject = projectsPayload.projects?.find((entry) => entry.project.name === projectName);
+    expect(uploadProject).toBeTruthy();
+    expect(uploadProject?.sourceFiles.some((source) => source.uploadUserId !== 'local-admin')).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-export type PlatformRole = 'owner' | 'editor' | 'viewer' | 'runner';
+export type PlatformRole = 'owner' | 'admin' | 'operator' | 'viewer';
 export type SourceFileType = 'pdf' | 'docx' | 'json' | 'txt' | 'other';
 export type SourceParseStatus = 'pending' | 'parsing' | 'parsed' | 'uploaded' | 'classifying' | 'extracting' | 'normalized' | 'itemized' | 'failed';
 export type ProblemReviewStatus = 'draft' | 'reviewed' | 'approved';
@@ -17,6 +17,8 @@ export type PlatformProject = {
   name: string;
   description: string;
   ownerUserId: string;
+  ownerName?: string;
+  ownerRole?: PlatformRole;
   status: 'active' | 'archived';
   createdAt: string;
   updatedAt: string;
@@ -29,6 +31,8 @@ export type PlatformSourceFile = {
   fileType: SourceFileType;
   storagePath: string;
   uploadUserId: string;
+  uploadUserName?: string;
+  uploadUserRole?: PlatformRole;
   parseStatus: SourceParseStatus;
   parseError: string | null;
   importedItemIds: string[];
@@ -56,6 +60,9 @@ export type PlatformProblemItem = {
     itemType: string;
     tags: string[];
     notes: string;
+    createdByUserId?: string;
+    createdByName?: string;
+    createdByRole?: PlatformRole;
   };
   itemSchemaVersion: string;
   reviewStatus: ProblemReviewStatus;

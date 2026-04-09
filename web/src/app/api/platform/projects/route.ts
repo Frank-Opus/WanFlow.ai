@@ -11,7 +11,14 @@ export async function GET() {
     return auth.response;
   }
   const bundles = await listProjectBundles();
-  return NextResponse.json({ projects: bundles });
+  return NextResponse.json({
+    projects: bundles,
+    actor: {
+      id: auth.session.user.id,
+      name: auth.session.user.name,
+      role: auth.session.user.role,
+    },
+  });
 }
 
 export async function POST(request: Request) {
@@ -26,6 +33,11 @@ export async function POST(request: Request) {
   const project = await createProject({
     name: body.name,
     description: body.description ?? '',
+    actor: {
+      id: auth.session.user.id,
+      name: auth.session.user.name,
+      role: auth.session.user.role,
+    },
   });
   return NextResponse.json({ project });
 }

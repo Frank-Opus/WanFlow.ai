@@ -57,6 +57,11 @@ export async function POST(request: Request, context: { params: Promise<{ projec
     },
     itemSchemaVersion: 'v1',
     reviewStatus: 'draft',
+    actor: {
+      id: auth.session.user.id,
+      name: auth.session.user.name,
+      role: auth.session.user.role,
+    },
   });
 
   return NextResponse.json({ item }, { status: 201 });

@@ -9,6 +9,7 @@ import type {
   PlatformProblemItem,
   PlatformProject,
   PlatformProjectBundle,
+  PlatformRole,
   PlatformSourceFile,
 } from '@/lib/platform-types';
 
@@ -26,6 +27,12 @@ export const PLATFORM_ARTIFACTS_DIR = path.join(PLATFORM_DIR, 'artifacts');
 function now() {
   return new Date().toISOString();
 }
+
+export type PlatformActor = {
+  id: string;
+  name: string;
+  role: PlatformRole;
+};
 
 function emptyDb(): PlatformDB {
   return {
@@ -124,19 +131,28 @@ export async function seedPlatformDbIfNeeded() {
     const itemId = randomUUID();
     const createdAt = now();
 
+    const seedOwner: PlatformActor = {
+      id: 'seed-owner',
+      name: 'Seed Owner',
+      role: 'owner',
+    };
     const project: PlatformProject = {
       id: projectId,
       name: '企业评测项目 / Enterprise Evaluation',
       description: '用于上传题源、维护题目、执行同步/异步评测与导出交付物。',
-      ownerUserId: 'local-admin',
+      ownerUserId: seedOwner.id,
+      ownerName: seedOwner.name,
+      ownerRole: seedOwner.role,
       status: 'active',
       createdAt,
       updatedAt: createdAt,
     };
 
     const members: PlatformMember[] = [
-      { userId: 'local-admin', name: 'Local Admin', role: 'owner' },
-      { userId: 'ops-runner', name: 'Ops Runner', role: 'runner' },
+      { userId: seedOwner.id, name: seedOwner.name, role: seedOwner.role },
+      { userId: 'seed-admin', name: 'Seed Admin', role: 'admin' },
+      { userId: 'seed-operator', name: 'Seed Operator', role: 'operator' },
+      { userId: 'seed-viewer', name: 'Seed Viewer', role: 'viewer' },
     ];
 
     const sourceFile: PlatformSourceFile = {
@@ -145,7 +161,9 @@ export async function seedPlatformDbIfNeeded() {
       fileName: 'examples/qf3_item.json',
       fileType: 'json',
       storagePath: 'examples/qf3_item.json',
-      uploadUserId: 'local-admin',
+      uploadUserId: seedOwner.id,
+      uploadUserName: seedOwner.name,
+      uploadUserRole: seedOwner.role,
       parseStatus: 'itemized',
       parseError: null,
       importedItemIds: [itemId],
@@ -171,6 +189,9 @@ export async function seedPlatformDbIfNeeded() {
         itemType: 'Open response',
         tags: ['yang-mills', 'ode', 'symbolic'],
         notes: 'Seeded from local example JSON.',
+        createdByUserId: seedOwner.id,
+        createdByName: seedOwner.name,
+        createdByRole: seedOwner.role,
       },
       itemSchemaVersion: 'v1',
       reviewStatus: 'approved',
@@ -206,20 +227,22 @@ export async function getProjectBundle(projectId: string): Promise<PlatformProje
   return bundles.find((bundle) => bundle.project.id === projectId) ?? null;
 }
 
-export async function createProject(input: { name: string; description: string; ownerUserId?: string }) {
+export async function createProject(input: { name: string; description: string; actor: PlatformActor }) {
   return mutatePlatformDb((db) => {
     const createdAt = now();
     const project: PlatformProject = {
       id: randomUUID(),
       name: input.name.trim(),
       description: input.description.trim(),
-      ownerUserId: input.ownerUserId ?? 'local-admin',
+      ownerUserId: input.actor.id,
+      ownerName: input.actor.name,
+      ownerRole: input.actor.role,
       status: 'active',
       createdAt,
       updatedAt: createdAt,
     };
     db.projects.unshift(project);
-    db.members[project.id] = [{ userId: project.ownerUserId, name: 'Local Admin', role: 'owner' }];
+    db.members[project.id] = [{ userId: project.ownerUserId, name: input.actor.name, role: input.actor.role }];
     return project;
   });
 }
@@ -243,11 +266,25 @@ export async function updateSourceFile(sourceId: string, patch: Partial<Platform
   });
 }
 
-export async function createProblemItem(input: Omit<PlatformProblemItem, 'id' | 'createdAt' | 'updatedAt'>) {
+export async function createProblemItem(
+  input: Omit<PlatformProblemItem, 'id' | 'createdAt' | 'updatedAt'> & {
+    actor?: PlatformActor;
+  }
+) {
   return mutatePlatformDb((db) => {
     const timestamp = now();
+    const { actor, ...baseInput } = input;
+    const metadata = actor
+      ? {
+          ...baseInput.metadata,
+          createdByUserId: actor.id,
+          createdByName: actor.name,
+          createdByRole: actor.role,
+        }
+      : baseInput.metadata;
     const item: PlatformProblemItem = {
-      ...input,
+      ...baseInput,
+      metadata,
       id: randomUUID(),
       createdAt: timestamp,
       updatedAt: timestamp,

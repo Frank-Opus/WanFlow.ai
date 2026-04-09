@@ -6,6 +6,11 @@ import type { BenchmarkOpsConsoleCopy, BenchmarkOpsSectionIntro } from '@dataflo
 type GovernancePanelProps = {
   locale: 'zh' | 'en';
   selectedBundle: PlatformProjectBundle | null;
+  currentUser: {
+    id: string;
+    name: string;
+    role: 'owner' | 'admin' | 'operator' | 'viewer';
+  } | null;
   intro: BenchmarkOpsSectionIntro;
   copy: Pick<BenchmarkOpsConsoleCopy, 'members' | 'permissions' | 'genericExport' | 'enterpriseNotice'>;
 };
@@ -20,26 +25,26 @@ function SectionIntro({ intro }: { intro: BenchmarkOpsSectionIntro }) {
   );
 }
 
-function roleLabel(locale: 'zh' | 'en', role: 'owner' | 'editor' | 'viewer' | 'runner') {
+function roleLabel(locale: 'zh' | 'en', role: 'owner' | 'admin' | 'operator' | 'viewer') {
   const map = {
     zh: {
       owner: '负责人',
-      editor: '编辑',
+      admin: '管理员',
+      operator: '操作员',
       viewer: '查看者',
-      runner: '执行者',
     },
     en: {
       owner: 'Owner',
-      editor: 'Editor',
+      admin: 'Admin',
+      operator: 'Operator',
       viewer: 'Viewer',
-      runner: 'Runner',
     },
   };
 
   return map[locale][role];
 }
 
-export default function GovernancePanel({ locale, selectedBundle, intro, copy }: GovernancePanelProps) {
+export default function GovernancePanel({ locale, selectedBundle, currentUser, intro, copy }: GovernancePanelProps) {
   return (
     <section className="panel rounded-[26px] p-6 sm:p-8">
       <SectionIntro intro={{ ...intro, align: intro.align ?? 'compact' }} />
@@ -57,7 +62,16 @@ export default function GovernancePanel({ locale, selectedBundle, intro, copy }:
         <div className="quiet-card rounded-[20px] p-5">
           <p className="text-sm font-semibold text-ink">{copy.permissions}</p>
           <p className="mt-3 text-sm leading-7 text-[var(--mist)]">
-            {locale === 'zh' ? '负责人 / 编辑 / 查看者 / 执行者' : 'Owner / Editor / Viewer / Runner'}
+            {locale === 'zh' ? '负责人 / 管理员 / 操作员 / 查看者' : 'Owner / Admin / Operator / Viewer'}
+          </p>
+          <p className="mt-2 text-xs leading-6 text-[var(--mist)]">
+            {currentUser
+              ? locale === 'zh'
+                ? `当前登录：${currentUser.name} · ${roleLabel(locale, currentUser.role)}`
+                : `Signed in as: ${currentUser.name} · ${roleLabel(locale, currentUser.role)}`
+              : locale === 'zh'
+                ? '当前登录：未识别'
+                : 'Signed in as: Unknown'}
           </p>
         </div>
         <div className="quiet-card rounded-[20px] p-5">

@@ -25,6 +25,23 @@ function SectionIntro({ intro }: { intro: BenchmarkOpsSectionIntro }) {
   );
 }
 
+function roleKeywordLabel(locale: 'zh' | 'en', role: 'owner' | 'admin' | 'operator' | 'viewer') {
+  if (locale === 'zh') {
+    return {
+      owner: '负责人',
+      admin: '管理员',
+      operator: '操作员',
+      viewer: '查看者',
+    }[role];
+  }
+  return {
+    owner: 'Owner',
+    admin: 'Admin',
+    operator: 'Operator',
+    viewer: 'Viewer',
+  }[role];
+}
+
 export default function BenchmarkOpsShell() {
   const shell = useBenchmarkOpsConsole();
   const shellCopy = getBenchmarkOpsShellCopy(shell.locale);
@@ -87,6 +104,15 @@ export default function BenchmarkOpsShell() {
                 <p className="mt-3 text-[1.4rem] font-semibold leading-snug">{viewModel.selectedBundle?.project.name ?? '—'}</p>
                 <p className="mt-3 text-sm leading-7 text-[rgba(248,250,252,0.74)]">
                   {viewModel.selectedBundle?.project.description ?? copy.emptyProjects}
+                </p>
+                <p className="mt-3 text-xs uppercase tracking-[0.14em] text-[rgba(248,250,252,0.62)]">
+                  {shell.currentUser
+                    ? shell.locale === 'zh'
+                      ? `当前登录：${shell.currentUser.name} · ${roleKeywordLabel(shell.locale, shell.currentUser.role)}`
+                      : `Signed in: ${shell.currentUser.name} · ${roleKeywordLabel(shell.locale, shell.currentUser.role)}`
+                    : shell.locale === 'zh'
+                      ? '当前登录：未识别'
+                      : 'Signed in: unknown'}
                 </p>
                 <div className="soft-rule mt-5 grid gap-4 pt-5 sm:grid-cols-2">
                   <div>
@@ -259,6 +285,7 @@ export default function BenchmarkOpsShell() {
             <GovernancePanel
               locale={shell.locale}
               selectedBundle={viewModel.selectedBundle}
+              currentUser={shell.currentUser}
               intro={{ eyebrow: copy.governanceTitle, title: copy.governanceHeadline, body: copy.governanceBody, align: 'compact' }}
               copy={copy}
             />

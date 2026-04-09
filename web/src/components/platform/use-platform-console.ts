@@ -20,6 +20,7 @@ import type {
   PlatformBenchmarkRun,
   PlatformProjectBundle,
   PlatformProblemItem,
+  PlatformRole,
 } from '@/lib/platform-types';
 
 const DISPLAY_MODEL = 'Qwen/Qwen3-235B-A22B-Thinking-2507';
@@ -306,6 +307,12 @@ function relativePathForUpload(file: File) {
   return fileWithRelativePath.webkitRelativePath?.trim() || file.name;
 }
 
+type ConsoleActor = {
+  id: string;
+  name: string;
+  role: PlatformRole;
+};
+
 export function useBenchmarkOpsConsole() {
   const { locale } = useLocale();
   const copy = COPY[locale];
@@ -347,8 +354,32 @@ export function useBenchmarkOpsConsole() {
   const [busyKey, setBusyKey] = useState<string | null>(null);
   const [liveArtifact, setLiveArtifact] = useState<ProofBenchArtifact | null>(null);
   const [liveRunId, setLiveRunId] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<ConsoleActor | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const folderInputRef = useRef<HTMLInputElement | null>(null);
+
+  function redirectToLogin() {
+    const next = `${window.location.pathname}${window.location.search}`;
+    window.location.assign(`/dataflow/proofbench/login?next=${encodeURIComponent(next)}`);
+  }
+
+  async function parseJson<T>(response: Response): Promise<T | null> {
+    try {
+      return (await response.json()) as T;
+    } catch {
+      return null;
+    }
+  }
+
+  async function assertAuthorized(response: Response) {
+    if (response.status === 401) {
+      redirectToLogin();
+      throw new Error(localeKey === 'zh' ? '登录态已失效，正在跳转登录。' : 'Session expired. Redirecting to sign in.');
+    }
+    if (response.status === 403) {
+      throw new Error(localeKey === 'zh' ? '当前账号无权限执行该操作。' : 'You do not have permission for this action.');
+    }
+  }
 
   function adminTabId(view: BenchmarkOpsAdminView) {
     return `${ids.adminTabs}-${view}-tab`;
@@ -362,11 +393,13 @@ export function useBenchmarkOpsConsole() {
     try {
       if (!silent) setBusyKey('loading');
       const response = await fetch('/api/platform/projects', { cache: 'no-store' });
-      const payload = (await response.json()) as { projects?: PlatformProjectBundle[]; error?: string };
+      await assertAuthorized(response);
+      const payload = (await parseJson<{ projects?: PlatformProjectBundle[]; actor?: ConsoleActor; error?: string }>(response)) ?? {};
       if (!response.ok) {
         throw new Error(payload.error ?? 'Failed to load projects.');
       }
       const projects = payload.projects ?? [];
+      setCurrentUser(payload.actor ?? null);
       setError(null);
       setBundles(projects);
       setSelectedProjectId((current) =>
@@ -504,7 +537,8 @@ export function useBenchmarkOpsConsole() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: projectName, description: projectDescription }),
       });
-      const payload = (await response.json()) as { project?: { id: string }; error?: string };
+      await assertAuthorized(response);
+      const payload = (await parseJson<{ project?: { id: string }; error?: string }>(response)) ?? {};
       if (!response.ok || !payload.project) {
         throw new Error(payload.error ?? 'Failed to create project.');
       }
@@ -532,11 +566,13 @@ export function useBenchmarkOpsConsole() {
         method: 'POST',
         body: formData,
       });
-      const payload = (await response.json()) as {
-        importedItems?: PlatformProblemItem[];
-        warnings?: string[];
-        error?: string;
-      };
+      await assertAuthorized(response);
+      const payload =
+        (await parseJson<{
+          importedItems?: PlatformProblemItem[];
+          warnings?: string[];
+          error?: string;
+        }>(response)) ?? {};
       if (!response.ok) {
         throw new Error(payload.error ?? 'Upload failed.');
       }
@@ -570,10 +606,11 @@ export function useBenchmarkOpsConsole() {
           tags: itemForm.tags
             .split(',')
             .map((tag) => tag.trim())
-            .filter(Boolean),
+          .filter(Boolean),
         }),
       });
-      const payload = (await response.json()) as { item?: PlatformProblemItem; error?: string };
+      await assertAuthorized(response);
+      const payload = (await parseJson<{ item?: PlatformProblemItem; error?: string }>(response)) ?? {};
       if (!response.ok || !payload.item) {
         throw new Error(payload.error ?? 'Failed to create item.');
       }
@@ -609,11 +646,13 @@ export function useBenchmarkOpsConsole() {
           problemItemId: selectedItem.id,
         }),
       });
-      const payload = (await response.json()) as {
-        runId?: string;
-        artifact?: ProofBenchArtifact;
-        error?: string;
-      };
+      await assertAuthorized(response);
+      const payload =
+        (await parseJson<{
+          runId?: string;
+          artifact?: ProofBenchArtifact;
+          error?: string;
+        }>(response)) ?? {};
       if (!response.ok) {
         throw new Error(payload.error ?? 'Run failed.');
       }
@@ -650,6 +689,7 @@ export function useBenchmarkOpsConsole() {
         throw new Error(localeKey === 'zh' ? '该运行没有 JSON 产物。' : 'No JSON artifact for this run.');
       }
       const response = await fetch(`/api/platform/artifacts/download?artifactId=${jsonArtifact.id}`);
+      await assertAuthorized(response);
       if (!response.ok) {
         throw new Error(localeKey === 'zh' ? '无法读取 JSON 产物。' : 'Failed to read JSON artifact.');
       }
@@ -701,6 +741,7 @@ export function useBenchmarkOpsConsole() {
     adminTabs,
     fileInputRef,
     folderInputRef,
+    currentUser,
     adminTabId,
     adminPanelId,
     setAdminView,
