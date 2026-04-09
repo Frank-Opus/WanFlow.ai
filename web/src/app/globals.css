@@ -394,6 +394,8 @@ html[lang='zh-CN'] .zh-card-title {
   --mk-brand-3: #2f9195;
   --mk-proof: #b78b45;
   --mk-shadow: 0 24px 70px rgba(18, 32, 43, 0.08);
+  --mk-shadow-card: 0 18px 38px rgba(18, 32, 43, 0.06);
+  --mk-shadow-hover: 0 28px 52px rgba(18, 32, 43, 0.12);
   --mk-bg-0: var(--mk-bg);
   --mk-bg-1: var(--mk-bg-alt);
   --mk-bg-2: var(--mk-surface-2);
@@ -407,13 +409,13 @@ html[lang='zh-CN'] .zh-card-title {
 @keyframes mkt-fade-up {
   from {
     opacity: 0;
-    transform: translate3d(0, 28px, 0) scale(0.962);
-    filter: blur(8px);
+    transform: translate3d(0, 22px, 0) scale(0.972);
+    filter: blur(6px);
   }
 
   62% {
     opacity: 1;
-    transform: translate3d(0, -4px, 0) scale(1.012);
+    transform: translate3d(0, -2px, 0) scale(1.007);
     filter: blur(0);
   }
 
@@ -427,13 +429,13 @@ html[lang='zh-CN'] .zh-card-title {
 @keyframes mkt-section-pop {
   from {
     opacity: 0;
-    transform: translate3d(0, 34px, 0) scale(0.95);
-    filter: blur(10px);
+    transform: translate3d(0, 28px, 0) scale(0.96);
+    filter: blur(8px);
   }
 
   58% {
     opacity: 1;
-    transform: translate3d(0, -5px, 0) scale(1.014);
+    transform: translate3d(0, -3px, 0) scale(1.008);
     filter: blur(0);
   }
 
@@ -447,13 +449,13 @@ html[lang='zh-CN'] .zh-card-title {
 @keyframes mkt-card-pop {
   from {
     opacity: 0;
-    transform: translate3d(0, 24px, 0) scale(0.958);
-    filter: blur(8px);
+    transform: translate3d(0, 18px, 0) scale(0.968);
+    filter: blur(6px);
   }
 
   64% {
     opacity: 1;
-    transform: translate3d(0, -3px, 0) scale(1.01);
+    transform: translate3d(0, -2px, 0) scale(1.006);
     filter: blur(0);
   }
 
@@ -506,12 +508,12 @@ html[lang='zh-CN'] .zh-card-title {
 
 .mkt-reveal {
   opacity: 0;
-  transform: translate3d(0, 24px, 0) scale(0.976);
-  filter: blur(7px);
+  transform: translate3d(0, 20px, 0) scale(0.982);
+  filter: blur(5px);
   transition:
-    opacity 820ms var(--mk-ease-out) var(--reveal-delay, 0ms),
-    transform 820ms var(--mk-ease-out) var(--reveal-delay, 0ms),
-    filter 820ms var(--mk-ease-out) var(--reveal-delay, 0ms);
+    opacity 860ms var(--mk-ease-out) var(--reveal-delay, 0ms),
+    transform 860ms var(--mk-ease-out) var(--reveal-delay, 0ms),
+    filter 860ms var(--mk-ease-out) var(--reveal-delay, 0ms);
   will-change: transform, opacity, filter;
 }
 
@@ -522,43 +524,43 @@ html[lang='zh-CN'] .zh-card-title {
 }
 
 .mkt-reveal-strong {
-  transform: translate3d(0, 28px, 0) scale(0.966);
-  filter: blur(8px);
+  transform: translate3d(0, 22px, 0) scale(0.974);
+  filter: blur(6px);
 }
 
 .mkt-reveal-hero {
-  transform: translate3d(0, 32px, 0) scale(0.958);
-  filter: blur(10px);
+  transform: translate3d(0, 24px, 0) scale(0.968);
+  filter: blur(7px);
 }
 
 .mkt-reveal[data-in-view='true'].mkt-reveal-strong,
 .mkt-reveal[data-in-view='true'].mkt-reveal-hero {
-  animation: mkt-section-pop 1040ms var(--mk-ease-out) both;
+  animation: mkt-section-pop 980ms var(--mk-ease-out) both;
   animation-delay: var(--reveal-delay, 0ms);
 }
 
 .mkt-reveal .mkt-stagger-grid > * {
   opacity: 0;
-  transform: translate3d(0, 20px, 0) scale(0.968);
+  transform: translate3d(0, 16px, 0) scale(0.976);
   transition:
-    opacity 760ms var(--mk-ease-soft),
-    transform 760ms var(--mk-ease-soft);
+    opacity 780ms var(--mk-ease-soft),
+    transform 780ms var(--mk-ease-soft);
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-stagger-grid > * {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
-  animation: mkt-fade-up 860ms var(--mk-ease-out) both;
+  animation: mkt-fade-up 900ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal-strong .mkt-stagger-grid > *,
 .mkt-reveal-hero .mkt-stagger-grid > * {
-  transform: translate3d(0, 24px, 0) scale(0.958);
+  transform: translate3d(0, 18px, 0) scale(0.968);
 }
 
 .mkt-reveal[data-in-view='true'].mkt-reveal-strong .mkt-stagger-grid > *,
 .mkt-reveal[data-in-view='true'].mkt-reveal-hero .mkt-stagger-grid > * {
-  animation: mkt-card-pop 940ms var(--mk-ease-out) both;
+  animation: mkt-card-pop 900ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-stagger-grid > *:nth-child(1) {
@@ -586,12 +588,12 @@ html[lang='zh-CN'] .zh-card-title {
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-hero-stage {
-  animation: mkt-fade-up 940ms var(--mk-ease-out) both;
+  animation: mkt-fade-up 980ms var(--mk-ease-out) both;
   transform-origin: 50% 100%;
 }
 
 .mkt-reveal[data-in-view='true'].mkt-reveal-hero .mkt-hero-stage {
-  animation: mkt-section-pop 1100ms var(--mk-ease-out) both;
+  animation: mkt-section-pop 1040ms var(--mk-ease-out) both;
 }
 
 .mkt-reveal[data-in-view='true'] .mkt-hero-stage-1 {
@@ -726,12 +728,31 @@ html[lang='zh-CN'] .zh-card-title {
   overflow: hidden;
   border: 1px solid var(--mk-line-1);
   background: linear-gradient(180deg, var(--mk-surface-1), var(--mk-surface-0));
-  box-shadow: var(--mk-shadow);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--mk-shadow-card);
   transition:
     transform 240ms var(--mk-ease-soft),
     border-color 240ms var(--mk-ease-soft),
     box-shadow 240ms var(--mk-ease-soft),
     background 240ms var(--mk-ease-soft);
+}
+
+.mkt-panel::after,
+.mkt-card::after,
+.mkt-case-card::after,
+.mkt-proof-panel::after,
+.mkt-form-panel::after,
+.mkt-module-card::after,
+.mkt-rail-card::after,
+.mkt-split-callout::after,
+.mkt-flow-step::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.18), transparent 78%);
+  pointer-events: none;
 }
 
 .mkt-panel,
@@ -750,11 +771,14 @@ html[lang='zh-CN'] .zh-card-title {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 18%),
     linear-gradient(180deg, #e7f0f4 0%, #dde8ee 62%, #d7e4ea 100%);
+  box-shadow: var(--mk-shadow);
 }
 
 .mkt-card-highlight {
   border-color: var(--mk-line-2);
-  background: linear-gradient(180deg, #f3f8fa 0%, #e6eff4 100%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 18%),
+    linear-gradient(180deg, #f3f8fa 0%, #e6eff4 100%);
 }
 
 .mkt-grid-lines::before {
@@ -849,6 +873,7 @@ html[lang='zh-CN'] .mkt-title {
 .mkt-copy {
   color: var(--mk-text-1);
   line-height: 1.78;
+  text-wrap: pretty;
 }
 
 html[lang='zh-CN'] .mkt-copy {
@@ -1025,6 +1050,7 @@ html[lang='zh-CN'] .mkt-metric-value {
   display: flex;
   gap: 0.75rem;
   align-items: flex-start;
+  line-height: 1.7;
 }
 
 .mkt-list-dot {
@@ -1205,7 +1231,7 @@ html[lang='zh-CN'] .mkt-metric-value {
   .mkt-flow-step:hover,
   .mkt-hero-rail:hover {
     transform: translate3d(0, -6px, 0) scale(1.015);
-    box-shadow: 0 30px 54px rgba(18, 32, 43, 0.14);
+    box-shadow: var(--mk-shadow-hover);
   }
 
   .mkt-reveal-hero .mkt-card:hover,
@@ -1225,7 +1251,7 @@ html[lang='zh-CN'] .mkt-metric-value {
   .mkt-reveal-strong .mkt-flow-step:hover,
   .mkt-reveal-strong .mkt-hero-rail:hover {
     transform: translate3d(0, -8px, 0) scale(1.02);
-    box-shadow: 0 34px 62px rgba(18, 32, 43, 0.16);
+    box-shadow: 0 34px 62px rgba(18, 32, 43, 0.14);
   }
 
   .mkt-card:hover,
