@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 async function prepareStablePage(page: Page, path: string) {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(path);
   await page.waitForLoadState('networkidle');
   await page.addStyleTag({

@@ -1,0 +1,16 @@
+.git
+.gitignore
+.worktrees
+.superpowers
+__pycache__
+.pytest_cache
+.mypy_cache
+platform-data
+runs
+*.log
+web/node_modules
+web/.next
+web/.next-dev
+web/playwright-report
+web/test-results
+web/.vercel

@@ -1,0 +1,44 @@
+services:
+  wanflow-web:
+    container_name: wanflow-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      HOST: ${HOST:-0.0.0.0}
+      PORT: ${PORT:-3010}
+      WANFLOW_PLATFORM_DIR: ${WANFLOW_PLATFORM_DIR:-/data/wanflow-platform}
+      WANFLOW_MARKETING_LEADS_DIR: ${WANFLOW_MARKETING_LEADS_DIR:-/data/wanflow-platform/marketing-leads}
+      WANFLOW_QWEN_API_KEY: ${WANFLOW_QWEN_API_KEY:?WANFLOW_QWEN_API_KEY is required}
+      WANFLOW_PYTHON_BIN: ${WANFLOW_PYTHON_BIN:-/opt/venv/bin/python}
+      WANFLOW_BASE_URL: ${WANFLOW_BASE_URL:-http://35.220.164.252:3888/v1/}
+      WANFLOW_DEFAULT_MODEL: ${WANFLOW_DEFAULT_MODEL:-Qwen/Qwen3-235B-A22B-Thinking-2507}
+      WANFLOW_SKIP_MODEL_CATALOG_CHECK: ${WANFLOW_SKIP_MODEL_CATALOG_CHECK:-0}
+      WANFLOW_SESSION_COOKIE: ${WANFLOW_SESSION_COOKIE:-wanflow_session}
+      WANFLOW_SESSION_SECRET: ${WANFLOW_SESSION_SECRET:?WANFLOW_SESSION_SECRET is required}
+      WANFLOW_SESSION_TTL_SECONDS: ${WANFLOW_SESSION_TTL_SECONDS:-43200}
+      WANFLOW_ADMIN_EMAIL: ${WANFLOW_ADMIN_EMAIL:-wanflow@163.com}
+      WANFLOW_ADMIN_PASSWORD: ${WANFLOW_ADMIN_PASSWORD:?WANFLOW_ADMIN_PASSWORD is required}
+      WANFLOW_ADMIN_NAME: ${WANFLOW_ADMIN_NAME:-Frank Xu}
+      WANFLOW_ADMIN_ROLE: ${WANFLOW_ADMIN_ROLE:-owner}
+      WANFLOW_AUTH_ENABLE_OAUTH: ${WANFLOW_AUTH_ENABLE_OAUTH:-0}
+      WANFLOW_AUTH_SSO_HINT: ${WANFLOW_AUTH_SSO_HINT:-reserved-for-enterprise-sso}
+    ports:
+      - "127.0.0.1:${PORT:-3010}:${PORT:-3010}"
+    volumes:
+      - type: bind
+        source: ${WANFLOW_PLATFORM_HOST_DIR:-./platform-data}
+        target: ${WANFLOW_PLATFORM_DIR:-/data/wanflow-platform}
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch('http://127.0.0.1:' + (process.env.PORT || '3010') + '/api/health').then((res) => { if (!res.ok) process.exit(1); }).catch(() => process.exit(1))
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s

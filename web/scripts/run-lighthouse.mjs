@@ -1,3 +1,4 @@
+import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,6 +9,7 @@ import { chromium } from '@playwright/test';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 const outputDir = path.join(projectRoot, '.lighthouse');
+const runtimeRoot = path.join(outputDir, '.runtime');
 const port = Number(process.env.LIGHTHOUSE_PORT ?? process.env.PORT ?? 3401);
 const baseURL = process.env.LIGHTHOUSE_BASE_URL ?? `http://127.0.0.1:${port}`;
 
@@ -30,6 +32,77 @@ function formatScore(value) {
     return 'n/a';
   }
   return `${Math.round(value * 100)}`;
+}
+
+async function wait(ms) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function probeServer(url, attempts = 60) {
+  for (let index = 0; index < attempts; index += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: { 'user-agent': 'wanflow-lighthouse-probe' },
+        signal: AbortSignal.timeout(2000),
+      });
+      if (response.ok) {
+        return true;
+      }
+    } catch {
+      // Keep polling until the server is reachable or the attempt budget ends.
+    }
+    await wait(1000);
+  }
+
+  return false;
+}
+
+async function ensureBuildArtifacts() {
+  const buildIdPath = path.join(projectRoot, '.next', 'BUILD_ID');
+  try {
+    await fs.access(buildIdPath);
+  } catch {
+    throw new Error('Missing Next.js production build. Run `cd web && npm run build` before `npm run audit:lighthouse`.');
+  }
+}
+
+async function startAuditServer() {
+  await ensureBuildArtifacts();
+  await fs.rm(runtimeRoot, { recursive: true, force: true });
+  const platformDir = path.join(runtimeRoot, 'platform-data');
+  const leadsDir = path.join(runtimeRoot, 'marketing-leads');
+  await fs.mkdir(platformDir, { recursive: true });
+  await fs.mkdir(leadsDir, { recursive: true });
+
+  const server = spawn('npm', ['run', 'start', '--', '--hostname', '127.0.0.1', '--port', String(port)], {
+    cwd: projectRoot,
+    env: {
+      ...process.env,
+      HOST: '127.0.0.1',
+      PORT: String(port),
+      WANFLOW_PLATFORM_DIR: platformDir,
+      WANFLOW_MARKETING_LEADS_DIR: leadsDir,
+    },
+    stdio: 'pipe',
+  });
+
+  let stderr = '';
+  server.stderr.on('data', (chunk) => {
+    stderr += String(chunk);
+  });
+
+  const ready = await probeServer(baseURL);
+  if (!ready) {
+    server.kill('SIGTERM');
+    throw new Error(`Timed out waiting for Lighthouse audit server on ${baseURL}.\n${stderr}`.trim());
+  }
+
+  return server;
+}
+
+let auditServer = null;
+if (!(await probeServer(baseURL, 2))) {
+  auditServer = await startAuditServer();
 }
 
 const chrome = await chromeLauncher.launch({
@@ -87,6 +160,10 @@ try {
   }
 } finally {
   await chrome.kill();
+  if (auditServer) {
+    auditServer.kill('SIGTERM');
+    await wait(500);
+  }
 }
 
 if (failures.length > 0) {
