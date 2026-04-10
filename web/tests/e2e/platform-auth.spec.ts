@@ -1,26 +1,5 @@
 import { expect, test } from '@playwright/test';
 
-function parseCookie(rawSetCookie: string | null): { name: string; value: string } | null {
-  if (!rawSetCookie) {
-    return null;
-  }
-
-  const firstSegment = rawSetCookie.split(';', 1)[0]?.trim();
-  if (!firstSegment) {
-    return null;
-  }
-
-  const separatorIndex = firstSegment.indexOf('=');
-  if (separatorIndex <= 0) {
-    return null;
-  }
-
-  return {
-    name: firstSegment.slice(0, separatorIndex),
-    value: firstSegment.slice(separatorIndex + 1),
-  };
-}
-
 test.describe('platform credentials auth flow', () => {
   test.skip(({ isMobile }) => isMobile);
 
@@ -95,38 +74,15 @@ test.describe('platform credentials auth flow', () => {
 
     const loginResponse = await loginResponsePromise;
     expect(loginResponse.ok()).toBeTruthy();
+    expect(loginResponse.status()).toBe(200);
 
-    const payload = (await loginResponse.json()) as { ok?: boolean; redirectTo?: string };
-    expect(payload.ok).toBe(true);
-    expect(payload.redirectTo).toBe('/dataflow/proofbench');
-
-    const sessionCookie = parseCookie(await loginResponse.headerValue('set-cookie'));
-    expect(sessionCookie?.name).toBe('wanflow_session');
-    expect(sessionCookie?.value?.length).toBeGreaterThan(10);
-
-    if (!sessionCookie) {
-      throw new Error('Missing session cookie from login response.');
-    }
-
-    await context.addCookies([
-      {
-        name: sessionCookie.name,
-        value: sessionCookie.value,
-        domain: '127.0.0.1',
-        path: '/',
-        httpOnly: true,
-        secure: false,
-        sameSite: 'Lax',
-      },
-    ]);
-
-    await page.goto('/dataflow/proofbench');
+    await page.waitForURL(/\/dataflow\/proofbench$/);
     await page.waitForLoadState('networkidle');
-
     await expect(page).toHaveURL(/\/dataflow\/proofbench$/);
     await expect(page.getByText(/项目工作台|Project workspace/i).first()).toBeVisible();
 
     const cookies = await context.cookies();
-    expect(cookies.some((cookie) => cookie.name === 'wanflow_session')).toBeTruthy();
+    const sessionCookie = cookies.find((cookie) => cookie.name === 'wanflow_session');
+    expect(sessionCookie?.value.length).toBeGreaterThan(10);
   });
 });

@@ -19,6 +19,11 @@ export type SessionCookieSetOptions = {
   maxAge: number;
 };
 
+type RequestLike = {
+  url: string;
+  headers: Pick<Headers, 'get'>;
+};
+
 function signPayload(payload: string, secret: string): string {
   return createHmac('sha256', secret).update(payload).digest('base64url');
 }
@@ -98,4 +103,20 @@ export function createSessionCookieClearOptions(secure: boolean): SessionCookieS
     expires: new Date(0),
     maxAge: 0,
   };
+}
+
+export function resolveSessionCookieSecure(request: RequestLike, fallback: boolean): boolean {
+  const forwardedProto = request.headers.get('x-forwarded-proto')?.split(',')[0]?.trim().toLowerCase();
+  if (forwardedProto === 'https') {
+    return true;
+  }
+  if (forwardedProto === 'http') {
+    return false;
+  }
+
+  try {
+    return new URL(request.url).protocol === 'https:';
+  } catch {
+    return fallback;
+  }
 }

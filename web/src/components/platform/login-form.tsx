@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 type LoginState = 'idle' | 'submitting' | 'error';
 
@@ -27,7 +26,6 @@ type PlatformLoginFormProps = {
 };
 
 export default function PlatformLoginForm({ nextPath: nextPathInput }: PlatformLoginFormProps) {
-  const router = useRouter();
   const nextPath = normalizeNextPath(nextPathInput);
 
   const [email, setEmail] = useState('');
@@ -66,8 +64,8 @@ export default function PlatformLoginForm({ nextPath: nextPathInput }: PlatformL
         throw new Error(payload.error || '登录失败，请稍后再试。');
       }
 
-      router.replace(payload.redirectTo || nextPath);
-      router.refresh();
+      window.location.assign(payload.redirectTo || nextPath);
+      return;
     } catch (error) {
       setStatus('error');
       setMessage(error instanceof Error ? error.message : '登录失败，请稍后再试。');

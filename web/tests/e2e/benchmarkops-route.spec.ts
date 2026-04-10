@@ -1,15 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { BENCHMARKOPS_PRODUCT_TITLE } from '../../../DataFlow/proofbench/lib/constants';
 
 const marketingPages = ['/', '/solutions', '/cases', '/about', '/contact'] as const;
 
 test.describe('benchmarkops canonical route', () => {
-  test('formal product title is visible on /dataflow/proofbench', async ({ page }) => {
+  test('canonical /dataflow/proofbench route redirects to the protected login page', async ({ page }) => {
     await page.goto('/dataflow/proofbench');
     await page.waitForLoadState('networkidle');
 
-    await expect(page.getByTestId('benchmarkops-formal-shell')).toBeVisible();
-    await expect(page.getByTestId('benchmarkops-formal-title')).toHaveText(BENCHMARKOPS_PRODUCT_TITLE);
+    await expect(page).toHaveURL(/\/dataflow\/proofbench\/login\?next=%2Fdataflow%2Fproofbench$/);
+    await expect(page.getByRole('heading', { name: '登录 BenchmarkOps 企业评测台' })).toBeVisible();
   });
 
   test('marketing pages do not expose the legacy /proofbench route', async ({ page }) => {

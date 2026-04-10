@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { getAuthConfig } from '@/lib/auth/auth-config';
 import { getAuthProvider } from '@/lib/auth/providers';
-import { createSessionCookieSetOptions, createSessionCookieValue } from '@/lib/auth/session';
+import { createSessionCookieSetOptions, createSessionCookieValue, resolveSessionCookieSecure } from '@/lib/auth/session';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -36,6 +36,7 @@ export async function POST(request: Request) {
   }
 
   const config = getAuthConfig();
+  const cookieSecure = resolveSessionCookieSecure(request, config.cookieSecure);
   const redirectTo = normalizeNextPath(payload.next, '/dataflow/proofbench');
   const email = payload.email?.trim() ?? '';
   const password = payload.password ?? '';
@@ -61,7 +62,7 @@ export async function POST(request: Request) {
       secret: config.sessionSecret,
       ttlSeconds: config.sessionTtlSeconds,
     }),
-    createSessionCookieSetOptions(config.sessionTtlSeconds, config.cookieSecure)
+    createSessionCookieSetOptions(config.sessionTtlSeconds, cookieSecure)
   );
 
   return NextResponse.json({

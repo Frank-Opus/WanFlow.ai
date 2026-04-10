@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { AuthUser } from './auth-types.ts';
-import { createSessionCookieValue, parseSessionCookieValue } from './session.ts';
+import { createSessionCookieValue, parseSessionCookieValue, resolveSessionCookieSecure } from './session.ts';
 
 const USER: AuthUser = {
   id: 'owner-frank',
@@ -37,4 +37,30 @@ test('parseSessionCookieValue rejects expired cookies', () => {
 test('parseSessionCookieValue rejects cookies with wrong secret', () => {
   const raw = createSessionCookieValue(USER, { secret: 'test-secret', ttlSeconds: 60 });
   assert.equal(parseSessionCookieValue(raw, { secret: 'wrong-secret' }), null);
+});
+
+test('resolveSessionCookieSecure trusts forwarded https headers', () => {
+  assert.equal(
+    resolveSessionCookieSecure(
+      {
+        url: 'http://127.0.0.1:3401/api/auth/login',
+        headers: new Headers({ 'x-forwarded-proto': 'https' }),
+      },
+      false
+    ),
+    true
+  );
+});
+
+test('resolveSessionCookieSecure stays false for local http requests', () => {
+  assert.equal(
+    resolveSessionCookieSecure(
+      {
+        url: 'http://127.0.0.1:3401/api/auth/login',
+        headers: new Headers(),
+      },
+      true
+    ),
+    false
+  );
 });
