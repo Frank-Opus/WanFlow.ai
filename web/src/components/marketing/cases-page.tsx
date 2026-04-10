@@ -39,7 +39,7 @@ export default function MarketingCasesPage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <MotionReveal delay={0}>
+        <MotionReveal delay={0} initiallyVisible>
           <PageHero
             eyebrow={copy.cases.intro.eyebrow}
             title={copy.cases.intro.title}

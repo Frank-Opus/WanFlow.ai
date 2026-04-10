@@ -21,7 +21,7 @@ export default function MarketingAboutPage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <MotionReveal delay={0}>
+        <MotionReveal delay={0} initiallyVisible>
           <PageHero
             eyebrow={copy.about.hero.eyebrow}
             title={copy.about.hero.title}

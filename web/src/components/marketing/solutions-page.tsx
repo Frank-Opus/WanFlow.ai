@@ -40,7 +40,7 @@ export default function MarketingSolutionsPage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <MotionReveal delay={0} intensity="hero">
+        <MotionReveal delay={0} intensity="hero" initiallyVisible>
           <PageHero
             eyebrow={copy.solutions.problemFrame.eyebrow}
             title={copy.solutions.problemFrame.title}

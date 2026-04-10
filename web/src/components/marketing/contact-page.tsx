@@ -23,7 +23,7 @@ export default function MarketingContactPage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <MotionReveal delay={0}>
+        <MotionReveal delay={0} initiallyVisible>
           <PageHero
             eyebrow={copy.contact.hero.eyebrow}
             title={copy.contact.hero.title}
@@ -33,7 +33,7 @@ export default function MarketingContactPage() {
             aside={
               <div className="space-y-4">
                 <p className="mkt-kicker">{labels.reach}</p>
-                <h3 className="zh-card-title text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.contact.side.responseTitle}</h3>
+                <h2 className="zh-card-title text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.contact.side.responseTitle}</h2>
                 <div className="space-y-3">
                   {copy.contact.side.contactItems.map((item) => (
                     <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">

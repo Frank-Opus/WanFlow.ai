@@ -8,6 +8,7 @@ type MotionRevealProps = HTMLAttributes<HTMLElement> & {
   children: ReactNode;
   delay?: number;
   intensity?: 'base' | 'strong' | 'hero';
+  initiallyVisible?: boolean;
   once?: boolean;
   threshold?: number;
   rootMargin?: string;
@@ -19,6 +20,7 @@ export default function MotionReveal({
   className,
   delay = 0,
   intensity = 'base',
+  initiallyVisible = false,
   once = true,
   threshold = 0.18,
   rootMargin = '0px 0px -10% 0px',
@@ -26,9 +28,14 @@ export default function MotionReveal({
   ...rest
 }: MotionRevealProps) {
   const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(initiallyVisible);
 
   useEffect(() => {
+    if (initiallyVisible) {
+      setVisible(true);
+      return;
+    }
+
     const node = ref.current;
     if (!node) return;
 
@@ -54,7 +61,7 @@ export default function MotionReveal({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [once, rootMargin, threshold]);
+  }, [initiallyVisible, once, rootMargin, threshold]);
 
   return (
     <Tag

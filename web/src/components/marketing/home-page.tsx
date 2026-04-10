@@ -29,7 +29,7 @@ export default function MarketingHomePage() {
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <MotionReveal delay={0} intensity="hero">
+        <MotionReveal delay={0} intensity="hero" initiallyVisible>
           <PageHero
             eyebrow={copy.home.hero.eyebrow}
             title={copy.home.hero.title}
