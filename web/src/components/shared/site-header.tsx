@@ -28,17 +28,8 @@ export default function SiteHeader() {
       </a>
 
       <header id="site-top" className="site-header-shell sticky top-0 z-40">
-        <div className="site-topline">
-          <div className="mkt-frame flex items-center justify-between gap-4 px-5 py-2 text-[0.68rem] uppercase tracking-[0.2em] text-[var(--mk-text-2)] lg:px-8 xl:px-10">
-            <p className="truncate">{copy.common.metaKicker}</p>
-            <span className="site-pill hidden rounded-full px-3 py-1 text-[var(--mk-text-1)] 2xl:inline-flex">
-              {copy.site.location}
-            </span>
-          </div>
-        </div>
-
         <div className="mkt-frame flex items-center justify-between gap-4 px-5 py-3.5 lg:px-8 xl:px-10">
-          <div className="flex min-w-0 items-center gap-4">
+          <div className="flex min-w-0 items-center">
             <Link href="/" className="site-brand-frame mkt-focus-ring inline-flex items-center rounded-[20px] px-3.5 py-2.5">
               <Image
                 src="/brand/logo-wide.png"
@@ -49,10 +40,6 @@ export default function SiteHeader() {
                 priority
               />
             </Link>
-            <div className="hidden min-w-0 2xl:block">
-              <p className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{copy.site.brand}</p>
-              <p className="mt-1 text-sm text-[var(--mk-text-1)]">{copy.site.tagline}</p>
-            </div>
           </div>
 
           <nav

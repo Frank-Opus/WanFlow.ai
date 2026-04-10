@@ -623,21 +623,6 @@ html[lang='zh-CN'] .zh-card-title {
     box-shadow 240ms var(--mk-ease-soft);
 }
 
-.site-topline {
-  border-bottom: 1px solid rgba(59, 88, 109, 0.1);
-  background: rgba(255, 255, 255, 0.78);
-  transition: background 220ms var(--mk-ease-soft), border-color 220ms var(--mk-ease-soft);
-}
-
-.site-pill {
-  border: 1px solid var(--mk-line-1);
-  background: rgba(255, 255, 255, 0.76);
-  transition:
-    transform 220ms var(--mk-ease-soft),
-    border-color 220ms var(--mk-ease-soft),
-    background 220ms var(--mk-ease-soft);
-}
-
 .site-brand-frame {
   border: 1px solid var(--mk-line-1);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 247, 249, 0.96));
@@ -1205,8 +1190,7 @@ html[lang='zh-CN'] .mkt-metric-value {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .site-brand-frame:hover,
-  .site-pill:hover {
+  .site-brand-frame:hover {
     transform: translateY(-1px);
   }
 

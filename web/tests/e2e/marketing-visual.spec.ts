@@ -8,6 +8,23 @@ async function prepareStablePage(page: Page, path: string) {
       *, *::before, *::after {
         caret-color: transparent !important;
       }
+
+      html {
+        scroll-behavior: auto !important;
+      }
+
+      .site-header-shell,
+      .mkt-panel,
+      .mkt-pop-surface,
+      .mkt-card,
+      .mkt-module-card,
+      .mkt-case-card,
+      .mkt-proof-panel,
+      .mkt-rail-card,
+      .mkt-split-callout,
+      .mkt-flow-step {
+        backdrop-filter: none !important;
+      }
     `,
   });
 }
