@@ -21,6 +21,7 @@ export default function HomePage() {
         '@type': 'ContactPoint',
         contactType: 'sales',
         email: siteContact.email,
+        telephone: siteContact.phone,
         availableLanguage: ['zh-CN', 'en'],
       },
     ],

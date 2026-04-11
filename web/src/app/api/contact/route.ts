@@ -2,6 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { NextResponse } from 'next/server';
+import { sendContactNotification } from '@/lib/contact-notify';
 import { PLATFORM_DIR } from '@/lib/platform-store';
 
 type ContactPayload = {
@@ -49,5 +50,11 @@ export async function POST(request: Request) {
   await mkdir(leadsDir, { recursive: true });
   await writeFile(path.join(leadsDir, `${record.createdAt.replace(/[:.]/g, '-')}-${record.id}.json`), JSON.stringify(record, null, 2));
 
-  return NextResponse.json({ ok: true, id: record.id });
+  try {
+    const notification = await sendContactNotification(record);
+    return NextResponse.json({ ok: true, id: record.id, emailDelivered: notification.delivered, emailMode: notification.mode });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Contact email forwarding failed.';
+    return NextResponse.json({ message }, { status: 502 });
+  }
 }

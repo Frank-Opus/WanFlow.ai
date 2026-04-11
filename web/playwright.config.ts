@@ -6,6 +6,7 @@ const baseURL = `http://127.0.0.1:${port}`;
 const runtimeRoot = path.join(__dirname, '.playwright-runtime');
 const platformDir = path.join(runtimeRoot, 'platform-data');
 const leadsDir = path.join(runtimeRoot, 'marketing-leads');
+const contactEmailDir = path.join(runtimeRoot, 'contact-email-outbox');
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -28,8 +29,10 @@ export default defineConfig({
     command:
       `rm -rf "${runtimeRoot}" && mkdir -p "${runtimeRoot}" && ` +
       `WANFLOW_PLATFORM_DIR="${platformDir}" WANFLOW_MARKETING_LEADS_DIR="${leadsDir}" ` +
+      `WANFLOW_CONTACT_EMAIL_MODE="json" WANFLOW_CONTACT_EMAIL_JSON_DIR="${contactEmailDir}" ` +
       `npm run build && ` +
       `WANFLOW_PLATFORM_DIR="${platformDir}" WANFLOW_MARKETING_LEADS_DIR="${leadsDir}" ` +
+      `WANFLOW_CONTACT_EMAIL_MODE="json" WANFLOW_CONTACT_EMAIL_JSON_DIR="${contactEmailDir}" ` +
       `npm run start -- --hostname 127.0.0.1 --port ${port}`,
     url: baseURL,
     // Always boot an isolated app instance so E2E does not attach to stray dev or audit servers.

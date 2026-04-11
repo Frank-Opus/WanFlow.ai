@@ -2,6 +2,7 @@ import type { Locale } from '@/lib/i18n';
 
 export const siteContact = {
   email: 'wanflow@163.com',
+  phone: '+86 18307010306',
   wechat: 'FrankXu0303',
   responseWindow: '24 hours',
 } as const;
@@ -61,7 +62,7 @@ const marketingCopyBase = {
         },
         {
           title: '联络方式',
-          items: [siteContact.email, `WeChat: ${siteContact.wechat}`, `响应：${responseWindowLocalized.zh}`],
+          items: [siteContact.email, `电话：${siteContact.phone}`, `WeChat: ${siteContact.wechat}`, `响应：${responseWindowLocalized.zh}`],
         },
       ],
       copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
@@ -439,9 +440,10 @@ const marketingCopyBase = {
           '你希望输出的不只是结果，还有可证明、可复盘的交付结构',
         ],
         responseTitle: '沟通方式',
-        responseBody: '你可以通过表单发起，也可以直接邮件联系。对于方向不明确的情况，我们也可以先做一次问题拆解。',
+        responseBody: '你可以通过表单发起，也可以直接邮件或电话联系。对于方向不明确的情况，我们也可以先做一次问题拆解。',
         contactItems: [
           `邮箱：${siteContact.email}`,
+          `电话：${siteContact.phone}`,
           `WeChat：${siteContact.wechat}`,
           `响应：${responseWindowLocalized.zh}`,
         ],
@@ -504,7 +506,7 @@ const marketingCopyBase = {
         },
         {
           title: 'Reach us',
-          items: [siteContact.email, `WeChat: ${siteContact.wechat}`, 'Replies within one business day'],
+          items: [siteContact.email, `Phone: ${siteContact.phone}`, `WeChat: ${siteContact.wechat}`, 'Replies within one business day'],
         },
       ],
       copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
@@ -881,9 +883,10 @@ const marketingCopyBase = {
           'You need outcomes with proof, traceability, and delivery structure',
         ],
         responseTitle: 'Ways to reach us',
-        responseBody: 'Use the form or email us directly. If the problem is still fuzzy, we can start with a structured problem-framing conversation.',
+        responseBody: 'Use the form, email, or call us directly. If the problem is still fuzzy, we can start with a structured problem-framing conversation.',
         contactItems: [
           `Email: ${siteContact.email}`,
+          `Phone: ${siteContact.phone}`,
           `WeChat: ${siteContact.wechat}`,
           `Response: ${responseWindowLocalized.en}`,
         ],
