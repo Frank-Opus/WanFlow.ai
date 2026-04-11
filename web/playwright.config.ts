@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { defineConfig, devices } from '@playwright/test';
 
-const port = Number(process.env.PLAYWRIGHT_PORT ?? 3401);
+const port = Number(process.env.PLAYWRIGHT_PORT ?? 3402);
 const baseURL = `http://127.0.0.1:${port}`;
 const runtimeRoot = path.join(__dirname, '.playwright-runtime');
 const platformDir = path.join(runtimeRoot, 'platform-data');
@@ -29,9 +29,11 @@ export default defineConfig({
       `rm -rf "${runtimeRoot}" && mkdir -p "${runtimeRoot}" && ` +
       `WANFLOW_PLATFORM_DIR="${platformDir}" WANFLOW_MARKETING_LEADS_DIR="${leadsDir}" ` +
       `npm run build && ` +
-      `WANFLOW_PLATFORM_DIR="${platformDir}" WANFLOW_MARKETING_LEADS_DIR="${leadsDir}" PORT=${port} npm run start`,
+      `WANFLOW_PLATFORM_DIR="${platformDir}" WANFLOW_MARKETING_LEADS_DIR="${leadsDir}" ` +
+      `npm run start -- --hostname 127.0.0.1 --port ${port}`,
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    // Always boot an isolated app instance so E2E does not attach to stray dev or audit servers.
+    reuseExistingServer: false,
     stdout: 'pipe',
     stderr: 'pipe',
     timeout: 120_000,

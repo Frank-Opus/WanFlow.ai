@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { once } from 'node:events';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,6 +11,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 const outputDir = path.join(projectRoot, '.lighthouse');
 const runtimeRoot = path.join(outputDir, '.runtime');
+const nextBin = path.join(projectRoot, 'node_modules', '.bin', 'next');
+const isExternalBaseURL = Boolean(process.env.LIGHTHOUSE_BASE_URL);
 const port = Number(process.env.LIGHTHOUSE_PORT ?? process.env.PORT ?? 3401);
 const baseURL = process.env.LIGHTHOUSE_BASE_URL ?? `http://127.0.0.1:${port}`;
 
@@ -74,7 +77,7 @@ async function startAuditServer() {
   await fs.mkdir(platformDir, { recursive: true });
   await fs.mkdir(leadsDir, { recursive: true });
 
-  const server = spawn('npm', ['run', 'start', '--', '--hostname', '127.0.0.1', '--port', String(port)], {
+  const server = spawn(nextBin, ['start', '--hostname', '127.0.0.1', '--port', String(port)], {
     cwd: projectRoot,
     env: {
       ...process.env,
@@ -100,8 +103,29 @@ async function startAuditServer() {
   return server;
 }
 
+async function stopAuditServer(server) {
+  if (!server || server.exitCode !== null) {
+    return;
+  }
+
+  server.kill('SIGTERM');
+  const exited = await Promise.race([
+    once(server, 'exit').then(() => true),
+    wait(5000).then(() => false),
+  ]);
+
+  if (!exited && server.exitCode === null) {
+    server.kill('SIGKILL');
+    await once(server, 'exit').catch(() => {});
+  }
+}
+
 let auditServer = null;
-if (!(await probeServer(baseURL, 2))) {
+if (isExternalBaseURL) {
+  if (!(await probeServer(baseURL))) {
+    throw new Error(`Timed out waiting for external Lighthouse target ${baseURL}.`);
+  }
+} else {
   auditServer = await startAuditServer();
 }
 
@@ -161,8 +185,7 @@ try {
 } finally {
   await chrome.kill();
   if (auditServer) {
-    auditServer.kill('SIGTERM');
-    await wait(500);
+    await stopAuditServer(auditServer);
   }
 }
 
