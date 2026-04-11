@@ -18,12 +18,12 @@ const responseWindowLocalized = {
 const marketingCopyBase = {
   zh: {
     site: {
-      title: 'WanFlow | 数据驱动的 AI 运营与交付伙伴',
+      title: 'WanFlow | 企业 AI 运营与交付伙伴',
       description:
-        'WanFlow 万物归流为企业提供 AI 数据标注、自动化数据处理、流程自动化、Process as a Service 与模型运营服务。',
+        'WanFlow 万物归流帮助企业把数据处理、流程自动化和模型运营真正接进业务里',
       brand: 'WanFlow',
       brandFull: 'WanFlow 万物归流',
-      tagline: 'Data-driven AI operations, built for enterprise delivery.',
+      tagline: '把 AI 真正接进业务里',
       location: '中国发起，全球交付',
     },
     nav: [
@@ -43,14 +43,15 @@ const marketingCopyBase = {
       en: 'EN',
       metaKicker: 'Data-driven AI operations',
       proofLabel: '可交付的 AI 运营系统',
-      proofNote: '从数据标注到模型运营，不止讲方法，更交付执行链。',
+      proofNote: '从数据标注到模型运营，我们把链路搭起来，也把结果交出去',
       finalPrimary: '发起业务沟通',
-      finalSecondary: '查看 WanFlow BenchmarkOps',
-      workbenchNote: '现有内部平台 WanFlow BenchmarkOps 可作为运营与交付证明层。',
+      finalSecondary: '查看案例',
+      workbenchNote: '把方法沉淀成可展示、可复盘、可验证的交付结构',
     },
     footer: {
+      companyName: '上海万流归智科技有限公司',
       description:
-        'WanFlow 把数据、流程和模型运营拉回同一条执行链，让企业 AI 项目从“能演示”走向“能交付、能扩展、能复盘”。',
+        'WanFlow 把数据、流程和模型运营接到一条线上，让 AI 项目不只看起来能跑，而是真的能交付',
       columns: [
         {
           title: '服务范围',
@@ -65,17 +66,21 @@ const marketingCopyBase = {
           items: [siteContact.email, `电话：${siteContact.phone}`, `WeChat: ${siteContact.wechat}`, `响应：${responseWindowLocalized.zh}`],
         },
       ],
-      copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
-      legal: 'WanFlow BenchmarkOps 作为内部运营平台持续提供能力证明。',
+      copyright: 'Copyright 2026 wanflowai.com. All rights reserved.',
+      legal: '围绕真实交付场景持续打磨方法与执行能力',
+      legalLinks: [
+        { href: '/privacy', label: '隐私政策' },
+        { href: '/terms', label: '服务条款' },
+      ],
     },
     home: {
       hero: {
-        eyebrow: '企业 AI 运营官网',
-        title: '把 AI 项目背后的数据与流程，真正跑成一套可交付系统。',
+        eyebrow: '企业 AI 运营与交付',
+        title: '让数据、流程和 AI 在业务里真正汇流',
         statement:
-          'WanFlow 万物归流是一家数据驱动型 AI 公司，面向企业提供 AI 数据标注、自动化数据处理、流程自动化、Process as a Service 与模型运营服务。',
+          '提供 AI 数据标注、自动化数据处理、流程自动化和模型运营服务，帮助企业实现稳定、安全、可落地的 AI 交付',
         body:
-          '我们不是只给建议，而是把执行链真正搭起来、跑起来、交付出去。',
+          '我们不只出建议，更把链路搭起来、跑起来、交付出去',
         primary: { label: '预约咨询', href: '/contact' },
         secondary: { label: '查看解决方案', href: '/solutions' },
       },
@@ -86,9 +91,9 @@ const marketingCopyBase = {
       ],
       platformView: {
         eyebrow: '平台 / 系统视角',
-        title: '像建设运营系统一样建设 AI 交付，而不是像做一次 demo。',
+        title: '把 AI 做成能长期运行的业务系统',
         body:
-          '对企业来说，真正难的不是“模型能不能跑起来”，而是数据如何准备、流程如何协同、人工与自动化如何编排、交付物如何稳定复现。WanFlow 的价值在于把这些环节连成一张可运营的网。',
+          '真正难的从来不是模型跑一次，而是数据怎么准备、流程怎么衔接、人工和自动化怎么配合、结果怎么稳定复现，WanFlow 做的就是把这些环节接顺',
         bullets: [
           '业务流程梳理与执行链设计',
           '复杂数据处理与结构化治理',
@@ -98,154 +103,154 @@ const marketingCopyBase = {
       },
       capabilityModules: {
         eyebrow: '能力模块',
-        title: '五个模块，一条执行链。',
+        title: '五个模块，一套持续进化的交付闭环',
         body:
-          '官网不把服务拆成彼此孤立的售卖项，而是让客户看到：这些模块如何从同一条数据与流程骨架里协同工作。',
+          '这五个模块不是彼此割裂的服务列表，而是同一套交付系统里的关键环节，能够持续运行、持续反馈、持续优化',
         items: [
           {
-            title: 'AI 数据标注',
-            body: '围绕业务目标设计标注规范、质检机制与产能节奏，而不是单纯堆人力。',
-            outcome: '形成可扩展的数据生产与验收机制。',
+            title: '数据标注与治理',
+            body: '把标注规范、数据标准、质检机制和治理节奏一起定清楚，让数据不只是产出，更能长期可用',
+            outcome: '建立稳定的数据基础',
           },
           {
-            title: '自动化数据处理',
-            body: '把清洗、抽取、归一化、结构化等高重复任务沉淀为可复用能力。',
-            outcome: '让数据从原料更快进入可用状态。',
+            title: '流程编排与自动化',
+            body: '把审批、流转、质检、系统动作和异常处理接进同一套执行流程，减少人为断点',
+            outcome: '让跨团队执行更顺、更稳',
           },
           {
-            title: '流程自动化',
-            body: '把人工审批、任务流转、质检回路与系统动作编排成稳定流程。',
-            outcome: '降低跨团队协作摩擦与交付波动。',
+            title: '企业级智能体',
+            body: '围绕企业任务构建安全、稳定、可控的智能体能力，让 AI 能真正参与执行，而不只是提供回答',
+            outcome: '把 AI 变成可管理的执行力量',
           },
           {
-            title: 'Process as a Service',
-            body: '把企业难以标准化的运营流程产品化，形成可持续外包与协同接口。',
-            outcome: '让复杂流程可以被持续执行与放大。',
+            title: '人机协同交付',
+            body: '把 AI 的执行效率和人的判断、复核、兜底结合起来，让复杂任务可以真实落地',
+            outcome: '兼顾效率、质量与交付确定性',
           },
           {
-            title: '模型运营服务',
-            body: '围绕模型表现、数据反馈、运行监控和交付证明，建立持续迭代闭环。',
-            outcome: '让模型能力成为一项被运营的业务资产。',
+            title: '模型运营与持续优化',
+            body: '围绕模型表现、业务反馈、运行监控和效果验证持续迭代，让系统越跑越稳、越用越准',
+            outcome: '形成可持续进化的运营闭环',
           },
         ],
       },
       deliveryFramework: {
         eyebrow: '交付框架',
-        title: '从问题梳理，到执行闭环，再到可证明结果。',
+        title: '先把问题看清，再把链路跑顺',
         body:
-          'WanFlow 的官网叙事不是“功能介绍”，而是“交付结构”。企业买的不只是能力点，而是一套可落地、可扩展、可追踪的运营系统。',
+          '企业真正买的不是几个能力点，而是一套能落地、能扩展、能复盘的交付方式',
         steps: [
-          { step: '01', title: '诊断业务瓶颈', body: '识别数据、流程、角色协作与模型运行中的真正卡点。' },
-          { step: '02', title: '设计执行骨架', body: '把任务接口、质检规则、自动化节点和责任边界定义清楚。' },
-          { step: '03', title: '跑通交付链路', body: '把数据处理、流程编排、运营动作与交付产物串成真实运行链。' },
-          { step: '04', title: '持续运营优化', body: '围绕结果、质量、成本与时效做持续迭代，而不是一次性交付。' },
+          { step: '01', title: '诊断业务瓶颈', body: '先找出数据、流程、协作和模型运行里真正卡住的地方' },
+          { step: '02', title: '设计执行骨架', body: '把任务接口、质检规则、自动化节点和责任边界定清楚' },
+          { step: '03', title: '跑通交付链路', body: '把数据处理、流程编排、运营动作和交付产物接成真实链路' },
+          { step: '04', title: '持续运营优化', body: '围绕结果、质量、成本和时效持续优化' },
         ],
       },
       proofLayer: {
         eyebrow: '证明层',
-        title: '我们更像一支 AI 运营团队，而不是只交一份方案。',
-        body: 'WanFlow BenchmarkOps 不作为首页主角出现，而是作为中段证明层，说明 WanFlow 如何把内部执行方法真正沉淀为可展示、可复盘、可验证的运营系统。',
+        title: '我们更像一起下场的运营团队',
+        body: '我们会把方法沉淀成可展示、可复盘、可验证的交付结构，让客户看得见这件事是怎么被做成的',
         items: [
           {
-            title: '数据与流程一体化看问题',
-            body: '不把“数据问题”“流程问题”“模型问题”割裂开，而是从执行链角度统一设计。',
+            title: '数据、流程和模型一起看',
+            body: '不把问题拆成互相割裂的几块，而是从整条执行链出发',
           },
           {
             title: '服务不是黑盒外包',
-            body: '每个环节都强调规范、质检、节奏、反馈与可复盘性，方便企业长期协作。',
+            body: '每个环节都讲规范、节奏、反馈和复盘，方便长期协作',
           },
           {
-            title: '把内部平台当成证明层',
-            body: 'WanFlow BenchmarkOps 展示了我们对流程编排、交付产物与评测闭环的真实理解。',
+            title: '交付过程可以被验证',
+            body: '每一步都强调过程记录、结果依据和复盘能力，而不是只给一个结论',
           },
         ],
       },
       caseTeaser: {
         eyebrow: '案例预览',
-        title: '不是行业故事会，而是匿名化的交付结构样本。',
+        title: '不是讲故事，是把交付结构摆出来',
         items: [
           {
             title: '大模型团队数据治理加速',
             sector: '模型训练与运营',
-            challenge: '多来源样本标准不统一，质检回路长，产能不稳定。',
-            outcome: '建立统一标注规范与自动化流转，缩短迭代周期。',
+            challenge: '多来源样本标准不一，质检回路长，产能不稳',
+            outcome: '统一标注规范和自动化流转，缩短迭代周期',
           },
           {
             title: '复杂文档处理流程重构',
             sector: '企业数据处理',
-            challenge: 'PDF、表格、文本混杂，人工整理成本高。',
-            outcome: '搭建自动化抽取与结构化处理链，减少重复人力。',
+            challenge: 'PDF、表格、文本混在一起，人工整理成本高',
+            outcome: '搭建自动抽取和结构化处理链，减少重复人力',
           },
           {
             title: '运营流程作为服务输出',
             sector: 'Process as a Service',
-            challenge: '客户流程复杂、跨角色协作混乱、交付标准难固定。',
-            outcome: '把流程变成服务化接口，形成稳定协同机制。',
+            challenge: '客户流程复杂，跨角色协作混乱，交付标准难固定',
+            outcome: '把流程做成服务接口，让协作更稳定',
           },
         ],
       },
       finalCta: {
         eyebrow: '下一步',
-        title: '如果你正在搭建企业 AI 执行链，我们可以直接聊真实问题。',
-        body: '从数据准备到流程编排，再到模型运营与交付证明，WanFlow 更适合在复杂系统里一起把事情做成。',
+        title: '如果你正卡在数据、流程或模型运营上，我们可以直接聊',
+        body: '把真实问题摊开说，通常比再听一轮概念更有用',
       },
     },
     solutions: {
       problemFrame: {
         eyebrow: '解决方案',
-        title: '把碎片化 AI 工作流，重组为可运营、可扩展、可交付的企业系统。',
+        title: '把零散的 AI 工作重新接成一套能跑的系统',
         body:
-          'WanFlow 的服务结构不是简单的“人力包 + 工具包”，而是围绕企业 AI 交付的真实运行逻辑，把数据、流程和模型运营放回同一套系统里。',
+          'WanFlow 不是简单的人力补位，也不是只给工具，我们更关注怎么把数据、流程和模型运营一起接进业务里',
       },
       architecture: [
         {
           title: 'Data Foundation',
-          body: '从采集、标注、质检到结构化治理，先把可用数据地基打稳。',
+          body: '先把采集、标注、质检和结构化治理做扎实，数据地基才稳',
         },
         {
           title: 'Process Layer',
-          body: '把人工步骤、自动化节点、审批与交付节奏编排成标准执行链。',
+          body: '把人工步骤、自动化节点、审批和交付节奏接成一条执行链',
         },
         {
           title: 'Model Operations',
-          body: '围绕模型表现、反馈回路与输出证明，建立持续运营机制。',
+          body: '围绕模型表现、反馈回路和结果证明做持续运营',
         },
       ],
       modules: [
         {
-          title: 'AI 数据标注',
-          body: '适用于训练数据建设、数据补标、质检返修、多轮标注协同等场景。',
-          deliverables: ['标注规范设计', '质检机制', '多角色协同流程', '产能与质量报表'],
-          outcomes: ['更稳定的数据产出', '更短的返工链路'],
+          title: '数据标注与治理',
+          body: '适合训练数据建设、数据补标、质检返修和治理规则持续收敛这类需要长期稳定标准的场景',
+          deliverables: ['标注规范设计', '数据标准定义', '质检与返修机制', '治理节奏与产能报表'],
+          outcomes: ['数据基础更稳', '后续返工更少'],
         },
         {
-          title: '自动化数据处理',
-          body: '适用于文档抽取、结构化转换、规则清洗、跨格式归一等高重复任务。',
-          deliverables: ['抽取流程', '结构化规则', '自动化脚本与节点', '可复用处理组件'],
-          outcomes: ['更快的数据就绪速度', '更低的重复操作成本'],
+          title: '流程编排与自动化',
+          body: '适合跨团队流转、审批回路、异常处理和系统动作编排这类需要稳定执行节奏的任务',
+          deliverables: ['流程编排设计', '角色职责边界', '状态追踪机制', '异常处理路径'],
+          outcomes: ['跨团队执行更顺', '交付波动更低'],
         },
         {
-          title: '流程自动化',
-          body: '适用于跨团队任务流转、审核回路、异常处理和人机协同运营。',
-          deliverables: ['流程编排', '角色职责定义', '状态追踪机制', '异常处理路径'],
-          outcomes: ['更低的协作摩擦', '更可控的执行质量'],
+          title: '企业级智能体',
+          body: '围绕企业场景设计可控的智能体执行能力，让任务理解、知识调用和动作执行进入同一套系统',
+          deliverables: ['任务与权限边界', '知识与工具接入', '执行链路设计', '运行与审计机制'],
+          outcomes: ['自动执行能力更强', '企业落地方式更可控'],
         },
         {
-          title: 'Process as a Service',
-          body: '把难以标准化的企业流程沉淀为可持续服务接口，帮助客户在保持灵活度的同时建立稳定输出。',
-          deliverables: ['流程服务蓝图', '服务边界定义', 'SLA 对齐', '运行与复盘机制'],
-          outcomes: ['流程可服务化', '交付可规模化'],
+          title: '人机协同交付',
+          body: '适合那些不能完全自动化、但又必须规模化交付的复杂任务，把 AI 效率和人工判断接成可运行的体系',
+          deliverables: ['协同分工设计', '复核与兜底机制', '质量控制节点', '交付运行手册'],
+          outcomes: ['效率和质量更平衡', '复杂任务更容易落地'],
         },
         {
-          title: '模型运营服务',
-          body: '围绕模型上线后的持续表现，处理评测、反馈、数据回流与运营证明问题。',
-          deliverables: ['评测闭环', '数据反馈机制', '运行监控', '对内对外交付证明'],
+          title: '模型运营与持续优化',
+          body: '围绕模型上线后的表现，持续处理评测、反馈、数据回流和效果验证，让系统形成长期运营闭环',
+          deliverables: ['评测闭环', '反馈回流机制', '运行监控', '优化与证明材料'],
           outcomes: ['模型能力更可持续', '业务方更容易建立信任'],
         },
       ],
       triggers: {
         eyebrow: '典型触发场景',
-        title: '企业通常在这些时刻开始需要 WanFlow。',
+        title: '企业通常在这些时候来找 WanFlow',
         items: [
           '数据源多、标准乱，团队越来越依赖人工救火',
           '流程跨部门、跨角色，交付经常卡在衔接与回溯',
@@ -255,35 +260,35 @@ const marketingCopyBase = {
       },
       delivery: {
         eyebrow: '交付模型',
-        title: '从诊断到稳定运行，按系统化节奏推进。',
+        title: '从看清问题，到接进业务，再到持续优化',
         steps: [
-          { step: 'A', title: '业务诊断', body: '识别流程断点、数据断点与责任断点。' },
-          { step: 'B', title: '方案抽象', body: '明确哪些环节适合自动化、哪些环节适合服务化。' },
-          { step: 'C', title: '执行上线', body: '把设计好的链路接进日常业务，而不是停留在方案阶段。' },
-          { step: 'D', title: '运营迭代', body: '依据时效、质量、成本和结果持续优化。' },
+          { step: 'A', title: '业务诊断', body: '先看流程断点、数据断点和责任断点' },
+          { step: 'B', title: '方案抽象', body: '分清哪些环节该自动化，哪些环节该服务化' },
+          { step: 'C', title: '执行上线', body: '把设计好的链路真正接进日常业务' },
+          { step: 'D', title: '运营迭代', body: '按时效、质量、成本和结果持续迭代' },
         ],
       },
       finalCta: {
-        title: '如果你已经知道问题在流程和数据上，现在就适合开始谈。',
-        body: 'WanFlow 更擅长处理“事情明明能做，但系统就是跑不顺”的阶段。',
+        title: '如果你已经知道问题卡在流程和数据上，现在就值得开始谈',
+        body: '我们更擅长处理那种事情能做，但系统总跑不顺的阶段',
       },
     },
     cases: {
       intro: {
         eyebrow: '案例',
-        title: '看结果，也看执行骨架。',
-        body: '以下案例以匿名化方式呈现，重点展示 WanFlow 如何处理真实运营问题，而不是只展示漂亮结论。',
+        title: '看结果，也看这件事是怎么跑起来的',
+        body: '这些案例做了匿名化处理，重点不是讲漂亮故事，而是把真实运营问题和处理方式讲清楚',
       },
       featured: {
         eyebrow: 'Featured case',
         title: '面向大模型运营团队的多源数据治理重构',
         sector: '模型训练与运营',
         challenge:
-          '客户原有数据处理与标注流程由多个团队碎片化维护，样本规范不统一，返修链条长，运营侧无法稳定评估质量。',
+          '客户原有的数据处理和标注流程分散在多个团队，样本规范不统一，返修链条长，运营侧也很难稳定评估质量',
         intervention:
-          'WanFlow 重新定义了标注规范、质量节点、处理接口与反馈节奏，同时将高重复的整理动作自动化，把人工能力聚焦在判断与复核上。',
+          'WanFlow 重新梳理了标注规范、质量节点、处理接口和反馈节奏，把高重复整理动作交给自动化，把人工能力留给判断和复核',
         outcome:
-          '客户获得了更稳定的数据产出节奏、更短的返工周期，以及可追踪的过程证明，方便内部协同和对外汇报。',
+          '最后拿到的是更稳定的数据节奏、更短的返工周期，以及可以拿出来对齐和汇报的过程证明',
         stats: [
           { value: '统一规范', label: '标注与质检接口', detail: '从分散标准变为统一协议' },
           { value: '缩短链路', label: '返修与回溯时间', detail: '减少人工反复对齐' },
@@ -294,115 +299,115 @@ const marketingCopyBase = {
         {
           title: '复杂文档结构化处理',
           sector: '自动化数据处理',
-          challenge: '文档来源多、格式差异大、人工录入成本高。',
-          action: '搭建自动抽取、归一化与校验链路。',
-          outcome: '让数据更快进入后续业务系统。',
+          challenge: '文档来源多、格式差异大、人工录入成本高',
+          action: '搭建自动抽取、归一化和校验链路',
+          outcome: '让数据更快进入后续业务系统',
         },
         {
           title: '客服与运营流程重编排',
           sector: '流程自动化',
-          challenge: '多个角色串联执行，但责任不清、状态不可追踪。',
-          action: '重建任务流转、状态节点与异常路径。',
-          outcome: '提高流程透明度与交付一致性。',
+          challenge: '多个角色串联执行，但责任不清，状态也不可追踪',
+          action: '重建任务流转、状态节点和异常路径',
+          outcome: '提高流程透明度和交付一致性',
         },
         {
           title: '模型运营证明层建设',
           sector: '模型运营服务',
-          challenge: '模型效果难稳定复盘，对业务方解释成本高。',
-          action: '建立评测、记录、产物与沟通一体的证明层。',
-          outcome: '让模型讨论从感受转向证据。',
+          challenge: '模型效果难稳定复盘，对业务方解释成本高',
+          action: '建立评测、记录、产物和沟通一体的证明层',
+          outcome: '让模型讨论从感受转向证据',
         },
       ],
       proof: {
         eyebrow: '交付物视角',
-        title: '客户真正买单的，往往是这些“证明层”。',
+        title: '客户真正看重的，往往是这些能拿出来证明的东西',
         items: [
           {
             title: '流程蓝图',
-            body: '把角色、任务、自动化节点与异常路径表达清楚，便于对齐与扩展。',
+            body: '把角色、任务、自动化节点和异常路径讲清楚，便于对齐和扩展',
           },
           {
             title: '运行记录',
-            body: '保留关键执行节点和结果摘要，让复盘不依赖口头记忆。',
+            body: '保留关键执行节点和结果摘要，让复盘不再靠口头记忆',
           },
           {
             title: '交付证据包',
-            body: '把结果、说明与必要上下文打包成能对外使用的交付结构。',
+            body: '把结果、说明和必要上下文整理成能对外使用的交付结构',
           },
         ],
       },
       finalCta: {
-        title: '如果你希望案例讨论更贴近你的业务语境，我们可以直接按场景来聊。',
-        body: '比起空泛的“AI 转型”，WanFlow 更愿意直接讨论具体执行问题。',
+        title: '如果你想按自己的业务场景来聊案例，我们可以直接展开',
+        body: '与其泛泛聊 AI 转型，不如直接聊你现在这条链路卡在哪',
       },
     },
     about: {
       hero: {
         eyebrow: '关于我们',
-        title: 'WanFlow 相信，AI 真正落地靠的是运营系统，而不是单点能力。',
+        title: 'WanFlow 认为，AI 真正落地靠的是一整套运营系统',
         body:
-          '我们是一家数据驱动型 AI 公司，长期围绕数据治理、流程执行和模型运营这些“最不性感但最关键”的环节工作。对企业来说，真正的 AI 能力往往不是一个模型，而是一整套能持续运行的协作系统。',
+          '我们长期做的是数据治理、流程执行和模型运营这些不热闹但很关键的事，对企业来说，真正可用的 AI 往往不是一个模型，而是一套能持续运行的协作系统',
       },
       positioning: {
         eyebrow: '我们的视角',
-        title: '从“项目交付”切入，而不是只从“模型能力”切入。',
+        title: '我们先看交付怎么跑，再看模型怎么用',
         paragraphs: [
-          '很多企业 AI 项目并不是输在算法，而是输在前后的执行链：数据准备不稳定、人工与系统配合不顺、流程职责不清、结果难以证明。',
-          'WanFlow 的工作方式是把这些问题重新拉通。我们把数据、流程、角色、产物和运营指标放在同一张图里思考，确保系统真的能跑，而不是只在方案汇报中看起来合理。',
+          '很多企业 AI 项目不是输在算法上，而是输在前后的执行链上，数据准备不稳，人工和系统配合不顺，流程职责不清，结果也很难证明',
+          'WanFlow 做的，就是把这些环节重新接起来，把数据、流程、角色、产物和运营指标放到一张图里，看系统能不能真正跑顺',
         ],
       },
       principles: {
         eyebrow: '工作原则',
-        title: '我们坚持用运营逻辑建设 AI 业务。',
+        title: '我们用运营逻辑来做 AI 业务',
         items: [
           {
             title: '先看执行链，再看单点工具',
-            body: '不先急着上工具，而是先把业务动作、责任边界与反馈路径看清。',
+            body: '不急着上工具，先把业务动作、责任边界和反馈路径看清',
           },
           {
             title: '让复杂流程可追踪',
-            body: '复杂不是问题，不可追踪才是问题。系统设计首先要支持复盘与治理。',
+            body: '复杂本身不是问题，跑完说不清才是问题',
           },
           {
             title: '把服务做成长期能力',
-            body: 'WanFlow 更关注如何把一次性交付沉淀为可持续协作机制。',
+            body: '我们更关注怎么把一次性交付变成持续协作',
           },
         ],
       },
       collaborationModel: {
         eyebrow: '协作方式',
-        title: '从对齐业务目标，到落地执行，再到持续优化。',
+        title: '从对齐目标，到落地执行，再到持续优化',
         items: [
-          { title: '诊断', body: '识别数据、流程与协作问题的根本约束。', },
-          { title: '设计', body: '抽象出能长期运行的执行骨架与交付边界。', },
-          { title: '运行', body: '把人、流程、系统与产物真正接进业务日常。', },
-          { title: '优化', body: '根据结果、时效与质量做持续运营。', },
+          { title: '诊断', body: '先找出数据、流程和协作里的真正约束', },
+          { title: '设计', body: '把能长期运行的执行骨架和交付边界定下来', },
+          { title: '运行', body: '把人、流程、系统和产物真正接进业务日常', },
+          { title: '优化', body: '根据结果、时效和质量持续迭代', },
         ],
       },
       trust: {
         eyebrow: '为什么值得信任',
-        title: '我们更接近“运营中的系统建设者”。',
+        title: '为什么客户愿意把复杂问题交给我们',
         items: [
-          '既理解数据工作，也理解交付节奏',
-          '既能做自动化，也知道哪些节点必须保留人工判断',
-          '既关注模型表现，也关注客户最终如何感知价值',
+          '既懂数据工作，也懂交付节奏',
+          '既能做自动化，也知道哪些节点必须有人判断',
+          '既关注模型表现，也关注业务方最终怎么感受到价值',
         ],
       },
       finalCta: {
-        title: '如果你需要的不是空泛叙事，而是一支能把执行链搭起来的团队，我们适合继续聊。',
-        body: '欢迎直接带着你的流程问题、交付目标或模型运营难题来找我们。',
+        title: '如果你要的不是一套说法，而是一支能把链路搭起来的团队，我们适合继续聊',
+        body: '直接带着你的流程问题、交付目标或模型运营难题来找我们就行',
       },
     },
     contact: {
       hero: {
         eyebrow: '联系我们',
-        title: '把你现在卡住的环节讲给我们听。',
+        title: '把你现在卡住的地方直接讲给我们听',
         body:
-          '无论你在处理数据标注、复杂文档处理、流程自动化还是模型运营闭环，只要问题已经进入“需要一套真正能跑的系统”阶段，WanFlow 就值得进入对话。',
+          '不管你卡在数据标注、复杂文档处理、流程自动化还是模型运营闭环，只要问题已经到了需要一套真正能跑的系统这一步，WanFlow 都值得进入对话',
       },
       form: {
         title: '发起业务沟通',
-        body: `填写下面的信息后，我们会按你的业务场景进行初步整理，并在${responseWindowLocalized.zh}尽快回复。`,
+        body: `填完下面的信息，我们会先按你的业务场景做一轮整理，并在${responseWindowLocalized.zh}尽快回复`,
         fields: {
           name: '姓名',
           company: '公司 / 团队',
@@ -422,25 +427,25 @@ const marketingCopyBase = {
         timelines: ['尽快开始', '1 个月内', '本季度内', '先交流判断'],
         submit: '提交咨询',
         submitting: '提交中...',
-        success: `已收到你的信息。我们会在${responseWindowLocalized.zh}通过邮箱联系你。`,
-        error: `提交失败，请稍后重试，或直接发送邮件到 ${siteContact.email}。`,
-        privacy: '我们只将这些信息用于业务沟通，不会用于无关营销。',
+        success: `已收到你的信息，我们会在${responseWindowLocalized.zh}通过邮箱联系你`,
+        error: `提交失败，请稍后重试，或直接发送邮件到 ${siteContact.email}`,
+        privacy: '这些信息只用于业务沟通，不会用于无关营销',
         validation: {
-          name: '请填写姓名。',
-          company: '请填写公司或团队名称。',
-          email: '请填写有效的工作邮箱。',
-          message: '请简单描述你的业务问题。',
+          name: '请填写姓名',
+          company: '请填写公司或团队名称',
+          email: '请填写有效的工作邮箱',
+          message: '请简单描述你的业务问题',
         },
       },
       side: {
         title: '为什么现在联系 WanFlow',
         reasons: [
-          '你已经确认问题不只是工具缺失，而是执行链失衡',
+          '你已经确认问题不只是缺一个工具，而是整条执行链没接顺',
           '你需要一个同时理解数据、流程与模型运营的团队',
-          '你希望输出的不只是结果，还有可证明、可复盘的交付结构',
+          '你希望交付的不只是结果，还有可证明、可复盘的过程',
         ],
         responseTitle: '沟通方式',
-        responseBody: '你可以通过表单发起，也可以直接邮件或电话联系。对于方向不明确的情况，我们也可以先做一次问题拆解。',
+        responseBody: '你可以提交表单，也可以直接发邮件或打电话，如果方向还不够清楚，我们可以先一起拆问题',
         contactItems: [
           `邮箱：${siteContact.email}`,
           `电话：${siteContact.phone}`,
@@ -451,11 +456,11 @@ const marketingCopyBase = {
       faq: [
         {
           question: '你们是咨询公司还是执行团队？',
-          answer: '更准确地说，我们是能把咨询、流程设计和执行链搭建串起来的运营型团队。',
+          answer: '更准确地说，我们是能把咨询、流程设计和执行链搭建真正接起来的运营团队',
         },
         {
           question: '没有完整需求，也可以联系吗？',
-          answer: '可以。很多项目一开始的问题就不是“需求不完整”，而是“问题还没有被正确抽象”。',
+          answer: '可以，很多项目一开始的问题不是需求不完整，而是问题还没有被看清',
         },
       ],
     },
@@ -493,6 +498,7 @@ const marketingCopyBase = {
       workbenchNote: 'WanFlow BenchmarkOps remains available as a proof layer for operations and delivery.',
     },
     footer: {
+      companyName: 'Shanghai Wanliu Guizhi Technology Co., Ltd.',
       description:
         'WanFlow reconnects data, process, and model operations into one execution chain so enterprise AI programs can move from demo-ready to delivery-ready.',
       columns: [
@@ -509,8 +515,12 @@ const marketingCopyBase = {
           items: [siteContact.email, `Phone: ${siteContact.phone}`, `WeChat: ${siteContact.wechat}`, 'Replies within one business day'],
         },
       ],
-      copyright: 'Copyright 2026 WanFlow.ai. All rights reserved.',
+      copyright: 'Copyright 2026 wanflowai.com. All rights reserved.',
       legal: 'WanFlow BenchmarkOps continues to serve as the internal proof layer behind delivery.',
+      legalLinks: [
+        { href: '/privacy', label: 'Privacy Policy' },
+        { href: '/terms', label: 'Terms of Service' },
+      ],
     },
     home: {
       hero: {
