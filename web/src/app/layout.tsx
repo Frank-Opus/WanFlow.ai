@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: 'WanFlow',
   title: 'WanFlow | 企业 AI 运营与交付伙伴',
-  description: 'WanFlow 万物归流帮助企业把数据处理、流程自动化和模型运营真正接进业务里',
-  keywords: ['WanFlow', '万物归流', 'AI 数据标注', '自动化数据处理', '流程自动化', 'Process as a Service', '模型运营服务'],
+  description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环真正接进业务里',
+  keywords: ['WanFlow', '万物归流', '数据标注与治理', '流程编排与自动化', '企业级智能体', '人机协同交付', '模型运营与持续优化'],
   category: 'technology',
   robots: {
     index: true,
@@ -50,14 +50,14 @@ export const metadata: Metadata = {
     apple: '/brand/logo-mark.png',
   },
   openGraph: {
-    title: 'WanFlow | Data-driven AI operations for enterprise delivery',
-    description: 'AI data labeling, automated data processing, workflow automation, Process as a Service, and model operations services for enterprise teams.',
+    title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
+    description: 'Data labeling and governance, workflow orchestration, enterprise AI agents, human-in-the-loop delivery, and continuous model optimization for enterprise teams.',
     images: ['/brand/logo-wide.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WanFlow | Data-driven AI operations for enterprise delivery',
-    description: 'AI data labeling, automated data processing, workflow automation, Process as a Service, and model operations services for enterprise teams.',
+    title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
+    description: 'Data labeling and governance, workflow orchestration, enterprise AI agents, human-in-the-loop delivery, and continuous model optimization for enterprise teams.',
     images: ['/brand/logo-wide.png'],
   },
 };

@@ -4,7 +4,7 @@ import { siteContact } from '@/lib/marketing';
 
 export const metadata: Metadata = {
   title: 'WanFlow | 企业 AI 运营与交付伙伴',
-  description: 'WanFlow 万物归流帮助企业把数据处理、流程自动化和模型运营真正接进业务里',
+  description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环真正接进业务里',
 };
 
 export default function HomePage() {

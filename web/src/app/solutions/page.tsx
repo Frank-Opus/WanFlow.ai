@@ -3,7 +3,7 @@ import MarketingSolutionsPage from '@/components/marketing/solutions-page';
 
 export const metadata: Metadata = {
   title: '解决方案 | WanFlow',
-  description: '查看 WanFlow 如何用 AI 数据标注、自动化数据处理、流程自动化与模型运营服务构建企业 AI 执行链。',
+  description: '查看 WanFlow 如何以数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环构建企业 AI 执行体系。',
 };
 
 export default function SolutionsPage() {

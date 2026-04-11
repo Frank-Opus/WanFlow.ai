@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'WanFlow',
     short_name: 'WanFlow',
-    description: 'WanFlow 万物归流为企业提供 AI 数据标注、自动化数据处理、流程自动化、Process as a Service 与模型运营服务。',
+    description: 'WanFlow 万物归流为企业提供数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环能力。',
     start_url: '/',
     display: 'standalone',
     background_color: '#06111f',

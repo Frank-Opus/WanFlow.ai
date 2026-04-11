@@ -20,7 +20,7 @@ const marketingCopyBase = {
     site: {
       title: 'WanFlow | 企业 AI 运营与交付伙伴',
       description:
-        'WanFlow 万物归流帮助企业把数据处理、流程自动化和模型运营真正接进业务里',
+        'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环真正接进业务里',
       brand: 'WanFlow',
       brandFull: 'WanFlow 万物归流',
       tagline: '把 AI 真正接进业务里',
@@ -43,7 +43,7 @@ const marketingCopyBase = {
       en: 'EN',
       metaKicker: 'Data-driven AI operations',
       proofLabel: '可交付的 AI 运营系统',
-      proofNote: '从数据标注到模型运营，我们把链路搭起来，也把结果交出去',
+      proofNote: '从数据治理到持续优化，我们把链路搭起来，也把结果交出去',
       finalPrimary: '发起业务沟通',
       finalSecondary: '查看案例',
       workbenchNote: '把方法沉淀成可展示、可复盘、可验证的交付结构',
@@ -51,15 +51,15 @@ const marketingCopyBase = {
     footer: {
       companyName: '上海万流归智科技有限公司',
       description:
-        'WanFlow 把数据、流程和模型运营接到一条线上，让 AI 项目不只看起来能跑，而是真的能交付',
+        'WanFlow 把数据、流程、智能体和模型运营接到一条线上，让 AI 项目不只看起来能跑，而是真的能交付',
       columns: [
         {
           title: '服务范围',
-          items: ['AI 数据标注', '自动化数据处理', '流程自动化', 'Process as a Service'],
+          items: ['数据标注与治理', '流程编排与自动化', '企业级智能体', '人机协同交付'],
         },
         {
           title: '业务入口',
-          items: ['模型运营服务', '行业数据治理', '人机协同流程', '企业交付支持'],
+          items: ['模型运营与持续优化', '数据治理体系', '人机协同交付', '企业交付支持'],
         },
         {
           title: '联络方式',
@@ -78,16 +78,16 @@ const marketingCopyBase = {
         eyebrow: '企业 AI 运营与交付',
         title: '让数据、流程和 AI 在业务里真正汇流',
         statement:
-          '提供 AI 数据标注、自动化数据处理、流程自动化和模型运营服务，帮助企业实现稳定、安全、可落地的 AI 交付',
+          '提供数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环能力，帮助企业实现稳定、安全、可落地的 AI 交付',
         body:
           '我们不只出建议，更把链路搭起来、跑起来、交付出去',
         primary: { label: '预约咨询', href: '/contact' },
         secondary: { label: '查看解决方案', href: '/solutions' },
       },
       supportSignals: [
-        { value: '5', label: '核心服务模块', detail: '覆盖数据、流程与模型运营全链路' },
-        { value: 'PaaS', label: 'Process as a Service', detail: '把复杂业务流程封装为稳定执行能力' },
-        { value: 'Ops', label: 'Model Operations', detail: '支持从数据到运行再到复盘的持续运营' },
+        { value: '5', label: '核心能力模块', detail: '覆盖从数据到执行再到优化的完整闭环' },
+        { value: 'Agents', label: 'Enterprise AI Agents', detail: '以安全、稳定、可控的方式参与企业任务执行' },
+        { value: 'Ops', label: 'Continuous Optimization', detail: '围绕反馈、评测和结果持续迭代' },
       ],
       platformView: {
         eyebrow: '平台 / 系统视角',
@@ -183,7 +183,7 @@ const marketingCopyBase = {
           },
           {
             title: '运营流程作为服务输出',
-            sector: 'Process as a Service',
+            sector: '人机协同交付',
             challenge: '客户流程复杂，跨角色协作混乱，交付标准难固定',
             outcome: '把流程做成服务接口，让协作更稳定',
           },
@@ -298,21 +298,21 @@ const marketingCopyBase = {
       cards: [
         {
           title: '复杂文档结构化处理',
-          sector: '自动化数据处理',
+          sector: '数据标注与治理',
           challenge: '文档来源多、格式差异大、人工录入成本高',
           action: '搭建自动抽取、归一化和校验链路',
           outcome: '让数据更快进入后续业务系统',
         },
         {
           title: '客服与运营流程重编排',
-          sector: '流程自动化',
+          sector: '流程编排与自动化',
           challenge: '多个角色串联执行，但责任不清，状态也不可追踪',
           action: '重建任务流转、状态节点和异常路径',
           outcome: '提高流程透明度和交付一致性',
         },
         {
           title: '模型运营证明层建设',
-          sector: '模型运营服务',
+          sector: '模型运营与持续优化',
           challenge: '模型效果难稳定复盘，对业务方解释成本高',
           action: '建立评测、记录、产物和沟通一体的证明层',
           outcome: '让模型讨论从感受转向证据',
@@ -403,7 +403,7 @@ const marketingCopyBase = {
         eyebrow: '联系我们',
         title: '把你现在卡住的地方直接讲给我们听',
         body:
-          '不管你卡在数据标注、复杂文档处理、流程自动化还是模型运营闭环，只要问题已经到了需要一套真正能跑的系统这一步，WanFlow 都值得进入对话',
+          '不管你卡在数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付还是模型运营闭环，只要问题已经到了需要一套真正能跑的系统这一步，WanFlow 都值得进入对话',
       },
       form: {
         title: '发起业务沟通',
@@ -417,11 +417,11 @@ const marketingCopyBase = {
           message: '你当前的问题',
         },
         interests: [
-          'AI 数据标注',
-          '自动化数据处理',
-          '流程自动化',
-          'Process as a Service',
-          '模型运营服务',
+          '数据标注与治理',
+          '流程编排与自动化',
+          '企业级智能体',
+          '人机协同交付',
+          '模型运营与持续优化',
           '需要一起梳理',
         ],
         timelines: ['尽快开始', '1 个月内', '本季度内', '先交流判断'],
@@ -467,12 +467,12 @@ const marketingCopyBase = {
   },
   en: {
     site: {
-      title: 'WanFlow | Data-driven AI operations for enterprise delivery',
+      title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
       description:
-        'WanFlow helps enterprises run AI data labeling, automated data processing, workflow automation, Process as a Service, and model operations services as a working system.',
+        'WanFlow helps enterprises connect data labeling and governance, workflow orchestration and automation, enterprise AI agents, human-in-the-loop delivery, and continuous model optimization into one working system.',
       brand: 'WanFlow',
       brandFull: 'WanFlow',
-      tagline: 'Data-driven AI operations, built for enterprise delivery.',
+      tagline: 'Bring data, workflows, and AI into real business execution.',
       location: 'Originated in China, delivered globally',
     },
     nav: [
@@ -492,23 +492,23 @@ const marketingCopyBase = {
       en: 'EN',
       metaKicker: 'Data-driven AI operations',
       proofLabel: 'Enterprise-ready AI delivery',
-      proofNote: 'From data labeling to model operations, WanFlow builds the execution chain instead of stopping at strategy.',
+      proofNote: 'From data governance to continuous optimization, WanFlow builds the execution chain instead of stopping at strategy.',
       finalPrimary: 'Start the conversation',
-      finalSecondary: 'See WanFlow BenchmarkOps',
+      finalSecondary: 'See Cases',
       workbenchNote: 'WanFlow BenchmarkOps remains available as a proof layer for operations and delivery.',
     },
     footer: {
       companyName: 'Shanghai Wanliu Guizhi Technology Co., Ltd.',
       description:
-        'WanFlow reconnects data, process, and model operations into one execution chain so enterprise AI programs can move from demo-ready to delivery-ready.',
+        'WanFlow connects data, workflows, AI agents, and model operations into one execution chain so enterprise AI programs can move from demo-ready to delivery-ready.',
       columns: [
         {
           title: 'Services',
-          items: ['AI data labeling', 'Automated data processing', 'Workflow automation', 'Process as a Service'],
+          items: ['Data Labeling & Governance', 'Workflow Orchestration & Automation', 'Enterprise AI Agents', 'Human-in-the-Loop Delivery'],
         },
         {
           title: 'Business entry points',
-          items: ['Model operations services', 'Data governance', 'Human-in-the-loop workflows', 'Enterprise delivery support'],
+          items: ['Model Operations & Continuous Optimization', 'Data governance systems', 'Human-in-the-loop delivery', 'Enterprise delivery support'],
         },
         {
           title: 'Reach us',
@@ -524,24 +524,24 @@ const marketingCopyBase = {
     },
     home: {
       hero: {
-        eyebrow: 'Enterprise AI operations website',
-        title: 'Run the data and process layer behind AI like a real operating system.',
+        eyebrow: 'Enterprise AI operations and delivery',
+        title: 'Bring data, workflows, and AI into real business execution.',
         statement:
-          'WanFlow is a data-driven AI company serving enterprises with AI data labeling, automated data processing, workflow automation, Process as a Service, and model operations services.',
+          'WanFlow helps enterprises connect data labeling and governance, workflow orchestration and automation, enterprise AI agents, human-in-the-loop delivery, and continuous model optimization into one working delivery system.',
         body: 'We do not stop at recommendations. We design, run, and deliver the execution chain.',
         primary: { label: 'Book an Ops Review', href: '/contact' },
         secondary: { label: 'Explore Solutions', href: '/solutions' },
       },
       supportSignals: [
-        { value: '5', label: 'service modules', detail: 'covering data, process, and model operations' },
-        { value: 'PaaS', label: 'Process as a Service', detail: 'turning complex workflows into stable execution capacity' },
-        { value: 'Ops', label: 'Model operations', detail: 'from data feedback to operational proof' },
+        { value: '5', label: 'core capability modules', detail: 'covering the full loop from data to execution to optimization' },
+        { value: 'Agents', label: 'Enterprise AI Agents', detail: 'controlled AI execution inside enterprise workflows' },
+        { value: 'Ops', label: 'Continuous Optimization', detail: 'continuous iteration around feedback, evaluation, and outcomes' },
       ],
       platformView: {
         eyebrow: 'Platform / system view',
-        title: 'Build AI delivery the way you build an operating system, not a one-off demo.',
+        title: 'Turn AI into a business system that can keep running.',
         body:
-          'For enterprises, the hard part is rarely whether a model can run once. The hard part is how data is prepared, how workflows are coordinated, how humans and automation are orchestrated, and how outputs become reliable deliverables. WanFlow connects those pieces into one working network.',
+          'For enterprises, the hard part is rarely whether a model can run once. The hard part is how data is prepared, how workflows are coordinated, how humans and automation are orchestrated, and how outputs become reliable business results. WanFlow connects those pieces into one working system.',
         bullets: [
           'Workflow design and execution architecture',
           'Complex data processing and structured governance',
@@ -551,34 +551,34 @@ const marketingCopyBase = {
       },
       capabilityModules: {
         eyebrow: 'Capability modules',
-        title: 'Five modules, one execution chain.',
+        title: 'Five modules, one delivery loop that keeps evolving.',
         body:
-          'The site does not frame services as isolated line items. It shows how they fit into a shared operating backbone for enterprise AI delivery.',
+          'These modules are not isolated service lines. They work as connected parts of one enterprise delivery system that keeps running, learning, and improving.',
         items: [
           {
-            title: 'AI data labeling',
-            body: 'Design labeling specs, quality loops, and production cadence around business outcomes, not raw labor alone.',
-            outcome: 'Create scalable and governable data production capacity.',
+            title: 'Data Labeling & Governance',
+            body: 'Define labeling standards, quality loops, and governance rhythm together so data becomes a long-term operating asset instead of one-off output.',
+            outcome: 'Build a stable data foundation.',
           },
           {
-            title: 'Automated data processing',
-            body: 'Turn repetitive cleaning, extraction, normalization, and structuring tasks into reusable execution modules.',
-            outcome: 'Move data into usable form faster.',
+            title: 'Workflow Orchestration & Automation',
+            body: 'Connect approvals, routing, quality checks, system actions, and exception handling into one stable operating flow.',
+            outcome: 'Make cross-team execution smoother and more reliable.',
           },
           {
-            title: 'Workflow automation',
-            body: 'Connect approvals, routing, quality loops, and system actions into repeatable enterprise workflows.',
-            outcome: 'Reduce coordination drag and delivery volatility.',
+            title: 'Enterprise AI Agents',
+            body: 'Build safe, stable, and controllable AI agent capabilities around enterprise tasks so AI can participate in execution, not just answer questions.',
+            outcome: 'Turn AI into a managed execution force.',
           },
           {
-            title: 'Process as a Service',
-            body: 'Package difficult-to-standardize business workflows into stable service interfaces with room for human judgment.',
-            outcome: 'Make complex operations continuously executable.',
+            title: 'Human-in-the-Loop Delivery',
+            body: 'Combine AI speed with human judgment, review, and fallback handling so complex work can be delivered in real operating conditions.',
+            outcome: 'Balance efficiency, quality, and delivery certainty.',
           },
           {
-            title: 'Model operations services',
-            body: 'Build the feedback, evaluation, monitoring, and proof layer that keeps model performance tied to the business.',
-            outcome: 'Turn model capability into an operated asset.',
+            title: 'Model Operations & Continuous Optimization',
+            body: 'Run evaluation, feedback, monitoring, and result validation over time so the system becomes steadier and more useful as it operates.',
+            outcome: 'Create a closed loop that keeps improving.',
           },
         ],
       },
@@ -630,8 +630,8 @@ const marketingCopyBase = {
             outcome: 'An automated extraction and structuring chain reduced repetitive human work.',
           },
           {
-            title: 'Process as a Service rollout',
-            sector: 'Process as a Service',
+            title: 'Human-in-the-Loop delivery redesign',
+            sector: 'Human-in-the-Loop Delivery',
             challenge: 'The client workflow was too complex to stabilize through ad hoc coordination.',
             outcome: 'A service interface and execution model made the process reusable and scalable.',
           },
@@ -666,33 +666,33 @@ const marketingCopyBase = {
       ],
       modules: [
         {
-          title: 'AI data labeling',
-          body: 'For data creation, relabeling, quality control, and multi-stage human-in-the-loop workflows.',
-          deliverables: ['Labeling specification design', 'Quality loops', 'Role-based coordination', 'Output reporting'],
-          outcomes: ['More stable data output', 'Shorter rework cycles'],
+          title: 'Data Labeling & Governance',
+          body: 'For training-data buildout, relabeling, quality control, and governance standards that need to stay stable over time.',
+          deliverables: ['Labeling specification design', 'Data standards', 'Quality and rework loops', 'Governance and output reporting'],
+          outcomes: ['More stable data foundations', 'Less downstream rework'],
         },
         {
-          title: 'Automated data processing',
-          body: 'For document extraction, structuring, normalization, cleanup, and repeated content operations.',
-          deliverables: ['Extraction flows', 'Structuring rules', 'Automation nodes', 'Reusable processing components'],
-          outcomes: ['Faster data readiness', 'Lower repetitive effort'],
+          title: 'Workflow Orchestration & Automation',
+          body: 'For cross-team routing, approvals, exception handling, and system actions that need a reliable operating cadence.',
+          deliverables: ['Workflow orchestration design', 'Ownership boundaries', 'State tracking', 'Exception paths'],
+          outcomes: ['Lower coordination drag', 'More stable execution quality'],
         },
         {
-          title: 'Workflow automation',
-          body: 'For cross-team routing, approvals, exception handling, and human-plus-system execution models.',
-          deliverables: ['Process orchestration', 'Ownership boundaries', 'Status tracking', 'Exception paths'],
-          outcomes: ['Lower coordination drag', 'More predictable execution quality'],
+          title: 'Enterprise AI Agents',
+          body: 'For enterprise scenarios that require controllable agent execution across task understanding, knowledge access, and action handling.',
+          deliverables: ['Task and permission boundaries', 'Knowledge and tool connections', 'Execution-chain design', 'Runtime and audit controls'],
+          outcomes: ['Stronger automated execution', 'More controllable enterprise adoption'],
         },
         {
-          title: 'Process as a Service',
-          body: 'Package difficult enterprise workflows as a stable operational service without losing the flexibility needed for real-world delivery.',
-          deliverables: ['Service blueprint', 'Boundary definition', 'SLA alignment', 'Operating and review rhythm'],
-          outcomes: ['Serviceable process layer', 'Scalable delivery capacity'],
+          title: 'Human-in-the-Loop Delivery',
+          body: 'For work that cannot be fully automated but still needs to scale through a disciplined blend of AI execution and human review.',
+          deliverables: ['Human-AI work split', 'Review and fallback design', 'Quality control nodes', 'Delivery operating playbook'],
+          outcomes: ['Better balance of speed and quality', 'Complex work that lands in practice'],
         },
         {
-          title: 'Model operations services',
-          body: 'Create the mechanisms needed to monitor, evaluate, improve, and prove model performance over time.',
-          deliverables: ['Evaluation loops', 'Feedback channels', 'Operational monitoring', 'Evidence packages'],
+          title: 'Model Operations & Continuous Optimization',
+          body: 'Create the mechanisms needed to evaluate, monitor, improve, and prove model performance as an ongoing operating loop.',
+          deliverables: ['Evaluation loops', 'Feedback channels', 'Operational monitoring', 'Optimization and evidence packages'],
           outcomes: ['Longer-lived model performance', 'Stronger business-side trust'],
         },
       ],
@@ -746,21 +746,21 @@ const marketingCopyBase = {
       cards: [
         {
           title: 'Complex document structuring',
-          sector: 'Automated data processing',
+          sector: 'Data Labeling & Governance',
           challenge: 'Mixed documents made manual cleanup expensive and slow.',
           action: 'Built a normalization and extraction chain.',
           outcome: 'Moved inputs into usable structures faster.',
         },
         {
           title: 'Operations workflow redesign',
-          sector: 'Workflow automation',
+          sector: 'Workflow Orchestration & Automation',
           challenge: 'Cross-role execution lacked ownership clarity and traceability.',
           action: 'Rebuilt routing, status control, and exception paths.',
           outcome: 'Improved transparency and delivery consistency.',
         },
         {
           title: 'Model proof layer buildout',
-          sector: 'Model operations services',
+          sector: 'Model Operations & Continuous Optimization',
           challenge: 'Model performance was hard to explain and hard to revisit with evidence.',
           action: 'Created an evaluation, recording, artifact, and communication layer.',
           outcome: 'Turned model discussion from intuition into evidence.',
@@ -851,7 +851,7 @@ const marketingCopyBase = {
         eyebrow: 'Contact',
         title: 'Tell us which part of the system is currently stuck.',
         body:
-          'Whether the issue is data labeling, document processing, workflow automation, or model operations, WanFlow is most useful when the business needs a system that can actually run.',
+          'Whether the issue is data governance, workflow orchestration, enterprise AI agents, human-in-the-loop delivery, or model operations, WanFlow is most useful when the business needs a system that can actually run.',
       },
       form: {
         title: 'Start the conversation',
@@ -865,11 +865,11 @@ const marketingCopyBase = {
           message: 'What is the problem today?',
         },
         interests: [
-          'AI data labeling',
-          'Automated data processing',
-          'Workflow automation',
-          'Process as a Service',
-          'Model operations services',
+          'Data Labeling & Governance',
+          'Workflow Orchestration & Automation',
+          'Enterprise AI Agents',
+          'Human-in-the-Loop Delivery',
+          'Model Operations & Continuous Optimization',
           'Need help framing the problem',
         ],
         timelines: ['As soon as possible', 'Within 1 month', 'This quarter', 'Exploratory conversation first'],
