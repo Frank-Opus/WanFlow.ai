@@ -18,8 +18,8 @@ export default function SiteFooter() {
             <Image
               src="/brand/logo-wide.png"
               alt={copy.site.brandFull}
-              width={220}
-              height={75}
+              width={340}
+              height={100}
               className="h-auto w-[170px] sm:w-[204px]"
             />
           </Link>

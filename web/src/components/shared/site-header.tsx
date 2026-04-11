@@ -28,15 +28,15 @@ export default function SiteHeader() {
       </a>
 
       <header id="site-top" className="site-header-shell sticky top-0 z-40">
-        <div className="mkt-frame flex items-center justify-between gap-4 px-5 py-3.5 lg:px-8 xl:px-10">
+        <div className="mkt-frame flex items-center justify-between gap-3 pl-2 pr-4 py-2.5 sm:gap-4 sm:px-5 sm:py-3.5 lg:px-8 xl:px-10">
           <div className="flex min-w-0 items-center">
-            <Link href="/" className="site-brand-frame mkt-focus-ring inline-flex items-center rounded-[20px] px-3.5 py-2.5">
+            <Link href="/" className="mkt-focus-ring inline-flex items-center justify-start">
               <Image
                 src="/brand/logo-wide.png"
                 alt={copy.site.brandFull}
-                width={220}
-                height={75}
-                className="h-auto w-[154px] sm:w-[186px]"
+                width={340}
+                height={100}
+                className="h-auto w-[164px] sm:w-[186px]"
                 priority
               />
             </Link>
