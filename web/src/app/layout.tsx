@@ -24,13 +24,13 @@ const plexMono = IBM_Plex_Mono({
   weight: ['400', '500', '600'],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://wanflow.ai';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://wanflowai.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: 'WanFlow',
-  title: 'WanFlow | 数据驱动的 AI 运营与交付伙伴',
-  description: 'WanFlow 万物归流为企业提供 AI 数据标注、自动化数据处理、流程自动化、Process as a Service 与模型运营服务。',
+  title: 'WanFlow | 企业 AI 运营与交付伙伴',
+  description: 'WanFlow 万物归流帮助企业把数据处理、流程自动化和模型运营真正接进业务里',
   keywords: ['WanFlow', '万物归流', 'AI 数据标注', '自动化数据处理', '流程自动化', 'Process as a Service', '模型运营服务'],
   category: 'technology',
   robots: {

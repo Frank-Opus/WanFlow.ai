@@ -17,7 +17,7 @@ export const copy = {
       skip: '跳转到主要内容',
     },
     home: {
-      heroEyebrow: 'WanFlow.ai 核心模块',
+      heroEyebrow: 'wanflowai.com 核心模块',
       heroTitle: '让推理评测可阅读、可复现、可交付。',
       heroBody:
         'WanFlow BenchmarkOps 把单题演示升级成企业评测工作台：围绕 Project、SourceFile、ProblemItem、BenchmarkRun、Artifact 五个核心对象组织导入、运行、回看与交付。',
@@ -215,7 +215,7 @@ export const copy = {
       skip: 'Skip to main content',
     },
     home: {
-      heroEyebrow: 'WanFlow.ai flagship module',
+      heroEyebrow: 'wanflowai.com flagship module',
       heroTitle: 'Readable, replayable, client-ready reasoning evaluation.',
       heroBody:
         'WanFlow BenchmarkOps upgrades a one-off evaluation flow into an enterprise workspace, organized around Project, SourceFile, ProblemItem, BenchmarkRun, and Artifact.',

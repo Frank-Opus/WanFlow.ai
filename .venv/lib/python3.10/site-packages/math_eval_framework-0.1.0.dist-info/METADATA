@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: math-eval-framework
+Version: 0.1.0
+Summary: Framework for structured math item evaluation against Qwen-compatible chat APIs.
+Requires-Python: >=3.10
+Requires-Dist: openpyxl
+Requires-Dist: pydantic>=2
+Requires-Dist: PyMuPDF
+Requires-Dist: python-docx
+Requires-Dist: rapidocr-onnxruntime>=1.4.4
+Requires-Dist: requests
+Requires-Dist: sympy

@@ -1,0 +1,7 @@
+openpyxl
+pydantic>=2
+PyMuPDF
+python-docx
+rapidocr-onnxruntime>=1.4.4
+requests
+sympy

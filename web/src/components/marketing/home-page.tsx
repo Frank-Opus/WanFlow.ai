@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useLocale } from '@/components/shared/locale-provider';
-import { FinalCtaBand, PageHero, SectionHeading, WorkbenchProofCard } from '@/components/marketing/primitives';
+import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
 import MotionReveal from '@/components/shared/motion-reveal';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
@@ -138,12 +138,17 @@ export default function MarketingHomePage() {
             body={copy.home.proofLayer.body}
           />
           <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
-            <WorkbenchProofCard
-              proofLabel={copy.common.proofLabel}
-              workbenchNote={copy.common.workbenchNote}
-              proofNote={copy.common.proofNote}
-              workbenchCta={copy.common.workbenchCta}
-            />
+            <div className="mkt-pop-surface mkt-proof-panel mkt-grid-lines p-5 sm:p-6">
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="mkt-chip">{copy.common.proofLabel}</span>
+                </div>
+                <h3 className="zh-card-title text-[1.32rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.52rem]">
+                  {copy.common.workbenchNote}
+                </h3>
+                <p className="mkt-copy text-sm">{copy.common.proofNote}</p>
+              </div>
+            </div>
             <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2">
               {copy.home.proofLayer.items.map((item, index) => (
                 <article key={item.title} className={index === 0 ? 'mkt-card px-5 py-5 md:col-span-2' : 'mkt-card px-5 py-5'}>
@@ -199,7 +204,7 @@ export default function MarketingHomePage() {
             title={copy.home.finalCta.title}
             body={copy.home.finalCta.body}
             primary={{ href: '/contact', label: copy.common.finalPrimary }}
-            secondary={{ href: '/dataflow/proofbench', label: copy.common.finalSecondary }}
+            secondary={{ href: '/cases', label: copy.common.finalSecondary }}
           />
         </MotionReveal>
       </div>

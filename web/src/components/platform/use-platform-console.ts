@@ -28,7 +28,7 @@ const DEFAULT_BASE_URL = 'http://35.220.164.252:3888/v1/';
 
 const COPY: Record<'zh' | 'en', BenchmarkOpsConsoleCopy> = {
   zh: {
-    heroEyebrow: 'WanFlow.ai 主版块',
+    heroEyebrow: 'wanflowai.com 主版块',
     heroTitle: `${BENCHMARKOPS_PRODUCT_TITLE} 企业评测中台`,
     heroBody:
       '把题源导入、题目管理、同步/异步评测、结果回看与交付导出放到一个工作台里。默认中文，默认接到 Qwen 评测服务，后续可继续扩到更多模型与队列。',
@@ -129,7 +129,7 @@ const COPY: Record<'zh' | 'en', BenchmarkOpsConsoleCopy> = {
     latencyLabel: '耗时区间',
   },
   en: {
-    heroEyebrow: 'WanFlow.ai flagship module',
+    heroEyebrow: 'wanflowai.com flagship module',
     heroTitle: `${BENCHMARKOPS_PRODUCT_TITLE} enterprise evaluation hub`,
     heroBody:
       'One workspace for source intake, item management, sync/async benchmark runs, result review, and client-ready exports. Chinese is the default locale and the Qwen evaluation endpoint is wired in by default.',

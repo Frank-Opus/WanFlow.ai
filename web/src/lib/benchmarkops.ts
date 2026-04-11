@@ -108,7 +108,7 @@ export type ProofBenchRunResponse = {
 };
 
 export const siteMeta: SiteMeta = {
-  brand: 'WanFlow.ai',
+  brand: 'wanflowai.com',
   moduleName: 'BenchmarkOps',
   tagline: 'Enterprise evaluation workspace for source intake, benchmark execution, artifact replay, and delivery orchestration.',
 };

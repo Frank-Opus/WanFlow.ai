@@ -1,0 +1,4 @@
+services:
+  wanflow-web:
+    image: wanflow-web:local
+    build: null

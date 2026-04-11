@@ -20,6 +20,7 @@ export default function SiteHeader() {
   }, [pathname]);
 
   const isMarketingRoute = copy.nav.some((item) => (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)));
+  const isHomePage = pathname === '/';
 
   return (
     <>
@@ -65,9 +66,11 @@ export default function SiteHeader() {
           </nav>
 
           <div className="hidden items-center gap-2 xl:flex">
-            <Link href="/dataflow/proofbench" className={isMarketingRoute ? 'mkt-button-secondary mkt-button-compact' : 'mkt-button-primary mkt-button-compact'}>
-              {copy.common.workbenchCta}
-            </Link>
+            {!isHomePage ? (
+              <Link href="/dataflow/proofbench" className={isMarketingRoute ? 'mkt-button-secondary mkt-button-compact' : 'mkt-button-primary mkt-button-compact'}>
+                {copy.common.workbenchCta}
+              </Link>
+            ) : null}
             {(['zh', 'en'] as const).map((lang) => {
               const active = locale === lang;
               return (
@@ -123,9 +126,11 @@ export default function SiteHeader() {
                 <Link href="/contact" className="mkt-button-primary">
                   {copy.common.primaryCta}
                 </Link>
-                <Link href="/dataflow/proofbench" className="mkt-button-secondary">
-                  {copy.common.workbenchCta}
-                </Link>
+                {!isHomePage ? (
+                  <Link href="/dataflow/proofbench" className="mkt-button-secondary">
+                    {copy.common.workbenchCta}
+                  </Link>
+                ) : null}
                 {(['zh', 'en'] as const).map((lang) => {
                   const active = locale === lang;
                   return (
