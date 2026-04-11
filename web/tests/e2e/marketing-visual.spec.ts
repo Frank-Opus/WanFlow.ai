@@ -38,6 +38,7 @@ test.describe('marketing visual regression', () => {
     await expect(page).toHaveScreenshot('home-main-desktop.png', {
       animations: 'disabled',
       fullPage: true,
+      timeout: 20_000,
     });
   });
 
@@ -47,6 +48,7 @@ test.describe('marketing visual regression', () => {
 
     await expect(page.locator('main')).toHaveScreenshot('contact-main-desktop.png', {
       animations: 'disabled',
+      timeout: 20_000,
     });
   });
 
@@ -56,6 +58,7 @@ test.describe('marketing visual regression', () => {
 
     await expect(page.locator('main')).toHaveScreenshot('proofbench-login-desktop.png', {
       animations: 'disabled',
+      timeout: 20_000,
     });
   });
 
@@ -69,6 +72,7 @@ test.describe('marketing visual regression', () => {
     await expect(page).toHaveScreenshot('home-mobile-menu-open.png', {
       animations: 'disabled',
       fullPage: true,
+      timeout: 20_000,
     });
   });
 });

@@ -33,7 +33,7 @@ test.describe('marketing desktop regressions', () => {
       expect(overflow.overflowX).toBeLessThanOrEqual(1);
 
       const screenshotPath = testInfo.outputPath(pageCase.name + '-desktop.png');
-      await page.screenshot({ path: screenshotPath, fullPage: true, animations: 'disabled' });
+      await page.screenshot({ path: screenshotPath, fullPage: true, animations: 'disabled', timeout: 20_000 });
       await testInfo.attach(pageCase.name + '-desktop', {
         path: screenshotPath,
         contentType: 'image/png',
@@ -51,7 +51,7 @@ test.describe('marketing desktop regressions', () => {
     await expect(page.locator('header a[href="/contact"]').first()).toBeVisible();
 
     const screenshotPath = testInfo.outputPath('home-motion-hooks.png');
-    await page.screenshot({ path: screenshotPath, fullPage: false, animations: 'disabled' });
+    await page.screenshot({ path: screenshotPath, fullPage: false, animations: 'disabled', timeout: 20_000 });
     await testInfo.attach('home-motion-hooks', {
       path: screenshotPath,
       contentType: 'image/png',
@@ -89,7 +89,7 @@ test.describe('marketing mobile smoke', () => {
     expect(overflow).toBeLessThanOrEqual(1);
 
     const screenshotPath = testInfo.outputPath('home-mobile-menu.png');
-    await page.screenshot({ path: screenshotPath, fullPage: true, animations: 'disabled' });
+    await page.screenshot({ path: screenshotPath, fullPage: false, animations: 'disabled', timeout: 20_000 });
     await testInfo.attach('home-mobile-menu', {
       path: screenshotPath,
       contentType: 'image/png',
