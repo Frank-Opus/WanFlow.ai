@@ -15,7 +15,7 @@ export function PageHero({
   aside,
 }: {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   body: string;
   primary: LinkTarget;
   secondary?: LinkTarget;

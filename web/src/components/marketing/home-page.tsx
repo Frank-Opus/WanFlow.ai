@@ -37,7 +37,19 @@ export default function MarketingHomePage() {
         <MotionReveal delay={0} intensity="hero" initiallyVisible>
           <PageHero
             eyebrow={copy.home.hero.eyebrow}
-            title={copy.home.hero.title}
+            title={locale === 'zh'
+              ? (
+                  <span className="mkt-home-title">
+                    让数据、流程和 <span className="mkt-home-title-accent">AI</span> 在业务里真正
+                    <span className="mkt-home-title-glow"> 汇流</span>
+                  </span>
+                )
+              : (
+                  <span className="mkt-home-title">
+                    Bring data, workflows, and <span className="mkt-home-title-accent">AI</span> into real business
+                    <span className="mkt-home-title-glow"> execution</span>
+                  </span>
+                )}
             body={copy.home.hero.statement}
             primary={copy.home.hero.primary}
             secondary={copy.home.hero.secondary}
