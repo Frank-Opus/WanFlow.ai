@@ -25,6 +25,11 @@ export default function MarketingHomePage() {
         outcome: 'Outcome',
       };
   const casesLabel = copy.nav.find((item) => item.href === '/cases')?.label ?? '/cases';
+  const getMetricValueClass = (value: string) => {
+    if (value.length > 8) return 'mkt-metric-value mkt-metric-value-tight';
+    if (value.length > 3) return 'mkt-metric-value mkt-metric-value-compact';
+    return 'mkt-metric-value';
+  };
 
   return (
     <main id="main-content" className="marketing-main">
@@ -48,7 +53,7 @@ export default function MarketingHomePage() {
                       key={metric.label}
                       className={index === copy.home.supportSignals.length - 1 ? 'mkt-card min-w-0 px-5 py-5 sm:col-span-2 xl:col-span-1' : 'mkt-card min-w-0 px-5 py-5'}
                     >
-                      <p className={metric.value.length > 3 ? 'mkt-metric-value mkt-metric-value-compact' : 'mkt-metric-value'}>
+                      <p className={getMetricValueClass(metric.value)}>
                         {metric.value}
                       </p>
                       <p className="mkt-metric-label mt-3">{metric.label}</p>
