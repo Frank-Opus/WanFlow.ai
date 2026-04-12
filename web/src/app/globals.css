@@ -998,10 +998,20 @@ html[lang='zh-CN'] .mkt-lang-button {
   overflow-wrap: normal;
 }
 
+.mkt-metric-value-compact {
+  font-size: clamp(1.55rem, 3vw, 2.95rem);
+  letter-spacing: -0.045em;
+}
+
 html[lang='zh-CN'] .mkt-metric-value {
   line-height: 1.02;
   letter-spacing: -0.03em;
   font-weight: 600;
+}
+
+html[lang='zh-CN'] .mkt-metric-value-compact {
+  line-height: 1.04;
+  letter-spacing: -0.02em;
 }
 
 .mkt-metric-label {
@@ -1021,6 +1031,10 @@ html[lang='zh-CN'] .mkt-metric-label {
   .mkt-metric-value {
     font-size: clamp(1.7rem, 9vw, 2.35rem);
     line-height: 1.04;
+  }
+
+  .mkt-metric-value-compact {
+    font-size: clamp(1.45rem, 8vw, 2rem);
   }
 
   .mkt-metric-label {
