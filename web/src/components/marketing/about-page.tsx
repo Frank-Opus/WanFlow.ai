@@ -26,15 +26,14 @@ export default function MarketingAboutPage() {
           <section
             className="mkt-about-hero mkt-panel overflow-hidden"
             style={{
-              backgroundImage:
-                "linear-gradient(118deg, rgba(11, 22, 36, 0.74) 0%, rgba(11, 22, 36, 0.5) 34%, rgba(248, 251, 255, 0.08) 100%), url('/about/office-hero.png')",
+              backgroundImage: "url('/about/office-hero.png')",
             }}
           >
             <div className="mkt-about-hero-inner">
-              <div className="mkt-about-copy">
-                <p className="mkt-kicker text-white/80">{copy.about.hero.eyebrow}</p>
-                <h1 className="mkt-display max-w-[11.5ch] text-white xl:max-w-[12.5ch]">{copy.about.hero.title}</h1>
-                <p className="mkt-copy max-w-[42rem] text-base text-white/85 sm:text-[1.05rem]">{copy.about.hero.body}</p>
+              <div className="mkt-about-copy mkt-about-copy-panel">
+                <p className="mkt-kicker mkt-about-kicker">{copy.about.hero.eyebrow}</p>
+                <h1 className="mkt-display mkt-about-title max-w-[11.5ch] xl:max-w-[12.5ch]">{copy.about.hero.title}</h1>
+                <p className="mkt-copy mkt-about-body max-w-[42rem] text-base sm:text-[1.05rem]">{copy.about.hero.body}</p>
                 <div className="mkt-hero-actions flex flex-wrap gap-3">
                   <Link href="/contact" className="mkt-button-primary">
                     {copy.common.primaryCta}
@@ -45,11 +44,11 @@ export default function MarketingAboutPage() {
                 </div>
               </div>
               <aside className="mkt-about-aside">
-                <p className="mkt-kicker text-white/75">{labels.trust}</p>
+                <p className="mkt-kicker mkt-about-side-kicker">{labels.trust}</p>
                 <div className="space-y-3">
                   {copy.about.trust.items.slice(0, 2).map((item) => (
-                    <div key={item} className="border-t border-white/15 pt-3 first:border-t-0 first:pt-0">
-                      <p className="mkt-copy text-sm text-white/85">{item}</p>
+                    <div key={item} className="border-t border-[rgba(31,63,82,0.14)] pt-3 first:border-t-0 first:pt-0">
+                      <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
                     </div>
                   ))}
                 </div>

@@ -1290,9 +1290,9 @@ html[lang='zh-CN'] .mkt-metric-label {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(103, 227, 240, 0.12), transparent 26%),
-    linear-gradient(120deg, rgba(255, 255, 255, 0.1) 0%, rgba(214, 237, 242, 0.06) 44%, rgba(10, 22, 36, 0.1) 100%);
-  backdrop-filter: blur(5px) saturate(0.92);
+    radial-gradient(circle at 22% 26%, rgba(100, 219, 235, 0.14), transparent 24%),
+    linear-gradient(102deg, rgba(245, 249, 252, 0.92) 0%, rgba(241, 247, 251, 0.78) 30%, rgba(239, 246, 250, 0.34) 56%, rgba(239, 246, 250, 0.08) 72%, transparent 82%);
+  backdrop-filter: blur(3px) saturate(0.94);
   pointer-events: none;
 }
 
@@ -1317,29 +1317,57 @@ html[lang='zh-CN'] .mkt-metric-label {
   gap: 1.2rem;
 }
 
+.mkt-about-copy-panel {
+  width: min(100%, 50rem);
+  border: 1px solid rgba(94, 128, 150, 0.16);
+  border-radius: 1.55rem;
+  background:
+    linear-gradient(180deg, rgba(249, 251, 253, 0.78), rgba(239, 245, 248, 0.52));
+  backdrop-filter: blur(12px) saturate(0.96);
+  padding: 1.25rem 1.2rem 1.35rem;
+  box-shadow: 0 22px 44px rgba(20, 37, 52, 0.08);
+}
+
+.mkt-about-kicker {
+  color: rgba(33, 77, 104, 0.9);
+}
+
+.mkt-about-title {
+  color: rgba(16, 26, 37, 0.96);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.mkt-about-body {
+  color: rgba(39, 52, 66, 0.88);
+}
+
 .mkt-about-aside {
   width: 100%;
   max-width: 24rem;
   justify-self: end;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(111, 142, 162, 0.16);
   border-radius: 1.3rem;
-  background: linear-gradient(180deg, rgba(11, 22, 36, 0.34), rgba(11, 22, 36, 0.16));
-  backdrop-filter: blur(14px) saturate(0.9);
+  background: linear-gradient(180deg, rgba(246, 250, 252, 0.64), rgba(237, 245, 248, 0.4));
+  backdrop-filter: blur(14px) saturate(0.94);
   padding: 1.2rem 1.15rem;
-  box-shadow: 0 18px 36px rgba(11, 22, 36, 0.2);
+  box-shadow: 0 18px 36px rgba(20, 37, 52, 0.1);
+}
+
+.mkt-about-side-kicker {
+  color: rgba(33, 77, 104, 0.82);
 }
 
 .mkt-button-on-image {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.16);
-  color: #f8fbff;
+  border-color: rgba(87, 121, 144, 0.18);
+  background: rgba(248, 251, 253, 0.62);
+  color: var(--mk-text-0);
   backdrop-filter: blur(10px) saturate(0.95);
 }
 
 .mkt-button-on-image:hover {
-  border-color: rgba(255, 255, 255, 0.34);
-  background: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 12px 28px rgba(11, 22, 36, 0.18);
+  border-color: rgba(71, 111, 138, 0.26);
+  background: rgba(248, 251, 253, 0.82);
+  box-shadow: 0 12px 28px rgba(20, 37, 52, 0.12);
 }
 
 .mkt-pop-surface {
@@ -1443,6 +1471,10 @@ html[lang='zh-CN'] .mkt-metric-label {
   .mkt-about-hero-inner {
     padding: 2rem;
   }
+
+  .mkt-about-copy-panel {
+    padding: 1.55rem 1.55rem 1.65rem;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -1477,6 +1509,11 @@ html[lang='zh-CN'] .mkt-metric-label {
     gap: 2rem;
     padding: 2.25rem;
   }
+
+  .mkt-about-copy-panel {
+    max-width: 46rem;
+    padding: 1.8rem 1.9rem 1.9rem;
+  }
 }
 
 @media (min-width: 1536px) {
@@ -1509,6 +1546,10 @@ html[lang='zh-CN'] .mkt-metric-label {
 
   .mkt-about-hero-inner {
     padding: 1.1rem;
+  }
+
+  .mkt-about-copy-panel {
+    padding: 1rem 0.95rem 1.1rem;
   }
 
   .mkt-about-aside {
