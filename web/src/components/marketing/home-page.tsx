@@ -42,11 +42,11 @@ export default function MarketingHomePage() {
                   <p className="mkt-kicker">{labels.brief}</p>
                   <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{copy.home.hero.body}</p>
                 </div>
-                <div className="mkt-stagger-grid grid gap-3 sm:grid-cols-3 xl:grid-cols-2">
+                <div className="mkt-stagger-grid grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
                   {copy.home.supportSignals.map((metric, index) => (
                     <article
                       key={metric.label}
-                      className={index === copy.home.supportSignals.length - 1 ? 'mkt-card min-w-0 px-5 py-5 xl:col-span-2' : 'mkt-card min-w-0 px-5 py-5'}
+                      className={index === copy.home.supportSignals.length - 1 ? 'mkt-card min-w-0 px-5 py-5 sm:col-span-2 xl:col-span-1' : 'mkt-card min-w-0 px-5 py-5'}
                     >
                       <p className="mkt-metric-value">{metric.value}</p>
                       <p className="mkt-metric-label mt-3">{metric.label}</p>
