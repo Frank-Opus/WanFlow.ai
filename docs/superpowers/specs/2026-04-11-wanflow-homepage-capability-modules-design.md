@@ -21,7 +21,7 @@ Explain that the five modules are not isolated services, but connected parts of 
 Homepage modules:
 1. `数据标注与治理`
 2. `流程编排与自动化`
-3. `企业级智能体`
+3. `企业级多智能体`
 4. `人机协同交付`
 5. `模型运营与持续优化`
 
@@ -30,7 +30,7 @@ Homepage modules:
 
 `流程编排与自动化` covers workflow design, orchestration, system actions, and execution stability.
 
-`企业级智能体` makes AI agent capability explicit, but should emphasize safety, stability, controllability, and task execution in the supporting text rather than overloading the title.
+`企业级多智能体` makes multi-agent capability explicit, but should emphasize safety, stability, controllability, and task execution in the supporting text rather than overloading the title.
 
 `人机协同交付` captures WanFlow's real delivery model: AI handles repeatable execution, while people provide judgment, review, exception handling, and delivery assurance.
 

@@ -20,11 +20,11 @@
 - [ ] **Step 1: Replace remaining Chinese legacy service lists in site, hero, signals, footer, and contact copy**
 
 ```ts
-description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级智能体和模型运营真正接进业务里'
+description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级多智能体和模型运营真正接进业务里'
 ```
 
 ```ts
-items: ['数据标注与治理', '流程编排与自动化', '企业级智能体', '人机协同交付']
+items: ['数据标注与治理', '流程编排与自动化', '企业级多智能体', '人机协同交付']
 ```
 
 ```ts
@@ -35,7 +35,7 @@ items: ['模型运营与持续优化', '数据治理体系', '人机协同交付
 
 ```ts
 { value: '5', label: '核心能力模块', detail: '覆盖从数据到执行再到优化的完整闭环' },
-{ value: 'Agents', label: 'Enterprise AI Agents', detail: '以安全、稳定、可控的方式参与企业任务执行' },
+{ value: 'Agents', label: 'Enterprise Multi-Agent Systems', detail: '以安全、稳定、可控的方式参与企业任务执行' },
 { value: 'Ops', label: 'Continuous Optimization', detail: '围绕反馈、评测和结果持续迭代' },
 ```
 
@@ -62,11 +62,11 @@ Expected: no remaining Chinese marketing copy uses the retired core-module set o
 ```
 
 ```ts
-items: ['Data Labeling & Governance', 'Workflow Orchestration & Automation', 'Enterprise AI Agents', 'Human-in-the-Loop Delivery']
+items: ['Data Labeling & Governance', 'Workflow Orchestration & Automation', 'Enterprise Multi-Agent Systems', 'Human-in-the-Loop Delivery']
 ```
 
 ```ts
-{ value: 'Agents', label: 'Enterprise AI Agents', detail: 'controlled AI execution inside enterprise workflows' },
+{ value: 'Agents', label: 'Enterprise Multi-Agent Systems', detail: 'controlled AI execution inside enterprise workflows' },
 ```
 
 - [ ] **Step 2: Replace English module titles and related case sectors**
@@ -74,7 +74,7 @@ items: ['Data Labeling & Governance', 'Workflow Orchestration & Automation', 'En
 ```ts
 title: 'Data Labeling & Governance'
 title: 'Workflow Orchestration & Automation'
-title: 'Enterprise AI Agents'
+title: 'Enterprise Multi-Agent Systems'
 title: 'Human-in-the-Loop Delivery'
 title: 'Model Operations & Continuous Optimization'
 ```
@@ -97,8 +97,8 @@ Expected: no homepage, footer, or module section uses it as a current core modul
 - [ ] **Step 1: Replace root metadata description and keywords with the new module system**
 
 ```ts
-description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级智能体和模型运营真正接进业务里'
-keywords: ['WanFlow', '万物归流', '数据标注与治理', '流程编排与自动化', '企业级智能体', '人机协同交付', '模型运营与持续优化']
+description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级多智能体和模型运营真正接进业务里'
+keywords: ['WanFlow', '万物归流', '数据标注与治理', '流程编排与自动化', '企业级多智能体', '人机协同交付', '模型运营与持续优化']
 ```
 
 - [ ] **Step 2: Replace English Open Graph and Twitter descriptions**
@@ -110,7 +110,7 @@ description: 'Data labeling and governance, workflow orchestration, enterprise A
 - [ ] **Step 3: Align route-level page metadata and manifest descriptions**
 
 ```ts
-description: '查看 WanFlow 如何以数据标注与治理、流程编排与自动化、企业级智能体和模型运营闭环构建企业 AI 执行体系。'
+description: '查看 WanFlow 如何以数据标注与治理、流程编排与自动化、企业级多智能体和模型运营闭环构建企业 AI 执行体系。'
 ```
 
 Run: `rg -n "AI 数据标注|自动化数据处理|流程自动化|Process as a Service|模型运营服务" web/src/app/layout.tsx web/src/app/page.tsx web/src/app/contact/page.tsx web/src/app/solutions/page.tsx web/src/app/cases/page.tsx web/src/app/manifest.ts`
@@ -150,7 +150,7 @@ Expected: container restarts and returns healthy
 
 - [ ] **Step 5: Verify the live site reflects the new expressions**
 
-Run: `curl -sS https://wanflowai.com | rg "数据标注与治理|流程编排与自动化|企业级智能体|人机协同交付|模型运营与持续优化|Enterprise AI Agents|Continuous Optimization"`
+Run: `curl -sS https://wanflowai.com | rg "数据标注与治理|流程编排与自动化|企业级多智能体|人机协同交付|模型运营与持续优化|Enterprise Multi-Agent Systems|Continuous Optimization"`
 Expected: updated copy appears in live HTML
 
 - [ ] **Step 6: Commit the implementation**

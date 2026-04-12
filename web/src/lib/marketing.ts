@@ -20,7 +20,7 @@ const marketingCopyBase = {
     site: {
       title: 'WanFlow | 企业 AI 运营与交付伙伴',
       description:
-        'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环真正接进业务里',
+        'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级多智能体、人机协同交付和模型运营闭环真正接进业务里',
       brand: 'WanFlow',
       brandFull: 'WanFlow 万物归流',
       tagline: '把 AI 真正接进业务里',
@@ -55,7 +55,7 @@ const marketingCopyBase = {
       columns: [
         {
           title: '服务范围',
-          items: ['数据标注与治理', '流程编排与自动化', '企业级智能体', '人机协同交付'],
+          items: ['数据标注与治理', '流程编排与自动化', '企业级多智能体', '人机协同交付'],
         },
         {
           title: '业务入口',
@@ -78,7 +78,7 @@ const marketingCopyBase = {
         eyebrow: '企业 AI 运营与交付',
         title: '让数据、流程和 AI 在业务里真正汇流',
         statement:
-          '提供数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付和模型运营闭环能力，帮助企业实现稳定、安全、可落地的 AI 交付',
+          '提供数据标注与治理、流程编排与自动化、企业级多智能体、人机协同交付和模型运营闭环能力，帮助企业实现稳定、安全、可落地的 AI 交付',
         body:
           '我们不只出建议，更把链路搭起来、跑起来、交付出去',
         primary: { label: '预约咨询', href: '/contact' },
@@ -86,7 +86,7 @@ const marketingCopyBase = {
       },
       supportSignals: [
         { value: '5', label: '核心能力模块', detail: '覆盖从数据到执行再到优化的完整闭环' },
-        { value: 'Agents', label: 'Enterprise AI Agents', detail: '以安全、稳定、可控的方式参与企业任务执行' },
+        { value: 'Agents', label: 'Enterprise Multi-Agent Systems', detail: '以安全、稳定、可控的方式参与企业任务执行' },
         { value: 'Ops', label: 'Continuous Optimization', detail: '围绕反馈、评测和结果持续迭代' },
       ],
       platformView: {
@@ -118,8 +118,8 @@ const marketingCopyBase = {
             outcome: '让跨团队执行更顺、更稳',
           },
           {
-            title: '企业级智能体',
-            body: '围绕企业任务构建安全、稳定、可控的智能体能力，让 AI 能真正参与执行，而不只是提供回答',
+            title: '企业级多智能体',
+            body: '围绕企业任务构建安全、稳定、可控的多智能体能力，让 AI 能真正参与执行，而不只是提供回答',
             outcome: '把 AI 变成可管理的执行力量',
           },
           {
@@ -230,8 +230,8 @@ const marketingCopyBase = {
           outcomes: ['跨团队执行更顺', '交付波动更低'],
         },
         {
-          title: '企业级智能体',
-          body: '围绕企业场景设计可控的智能体执行能力，让任务理解、知识调用和动作执行进入同一套系统',
+          title: '企业级多智能体',
+          body: '围绕企业场景设计可控的多智能体执行能力，让任务理解、知识调用和动作执行进入同一套系统',
           deliverables: ['任务与权限边界', '知识与工具接入', '执行链路设计', '运行与审计机制'],
           outcomes: ['自动执行能力更强', '企业落地方式更可控'],
         },
@@ -403,7 +403,7 @@ const marketingCopyBase = {
         eyebrow: '联系我们',
         title: '把你现在卡住的地方直接讲给我们听',
         body:
-          '不管你卡在数据标注与治理、流程编排与自动化、企业级智能体、人机协同交付还是模型运营闭环，只要问题已经到了需要一套真正能跑的系统这一步，WanFlow 都值得进入对话',
+          '不管你卡在数据标注与治理、流程编排与自动化、企业级多智能体、人机协同交付还是模型运营闭环，只要问题已经到了需要一套真正能跑的系统这一步，WanFlow 都值得进入对话',
       },
       form: {
         title: '发起业务沟通',
@@ -419,7 +419,7 @@ const marketingCopyBase = {
         interests: [
           '数据标注与治理',
           '流程编排与自动化',
-          '企业级智能体',
+          '企业级多智能体',
           '人机协同交付',
           '模型运营与持续优化',
           '需要一起梳理',
@@ -469,7 +469,7 @@ const marketingCopyBase = {
     site: {
       title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
       description:
-        'WanFlow helps enterprises connect data labeling and governance, workflow orchestration and automation, enterprise AI agents, human-in-the-loop delivery, and continuous model optimization into one working system.',
+        'WanFlow helps enterprises connect data labeling and governance, workflow orchestration and automation, enterprise multi-agent systems, human-in-the-loop delivery, and continuous model optimization into one working system.',
       brand: 'WanFlow',
       brandFull: 'WanFlow',
       tagline: 'Bring data, workflows, and AI into real business execution.',
@@ -504,7 +504,7 @@ const marketingCopyBase = {
       columns: [
         {
           title: 'Services',
-          items: ['Data Labeling & Governance', 'Workflow Orchestration & Automation', 'Enterprise AI Agents', 'Human-in-the-Loop Delivery'],
+          items: ['Data Labeling & Governance', 'Workflow Orchestration & Automation', 'Enterprise Multi-Agent Systems', 'Human-in-the-Loop Delivery'],
         },
         {
           title: 'Business entry points',
@@ -527,14 +527,14 @@ const marketingCopyBase = {
         eyebrow: 'Enterprise AI operations and delivery',
         title: 'Bring data, workflows, and AI into real business execution.',
         statement:
-          'WanFlow helps enterprises connect data labeling and governance, workflow orchestration and automation, enterprise AI agents, human-in-the-loop delivery, and continuous model optimization into one working delivery system.',
+          'WanFlow helps enterprises connect data labeling and governance, workflow orchestration and automation, enterprise multi-agent systems, human-in-the-loop delivery, and continuous model optimization into one working delivery system.',
         body: 'We do not stop at recommendations. We design, run, and deliver the execution chain.',
         primary: { label: 'Book an Ops Review', href: '/contact' },
         secondary: { label: 'Explore Solutions', href: '/solutions' },
       },
       supportSignals: [
         { value: '5', label: 'core capability modules', detail: 'covering the full loop from data to execution to optimization' },
-        { value: 'Agents', label: 'Enterprise AI Agents', detail: 'controlled AI execution inside enterprise workflows' },
+        { value: 'Agents', label: 'Enterprise Multi-Agent Systems', detail: 'controlled AI execution inside enterprise workflows' },
         { value: 'Ops', label: 'Continuous Optimization', detail: 'continuous iteration around feedback, evaluation, and outcomes' },
       ],
       platformView: {
@@ -566,8 +566,8 @@ const marketingCopyBase = {
             outcome: 'Make cross-team execution smoother and more reliable.',
           },
           {
-            title: 'Enterprise AI Agents',
-            body: 'Build safe, stable, and controllable AI agent capabilities around enterprise tasks so AI can participate in execution, not just answer questions.',
+            title: 'Enterprise Multi-Agent Systems',
+            body: 'Build safe, stable, and controllable multi-agent capabilities around enterprise tasks so AI can participate in execution, not just answer questions.',
             outcome: 'Turn AI into a managed execution force.',
           },
           {
@@ -678,8 +678,8 @@ const marketingCopyBase = {
           outcomes: ['Lower coordination drag', 'More stable execution quality'],
         },
         {
-          title: 'Enterprise AI Agents',
-          body: 'For enterprise scenarios that require controllable agent execution across task understanding, knowledge access, and action handling.',
+          title: 'Enterprise Multi-Agent Systems',
+          body: 'For enterprise scenarios that require controllable multi-agent execution across task understanding, knowledge access, and action handling.',
           deliverables: ['Task and permission boundaries', 'Knowledge and tool connections', 'Execution-chain design', 'Runtime and audit controls'],
           outcomes: ['Stronger automated execution', 'More controllable enterprise adoption'],
         },
@@ -851,7 +851,7 @@ const marketingCopyBase = {
         eyebrow: 'Contact',
         title: 'Tell us which part of the system is currently stuck.',
         body:
-          'Whether the issue is data governance, workflow orchestration, enterprise AI agents, human-in-the-loop delivery, or model operations, WanFlow is most useful when the business needs a system that can actually run.',
+          'Whether the issue is data governance, workflow orchestration, enterprise multi-agent systems, human-in-the-loop delivery, or model operations, WanFlow is most useful when the business needs a system that can actually run.',
       },
       form: {
         title: 'Start the conversation',
@@ -867,7 +867,7 @@ const marketingCopyBase = {
         interests: [
           'Data Labeling & Governance',
           'Workflow Orchestration & Automation',
-          'Enterprise AI Agents',
+          'Enterprise Multi-Agent Systems',
           'Human-in-the-Loop Delivery',
           'Model Operations & Continuous Optimization',
           'Need help framing the problem',

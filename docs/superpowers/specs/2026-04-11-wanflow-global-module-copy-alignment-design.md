@@ -9,14 +9,14 @@ Use one shared module system across the public site.
 Chinese modules:
 1. `数据标注与治理`
 2. `流程编排与自动化`
-3. `企业级智能体`
+3. `企业级多智能体`
 4. `人机协同交付`
 5. `模型运营与持续优化`
 
 English modules:
 1. `Data Labeling & Governance`
 2. `Workflow Orchestration & Automation`
-3. `Enterprise AI Agents`
+3. `Enterprise Multi-Agent Systems`
 4. `Human-in-the-Loop Delivery`
 5. `Model Operations & Continuous Optimization`
 
@@ -40,7 +40,7 @@ Do not make the English set a literal slogan translation. Keep it formal, enterp
 ## Copy Intent
 The site should read as one operating system for enterprise AI delivery, not as a loose list of outsourced services.
 
-`企业级智能体` / `Enterprise AI Agents` should be framed as controlled enterprise execution capability, with safety, stability, and governance expressed in supporting text rather than overloaded titles.
+`企业级多智能体` / `Enterprise Multi-Agent Systems` should be framed as controlled enterprise execution capability, with safety, stability, and governance expressed in supporting text rather than overloaded titles.
 
 `人机协同交付` / `Human-in-the-Loop Delivery` should explain WanFlow's differentiation: AI handles repeatable execution while people handle judgment, review, and exception management.
 

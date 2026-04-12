@@ -40,7 +40,7 @@ items: [
     outcome: '让跨团队执行更顺、更稳',
   },
   {
-    title: '企业级智能体',
+    title: '企业级多智能体',
     body: '围绕企业任务构建安全、稳定、可控的智能体能力，让 AI 能真正参与执行，而不只是提供回答',
     outcome: '把 AI 变成可管理的执行力量',
   },
@@ -74,7 +74,7 @@ Expected: Only the Chinese homepage capability module section changes, with no a
 modules: [
   { title: '数据标注与治理', ... },
   { title: '流程编排与自动化', ... },
-  { title: '企业级智能体', ... },
+  { title: '企业级多智能体', ... },
   { title: '人机协同交付', ... },
   { title: '模型运营与持续优化', ... },
 ]
@@ -84,7 +84,7 @@ modules: [
 
 ```ts
 {
-  title: '企业级智能体',
+  title: '企业级多智能体',
   body: '围绕企业场景设计可控的智能体执行能力，让任务理解、知识调用和动作执行进入同一套系统。',
   deliverables: ['任务与权限边界', '知识与工具接入', '执行链路设计', '运行与审计机制'],
   outcomes: ['更强的自动执行能力', '更可控的企业落地方式'],
@@ -130,7 +130,7 @@ Expected: container returns to healthy state
 
 - [ ] **Step 5: Verify the live site reflects the new module language**
 
-Run: `curl -sS https://wanflowai.com | rg "五个模块，一套持续进化的交付闭环|数据标注与治理|企业级智能体|模型运营与持续优化"`
+Run: `curl -sS https://wanflowai.com | rg "五个模块，一套持续进化的交付闭环|数据标注与治理|企业级多智能体|模型运营与持续优化"`
 Expected: all updated strings appear in live HTML
 
 - [ ] **Step 6: Commit the implementation**
