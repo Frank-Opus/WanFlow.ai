@@ -13,26 +13,28 @@ export default function MarketingCasesPage() {
   const labels = locale === 'zh'
     ? {
         featured: '重点案例',
-        context: '场景',
-        challenge: '挑战',
-        intervention: '执行方式',
+        client: '客户类型',
+        context: '所属行业',
+        challenge: '原始问题',
+        solution: '方案组合',
+        delivery: '交付方式',
         outcome: '结果',
-        caseGrid: '匿名化交付切片',
-        caseGridTitle: '更多案例，不讲品牌故事，直接看执行骨架。',
-        action: '动作',
-        proof: '证明层',
+        proofPoints: '交付要点',
+        caseGrid: '更多真实案例',
+        caseGridTitle: '更多匿名化真实案例，直接看问题、方案和结果。',
         nextStep: '下一步',
       }
     : {
         featured: 'Featured case',
-        context: 'Context',
-        challenge: 'Challenge',
-        intervention: 'Intervention',
+        client: 'Client type',
+        context: 'Industry',
+        challenge: 'Original problem',
+        solution: 'Solution combination',
+        delivery: 'Delivery approach',
         outcome: 'Outcome',
-        caseGrid: 'Delivery slices',
-        caseGridTitle: 'More cases, focused on execution structure instead of brand theatre.',
-        action: 'Action',
-        proof: 'Proof',
+        proofPoints: 'Proof points',
+        caseGrid: 'More real cases',
+        caseGridTitle: 'More anonymized cases focused on the problem, the solution, and the result.',
         nextStep: 'Next step',
       };
 
@@ -51,6 +53,7 @@ export default function MarketingCasesPage() {
                 <p className="mkt-kicker">{labels.featured}</p>
                 <span className="mkt-chip">{featured.sector}</span>
                 <h3 className="zh-card-title text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{featured.title}</h3>
+                <p className="text-sm font-medium text-[var(--mk-text-0)]">{featured.client}</p>
                 <p className="mkt-copy text-sm">{featured.outcome}</p>
               </div>
             }
@@ -63,10 +66,23 @@ export default function MarketingCasesPage() {
               <p className="mkt-kicker">{featured.eyebrow}</p>
               <h2 className="mkt-title max-w-[12ch]">{featured.title}</h2>
               <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
+                <p><strong className="text-[var(--mk-text-0)]">{labels.client}:</strong> {featured.client}</p>
                 <p><strong className="text-[var(--mk-text-0)]">{labels.context}:</strong> {featured.sector}</p>
                 <p><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {featured.challenge}</p>
-                <p><strong className="text-[var(--mk-text-0)]">{labels.intervention}:</strong> {featured.intervention}</p>
+                <p><strong className="text-[var(--mk-text-0)]">{labels.solution}:</strong> {featured.solution}</p>
+                <p><strong className="text-[var(--mk-text-0)]">{labels.delivery}:</strong> {featured.delivery}</p>
                 <p><strong className="text-[var(--mk-text-0)]">{labels.outcome}:</strong> {featured.outcome}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.proofPoints}</p>
+                <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
+                  {featured.proofPoints.map((item) => (
+                    <li key={item} className="mkt-list-item">
+                      <span className="mkt-list-dot" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
             <div className="mkt-stagger-grid grid gap-3 sm:grid-cols-3 xl:grid-cols-2 xl:self-start">
@@ -99,29 +115,16 @@ export default function MarketingCasesPage() {
               >
                 <span className="mkt-chip">{item.sector}</span>
                 <h3 className="zh-card-title mt-4 text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.context}:</strong> {item.sector}</p>
+                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.client}:</strong> {item.client}</p>
                 <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.action}:</strong> {item.action}</p>
+                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.solution}:</strong> {item.solution}</p>
                 <p className="mt-5 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-1)]">{item.outcome}</p>
               </article>
             ))}
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={130} className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
-          <SectionHeading eyebrow={copy.cases.proof.eyebrow} title={copy.cases.proof.title} />
-          <div className="mkt-stagger-grid mt-6 grid gap-4 lg:grid-cols-3">
-            {copy.cases.proof.items.map((item, index) => (
-              <article key={item.title} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
-                <span className="mkt-card-index">{labels.proof}</span>
-                <h3 className="zh-card-title mt-4 text-[1.18rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3">{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </MotionReveal>
-
-        <MotionReveal delay={165}>
+        <MotionReveal delay={130}>
           <FinalCtaBand
             eyebrow={labels.nextStep}
             title={copy.cases.finalCta.title}

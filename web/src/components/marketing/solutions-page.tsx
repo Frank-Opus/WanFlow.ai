@@ -7,34 +7,36 @@ import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 export default function MarketingSolutionsPage() {
   const copy = useMarketingCopy();
-  const { locale } = useLocale();
   const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
+  const { locale } = useLocale();
   const labels = locale === 'zh'
     ? {
-        problem: '企业问题',
-        architectureEyebrow: '系统架构',
-        architectureTitle: '先把数据、流程、模型运营放回同一张架构图里。',
-        architectureBody: '对 WanFlow 来说，解决方案不是服务堆叠，而是把企业 AI 交付拆回三个互相咬合的层级。',
+        industriesAside: '适用行业',
+        industriesEyebrow: '行业解决方案',
+        industriesTitle: '先看行业问题，再看对应方案组合',
+        industriesBody: 'WanFlow 按行业去理解业务链路，再把数据、流程、多智能体和人机协同能力组合成真正能落地的方案。',
         modulesEyebrow: '服务模块',
-        modulesTitle: '五大模块如何变成可执行交付系统',
-        modulesBody: '每个模块都对应清晰的交付物与业务结果，但真正重要的是它们如何拼成统一的运行骨架。',
+        modulesTitle: '同一套能力底座，按行业做不同组合',
+        modulesBody: '不同项目入口不一样，但真正起作用的，往往还是这五类核心能力如何被组合、接通和长期运行。',
+        problems: '典型问题',
+        solutionCombo: '方案组合',
         deliverables: '交付物',
         outcomes: '结果',
         contact: '联系我们',
-        layer: '层级',
       }
     : {
-        problem: 'Enterprise problem',
-        architectureEyebrow: 'Architecture',
-        architectureTitle: 'Put data, process, and model operations back into one operating stack.',
-        architectureBody: 'WanFlow does not stack services on top of each other. We rebuild enterprise AI delivery as three connected layers.',
+        industriesAside: 'Industries',
+        industriesEyebrow: 'Industry solutions',
+        industriesTitle: 'Start from industry problems, then match the right solution combination',
+        industriesBody: 'WanFlow reads the business chain by industry first, then combines data, workflow, multi-agent, and human review capabilities into a practical operating solution.',
         modulesEyebrow: 'Service modules',
-        modulesTitle: 'How the modules become an executable delivery system',
-        modulesBody: 'Each module has concrete deliverables and business outcomes, but the real value is how they lock together into one operating spine.',
+        modulesTitle: 'One shared capability base, assembled differently by industry',
+        modulesBody: 'Projects enter from different business problems, but the real delivery engine usually comes from how these five modules are combined and operated together.',
+        problems: 'Typical problems',
+        solutionCombo: 'Solution combination',
         deliverables: 'Deliverables',
         outcomes: 'Outcomes',
         contact: 'Contact',
-        layer: 'Layer',
       };
 
   return (
@@ -49,11 +51,12 @@ export default function MarketingSolutionsPage() {
             secondary={{ href: '/cases', label: navLabel('/cases') }}
             aside={
               <div className="space-y-4">
-                <p className="mkt-kicker">{labels.problem}</p>
+                <p className="mkt-kicker">{labels.industriesAside}</p>
                 <div className="space-y-3">
-                  {copy.solutions.triggers.items.slice(0, 3).map((item) => (
-                    <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
-                      <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
+                  {copy.solutions.industries.slice(0, 4).map((item) => (
+                    <div key={item.title} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
+                      <p className="text-sm font-semibold text-[var(--mk-text-0)]">{item.title}</p>
+                      <p className="mkt-copy mt-1 text-sm">{item.summary}</p>
                     </div>
                   ))}
                 </div>
@@ -64,24 +67,58 @@ export default function MarketingSolutionsPage() {
 
         <MotionReveal as="section" delay={70} intensity="strong" className="space-y-6">
           <SectionHeading
-            eyebrow={labels.architectureEyebrow}
-            title={labels.architectureTitle}
-            body={labels.architectureBody}
+            eyebrow={labels.industriesEyebrow}
+            title={labels.industriesTitle}
+            body={labels.industriesBody}
           />
           <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
-            {copy.solutions.architecture.map((item, index) => (
+            {copy.solutions.industries.map((item, index) => (
               <article
                 key={item.title}
                 className={[
-                  'mkt-card px-6 py-6',
-                  index === 1 ? 'mkt-card-highlight lg:col-span-5' : '',
-                  index === 0 ? 'lg:col-span-3' : '',
-                  index === 2 ? 'lg:col-span-4' : '',
+                  'mkt-case-card px-6 py-6',
+                  index === 0 ? 'mkt-card-highlight lg:col-span-7' : '',
+                  index === 1 ? 'lg:col-span-5' : '',
+                  index >= 2 ? 'lg:col-span-4' : '',
                 ].filter(Boolean).join(' ')}
               >
-                <span className="mkt-card-index">{labels.layer} 0{index + 1}</span>
-                <h3 className="zh-card-title mt-4 text-[1.35rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3">{item.body}</p>
+                <span className="mkt-chip">{item.title}</span>
+                <h3 className="zh-card-title mt-4 text-[1.35rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.summary}</h3>
+                <div className="mt-5 space-y-5">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.problems}</p>
+                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
+                      {item.problems.map((problem) => (
+                        <li key={problem} className="mkt-list-item">
+                          <span className="mkt-list-dot" />
+                          <span>{problem}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.solutionCombo}</p>
+                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
+                      {item.solutions.map((solution) => (
+                        <li key={solution} className="mkt-list-item">
+                          <span className="mkt-list-dot" />
+                          <span>{solution}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
+                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
+                      {item.outcomes.map((outcome) => (
+                        <li key={outcome} className="mkt-list-item">
+                          <span className="mkt-list-dot" />
+                          <span>{outcome}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
@@ -132,36 +169,7 @@ export default function MarketingSolutionsPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={120} intensity="strong" className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
-          <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-            <SectionHeading eyebrow={copy.solutions.triggers.eyebrow} title={copy.solutions.triggers.title} />
-            <div className="mkt-stagger-grid grid gap-3 sm:grid-cols-2">
-              {copy.solutions.triggers.items.map((item, index) => (
-                <article key={item} className={index === 0 ? 'mkt-split-callout px-5 py-5 sm:col-span-2' : 'mkt-rail-card px-5 py-5'}>
-                  <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </MotionReveal>
-
-        <MotionReveal as="section" delay={145} intensity="strong" className="space-y-6">
-          <SectionHeading
-            eyebrow={copy.solutions.delivery.eyebrow}
-            title={copy.solutions.delivery.title}
-          />
-          <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {copy.solutions.delivery.steps.map((step, index) => (
-              <article key={step.step} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
-                <div className="mkt-flow-marker">{step.step}</div>
-                <h3 className="zh-card-title mt-4 text-[1.15rem] font-semibold text-[var(--mk-text-0)]">{step.title}</h3>
-                <p className="mkt-copy mt-3 text-sm">{step.body}</p>
-              </article>
-            ))}
-          </div>
-        </MotionReveal>
-
-        <MotionReveal delay={170} intensity="strong">
+        <MotionReveal delay={120} intensity="strong">
           <FinalCtaBand
             eyebrow={labels.contact}
             title={copy.solutions.finalCta.title}
