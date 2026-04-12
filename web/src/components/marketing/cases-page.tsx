@@ -8,33 +8,34 @@ import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 export default function MarketingCasesPage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
-  const featured = copy.cases.featured;
   const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const labels = locale === 'zh'
     ? {
-        featured: '重点案例',
         client: '客户类型',
         context: '所属行业',
         challenge: '原始问题',
         solution: '方案组合',
         delivery: '交付方式',
+        deliverables: '交付物',
+        image: '图片建议',
         outcome: '结果',
-        proofPoints: '交付要点',
-        caseGrid: '更多真实案例',
-        caseGridTitle: '更多匿名化真实案例，直接看问题、方案和结果。',
+        caseGrid: '真实案例',
+        caseGridTitle: '每个案例都直接展开问题、方案、交付和结果',
+        caseGridBody: '不再单列重点案例，所有案例都用同样的颗粒度来展示，方便直接对照你的业务场景。',
         nextStep: '下一步',
       }
     : {
-        featured: 'Featured case',
         client: 'Client type',
         context: 'Industry',
         challenge: 'Original problem',
         solution: 'Solution combination',
         delivery: 'Delivery approach',
+        deliverables: 'Deliverables',
+        image: 'Image direction',
         outcome: 'Outcome',
-        proofPoints: 'Proof points',
-        caseGrid: 'More real cases',
-        caseGridTitle: 'More anonymized cases focused on the problem, the solution, and the result.',
+        caseGrid: 'Real cases',
+        caseGridTitle: 'Each case opens up the problem, solution, delivery, and outcome directly',
+        caseGridBody: 'There is no separate featured case now. Every case is shown at the same detail level so visitors can compare them against their own workflow.',
         nextStep: 'Next step',
       };
 
@@ -50,75 +51,59 @@ export default function MarketingCasesPage() {
             secondary={{ href: '/solutions', label: navLabel('/solutions') }}
             aside={
               <div className="space-y-4">
-                <p className="mkt-kicker">{labels.featured}</p>
-                <span className="mkt-chip">{featured.sector}</span>
-                <h3 className="zh-card-title text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{featured.title}</h3>
-                <p className="text-sm font-medium text-[var(--mk-text-0)]">{featured.client}</p>
-                <p className="mkt-copy text-sm">{featured.outcome}</p>
+                <p className="mkt-kicker">{labels.caseGrid}</p>
+                <div className="grid gap-2">
+                  {copy.cases.cards.slice(0, 4).map((item) => (
+                    <span key={item.title} className="mkt-chip w-fit">{item.sector}</span>
+                  ))}
+                </div>
+                <p className="mkt-copy text-sm">{labels.caseGridBody}</p>
               </div>
             }
           />
         </MotionReveal>
 
-        <MotionReveal as="section" delay={70} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.08fr)_minmax(22rem,0.92fr)] xl:items-start xl:gap-10">
-            <div className="max-w-[46rem] space-y-5">
-              <p className="mkt-kicker">{featured.eyebrow}</p>
-              <h2 className="mkt-title max-w-[12ch]">{featured.title}</h2>
-              <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
-                <p><strong className="text-[var(--mk-text-0)]">{labels.client}:</strong> {featured.client}</p>
-                <p><strong className="text-[var(--mk-text-0)]">{labels.context}:</strong> {featured.sector}</p>
-                <p><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {featured.challenge}</p>
-                <p><strong className="text-[var(--mk-text-0)]">{labels.solution}:</strong> {featured.solution}</p>
-                <p><strong className="text-[var(--mk-text-0)]">{labels.delivery}:</strong> {featured.delivery}</p>
-                <p><strong className="text-[var(--mk-text-0)]">{labels.outcome}:</strong> {featured.outcome}</p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.proofPoints}</p>
-                <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                  {featured.proofPoints.map((item) => (
-                    <li key={item} className="mkt-list-item">
-                      <span className="mkt-list-dot" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="mkt-stagger-grid grid gap-3 sm:grid-cols-3 xl:grid-cols-2 xl:self-start">
-              {featured.stats.map((stat, index) => (
-                <article
-                  key={stat.label}
-                  className={index === 0 ? 'mkt-card px-5 py-5 xl:col-span-2' : 'mkt-card px-5 py-5'}
-                >
-                  <p className="mkt-metric-value text-[2.2rem]">{stat.value}</p>
-                  <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{stat.label}</p>
-                  <p className="mkt-copy mt-2 text-sm">{stat.detail}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </MotionReveal>
-
         <MotionReveal as="section" delay={100} className="space-y-6">
-          <SectionHeading eyebrow={labels.caseGrid} title={labels.caseGridTitle} body={copy.cases.intro.body} />
-          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
-            {copy.cases.cards.map((item, index) => (
+          <SectionHeading eyebrow={labels.caseGrid} title={labels.caseGridTitle} body={labels.caseGridBody} />
+          <div className="space-y-4">
+            {copy.cases.cards.map((item) => (
               <article
                 key={item.title}
-                className={[
-                  'mkt-case-card px-5 py-5 sm:px-6 sm:py-6',
-                  index === 0 ? 'lg:col-span-7 xl:col-span-8' : '',
-                  index === 1 ? 'lg:col-span-5 xl:col-span-4' : '',
-                  index === 2 ? 'lg:col-span-12' : '',
-                ].filter(Boolean).join(' ')}
+                className="mkt-case-detail-card mkt-panel px-5 py-5 sm:px-6 sm:py-6 lg:px-7 lg:py-7"
               >
-                <span className="mkt-chip">{item.sector}</span>
-                <h3 className="zh-card-title mt-4 text-[1.22rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.client}:</strong> {item.client}</p>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
-                <p className="mkt-copy mt-3 text-sm"><strong className="text-[var(--mk-text-0)]">{labels.solution}:</strong> {item.solution}</p>
-                <p className="mt-5 border-t border-[var(--mk-line-1)] pt-4 text-sm text-[var(--mk-brand-1)]">{item.outcome}</p>
+                <div className="grid gap-6 xl:grid-cols-[minmax(0,1.06fr)_minmax(18rem,0.94fr)]">
+                  <div className="space-y-4">
+                    <div className="space-y-3">
+                      <span className="mkt-chip">{item.sector}</span>
+                      <h3 className="zh-card-title text-[1.28rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                    </div>
+                    <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
+                      <p><strong className="text-[var(--mk-text-0)]">{labels.client}:</strong> {item.client}</p>
+                      <p><strong className="text-[var(--mk-text-0)]">{labels.context}:</strong> {item.sector}</p>
+                      <p><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
+                      <p><strong className="text-[var(--mk-text-0)]">{labels.solution}:</strong> {item.solution}</p>
+                      <p><strong className="text-[var(--mk-text-0)]">{labels.delivery}:</strong> {item.delivery}</p>
+                      <p><strong className="text-[var(--mk-text-0)]">{labels.outcome}:</strong> {item.outcome}</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
+                      <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
+                        {item.deliverables.map((deliverable) => (
+                          <li key={deliverable} className="mkt-list-item">
+                            <span className="mkt-list-dot" />
+                            <span>{deliverable}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mkt-industry-image-slot">
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.image}</p>
+                      <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{item.imageTitle}</p>
+                    </div>
+                  </div>
+                </div>
               </article>
             ))}
           </div>

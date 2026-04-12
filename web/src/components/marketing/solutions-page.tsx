@@ -13,13 +13,14 @@ export default function MarketingSolutionsPage() {
     ? {
         industriesAside: '适用行业',
         industriesEyebrow: '行业解决方案',
-        industriesTitle: '先看行业问题，再看对应方案组合',
-        industriesBody: 'WanFlow 按行业去理解业务链路，再把数据、流程、多智能体和人机协同能力组合成真正能落地的方案。',
+        industriesTitle: '每个行业一条业务带，里面放具体模块和对应交付',
+        industriesBody: '每个行业都不是一个抽象标签，而是一条可展开的业务带。左侧讲行业问题和结果，右侧用可横向扩展的模块卡片去承载具体场景。',
         modulesEyebrow: '服务模块',
         modulesTitle: '同一套能力底座，按行业做不同组合',
         modulesBody: '不同项目入口不一样，但真正起作用的，往往还是这五类核心能力如何被组合、接通和长期运行。',
-        problems: '典型问题',
-        solutionCombo: '方案组合',
+        railHint: '左右拖动查看行业模块',
+        modulesInIndustry: '行业内模块',
+        imageSlot: '图片建议',
         deliverables: '交付物',
         outcomes: '结果',
         contact: '联系我们',
@@ -27,13 +28,14 @@ export default function MarketingSolutionsPage() {
     : {
         industriesAside: 'Industries',
         industriesEyebrow: 'Industry solutions',
-        industriesTitle: 'Start from industry problems, then match the right solution combination',
-        industriesBody: 'WanFlow reads the business chain by industry first, then combines data, workflow, multi-agent, and human review capabilities into a practical operating solution.',
+        industriesTitle: 'Each industry gets its own business strip with expandable module cards',
+        industriesBody: 'Each industry should read like a concrete operating lane, not an abstract label. The left side frames the problem and results, while the right side holds horizontally expandable module cards.',
         modulesEyebrow: 'Service modules',
         modulesTitle: 'One shared capability base, assembled differently by industry',
         modulesBody: 'Projects enter from different business problems, but the real delivery engine usually comes from how these five modules are combined and operated together.',
-        problems: 'Typical problems',
-        solutionCombo: 'Solution combination',
+        railHint: 'Drag sideways to view more modules',
+        modulesInIndustry: 'Modules in this industry',
+        imageSlot: 'Image direction',
         deliverables: 'Deliverables',
         outcomes: 'Outcomes',
         contact: 'Contact',
@@ -52,12 +54,10 @@ export default function MarketingSolutionsPage() {
             aside={
               <div className="space-y-4">
                 <p className="mkt-kicker">{labels.industriesAside}</p>
-                <div className="space-y-3">
+                <p className="mkt-copy text-sm">{labels.railHint}</p>
+                <div className="grid gap-2">
                   {copy.solutions.industries.slice(0, 4).map((item) => (
-                    <div key={item.title} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
-                      <p className="text-sm font-semibold text-[var(--mk-text-0)]">{item.title}</p>
-                      <p className="mkt-copy mt-1 text-sm">{item.summary}</p>
-                    </div>
+                    <span key={item.title} className="mkt-chip w-fit">{item.title}</span>
                   ))}
                 </div>
               </div>
@@ -71,52 +71,60 @@ export default function MarketingSolutionsPage() {
             title={labels.industriesTitle}
             body={labels.industriesBody}
           />
-          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
-            {copy.solutions.industries.map((item, index) => (
+          <div className="space-y-4">
+            {copy.solutions.industries.map((item) => (
               <article
                 key={item.title}
-                className={[
-                  'mkt-case-card px-6 py-6',
-                  index === 0 ? 'mkt-card-highlight lg:col-span-7' : '',
-                  index === 1 ? 'lg:col-span-5' : '',
-                  index >= 2 ? 'lg:col-span-4' : '',
-                ].filter(Boolean).join(' ')}
+                className="mkt-industry-strip mkt-panel px-5 py-5 sm:px-6 sm:py-6 lg:px-7 lg:py-7"
               >
-                <span className="mkt-chip">{item.title}</span>
-                <h3 className="zh-card-title mt-4 text-[1.35rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.summary}</h3>
-                <div className="mt-5 space-y-5">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.problems}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                      {item.problems.map((problem) => (
-                        <li key={problem} className="mkt-list-item">
-                          <span className="mkt-list-dot" />
-                          <span>{problem}</span>
-                        </li>
-                      ))}
-                    </ul>
+                <div className="grid gap-6 xl:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1.18fr)] xl:items-start">
+                  <div className="space-y-5">
+                    <div className="space-y-3">
+                      <span className="mkt-chip">{item.title}</span>
+                      <h3 className="zh-card-title text-[1.4rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.summary}</h3>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
+                      <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
+                        {item.outcomes.map((outcome) => (
+                          <li key={outcome} className="mkt-list-item">
+                            <span className="mkt-list-dot" />
+                            <span>{outcome}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mkt-industry-image-slot">
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
+                      <h4 className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{item.imageTitle}</h4>
+                      <p className="mkt-copy mt-2 text-sm">{item.imageHint}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.solutionCombo}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                      {item.solutions.map((solution) => (
-                        <li key={solution} className="mkt-list-item">
-                          <span className="mkt-list-dot" />
-                          <span>{solution}</span>
-                        </li>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.modulesInIndustry}</p>
+                      <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
+                    </div>
+                    <div className="mkt-industry-rail">
+                      {item.modules.map((module) => (
+                        <article key={module.title} className="mkt-industry-module-card">
+                          <h4 className="zh-card-title text-[1.12rem] font-semibold text-[var(--mk-text-0)]">{module.title}</h4>
+                          <p className="mkt-copy mt-3 text-sm">{module.body}</p>
+                          <div className="mt-4">
+                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
+                            <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
+                              {module.deliverables.map((deliverable) => (
+                                <li key={deliverable} className="mkt-list-item">
+                                  <span className="mkt-list-dot" />
+                                  <span>{deliverable}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <p className="mt-4 border-t border-[var(--mk-line-1)] pt-3 text-sm text-[var(--mk-brand-1)]">{module.outcome}</p>
+                        </article>
                       ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                      {item.outcomes.map((outcome) => (
-                        <li key={outcome} className="mkt-list-item">
-                          <span className="mkt-list-dot" />
-                          <span>{outcome}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    </div>
                   </div>
                 </div>
               </article>
