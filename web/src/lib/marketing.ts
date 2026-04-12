@@ -42,11 +42,8 @@ const marketingCopyBase = {
       zh: '中文',
       en: 'EN',
       metaKicker: 'Data-driven AI operations',
-      proofLabel: '可交付的 AI 运营系统',
-      proofNote: '从数据治理到持续优化，我们把链路搭起来，也把结果交出去',
       finalPrimary: '发起业务沟通',
       finalSecondary: '查看案例',
-      workbenchNote: '把方法沉淀成可展示、可复盘、可验证的交付结构',
     },
     footer: {
       companyName: '上海万流归智科技有限公司',
@@ -144,25 +141,6 @@ const marketingCopyBase = {
           { step: '02', title: '再把链路搭好', body: '把该自动化的、该人工兜底的、该留痕复盘的边界一开始就定清楚' },
           { step: '03', title: '接进真实业务', body: '不把方案停在纸面上，而是把流程真正接进日常业务里，边跑边校正' },
           { step: '04', title: '持续往前调', body: '盯住质量、时效和结果，哪里不顺就改哪里，让系统越跑越稳' },
-        ],
-      },
-      proofLayer: {
-        eyebrow: '证明层',
-        title: '我们更像一起下场的运营团队',
-        body: '我们会把方法沉淀成可展示、可复盘、可验证的交付结构，让客户看得见这件事是怎么被做成的',
-        items: [
-          {
-            title: '数据、流程和模型一起看',
-            body: '不把问题拆成互相割裂的几块，而是从整条执行链出发',
-          },
-          {
-            title: '服务不是黑盒外包',
-            body: '每个环节都讲规范、节奏、反馈和复盘，方便长期协作',
-          },
-          {
-            title: '交付过程可以被验证',
-            body: '每一步都强调过程记录、结果依据和复盘能力，而不是只给一个结论',
-          },
         ],
       },
       caseTeaser: {
@@ -491,11 +469,8 @@ const marketingCopyBase = {
       zh: '中文',
       en: 'EN',
       metaKicker: 'Data-driven AI operations',
-      proofLabel: 'Enterprise-ready AI delivery',
-      proofNote: 'From data governance to continuous optimization, WanFlow builds the execution chain instead of stopping at strategy.',
       finalPrimary: 'Start the conversation',
       finalSecondary: 'See Cases',
-      workbenchNote: 'WanFlow BenchmarkOps remains available as a proof layer for operations and delivery.',
     },
     footer: {
       companyName: 'Shanghai Wanliu Guizhi Technology Co., Ltd.',
@@ -592,25 +567,6 @@ const marketingCopyBase = {
           { step: '02', title: 'Set the boundaries', body: 'Decide early what should be automated, what needs human review, and what must stay traceable.' },
           { step: '03', title: 'Put it into live work', body: 'Move the chain into day-to-day business operations and correct it while it is actually running.' },
           { step: '04', title: 'Keep tuning it', body: 'Watch quality, speed, and outcomes closely, then keep improving the parts that still drag the system down.' },
-        ],
-      },
-      proofLayer: {
-        eyebrow: 'Proof layer',
-        title: 'We work more like an AI operations team than a presentation-only consultancy.',
-        body: 'WanFlow BenchmarkOps appears as supporting evidence rather than the homepage lead, showing how WanFlow turns internal operating methods into an inspectable delivery system.',
-        items: [
-          {
-            title: 'Data and process in one frame',
-            body: 'We do not split data problems, workflow problems, and model problems into disconnected workstreams.',
-          },
-          {
-            title: 'Services that stay inspectable',
-            body: 'Specs, quality logic, cadence, and feedback loops remain visible so enterprise collaboration stays governable.',
-          },
-          {
-            title: 'Internal platform as proof layer',
-            body: 'WanFlow BenchmarkOps reflects WanFlow’s real understanding of process, artifacts, and benchmark evidence.',
-          },
         ],
       },
       caseTeaser: {
@@ -932,7 +888,6 @@ type MarketingHomeWithLegacy<T extends MarketingHomeBase> = T & {
   };
   services: T['capabilityModules'];
   process: T['deliveryFramework'];
-  differentiators: T['proofLayer'];
   casesTeaser: T['caseTeaser'];
 };
 
@@ -961,7 +916,6 @@ function withLegacyHome<T extends {
   platformView: { eyebrow: string; title: string; body: string; bullets: readonly string[] };
   capabilityModules: { eyebrow: string; title: string; body: string; items: readonly unknown[] };
   deliveryFramework: { eyebrow: string; title: string; body: string; steps: readonly unknown[] };
-  proofLayer: { eyebrow: string; title: string; items: readonly unknown[] };
   caseTeaser: { eyebrow: string; title: string; items: readonly unknown[] };
 }>(home: T): MarketingHomeWithLegacy<T & MarketingHomeBase> {
   return {
@@ -975,7 +929,6 @@ function withLegacyHome<T extends {
     },
     services: home.capabilityModules,
     process: home.deliveryFramework,
-    differentiators: home.proofLayer,
     casesTeaser: home.caseTeaser,
   } as MarketingHomeWithLegacy<T & MarketingHomeBase>;
 }
