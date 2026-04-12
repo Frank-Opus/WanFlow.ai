@@ -326,6 +326,15 @@ const marketingCopyBase = {
         body:
           '我们长期做的是数据治理、流程执行和模型运营这些不热闹但很关键的事，对企业来说，真正可用的 AI 往往不是一个模型，而是一套能持续运行的协作系统',
       },
+      identity: {
+        eyebrow: '我们是谁',
+        title: '我们不是只讲 AI 的团队，我们更关注它怎么真正跑进企业里',
+        paragraphs: [
+          'WanFlow 是一家面向企业客户的 AI 运营与交付公司，长期关注数据治理、流程执行、系统协同和模型运营这些最决定结果、却最容易被忽略的环节。尤其在中国市场，很多企业不是不想做 AI，而是缺少一支既理解业务现实、又能把系统真正接起来的团队。',
+          '我们不把自己定义成单纯的咨询方，也不把交付理解成一次性项目外包。对我们来说，真正有价值的工作，是把数据标注与治理、流程编排与自动化、企业级多智能体、人机协同交付和模型运营闭环接成一套能长期运行的业务系统，让客户看得见这套系统怎么被搭起来，也能感受到它如何在日常业务里持续发挥作用。',
+          '我们相信，企业采用 AI 最终比拼的不是一次演示有多惊艳，而是能不能持续交付、持续优化、持续建立信任。WanFlow 想做的，就是陪客户把这套能力从想法、试点一路接到真实业务里，让 AI 真的成为组织效率和业务增长的一部分。',
+        ],
+      },
       positioning: {
         eyebrow: '我们的视角',
         title: '我们先看交付怎么跑，再看模型怎么用',
@@ -751,6 +760,15 @@ const marketingCopyBase = {
         title: 'WanFlow believes AI becomes real when it is operated like a system.',
         body:
           'We are a data-driven AI company focused on the least glamorous but most decisive layers of enterprise AI: data governance, workflow execution, and model operations. In practice, most AI value is created by the system around the model, not by the model alone.',
+      },
+      identity: {
+        eyebrow: 'Who We Are',
+        title: 'We are not a team that only talks about AI. We care about how it actually runs inside enterprises.',
+        paragraphs: [
+          'WanFlow is an enterprise AI operations and delivery company focused on the layers that most often decide whether AI works in practice: data governance, workflow execution, system coordination, and model operations. Especially in the China market, many companies are already interested in AI. What they often lack is a team that understands both business reality and execution systems well enough to connect everything into one working mechanism.',
+          'We do not see ourselves as a consultancy that stops at slides, and we do not treat delivery as one-off outsourcing. The work that matters is turning data labeling and governance, workflow orchestration and automation, enterprise multi-agent systems, human-in-the-loop delivery, and model operations into one operating system that can keep running inside the business.',
+          'We believe enterprise AI is not judged by how impressive a single demo looks. It is judged by whether the system can keep delivering, keep improving, and keep earning trust over time. That is what WanFlow wants to help clients build from idea, to pilot, to real business operation.',
+        ],
       },
       positioning: {
         eyebrow: 'How we see the problem',

@@ -1,7 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useLocale } from '@/components/shared/locale-provider';
-import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
+import { FinalCtaBand, SectionHeading } from '@/components/marketing/primitives';
 import MotionReveal from '@/components/shared/motion-reveal';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
@@ -22,28 +23,53 @@ export default function MarketingAboutPage() {
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
         <MotionReveal delay={0} initiallyVisible>
-          <PageHero
-            eyebrow={copy.about.hero.eyebrow}
-            title={copy.about.hero.title}
-            body={copy.about.hero.body}
-            primary={{ href: '/contact', label: copy.common.primaryCta }}
-            secondary={{ href: '/cases', label: navLabel('/cases') }}
-            aside={
-              <div className="space-y-4">
-                <p className="mkt-kicker">{labels.trust}</p>
+          <section
+            className="mkt-about-hero mkt-panel overflow-hidden"
+            style={{
+              backgroundImage:
+                "linear-gradient(118deg, rgba(11, 22, 36, 0.74) 0%, rgba(11, 22, 36, 0.5) 34%, rgba(248, 251, 255, 0.08) 100%), url('/about/office-hero.png')",
+            }}
+          >
+            <div className="mkt-about-hero-inner">
+              <div className="mkt-about-copy">
+                <p className="mkt-kicker text-white/80">{copy.about.hero.eyebrow}</p>
+                <h1 className="mkt-display max-w-[11.5ch] text-white xl:max-w-[12.5ch]">{copy.about.hero.title}</h1>
+                <p className="mkt-copy max-w-[42rem] text-base text-white/85 sm:text-[1.05rem]">{copy.about.hero.body}</p>
+                <div className="mkt-hero-actions flex flex-wrap gap-3">
+                  <Link href="/contact" className="mkt-button-primary">
+                    {copy.common.primaryCta}
+                  </Link>
+                  <Link href="/cases" className="mkt-button-secondary mkt-button-on-image">
+                    {navLabel('/cases')}
+                  </Link>
+                </div>
+              </div>
+              <aside className="mkt-about-aside">
+                <p className="mkt-kicker text-white/75">{labels.trust}</p>
                 <div className="space-y-3">
                   {copy.about.trust.items.slice(0, 2).map((item) => (
-                    <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
-                      <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
+                    <div key={item} className="border-t border-white/15 pt-3 first:border-t-0 first:pt-0">
+                      <p className="mkt-copy text-sm text-white/85">{item}</p>
                     </div>
                   ))}
                 </div>
-              </div>
-            }
-          />
+              </aside>
+            </div>
+          </section>
         </MotionReveal>
 
         <MotionReveal as="section" delay={70} className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+            <SectionHeading eyebrow={copy.about.identity.eyebrow} title={copy.about.identity.title} />
+            <div className="space-y-5">
+              {copy.about.identity.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="mkt-copy text-base sm:text-[1.03rem]">{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </MotionReveal>
+
+        <MotionReveal as="section" delay={90} className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
             <SectionHeading eyebrow={copy.about.positioning.eyebrow} title={copy.about.positioning.title} />
             <div className="space-y-4">
@@ -54,7 +80,7 @@ export default function MarketingAboutPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={95} className="space-y-6">
+        <MotionReveal as="section" delay={115} className="space-y-6">
           <SectionHeading eyebrow={copy.about.principles.eyebrow} title={copy.about.principles.title} />
           <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-3">
             {copy.about.principles.items.map((item, index) => (
@@ -66,7 +92,7 @@ export default function MarketingAboutPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={120} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={140} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <SectionHeading eyebrow={copy.about.collaborationModel.eyebrow} title={copy.about.collaborationModel.title} />
           <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {copy.about.collaborationModel.items.map((item) => (
@@ -79,7 +105,7 @@ export default function MarketingAboutPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={145} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={165} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <SectionHeading eyebrow={copy.about.trust.eyebrow} title={copy.about.trust.title} />
           <div className="mkt-stagger-grid mt-6 grid gap-3 lg:grid-cols-12">
             {copy.about.trust.items.map((item, index) => (
@@ -99,7 +125,7 @@ export default function MarketingAboutPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal delay={170}>
+        <MotionReveal delay={185}>
           <FinalCtaBand
             eyebrow={finalEyebrow}
             title={copy.about.finalCta.title}
