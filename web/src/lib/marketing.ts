@@ -51,7 +51,7 @@ const marketingCopyBase = {
     footer: {
       companyName: '上海万流归智科技有限公司',
       description:
-        'WanFlow 把数据、流程、智能体和模型运营接到一条线上，让 AI 项目不只看起来能跑，而是真的能交付',
+        'WanFlow 把数据、流程、多智能体和模型运营接到一条线上，让 AI 项目不只看起来能跑，而是真的能交付',
       columns: [
         {
           title: '服务范围',
@@ -136,14 +136,14 @@ const marketingCopyBase = {
       },
       deliveryFramework: {
         eyebrow: '交付框架',
-        title: '先把问题看清，再把链路跑顺',
+        title: '先把卡点找准，再把事情一段一段做成',
         body:
-          '企业真正买的不是几个能力点，而是一套能落地、能扩展、能复盘的交付方式',
+          '企业来找 WanFlow，不是为了再听一轮概念，而是想把原本跑不顺的环节理清、接上、跑稳',
         steps: [
-          { step: '01', title: '诊断业务瓶颈', body: '先找出数据、流程、协作和模型运行里真正卡住的地方' },
-          { step: '02', title: '设计执行骨架', body: '把任务接口、质检规则、自动化节点和责任边界定清楚' },
-          { step: '03', title: '跑通交付链路', body: '把数据处理、流程编排、运营动作和交付产物接成真实链路' },
-          { step: '04', title: '持续运营优化', body: '围绕结果、质量、成本和时效持续优化' },
+          { step: '01', title: '先看清卡点', body: '把问题落到具体环节里，看看到底卡在数据、流程衔接，还是运行反馈' },
+          { step: '02', title: '再把链路搭好', body: '把该自动化的、该人工兜底的、该留痕复盘的边界一开始就定清楚' },
+          { step: '03', title: '接进真实业务', body: '不把方案停在纸面上，而是把流程真正接进日常业务里，边跑边校正' },
+          { step: '04', title: '持续往前调', body: '盯住质量、时效和结果，哪里不顺就改哪里，让系统越跑越稳' },
         ],
       },
       proofLayer: {
@@ -500,7 +500,7 @@ const marketingCopyBase = {
     footer: {
       companyName: 'Shanghai Wanliu Guizhi Technology Co., Ltd.',
       description:
-        'WanFlow connects data, workflows, AI agents, and model operations into one execution chain so enterprise AI programs can move from demo-ready to delivery-ready.',
+        'WanFlow connects data, workflows, multi-agent systems, and model operations into one execution chain so enterprise AI programs can move from demo-ready to delivery-ready.',
       columns: [
         {
           title: 'Services',
@@ -584,14 +584,14 @@ const marketingCopyBase = {
       },
       deliveryFramework: {
         eyebrow: 'Delivery framework',
-        title: 'From operational diagnosis to measurable proof.',
+        title: 'Find the real blockage, then fix the chain step by step.',
         body:
-          'WanFlow tells a delivery story, not just a feature story. Enterprises are buying a working system with traceable outputs and operational control.',
+          'Clients do not come to WanFlow for another slide deck. They come when the work should already run, but still breaks under real operating pressure.',
         steps: [
-          { step: '01', title: 'Diagnose the bottleneck', body: 'Identify the real points of failure across data, process, and team coordination.' },
-          { step: '02', title: 'Design the execution spine', body: 'Define interfaces, quality rules, automation points, and ownership boundaries.' },
-          { step: '03', title: 'Run the chain', body: 'Connect data handling, workflow orchestration, operating actions, and delivery outputs into a live system.' },
-          { step: '04', title: 'Operate and optimize', body: 'Iterate on quality, speed, cost, and outcomes over time instead of treating delivery as one-off.' },
+          { step: '01', title: 'Find the blockage', body: 'Pin the problem to a real operating link so everyone knows whether the break is in data, workflow, or feedback.' },
+          { step: '02', title: 'Set the boundaries', body: 'Decide early what should be automated, what needs human review, and what must stay traceable.' },
+          { step: '03', title: 'Put it into live work', body: 'Move the chain into day-to-day business operations and correct it while it is actually running.' },
+          { step: '04', title: 'Keep tuning it', body: 'Watch quality, speed, and outcomes closely, then keep improving the parts that still drag the system down.' },
         ],
       },
       proofLayer: {

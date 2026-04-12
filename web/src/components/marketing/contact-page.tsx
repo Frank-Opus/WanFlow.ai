@@ -90,7 +90,7 @@ export default function MarketingContactPage() {
             </section>
           </div>
 
-          <div className="xl:sticky xl:top-28">
+          <div className="order-first xl:order-none xl:sticky xl:top-28">
             <ContactForm />
           </div>
         </MotionReveal>

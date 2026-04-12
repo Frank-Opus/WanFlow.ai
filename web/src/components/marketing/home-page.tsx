@@ -132,36 +132,6 @@ export default function MarketingHomePage() {
         </MotionReveal>
 
         <MotionReveal as="section" delay={130} intensity="strong" className="space-y-6">
-          <SectionHeading
-            eyebrow={copy.home.proofLayer.eyebrow}
-            title={copy.home.proofLayer.title}
-            body={copy.home.proofLayer.body}
-          />
-          <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
-            <div className="mkt-pop-surface mkt-proof-panel mkt-grid-lines p-5 sm:p-6">
-              <div className="space-y-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="mkt-chip">{copy.common.proofLabel}</span>
-                </div>
-                <h3 className="zh-card-title text-[1.32rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)] sm:text-[1.52rem]">
-                  {copy.common.workbenchNote}
-                </h3>
-                <p className="mkt-copy text-sm">{copy.common.proofNote}</p>
-              </div>
-            </div>
-            <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2">
-              {copy.home.proofLayer.items.map((item, index) => (
-                <article key={item.title} className={index === 0 ? 'mkt-card px-5 py-5 md:col-span-2' : 'mkt-card px-5 py-5'}>
-                  <span className="mkt-card-index">{labels.flow}</span>
-                  <h3 className="zh-card-title mt-4 text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                  <p className="mkt-copy mt-3">{item.body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </MotionReveal>
-
-        <MotionReveal as="section" delay={150} intensity="strong" className="space-y-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeading
               eyebrow={copy.home.caseTeaser.eyebrow}
@@ -198,7 +168,7 @@ export default function MarketingHomePage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal delay={170} intensity="strong">
+        <MotionReveal delay={150} intensity="strong">
           <FinalCtaBand
             eyebrow={copy.home.finalCta.eyebrow}
             title={copy.home.finalCta.title}
