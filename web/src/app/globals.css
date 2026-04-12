@@ -641,12 +641,18 @@ html[lang='zh-CN'] .zh-card-title {
 
 .site-nav-link-active,
 .site-nav-link-idle {
+  border: 1px solid transparent;
+  box-sizing: border-box;
   transition:
     transform 220ms var(--mk-ease-soft),
     border-color 220ms var(--mk-ease-soft),
     background 220ms var(--mk-ease-soft),
     color 220ms var(--mk-ease-soft),
     box-shadow 220ms var(--mk-ease-soft);
+}
+
+.site-nav-link-idle {
+  box-shadow: none;
 }
 
 .site-nav-link-idle:hover {

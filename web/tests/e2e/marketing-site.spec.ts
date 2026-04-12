@@ -11,6 +11,40 @@ const desktopPages = [
 test.describe('marketing desktop regressions', () => {
   test.skip(({ isMobile }) => isMobile);
 
+  test('desktop header navigation stays stable across route changes', async ({ page }) => {
+    const measureHeader = async (path: string) => {
+      await page.goto(path);
+      await page.waitForLoadState('networkidle');
+
+      return page.evaluate(() => {
+        const nav = document.querySelector('header nav[aria-label]') as HTMLElement | null;
+        const activeLink = document.querySelector('header nav[aria-label] a[aria-current="page"]') as HTMLElement | null;
+
+        if (!nav || !activeLink) {
+          throw new Error('Header navigation or active link not found');
+        }
+
+        const navRect = nav.getBoundingClientRect();
+        const activeRect = activeLink.getBoundingClientRect();
+
+        return {
+          navLeft: Math.round(navRect.left),
+          navTop: Math.round(navRect.top),
+          navHeight: Math.round(navRect.height),
+          activeHeight: Math.round(activeRect.height),
+        };
+      });
+    };
+
+    const home = await measureHeader('/');
+    const solutions = await measureHeader('/solutions');
+
+    expect(Math.abs(home.navLeft - solutions.navLeft)).toBeLessThanOrEqual(1);
+    expect(Math.abs(home.navTop - solutions.navTop)).toBeLessThanOrEqual(1);
+    expect(Math.abs(home.navHeight - solutions.navHeight)).toBeLessThanOrEqual(1);
+    expect(Math.abs(home.activeHeight - solutions.activeHeight)).toBeLessThanOrEqual(1);
+  });
+
   for (const pageCase of desktopPages) {
     test(pageCase.name + ' renders without desktop overflow', async ({ page }, testInfo) => {
       await page.goto(pageCase.path);
