@@ -14,14 +14,14 @@ export default function MarketingHomePage() {
         caseTag: '案例',
         challenge: '挑战',
         flow: '骨架',
-        brief: '品牌摘要',
+        brief: '核心概览',
         outcome: '结果',
       }
     : {
         caseTag: 'Case',
         challenge: 'Challenge',
         flow: 'Spine',
-        brief: 'Brand brief',
+        brief: 'Key Overview',
         outcome: 'Outcome',
       };
   const casesLabel = copy.nav.find((item) => item.href === '/cases')?.label ?? '/cases';
@@ -46,10 +46,10 @@ export default function MarketingHomePage() {
                   {copy.home.supportSignals.map((metric, index) => (
                     <article
                       key={metric.label}
-                      className={index === copy.home.supportSignals.length - 1 ? 'mkt-card px-5 py-5 xl:col-span-2' : 'mkt-card px-5 py-5'}
+                      className={index === copy.home.supportSignals.length - 1 ? 'mkt-card min-w-0 px-5 py-5 xl:col-span-2' : 'mkt-card min-w-0 px-5 py-5'}
                     >
                       <p className="mkt-metric-value">{metric.value}</p>
-                      <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{metric.label}</p>
+                      <p className="mkt-metric-label mt-3">{metric.label}</p>
                       <p className="mkt-copy mt-2 text-sm">{metric.detail}</p>
                     </article>
                   ))}

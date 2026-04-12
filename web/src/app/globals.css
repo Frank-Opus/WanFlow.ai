@@ -984,16 +984,43 @@ html[lang='zh-CN'] .mkt-lang-button {
 
 .mkt-metric-value {
   font-family: var(--font-display), 'Segoe UI', sans-serif;
-  font-size: clamp(2.4rem, 4vw, 4.25rem);
-  line-height: 0.95;
+  font-size: clamp(1.9rem, 4vw, 4.25rem);
+  line-height: 0.98;
   letter-spacing: -0.06em;
   color: var(--mk-text-0);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 html[lang='zh-CN'] .mkt-metric-value {
   line-height: 1.02;
   letter-spacing: -0.03em;
   font-weight: 600;
+}
+
+.mkt-metric-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  color: var(--mk-text-2);
+  text-wrap: balance;
+}
+
+html[lang='zh-CN'] .mkt-metric-label {
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 640px) {
+  .mkt-metric-value {
+    font-size: clamp(1.7rem, 9vw, 2.35rem);
+    line-height: 1.04;
+  }
+
+  .mkt-metric-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
 }
 
 .mkt-flow-step {

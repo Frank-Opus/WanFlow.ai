@@ -82,9 +82,9 @@ const marketingCopyBase = {
         secondary: { label: '查看解决方案', href: '/solutions' },
       },
       supportSignals: [
-        { value: '5', label: '核心能力模块', detail: '覆盖从数据到执行再到优化的完整闭环' },
-        { value: 'Agents', label: 'Enterprise Multi-Agent Systems', detail: '以安全、稳定、可控的方式参与企业任务执行' },
-        { value: 'Ops', label: 'Continuous Optimization', detail: '围绕反馈、评测和结果持续迭代' },
+        { value: '5', label: '核心模块', detail: '覆盖从数据到执行再到优化的完整闭环' },
+        { value: '多智能体', label: '企业级执行能力', detail: '以安全、稳定、可控的方式参与企业任务执行' },
+        { value: '闭环优化', label: '持续评测与迭代', detail: '围绕反馈、评测和结果持续迭代' },
       ],
       platformView: {
         eyebrow: '平台 / 系统视角',
@@ -508,9 +508,9 @@ const marketingCopyBase = {
         secondary: { label: 'Explore Solutions', href: '/solutions' },
       },
       supportSignals: [
-        { value: '5', label: 'core capability modules', detail: 'covering the full loop from data to execution to optimization' },
-        { value: 'Agents', label: 'Enterprise Multi-Agent Systems', detail: 'controlled AI execution inside enterprise workflows' },
-        { value: 'Ops', label: 'Continuous Optimization', detail: 'continuous iteration around feedback, evaluation, and outcomes' },
+        { value: '5', label: 'Core Modules', detail: 'covering the full loop from data to execution to optimization' },
+        { value: 'Multi-Agent', label: 'Managed Execution', detail: 'controlled AI execution inside enterprise workflows' },
+        { value: 'Closed Loop', label: 'Continuous Evaluation', detail: 'continuous iteration around feedback, evaluation, and outcomes' },
       ],
       platformView: {
         eyebrow: 'Platform / system view',
