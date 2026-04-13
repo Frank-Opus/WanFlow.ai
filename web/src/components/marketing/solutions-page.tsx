@@ -78,7 +78,7 @@ export default function MarketingSolutionsPage() {
           />
         </MotionReveal>
 
-        <MotionReveal as="section" delay={70} intensity="strong" className="space-y-6">
+        <MotionReveal as="section" delay={70} intensity="strong" initiallyVisible className="space-y-6">
           <SectionHeading
             eyebrow={labels.industriesEyebrow}
             title={labels.industriesTitle}
@@ -197,7 +197,7 @@ export default function MarketingSolutionsPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={95} intensity="strong" className="space-y-6">
+        <MotionReveal as="section" delay={95} intensity="strong" initiallyVisible className="space-y-6">
           <SectionHeading eyebrow={labels.modulesEyebrow} title={labels.modulesTitle} body={labels.modulesBody} />
           <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
             {copy.solutions.modules.map((module, index) => (
@@ -242,7 +242,7 @@ export default function MarketingSolutionsPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal delay={120} intensity="strong">
+        <MotionReveal delay={120} intensity="strong" initiallyVisible>
           <FinalCtaBand
             eyebrow={labels.contact}
             title={copy.solutions.finalCta.title}

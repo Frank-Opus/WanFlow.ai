@@ -71,7 +71,7 @@ export default function MarketingCasesPage() {
           />
         </MotionReveal>
 
-        <MotionReveal as="section" delay={100} className="space-y-6">
+        <MotionReveal as="section" delay={100} initiallyVisible className="space-y-6">
           <SectionHeading eyebrow={labels.caseGrid} title={labels.caseGridTitle} body={labels.caseGridBody} />
           <div className="space-y-4">
             {copy.cases.cards.map((item) => (
@@ -142,7 +142,7 @@ export default function MarketingCasesPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal delay={130}>
+        <MotionReveal delay={130} initiallyVisible>
           <FinalCtaBand
             eyebrow={labels.nextStep}
             title={copy.cases.finalCta.title}
