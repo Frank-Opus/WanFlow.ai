@@ -18,10 +18,11 @@ export default function MarketingCasesPage() {
         delivery: '交付方式',
         deliverables: '交付物',
         image: '图片建议',
+        stats: '关键数字',
         outcome: '结果',
         caseGrid: '真实案例',
-        caseGridTitle: '每个案例都直接展开问题、方案、交付和结果',
-        caseGridBody: '不再单列重点案例，所有案例都用同样的颗粒度来展示，方便直接对照你的业务场景。',
+        caseGridTitle: '按真实业务链路看交付',
+        caseGridBody: '每个案例都直接对应一个真实业务问题，重点展示方案怎么落、交付物怎么沉淀、结果怎么被看见。',
         nextStep: '下一步',
       }
     : {
@@ -32,10 +33,11 @@ export default function MarketingCasesPage() {
         delivery: 'Delivery approach',
         deliverables: 'Deliverables',
         image: 'Image direction',
+        stats: 'Key numbers',
         outcome: 'Outcome',
         caseGrid: 'Real cases',
-        caseGridTitle: 'Each case opens up the problem, solution, delivery, and outcome directly',
-        caseGridBody: 'There is no separate featured case now. Every case is shown at the same detail level so visitors can compare them against their own workflow.',
+        caseGridTitle: 'Read delivery through real business chains',
+        caseGridBody: 'Each case maps to a real business problem and shows how the solution landed, what was delivered, and how the outcome became visible.',
         nextStep: 'Next step',
       };
 
@@ -74,8 +76,13 @@ export default function MarketingCasesPage() {
                 <div className="grid gap-6 xl:grid-cols-[minmax(0,1.06fr)_minmax(18rem,0.94fr)]">
                   <div className="space-y-4">
                     <div className="space-y-3">
-                      <span className="mkt-chip">{item.sector}</span>
+                      <p className="mkt-kicker">{item.sector}</p>
                       <h3 className="zh-card-title text-[1.28rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                    </div>
+                    <div className="mkt-stat-row">
+                      {item.stats.map((stat) => (
+                        <span key={stat} className="mkt-stat-chip">{stat}</span>
+                      ))}
                     </div>
                     <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
                       <p><strong className="text-[var(--mk-text-0)]">{labels.client}:</strong> {item.client}</p>
@@ -89,14 +96,14 @@ export default function MarketingCasesPage() {
                   <div className="space-y-4">
                     <div>
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
-                      <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                        {item.deliverables.map((deliverable) => (
-                          <li key={deliverable} className="mkt-list-item">
-                            <span className="mkt-list-dot" />
+                      <ol className="mkt-number-list mt-3">
+                        {item.deliverables.map((deliverable, index) => (
+                          <li key={deliverable} className="mkt-number-item">
+                            <span className="mkt-number-badge">{index + 1}</span>
                             <span>{deliverable}</span>
                           </li>
                         ))}
-                      </ul>
+                      </ol>
                     </div>
                     <div className="mkt-industry-image-slot">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.image}</p>

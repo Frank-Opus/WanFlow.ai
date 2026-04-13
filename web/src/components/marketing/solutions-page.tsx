@@ -13,12 +13,12 @@ export default function MarketingSolutionsPage() {
     ? {
         industriesAside: '适用行业',
         industriesEyebrow: '行业解决方案',
-        industriesTitle: '每个行业一条业务带，里面放具体模块和对应交付',
-        industriesBody: '每个行业都不是一个抽象标签，而是一条可展开的业务带。左侧讲行业问题和结果，右侧用可横向扩展的模块卡片去承载具体场景。',
+        industriesTitle: '覆盖核心行业，直达高频业务链路',
+        industriesBody: '围绕审核、异常工单、经营复盘、知识治理与共享服务等关键场景，形成可落地、可扩展、可持续优化的解决方案。',
         modulesEyebrow: '服务模块',
-        modulesTitle: '同一套能力底座，按行业做不同组合',
-        modulesBody: '不同项目入口不一样，但真正起作用的，往往还是这五类核心能力如何被组合、接通和长期运行。',
-        railHint: '左右拖动查看行业模块',
+        modulesTitle: '五个核心模块，组成企业级交付底座',
+        modulesBody: '不同项目的入口不同，但真正决定交付质量的，往往是这五类能力如何被组合、接通并持续运营。',
+        railHint: '横向查看具体场景模块',
         modulesInIndustry: '行业内模块',
         imageSlot: '图片建议',
         deliverables: '交付物',
@@ -28,12 +28,12 @@ export default function MarketingSolutionsPage() {
     : {
         industriesAside: 'Industries',
         industriesEyebrow: 'Industry solutions',
-        industriesTitle: 'Each industry gets its own business strip with expandable module cards',
-        industriesBody: 'Each industry should read like a concrete operating lane, not an abstract label. The left side frames the problem and results, while the right side holds horizontally expandable module cards.',
+        industriesTitle: 'Coverage across core industries and high-frequency business chains',
+        industriesBody: 'From review workflows and exception handling to reporting, knowledge governance, and shared services, each lane is built for live business execution.',
         modulesEyebrow: 'Service modules',
-        modulesTitle: 'One shared capability base, assembled differently by industry',
-        modulesBody: 'Projects enter from different business problems, but the real delivery engine usually comes from how these five modules are combined and operated together.',
-        railHint: 'Drag sideways to view more modules',
+        modulesTitle: 'Five core modules forming one enterprise delivery base',
+        modulesBody: 'Projects start from different business problems, but delivery quality depends on how these five capabilities are connected and operated over time.',
+        railHint: 'Scroll sideways for module details',
         modulesInIndustry: 'Modules in this industry',
         imageSlot: 'Image direction',
         deliverables: 'Deliverables',
@@ -54,7 +54,6 @@ export default function MarketingSolutionsPage() {
             aside={
               <div className="space-y-4">
                 <p className="mkt-kicker">{labels.industriesAside}</p>
-                <p className="mkt-copy text-sm">{labels.railHint}</p>
                 <div className="grid gap-2">
                   {copy.solutions.industries.slice(0, 4).map((item) => (
                     <span key={item.title} className="mkt-chip w-fit">{item.title}</span>
@@ -80,19 +79,25 @@ export default function MarketingSolutionsPage() {
                 <div className="grid gap-6 xl:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1.18fr)] xl:items-start">
                   <div className="space-y-5">
                     <div className="space-y-3">
-                      <span className="mkt-chip">{item.title}</span>
-                      <h3 className="zh-card-title text-[1.4rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.summary}</h3>
+                      <p className="mkt-kicker">{item.title}</p>
+                      <h3 className="mkt-industry-title">{item.title}</h3>
+                      <p className="mkt-copy text-[0.98rem] sm:text-[1.02rem]">{item.summary}</p>
+                    </div>
+                    <div className="mkt-stat-row">
+                      {item.stats.map((stat) => (
+                        <span key={stat} className="mkt-stat-chip">{stat}</span>
+                      ))}
                     </div>
                     <div>
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
-                      <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                        {item.outcomes.map((outcome) => (
-                          <li key={outcome} className="mkt-list-item">
-                            <span className="mkt-list-dot" />
+                      <ol className="mkt-number-list mt-3">
+                        {item.outcomes.map((outcome, index) => (
+                          <li key={outcome} className="mkt-number-item">
+                            <span className="mkt-number-badge">{index + 1}</span>
                             <span>{outcome}</span>
                           </li>
                         ))}
-                      </ul>
+                      </ol>
                     </div>
                     <div className="mkt-industry-image-slot">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
@@ -112,14 +117,14 @@ export default function MarketingSolutionsPage() {
                           <p className="mkt-copy mt-3 text-sm">{module.body}</p>
                           <div className="mt-4">
                             <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
-                            <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                              {module.deliverables.map((deliverable) => (
-                                <li key={deliverable} className="mkt-list-item">
-                                  <span className="mkt-list-dot" />
+                            <ol className="mkt-number-list mt-3">
+                              {module.deliverables.map((deliverable, index) => (
+                                <li key={deliverable} className="mkt-number-item">
+                                  <span className="mkt-number-badge">{index + 1}</span>
                                   <span>{deliverable}</span>
                                 </li>
                               ))}
-                            </ul>
+                            </ol>
                           </div>
                           <p className="mt-4 border-t border-[var(--mk-line-1)] pt-3 text-sm text-[var(--mk-brand-1)]">{module.outcome}</p>
                         </article>
@@ -151,25 +156,25 @@ export default function MarketingSolutionsPage() {
                 <div className="mt-5 grid gap-5 md:grid-cols-2">
                   <div>
                     <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                      {module.deliverables.map((item) => (
-                        <li key={item} className="mkt-list-item">
-                          <span className="mkt-list-dot" />
+                    <ol className="mkt-number-list mt-3">
+                      {module.deliverables.map((item, index) => (
+                        <li key={item} className="mkt-number-item">
+                          <span className="mkt-number-badge">{index + 1}</span>
                           <span>{item}</span>
                         </li>
                       ))}
-                    </ul>
+                    </ol>
                   </div>
                   <div>
                     <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-[var(--mk-text-1)]">
-                      {module.outcomes.map((item) => (
-                        <li key={item} className="mkt-list-item">
-                          <span className="mkt-list-dot" />
+                    <ol className="mkt-number-list mt-3">
+                      {module.outcomes.map((item, index) => (
+                        <li key={item} className="mkt-number-item">
+                          <span className="mkt-number-badge">{index + 1}</span>
                           <span>{item}</span>
                         </li>
                       ))}
-                    </ul>
+                    </ol>
                   </div>
                 </div>
               </article>

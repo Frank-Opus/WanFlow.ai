@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useLocale } from '@/components/shared/locale-provider';
 import { getMarketingCopy } from '@/lib/marketing';
 
@@ -12,12 +12,38 @@ export default function SiteHeader() {
   const { locale, setLocale } = useLocale();
   const copy = getMarketingCopy(locale);
   const [open, setOpen] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [activePill, setActivePill] = useState<{ left: number; width: number; opacity: number }>({ left: 0, width: 0, opacity: 0 });
   const mobileMenuLabel = open ? (locale === 'zh' ? '关闭' : 'Close') : locale === 'zh' ? '菜单' : 'Menu';
   const primaryNavLabel = locale === 'zh' ? '主导航' : 'Primary navigation';
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useLayoutEffect(() => {
+    const updateActivePill = () => {
+      const activeItem = copy.nav.find((item) => (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)));
+      const activeLink = activeItem ? linkRefs.current[activeItem.href] : null;
+      const navElement = navRef.current;
+
+      if (!activeLink || !navElement) {
+        setActivePill((current) => ({ ...current, opacity: 0 }));
+        return;
+      }
+
+      setActivePill({
+        left: activeLink.offsetLeft,
+        width: activeLink.offsetWidth,
+        opacity: 1,
+      });
+    };
+
+    updateActivePill();
+    window.addEventListener('resize', updateActivePill);
+    return () => window.removeEventListener('resize', updateActivePill);
+  }, [copy.nav, pathname]);
 
   const isMarketingRoute = copy.nav.some((item) => (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)));
   const isHomePage = pathname === '/';
@@ -54,17 +80,30 @@ export default function SiteHeader() {
 
           <nav
             aria-label={primaryNavLabel}
-            className="hidden items-center gap-1.5 rounded-full border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.7)] px-2 py-1 xl:flex"
+            ref={navRef}
+            className="site-nav-shell hidden items-center gap-1.5 rounded-full border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.7)] px-2 py-1 xl:flex"
           >
+            <span
+              aria-hidden="true"
+              className="site-nav-pill"
+              style={{
+                width: `${activePill.width}px`,
+                transform: `translateX(${activePill.left}px)`,
+                opacity: activePill.opacity,
+              }}
+            />
             {copy.nav.map((item) => {
-              const active = pathname === item.href;
+              const active = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
+                  ref={(node) => {
+                    linkRefs.current[item.href] = node;
+                  }}
                   aria-current={active ? 'page' : undefined}
                   className={[
-                    'site-nav-link mkt-focus-ring inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full px-3.5 py-2 text-[0.88rem] font-medium leading-none transition 2xl:px-4 2xl:text-[0.92rem]',
+                    'site-nav-link mkt-focus-ring relative z-[1] inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full px-3.5 py-2 text-[0.88rem] font-medium leading-none transition 2xl:px-4 2xl:text-[0.92rem]',
                     active ? 'site-nav-link-active' : 'site-nav-link-idle',
                   ].join(' ')}
                 >
@@ -111,7 +150,7 @@ export default function SiteHeader() {
             <div className="mkt-frame flex flex-col gap-3">
               <div className="grid gap-2 rounded-[1.35rem] border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.72)] p-2">
                 {copy.nav.map((item) => {
-                  const active = pathname === item.href;
+                  const active = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
                   return (
                     <Link
                       key={item.href}
