@@ -176,9 +176,9 @@ const marketingCopyBase = {
     solutions: {
       problemFrame: {
         eyebrow: '行业解决方案',
-        title: '面向不同行业，把 AI 接成真正能跑的业务链路',
+        title: '按行业看，WanFlow 能把哪些业务真正做顺',
         body:
-          'WanFlow 不从抽象技术概念出发，而是从企业最真实的业务卡点出发，把数据、流程、多智能体和人机协同能力接进一条可持续运行的交付链',
+          '我们不先讲复杂技术概念，而是先看企业最常见的业务问题，再看 WanFlow 怎么把流程接顺、把结果做出来',
       },
       industries: [
         {
@@ -452,8 +452,8 @@ const marketingCopyBase = {
     cases: {
       intro: {
         eyebrow: '真实案例',
-        title: '真实案例，不只展示结果，也展示怎么落地',
-        body: '这些案例做了匿名化处理，重点不是讲品牌故事，而是把客户原始问题、方案组合和交付结果讲清楚',
+        title: '看真实业务问题，WanFlow 是怎么一步步做出来的',
+        body: '这些案例做了匿名化处理，重点不是讲品牌名，而是讲清楚原来卡在哪里、后来怎么改、最后结果怎么样',
       },
       cards: [
         {

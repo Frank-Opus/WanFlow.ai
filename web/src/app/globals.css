@@ -1276,15 +1276,13 @@ html[lang='zh-CN'] .mkt-metric-label {
 }
 
 .mkt-industry-module-card {
-  min-width: min(28rem, 88vw);
-  flex: 0 0 min(28rem, 88vw);
-  scroll-snap-align: start;
   border: 1px solid rgba(59, 88, 109, 0.14);
   border-top: 3px solid rgba(47, 143, 184, 0.22);
   border-radius: 1.15rem;
   background: linear-gradient(180deg, rgba(253, 254, 255, 0.96), rgba(244, 249, 252, 0.94));
   padding: 1.1rem 1rem 1rem;
   box-shadow: 0 16px 28px rgba(18, 32, 43, 0.05);
+  height: 100%;
 }
 
 .mkt-industry-sector {

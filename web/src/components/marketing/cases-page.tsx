@@ -15,13 +15,13 @@ export default function MarketingCasesPage() {
         image: '图片建议',
         stats: '量化结果',
         outcome: '最终结果',
-        originalMethod: 'WanFlow 原创',
+        originalMethod: 'WanFlow 的做法',
         projectStart: '项目起点',
-        projectBuild: 'WanFlow 怎么把它做成',
-        whyWorked: '为什么它能长期跑',
+        projectBuild: 'WanFlow 做了什么',
+        whyWorked: '为什么最后能跑顺',
         caseGrid: '真实案例',
-        caseGridTitle: '按真实业务链路看交付',
-        caseGridBody: '每个案例都直接对应一个真实业务问题，重点展示方案怎么落、交付物怎么沉淀、结果怎么被看见。',
+        caseGridTitle: '按真实业务问题看 WanFlow 怎么交付',
+        caseGridBody: '不讲概念包装，直接看客户原来卡在哪里、WanFlow 做了什么，以及最后业务侧看到了什么结果。',
         nextStep: '下一步',
       }
     : {
@@ -29,13 +29,13 @@ export default function MarketingCasesPage() {
         image: 'Image direction',
         stats: 'Measured impact',
         outcome: 'Outcome',
-        originalMethod: 'WanFlow original',
+        originalMethod: 'How WanFlow approached it',
         projectStart: 'Where the project started',
-        projectBuild: 'How WanFlow made it work',
-        whyWorked: 'Why it could keep running',
+        projectBuild: 'What WanFlow changed',
+        whyWorked: 'Why it started to run better',
         caseGrid: 'Real cases',
-        caseGridTitle: 'Read delivery through real business chains',
-        caseGridBody: 'Each case maps to a real business problem and shows how the solution landed, what was delivered, and how the outcome became visible.',
+        caseGridTitle: 'See how WanFlow delivers against real business problems',
+        caseGridBody: 'Skip the buzzwords and look directly at the client problem, what changed, and the result the business actually saw.',
         nextStep: 'Next step',
       };
 
@@ -87,19 +87,12 @@ export default function MarketingCasesPage() {
                     </div>
                     <div className="mkt-proof-callout">
                       <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
-                      <p className="mkt-proof-callout-title">
-                        {locale === 'zh' ? `WanFlow 原创：${item.originalMethod}` : `WanFlow original: ${item.originalMethod}`}
-                      </p>
+                      <p className="mkt-proof-callout-title">{item.originalMethod}</p>
                       <p className="mkt-proof-callout-body">
                         {locale === 'zh'
-                          ? `${item.aiCapability}，并通过 ${item.technicalTraits.join('、')} 形成一套能长期复用的交付结构`
-                          : `${item.aiCapability}, combined with ${item.technicalTraits.join(', ')}, forms a delivery structure that can be reused over time.`}
+                          ? `不是上来先讲模型，而是先把最影响业务结果的几个节点理顺，再把 ${item.aiCapability} 接进去，这样团队更容易真正用起来。`
+                          : `We do not lead with the model. We first fix the operating nodes that most affect business results, then bring in ${item.aiCapability} so the team can actually use it.`}
                       </p>
-                      <div className="mkt-trait-row">
-                        {item.technicalTraits.map((trait) => (
-                          <span key={trait} className="mkt-trait-chip">{trait}</span>
-                        ))}
-                      </div>
                     </div>
                     <div className="space-y-4">
                       <section className="mkt-story-block">
@@ -119,8 +112,8 @@ export default function MarketingCasesPage() {
                         <p className="mkt-proof-callout-label">{labels.whyWorked}</p>
                         <p className="mkt-copy mt-3 text-sm sm:text-[0.98rem]">
                           {locale === 'zh'
-                            ? `不是只把 AI 加进流程里，而是把 ${item.aiCapability} 接到 ${item.technicalTraits.join('、')} 这条执行链上，让这套方案既能上线，也能留下之后继续扩展和复盘的空间`
-                            : `This was not just AI added into a workflow. WanFlow connected ${item.aiCapability} into an execution chain shaped by ${item.technicalTraits.join(', ')}, so the system could launch, stay governable, and keep improving.`}
+                            ? `因为这套方案不是停在一个演示上，而是把 ${item.technicalTraits.join('、')} 这些关键部分一起接进了日常业务里，所以团队能持续用、持续复盘，也更容易看到结果。`
+                            : `The system worked because it moved beyond demo behavior and connected ${item.technicalTraits.join(', ')} into day-to-day work, so teams could keep using it, reviewing it, and seeing the result.`}
                         </p>
                       </section>
                     </div>

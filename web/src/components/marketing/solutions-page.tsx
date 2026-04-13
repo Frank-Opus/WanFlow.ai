@@ -14,42 +14,40 @@ export default function MarketingSolutionsPage() {
         industryLabel: '行业',
         industriesAside: '适用行业',
         industriesEyebrow: '行业解决方案',
-        industriesTitle: '覆盖核心行业，直达高频业务链路',
-        industriesBody: '围绕审核、异常工单、经营复盘、知识治理与共享服务等关键场景，形成可落地、可扩展、可持续优化的解决方案。',
-        modulesEyebrow: '服务模块',
-        modulesTitle: '五个核心模块，组成企业级交付底座',
-        modulesBody: '不同项目的入口不同，但真正决定交付质量的，往往是这五类能力如何被组合、接通并持续运营。',
-        railHint: '横向查看具体场景模块',
-        modulesInIndustry: '行业内模块',
+        industriesTitle: '按行业看，WanFlow 具体能帮企业把什么做顺',
+        industriesBody: '不讲抽象技术概念，直接看常见业务场景、我们通常怎么做，以及最后通常能看到什么改善。',
+        modulesEyebrow: '交付底座',
+        modulesTitle: '一套项目做下来，通常会留下这几类长期能力',
+        modulesBody: '客户看到的不该只是一次上线，而应该是后面还能继续跑、继续扩展、继续优化的一套交付基础。',
+        modulesInIndustry: '常见业务场景',
         imageSlot: '行业主视觉建议',
-        moduleImageSlot: '模块配图建议',
+        moduleImageSlot: '场景配图建议',
         stats: '典型改善区间',
-        deliverables: '交付物',
-        outcomes: '结果',
-        originalMethod: 'WanFlow 原创',
-        moduleMethod: '这条链怎么落地',
-        moduleSupport: '最终会沉淀什么',
+        deliverables: '最终会沉淀什么',
+        outcomes: '常见结果',
+        originalMethod: 'WanFlow 的做法',
+        whatWeDo: 'WanFlow 一般会这样推进',
+        moduleOutcome: '这个场景通常能带来什么改善',
         contact: '联系我们',
       }
     : {
         industryLabel: 'Industry',
         industriesAside: 'Industries',
         industriesEyebrow: 'Industry solutions',
-        industriesTitle: 'Coverage across core industries and high-frequency business chains',
-        industriesBody: 'From review workflows and exception handling to reporting, knowledge governance, and shared services, each lane is built for live business execution.',
-        modulesEyebrow: 'Service modules',
-        modulesTitle: 'Five core modules forming one enterprise delivery base',
-        modulesBody: 'Projects start from different business problems, but delivery quality depends on how these five capabilities are connected and operated over time.',
-        railHint: 'Scroll sideways for module details',
-        modulesInIndustry: 'Modules in this industry',
+        industriesTitle: 'What WanFlow helps enterprise teams get running, industry by industry',
+        industriesBody: 'Skip the abstract AI language and look directly at the business scenarios, what we do, and the results teams usually care about.',
+        modulesEyebrow: 'Delivery base',
+        modulesTitle: 'A real project should leave behind capabilities that keep running',
+        modulesBody: 'The output should not be a one-time launch. It should be a working base that teams can keep expanding and improving.',
+        modulesInIndustry: 'Typical business scenarios',
         imageSlot: 'Industry visual direction',
-        moduleImageSlot: 'Module visual direction',
+        moduleImageSlot: 'Scenario visual direction',
         stats: 'Typical impact range',
-        deliverables: 'Deliverables',
-        outcomes: 'Outcomes',
-        originalMethod: 'WanFlow original',
-        moduleMethod: 'How this chain lands',
-        moduleSupport: 'What gets left behind',
+        deliverables: 'What gets left behind',
+        outcomes: 'Typical outcomes',
+        originalMethod: 'How WanFlow usually approaches it',
+        whatWeDo: 'How WanFlow usually works',
+        moduleOutcome: 'Typical improvement',
         contact: 'Contact',
       };
 
@@ -106,19 +104,12 @@ export default function MarketingSolutionsPage() {
                     </div>
                     <div className="mkt-proof-callout">
                       <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
-                      <p className="mkt-proof-callout-title">
-                        {locale === 'zh' ? `WanFlow 原创：${item.originalMethod}` : `WanFlow original: ${item.originalMethod}`}
-                      </p>
+                      <p className="mkt-proof-callout-title">{item.originalMethod}</p>
                       <p className="mkt-proof-callout-body">
                         {locale === 'zh'
-                          ? `不是把流程拆给不同人硬接，而是把 ${item.technicalTraits.join('、')} 这些能力先接成一条能长期运行的业务链`
-                          : `Instead of stitching the work together manually, WanFlow turns ${item.technicalTraits.join(', ')} into one operating chain that can keep running.`}
+                          ? `我们通常不会先堆工具，而是先把 ${item.technicalTraits.join('、')} 这些关键环节接顺，让业务团队先把最卡的链路跑起来，再继续往下扩。`
+                          : `We do not start by stacking tools. We start by connecting the key operating links around ${item.technicalTraits.join(', ')} so the team can get the blocked workflow running first and then keep expanding.`}
                       </p>
-                      <div className="mkt-trait-row">
-                        {item.technicalTraits.map((trait) => (
-                          <span key={trait} className="mkt-trait-chip">{trait}</span>
-                        ))}
-                      </div>
                     </div>
                     <div className="mkt-industry-visual">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
@@ -142,72 +133,39 @@ export default function MarketingSolutionsPage() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.modulesInIndustry}</p>
-                      <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
                     </div>
-                    <div className="mkt-industry-rail">
+                    <div className="grid gap-4 lg:grid-cols-2">
                       {item.modules.map((module, index) => (
                         <article key={module.title} className="mkt-industry-module-card">
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="space-y-3">
-                              <span className="mkt-card-index">0{index + 1}</span>
-                              <p className="mkt-module-impact">{module.outcome}</p>
-                            </div>
-                            <span className="mkt-chip mkt-chip-subtle !min-h-[2rem] !px-3 !text-[0.66rem] !tracking-[0.12em]">
-                              {module.mappedModule}
-                            </span>
+                          <div className="space-y-3">
+                            <span className="mkt-card-index">0{index + 1}</span>
+                            <p className="mkt-module-impact">{module.outcome}</p>
                           </div>
                           <h4 className="zh-card-title mt-4 text-[1.16rem] font-semibold text-[var(--mk-text-0)]">{module.title}</h4>
                           <p className="mkt-copy mt-3 text-sm">{module.body}</p>
                           <div className="mkt-proof-callout mkt-proof-callout-compact mt-4">
-                            <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
-                            <p className="mkt-proof-callout-title">
-                              {locale === 'zh' ? `WanFlow 原创：${module.originalMethod}` : `WanFlow original: ${module.originalMethod}`}
-                            </p>
+                            <p className="mkt-proof-callout-label">{labels.whatWeDo}</p>
+                            <p className="mkt-proof-callout-title">{module.originalMethod}</p>
                             <p className="mkt-proof-callout-body">
                               {locale === 'zh'
-                                ? `WanFlow 会把 ${module.aiCapability} 接进真实任务，再用 ${module.technicalTrait} 把稳定性、边界和执行节奏控住，让 ${module.mappedModule} 不只是一个模块名，而是一条能持续复用的交付链`
-                                : `WanFlow connects ${module.aiCapability} into live work, then uses ${module.technicalTrait} to keep pace, boundaries, and stability under control so ${module.mappedModule} becomes a reusable delivery chain instead of a label.`}
+                                ? `先把最影响时效和质量的节点理顺，再把 ${module.aiCapability} 接进去，同时用 ${module.technicalTrait} 把边界、节奏和可追踪性守住。`
+                                : `We first fix the operating nodes that most affect speed and quality, then bring in ${module.aiCapability} and use ${module.technicalTrait} to keep boundaries, rhythm, and traceability under control.`}
                             </p>
-                            <div className="mkt-trait-row mt-3">
-                              <span className="mkt-trait-chip">{module.aiCapability}</span>
-                              <span className="mkt-trait-chip">{module.technicalTrait}</span>
-                            </div>
                           </div>
                           <div className="mkt-module-story mt-4">
-                            <p className="mkt-proof-callout-label">{labels.moduleMethod}</p>
-                            <ol className="mkt-number-list mt-3">
-                              <li className="mkt-number-item">
-                                <span className="mkt-number-badge">1</span>
-                                <span>
-                                  {locale === 'zh'
-                                    ? `先把 ${module.aiCapability} 接进高频业务动作里`
-                                    : `Start by placing ${module.aiCapability} inside the highest-frequency business actions.`}
-                                </span>
-                              </li>
-                              <li className="mkt-number-item">
-                                <span className="mkt-number-badge">2</span>
-                                <span>
-                                  {locale === 'zh'
-                                    ? `再用 ${module.technicalTrait} 守住边界、时效和可追踪性`
-                                    : `Use ${module.technicalTrait} to hold the line on boundaries, cycle time, and traceability.`}
-                                </span>
-                              </li>
-                              <li className="mkt-number-item">
-                                <span className="mkt-number-badge">3</span>
-                                <span>
-                                  {locale === 'zh'
-                                    ? `最后沉淀成可重复调用的 ${module.mappedModule} 交付骨架`
-                                    : `Leave behind a reusable ${module.mappedModule} delivery backbone.`}
-                                </span>
-                              </li>
-                            </ol>
+                            <p className="mkt-proof-callout-label">{labels.moduleOutcome}</p>
+                            <p className="mkt-copy mt-3 text-sm">
+                              {locale === 'zh'
+                                ? '这个场景通常会先体现在时效、准确率、回退率、人工负荷或跨团队协同成本上的改善。'
+                                : 'This usually shows up first in cycle time, accuracy, rework rate, manual load, or coordination cost.'}
+                            </p>
                           </div>
                           <div className="mkt-module-image-slot mt-4">
                             <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.moduleImageSlot}</p>
                             <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
                           </div>
                           <div className="mt-4">
-                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.moduleSupport}</p>
+                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
                             <ol className="mkt-number-list mt-3">
                               {module.deliverables.map((deliverable, deliverableIndex) => (
                                 <li key={deliverable} className="mkt-number-item">
