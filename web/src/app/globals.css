@@ -1276,6 +1276,9 @@ html[lang='zh-CN'] .mkt-metric-label {
 }
 
 .mkt-industry-module-card {
+  min-width: min(25rem, 84vw);
+  flex: 0 0 min(25rem, 84vw);
+  scroll-snap-align: start;
   border: 1px solid rgba(59, 88, 109, 0.14);
   border-top: 3px solid rgba(47, 143, 184, 0.22);
   border-radius: 1.15rem;
@@ -1283,6 +1286,13 @@ html[lang='zh-CN'] .mkt-metric-label {
   padding: 1.1rem 1rem 1rem;
   box-shadow: 0 16px 28px rgba(18, 32, 43, 0.05);
   height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .mkt-industry-module-card {
+    min-width: min(27rem, 48vw);
+    flex-basis: min(27rem, 48vw);
+  }
 }
 
 .mkt-industry-sector {

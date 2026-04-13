@@ -20,6 +20,7 @@ export default function MarketingSolutionsPage() {
         modulesTitle: '一套项目做下来，通常会留下这几类长期能力',
         modulesBody: '客户看到的不该只是一次上线，而应该是后面还能继续跑、继续扩展、继续优化的一套交付基础。',
         modulesInIndustry: '常见业务场景',
+        railHint: '左右滑动查看更多场景',
         imageSlot: '行业主视觉建议',
         moduleImageSlot: '场景配图建议',
         stats: '典型改善区间',
@@ -40,6 +41,7 @@ export default function MarketingSolutionsPage() {
         modulesTitle: 'A real project should leave behind capabilities that keep running',
         modulesBody: 'The output should not be a one-time launch. It should be a working base that teams can keep expanding and improving.',
         modulesInIndustry: 'Typical business scenarios',
+        railHint: 'Swipe sideways for more scenarios',
         imageSlot: 'Industry visual direction',
         moduleImageSlot: 'Scenario visual direction',
         stats: 'Typical impact range',
@@ -133,8 +135,9 @@ export default function MarketingSolutionsPage() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.modulesInIndustry}</p>
+                      <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
                     </div>
-                    <div className="grid gap-4 lg:grid-cols-2">
+                    <div className="mkt-industry-rail">
                       {item.modules.map((module, index) => (
                         <article key={module.title} className="mkt-industry-module-card">
                           <div className="space-y-3">
