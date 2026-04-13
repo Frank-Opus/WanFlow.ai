@@ -626,6 +626,7 @@ html[lang='zh-CN'] .zh-card-title {
 .site-nav-shell {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .site-nav-pill {
@@ -662,6 +663,7 @@ html[lang='zh-CN'] .zh-card-title {
 .site-nav-link-idle {
   border: 1px solid transparent;
   box-sizing: border-box;
+  flex-shrink: 0;
   transition:
     transform 220ms var(--mk-ease-soft),
     border-color 220ms var(--mk-ease-soft),
@@ -1274,8 +1276,8 @@ html[lang='zh-CN'] .mkt-metric-label {
 }
 
 .mkt-industry-module-card {
-  min-width: min(26rem, 82vw);
-  flex: 0 0 min(26rem, 82vw);
+  min-width: min(28rem, 88vw);
+  flex: 0 0 min(28rem, 88vw);
   scroll-snap-align: start;
   border: 1px solid rgba(59, 88, 109, 0.14);
   border-top: 3px solid rgba(47, 143, 184, 0.22);
@@ -1285,12 +1287,59 @@ html[lang='zh-CN'] .mkt-metric-label {
   box-shadow: 0 16px 28px rgba(18, 32, 43, 0.05);
 }
 
+.mkt-industry-sector {
+  font-size: clamp(1.02rem, 1.55vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--mk-text-0);
+}
+
+html[lang='zh-CN'] .mkt-industry-sector {
+  letter-spacing: 0.08em;
+}
+
 .mkt-industry-title {
-  font-size: clamp(1.6rem, 2vw, 2.1rem);
+  font-size: clamp(1.52rem, 2.6vw, 2.4rem);
   line-height: 1.02;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.065em;
   font-weight: 700;
   color: var(--mk-text-0);
+}
+
+.mkt-industry-headline {
+  max-width: 34rem;
+  font-family: var(--font-display), 'Segoe UI', sans-serif;
+  font-size: clamp(1.1rem, 1.65vw, 1.5rem);
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: var(--mk-brand-1);
+  text-wrap: balance;
+}
+
+.mkt-proof-label-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.mkt-proof-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.2rem;
+  border: 1px solid rgba(77, 123, 148, 0.18);
+  border-radius: 999px;
+  background: rgba(248, 251, 253, 0.88);
+  padding: 0.42rem 0.78rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--mk-text-1);
+  box-shadow: 0 10px 18px rgba(18, 32, 43, 0.04);
+}
+
+.mkt-proof-tag strong {
+  color: var(--mk-text-0);
+  font-weight: 700;
 }
 
 .mkt-stat-row {
@@ -1341,8 +1390,10 @@ html[lang='zh-CN'] .mkt-metric-label {
   box-shadow: inset 0 0 0 1px rgba(68, 196, 217, 0.12);
 }
 
-.mkt-industry-image-slot {
-  min-height: 11.5rem;
+.mkt-industry-visual,
+.mkt-industry-image-slot,
+.mkt-case-image-slot {
+  min-height: 12.5rem;
   border: 1px dashed rgba(86, 125, 149, 0.26);
   border-radius: 1.15rem;
   background:
@@ -1351,11 +1402,40 @@ html[lang='zh-CN'] .mkt-metric-label {
   padding: 1rem 1rem 1.05rem;
 }
 
+.mkt-industry-visual {
+  min-height: 16rem;
+  background:
+    linear-gradient(135deg, rgba(251, 253, 254, 0.94), rgba(232, 242, 247, 0.88)),
+    radial-gradient(circle at 82% 16%, rgba(75, 192, 212, 0.18), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 34%);
+}
+
+.mkt-module-image-slot {
+  min-height: 7.8rem;
+  border: 1px dashed rgba(86, 125, 149, 0.24);
+  border-radius: 1rem;
+  background:
+    linear-gradient(135deg, rgba(251, 253, 254, 0.92), rgba(239, 246, 249, 0.9)),
+    radial-gradient(circle at 84% 20%, rgba(75, 192, 212, 0.12), transparent 24%);
+  padding: 0.9rem;
+}
+
+.mkt-module-outcome {
+  border-top: 1px solid var(--mk-line-1);
+  padding-top: 0.9rem;
+  font-size: 0.94rem;
+  color: var(--mk-brand-1);
+}
+
 .mkt-case-detail-card {
   border-color: rgba(54, 92, 118, 0.18);
   background:
     radial-gradient(circle at 100% 0%, rgba(74, 171, 202, 0.08), transparent 24%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(242, 248, 251, 0.94));
+}
+
+.mkt-case-image-slot {
+  min-height: 10.2rem;
 }
 
 .mkt-case-card {
@@ -1698,6 +1778,15 @@ html[lang='zh-CN'] .mkt-metric-label {
 
   .mkt-title {
     font-size: clamp(1.75rem, 10vw, 2.6rem);
+  }
+
+  .mkt-industry-title {
+    font-size: clamp(1.35rem, 7vw, 1.8rem);
+    line-height: 1;
+  }
+
+  .mkt-industry-headline {
+    font-size: 1rem;
   }
 
   .mkt-flow-step {

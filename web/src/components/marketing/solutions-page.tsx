@@ -11,6 +11,7 @@ export default function MarketingSolutionsPage() {
   const { locale } = useLocale();
   const labels = locale === 'zh'
     ? {
+        industryLabel: '行业',
         industriesAside: '适用行业',
         industriesEyebrow: '行业解决方案',
         industriesTitle: '覆盖核心行业，直达高频业务链路',
@@ -20,12 +21,19 @@ export default function MarketingSolutionsPage() {
         modulesBody: '不同项目的入口不同，但真正决定交付质量的，往往是这五类能力如何被组合、接通并持续运营。',
         railHint: '横向查看具体场景模块',
         modulesInIndustry: '行业内模块',
-        imageSlot: '图片建议',
+        imageSlot: '行业主视觉建议',
+        moduleImageSlot: '模块配图建议',
+        stats: '关键数字',
         deliverables: '交付物',
         outcomes: '结果',
+        originalMethod: '原创方法',
+        technicalTraits: '技术特点',
+        mappedModule: '对应模块',
+        aiCapability: 'AI 能力',
         contact: '联系我们',
       }
     : {
+        industryLabel: 'Industry',
         industriesAside: 'Industries',
         industriesEyebrow: 'Industry solutions',
         industriesTitle: 'Coverage across core industries and high-frequency business chains',
@@ -35,9 +43,15 @@ export default function MarketingSolutionsPage() {
         modulesBody: 'Projects start from different business problems, but delivery quality depends on how these five capabilities are connected and operated over time.',
         railHint: 'Scroll sideways for module details',
         modulesInIndustry: 'Modules in this industry',
-        imageSlot: 'Image direction',
+        imageSlot: 'Industry visual direction',
+        moduleImageSlot: 'Module visual direction',
+        stats: 'Key numbers',
         deliverables: 'Deliverables',
         outcomes: 'Outcomes',
+        originalMethod: 'Original method',
+        technicalTraits: 'Technical traits',
+        mappedModule: 'Mapped module',
+        aiCapability: 'AI capability',
         contact: 'Contact',
       };
 
@@ -76,17 +90,40 @@ export default function MarketingSolutionsPage() {
                 key={item.title}
                 className="mkt-industry-strip mkt-panel px-5 py-5 sm:px-6 sm:py-6 lg:px-7 lg:py-7"
               >
-                <div className="grid gap-6 xl:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1.18fr)] xl:items-start">
+                <div className="grid gap-6 xl:grid-cols-[minmax(22rem,0.92fr)_minmax(0,1.08fr)] xl:items-start">
                   <div className="space-y-5">
                     <div className="space-y-3">
-                      <p className="mkt-kicker">{item.title}</p>
-                      <h3 className="mkt-industry-title">{item.title}</h3>
+                      <p className="mkt-kicker">{labels.industryLabel}</p>
+                      <p className="mkt-industry-sector">{item.title}</p>
+                      <h3 className="mkt-industry-title">{item.headline}</h3>
                       <p className="mkt-copy text-[0.98rem] sm:text-[1.02rem]">{item.summary}</p>
                     </div>
-                    <div className="mkt-stat-row">
-                      {item.stats.map((stat) => (
-                        <span key={stat} className="mkt-stat-chip">{stat}</span>
+                    <div className="space-y-3">
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.stats}</p>
+                      <div className="mkt-stat-row">
+                        {item.stats.map((stat) => (
+                          <span key={stat} className="mkt-stat-chip">{stat}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mkt-proof-label-grid">
+                      <span className="mkt-proof-tag">
+                        <strong>{labels.originalMethod}</strong>
+                        <span>{item.originalMethod}</span>
+                      </span>
+                      {item.technicalTraits.map((trait) => (
+                        <span key={trait} className="mkt-proof-tag">
+                          <strong>{labels.technicalTraits}</strong>
+                          <span>{trait}</span>
+                        </span>
                       ))}
+                    </div>
+                    <div className="mkt-industry-visual">
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
+                      <div className="mt-4 space-y-3">
+                        <h4 className="text-base font-semibold text-[var(--mk-text-0)] sm:text-[1.05rem]">{item.imageTitle}</h4>
+                        <p className="mkt-copy text-sm">{item.imageHint}</p>
+                      </div>
                     </div>
                     <div>
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
@@ -99,11 +136,6 @@ export default function MarketingSolutionsPage() {
                         ))}
                       </ol>
                     </div>
-                    <div className="mkt-industry-image-slot">
-                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
-                      <h4 className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{item.imageTitle}</h4>
-                      <p className="mkt-copy mt-2 text-sm">{item.imageHint}</p>
-                    </div>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
@@ -111,22 +143,50 @@ export default function MarketingSolutionsPage() {
                       <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
                     </div>
                     <div className="mkt-industry-rail">
-                      {item.modules.map((module) => (
+                      {item.modules.map((module, index) => (
                         <article key={module.title} className="mkt-industry-module-card">
-                          <h4 className="zh-card-title text-[1.12rem] font-semibold text-[var(--mk-text-0)]">{module.title}</h4>
+                          <div className="flex items-start justify-between gap-3">
+                            <span className="mkt-card-index">0{index + 1}</span>
+                            <span className="mkt-chip mkt-chip-subtle !min-h-[2rem] !px-3 !text-[0.66rem] !tracking-[0.12em]">
+                              {module.mappedModule}
+                            </span>
+                          </div>
+                          <h4 className="zh-card-title mt-4 text-[1.16rem] font-semibold text-[var(--mk-text-0)]">{module.title}</h4>
                           <p className="mkt-copy mt-3 text-sm">{module.body}</p>
+                          <div className="mkt-proof-label-grid mt-4">
+                            <span className="mkt-proof-tag">
+                              <strong>{labels.mappedModule}</strong>
+                              <span>{module.mappedModule}</span>
+                            </span>
+                            <span className="mkt-proof-tag">
+                              <strong>{labels.aiCapability}</strong>
+                              <span>{module.aiCapability}</span>
+                            </span>
+                            <span className="mkt-proof-tag">
+                              <strong>{labels.technicalTraits}</strong>
+                              <span>{module.technicalTrait}</span>
+                            </span>
+                            <span className="mkt-proof-tag">
+                              <strong>{labels.originalMethod}</strong>
+                              <span>{module.originalMethod}</span>
+                            </span>
+                          </div>
+                          <div className="mkt-module-image-slot mt-4">
+                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.moduleImageSlot}</p>
+                            <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
+                          </div>
                           <div className="mt-4">
                             <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
                             <ol className="mkt-number-list mt-3">
-                              {module.deliverables.map((deliverable, index) => (
+                              {module.deliverables.map((deliverable, deliverableIndex) => (
                                 <li key={deliverable} className="mkt-number-item">
-                                  <span className="mkt-number-badge">{index + 1}</span>
+                                  <span className="mkt-number-badge">{deliverableIndex + 1}</span>
                                   <span>{deliverable}</span>
                                 </li>
                               ))}
                             </ol>
                           </div>
-                          <p className="mt-4 border-t border-[var(--mk-line-1)] pt-3 text-sm text-[var(--mk-brand-1)]">{module.outcome}</p>
+                          <p className="mkt-module-outcome mt-4">{module.outcome}</p>
                         </article>
                       ))}
                     </div>

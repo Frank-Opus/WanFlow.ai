@@ -10,7 +10,7 @@ export default function MarketingCasesPage() {
   const { locale } = useLocale();
   const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const labels = locale === 'zh'
-    ? {
+      ? {
         client: '客户类型',
         context: '所属行业',
         challenge: '原始问题',
@@ -20,6 +20,9 @@ export default function MarketingCasesPage() {
         image: '图片建议',
         stats: '关键数字',
         outcome: '结果',
+        originalMethod: '原创方法',
+        aiCapability: 'AI 能力',
+        technicalTraits: '技术特点',
         caseGrid: '真实案例',
         caseGridTitle: '按真实业务链路看交付',
         caseGridBody: '每个案例都直接对应一个真实业务问题，重点展示方案怎么落、交付物怎么沉淀、结果怎么被看见。',
@@ -35,6 +38,9 @@ export default function MarketingCasesPage() {
         image: 'Image direction',
         stats: 'Key numbers',
         outcome: 'Outcome',
+        originalMethod: 'Original method',
+        aiCapability: 'AI capability',
+        technicalTraits: 'Technical traits',
         caseGrid: 'Real cases',
         caseGridTitle: 'Read delivery through real business chains',
         caseGridBody: 'Each case maps to a real business problem and shows how the solution landed, what was delivered, and how the outcome became visible.',
@@ -79,9 +85,28 @@ export default function MarketingCasesPage() {
                       <p className="mkt-kicker">{item.sector}</p>
                       <h3 className="zh-card-title text-[1.28rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
                     </div>
-                    <div className="mkt-stat-row">
-                      {item.stats.map((stat) => (
-                        <span key={stat} className="mkt-stat-chip">{stat}</span>
+                    <div className="space-y-3">
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.stats}</p>
+                      <div className="mkt-stat-row">
+                        {item.stats.map((stat) => (
+                          <span key={stat} className="mkt-stat-chip">{stat}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mkt-proof-label-grid">
+                      <span className="mkt-proof-tag">
+                        <strong>{labels.originalMethod}</strong>
+                        <span>{item.originalMethod}</span>
+                      </span>
+                      <span className="mkt-proof-tag">
+                        <strong>{labels.aiCapability}</strong>
+                        <span>{item.aiCapability}</span>
+                      </span>
+                      {item.technicalTraits.map((trait) => (
+                        <span key={trait} className="mkt-proof-tag">
+                          <strong>{labels.technicalTraits}</strong>
+                          <span>{trait}</span>
+                        </span>
                       ))}
                     </div>
                     <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
@@ -94,6 +119,10 @@ export default function MarketingCasesPage() {
                     </div>
                   </div>
                   <div className="space-y-4">
+                    <div className="mkt-case-image-slot">
+                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.image}</p>
+                      <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{item.imageTitle}</p>
+                    </div>
                     <div>
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
                       <ol className="mkt-number-list mt-3">
@@ -105,10 +134,7 @@ export default function MarketingCasesPage() {
                         ))}
                       </ol>
                     </div>
-                    <div className="mkt-industry-image-slot">
-                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.image}</p>
-                      <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{item.imageTitle}</p>
-                    </div>
+                    <p className="mkt-module-outcome">{item.outcome}</p>
                   </div>
                 </div>
               </article>

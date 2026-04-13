@@ -23,6 +23,7 @@ export default function SiteHeader() {
   }, [pathname]);
 
   useLayoutEffect(() => {
+    let frame = 0;
     const updateActivePill = () => {
       const activeItem = copy.nav.find((item) => (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)));
       const activeLink = activeItem ? linkRefs.current[activeItem.href] : null;
@@ -33,16 +34,50 @@ export default function SiteHeader() {
         return;
       }
 
+      const navBounds = navElement.getBoundingClientRect();
+      const linkBounds = activeLink.getBoundingClientRect();
       setActivePill({
-        left: activeLink.offsetLeft,
-        width: activeLink.offsetWidth,
+        left: linkBounds.left - navBounds.left,
+        width: linkBounds.width,
         opacity: 1,
       });
     };
 
-    updateActivePill();
-    window.addEventListener('resize', updateActivePill);
-    return () => window.removeEventListener('resize', updateActivePill);
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateActivePill);
+    };
+
+    scheduleUpdate();
+
+    const resizeObserver = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(() => scheduleUpdate())
+      : null;
+    const navElement = navRef.current;
+
+    if (navElement) {
+      resizeObserver?.observe(navElement);
+    }
+
+    copy.nav.forEach((item) => {
+      const link = linkRefs.current[item.href];
+      if (link) {
+        resizeObserver?.observe(link);
+      }
+    });
+
+    if (typeof document !== 'undefined' && 'fonts' in document) {
+      void (document as Document & { fonts: FontFaceSet }).fonts.ready.then(() => {
+        scheduleUpdate();
+      });
+    }
+
+    window.addEventListener('resize', scheduleUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', scheduleUpdate);
+    };
   }, [copy.nav, pathname]);
 
   const isMarketingRoute = copy.nav.some((item) => (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)));
@@ -81,7 +116,7 @@ export default function SiteHeader() {
           <nav
             aria-label={primaryNavLabel}
             ref={navRef}
-            className="site-nav-shell hidden items-center gap-1.5 rounded-full border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.7)] px-2 py-1 xl:flex"
+            className="site-nav-shell hidden min-w-0 items-center gap-1.5 rounded-full border border-[var(--mk-line-1)] bg-[rgba(255,255,255,0.7)] px-2 py-1 xl:flex"
           >
             <span
               aria-hidden="true"
@@ -103,7 +138,7 @@ export default function SiteHeader() {
                   }}
                   aria-current={active ? 'page' : undefined}
                   className={[
-                    'site-nav-link mkt-focus-ring relative z-[1] inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full px-3.5 py-2 text-[0.88rem] font-medium leading-none transition 2xl:px-4 2xl:text-[0.92rem]',
+                    'site-nav-link mkt-focus-ring relative z-[1] inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full px-3.5 py-2 text-[0.84rem] font-medium leading-none transition 2xl:px-4 2xl:text-[0.9rem]',
                     active ? 'site-nav-link-active' : 'site-nav-link-idle',
                   ].join(' ')}
                 >
