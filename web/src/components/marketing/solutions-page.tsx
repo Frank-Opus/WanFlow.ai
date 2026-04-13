@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, PageHero, SectionHeading } from '@/components/marketing/primitives';
 import MotionReveal from '@/components/shared/motion-reveal';
@@ -115,10 +116,22 @@ export default function MarketingSolutionsPage() {
                     </div>
                     <div className="mkt-industry-visual">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
-                      <div className="mt-4 space-y-3">
-                        <h4 className="text-base font-semibold text-[var(--mk-text-0)] sm:text-[1.05rem]">{item.imageTitle}</h4>
-                        <p className="mkt-copy text-sm">{item.imageHint}</p>
-                      </div>
+                      {(item as { imageSrc?: string }).imageSrc ? (
+                        <div className="relative mt-4 overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[16/10]">
+                          <Image
+                            src={(item as { imageSrc?: string }).imageSrc!}
+                            alt={item.imageTitle}
+                            fill
+                            className="object-cover object-top"
+                            sizes="(min-width: 1280px) 40vw, 100vw"
+                          />
+                        </div>
+                      ) : (
+                        <div className="mt-4 space-y-3">
+                          <h4 className="text-base font-semibold text-[var(--mk-text-0)] sm:text-[1.05rem]">{item.imageTitle}</h4>
+                          <p className="mkt-copy text-sm">{item.imageHint}</p>
+                        </div>
+                      )}
                     </div>
                     <div>
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
@@ -165,7 +178,19 @@ export default function MarketingSolutionsPage() {
                           </div>
                           <div className="mkt-module-image-slot mt-4">
                             <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.moduleImageSlot}</p>
-                            <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
+                            {(module as { imageSrc?: string }).imageSrc ? (
+                              <div className="relative mt-3 overflow-hidden rounded-[0.9rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[4/3]">
+                                <Image
+                                  src={(module as { imageSrc?: string }).imageSrc!}
+                                  alt={module.imageTitle}
+                                  fill
+                                  className="object-cover object-top"
+                                  sizes="(min-width: 1280px) 24vw, (min-width: 768px) 40vw, 84vw"
+                                />
+                              </div>
+                            ) : (
+                              <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
+                            )}
                           </div>
                           <div className="mt-4">
                             <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
