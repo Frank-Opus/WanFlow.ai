@@ -1342,6 +1342,91 @@ html[lang='zh-CN'] .mkt-industry-sector {
   font-weight: 700;
 }
 
+.mkt-proof-callout {
+  border: 1px solid rgba(77, 123, 148, 0.16);
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(180deg, rgba(252, 253, 254, 0.94), rgba(241, 247, 250, 0.9)),
+    radial-gradient(circle at 85% 15%, rgba(75, 192, 212, 0.12), transparent 28%);
+  padding: 1rem 1rem 1.05rem;
+  box-shadow: 0 14px 24px rgba(18, 32, 43, 0.04);
+}
+
+.mkt-proof-callout-compact {
+  padding: 0.92rem 0.95rem 0.98rem;
+}
+
+.mkt-proof-callout-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mk-brand-3);
+}
+
+.mkt-proof-callout-title {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--mk-text-0);
+}
+
+.mkt-proof-callout-body {
+  margin-top: 0.55rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--mk-text-1);
+}
+
+.mkt-trait-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+}
+
+.mkt-trait-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(86, 125, 149, 0.18);
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.35rem 0.74rem;
+  font-size: 0.76rem;
+  line-height: 1.3;
+  color: var(--mk-text-1);
+}
+
+.mkt-module-brief {
+  border-top: 1px solid rgba(86, 125, 149, 0.14);
+  padding-top: 0.95rem;
+}
+
+.mkt-module-brief-title {
+  margin-top: 0.45rem;
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--mk-text-0);
+}
+
+.mkt-module-impact {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  max-width: 15rem;
+  border: 1px solid rgba(77, 123, 148, 0.16);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(68, 196, 217, 0.12), rgba(47, 143, 184, 0.08));
+  padding: 0.34rem 0.72rem;
+  font-size: 0.77rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--mk-brand-1);
+}
+
 .mkt-stat-row {
   display: flex;
   flex-wrap: wrap;
@@ -1425,6 +1510,21 @@ html[lang='zh-CN'] .mkt-industry-sector {
   padding-top: 0.9rem;
   font-size: 0.94rem;
   color: var(--mk-brand-1);
+}
+
+.mkt-module-story,
+.mkt-story-block,
+.mkt-outcome-band {
+  border: 1px solid rgba(86, 125, 149, 0.14);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.74);
+  padding: 0.95rem 1rem 1rem;
+}
+
+.mkt-outcome-band {
+  background:
+    linear-gradient(135deg, rgba(250, 252, 254, 0.96), rgba(236, 245, 249, 0.92)),
+    radial-gradient(circle at 88% 18%, rgba(75, 192, 212, 0.1), transparent 22%);
 }
 
 .mkt-case-detail-card {

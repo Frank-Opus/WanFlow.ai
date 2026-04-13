@@ -11,36 +11,28 @@ export default function MarketingCasesPage() {
   const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const labels = locale === 'zh'
       ? {
-        client: '客户类型',
-        context: '所属行业',
-        challenge: '原始问题',
-        solution: '方案组合',
-        delivery: '交付方式',
         deliverables: '交付物',
         image: '图片建议',
         stats: '量化结果',
-        outcome: '结果',
-        originalMethod: '原创方法',
-        aiCapability: 'AI 能力',
-        technicalTraits: '技术特点',
+        outcome: '最终结果',
+        originalMethod: 'WanFlow 原创',
+        projectStart: '项目起点',
+        projectBuild: 'WanFlow 怎么把它做成',
+        whyWorked: '为什么它能长期跑',
         caseGrid: '真实案例',
         caseGridTitle: '按真实业务链路看交付',
         caseGridBody: '每个案例都直接对应一个真实业务问题，重点展示方案怎么落、交付物怎么沉淀、结果怎么被看见。',
         nextStep: '下一步',
       }
     : {
-        client: 'Client type',
-        context: 'Industry',
-        challenge: 'Original problem',
-        solution: 'Solution combination',
-        delivery: 'Delivery approach',
         deliverables: 'Deliverables',
         image: 'Image direction',
         stats: 'Measured impact',
         outcome: 'Outcome',
-        originalMethod: 'Original method',
-        aiCapability: 'AI capability',
-        technicalTraits: 'Technical traits',
+        originalMethod: 'WanFlow original',
+        projectStart: 'Where the project started',
+        projectBuild: 'How WanFlow made it work',
+        whyWorked: 'Why it could keep running',
         caseGrid: 'Real cases',
         caseGridTitle: 'Read delivery through real business chains',
         caseGridBody: 'Each case maps to a real business problem and shows how the solution landed, what was delivered, and how the outcome became visible.',
@@ -93,29 +85,44 @@ export default function MarketingCasesPage() {
                         ))}
                       </div>
                     </div>
-                    <div className="mkt-proof-label-grid">
-                      <span className="mkt-proof-tag">
-                        <strong>{labels.originalMethod}</strong>
-                        <span>{item.originalMethod}</span>
-                      </span>
-                      <span className="mkt-proof-tag">
-                        <strong>{labels.aiCapability}</strong>
-                        <span>{item.aiCapability}</span>
-                      </span>
-                      {item.technicalTraits.map((trait) => (
-                        <span key={trait} className="mkt-proof-tag">
-                          <strong>{labels.technicalTraits}</strong>
-                          <span>{trait}</span>
-                        </span>
-                      ))}
+                    <div className="mkt-proof-callout">
+                      <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
+                      <p className="mkt-proof-callout-title">
+                        {locale === 'zh' ? `WanFlow 原创：${item.originalMethod}` : `WanFlow original: ${item.originalMethod}`}
+                      </p>
+                      <p className="mkt-proof-callout-body">
+                        {locale === 'zh'
+                          ? `${item.aiCapability}，并通过 ${item.technicalTraits.join('、')} 形成一套能长期复用的交付结构`
+                          : `${item.aiCapability}, combined with ${item.technicalTraits.join(', ')}, forms a delivery structure that can be reused over time.`}
+                      </p>
+                      <div className="mkt-trait-row">
+                        {item.technicalTraits.map((trait) => (
+                          <span key={trait} className="mkt-trait-chip">{trait}</span>
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-4 text-sm leading-7 text-[var(--mk-text-1)] sm:text-[0.98rem]">
-                      <p><strong className="text-[var(--mk-text-0)]">{labels.client}:</strong> {item.client}</p>
-                      <p><strong className="text-[var(--mk-text-0)]">{labels.context}:</strong> {item.sector}</p>
-                      <p><strong className="text-[var(--mk-text-0)]">{labels.challenge}:</strong> {item.challenge}</p>
-                      <p><strong className="text-[var(--mk-text-0)]">{labels.solution}:</strong> {item.solution}</p>
-                      <p><strong className="text-[var(--mk-text-0)]">{labels.delivery}:</strong> {item.delivery}</p>
-                      <p><strong className="text-[var(--mk-text-0)]">{labels.outcome}:</strong> {item.outcome}</p>
+                    <div className="space-y-4">
+                      <section className="mkt-story-block">
+                        <p className="mkt-proof-callout-label">{labels.projectStart}</p>
+                        <p className="mkt-copy mt-3 text-sm sm:text-[0.98rem]">
+                          {locale === 'zh'
+                            ? `${item.client} 所处的是 ${item.sector} 场景。${item.challenge}`
+                            : `${item.client} operated in ${item.sector}. ${item.challenge}`}
+                        </p>
+                      </section>
+                      <section className="mkt-story-block">
+                        <p className="mkt-proof-callout-label">{labels.projectBuild}</p>
+                        <p className="mkt-copy mt-3 text-sm sm:text-[0.98rem]">{item.solution}</p>
+                        <p className="mkt-copy mt-3 text-sm sm:text-[0.98rem]">{item.delivery}</p>
+                      </section>
+                      <section className="mkt-story-block">
+                        <p className="mkt-proof-callout-label">{labels.whyWorked}</p>
+                        <p className="mkt-copy mt-3 text-sm sm:text-[0.98rem]">
+                          {locale === 'zh'
+                            ? `不是只把 AI 加进流程里，而是把 ${item.aiCapability} 接到 ${item.technicalTraits.join('、')} 这条执行链上，让这套方案既能上线，也能留下之后继续扩展和复盘的空间`
+                            : `This was not just AI added into a workflow. WanFlow connected ${item.aiCapability} into an execution chain shaped by ${item.technicalTraits.join(', ')}, so the system could launch, stay governable, and keep improving.`}
+                        </p>
+                      </section>
                     </div>
                   </div>
                   <div className="space-y-4">
@@ -134,7 +141,10 @@ export default function MarketingCasesPage() {
                         ))}
                       </ol>
                     </div>
-                    <p className="mkt-module-outcome">{item.outcome}</p>
+                    <div className="mkt-outcome-band">
+                      <p className="mkt-proof-callout-label">{labels.outcome}</p>
+                      <p className="mkt-copy mt-3 text-sm font-semibold text-[var(--mk-text-0)] sm:text-[0.98rem]">{item.outcome}</p>
+                    </div>
                   </div>
                 </div>
               </article>

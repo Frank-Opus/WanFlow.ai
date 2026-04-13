@@ -26,10 +26,9 @@ export default function MarketingSolutionsPage() {
         stats: '典型改善区间',
         deliverables: '交付物',
         outcomes: '结果',
-        originalMethod: '原创方法',
-        technicalTraits: '技术特点',
-        mappedModule: '对应模块',
-        aiCapability: 'AI 能力',
+        originalMethod: 'WanFlow 原创',
+        moduleMethod: '这条链怎么落地',
+        moduleSupport: '最终会沉淀什么',
         contact: '联系我们',
       }
     : {
@@ -48,10 +47,9 @@ export default function MarketingSolutionsPage() {
         stats: 'Typical impact range',
         deliverables: 'Deliverables',
         outcomes: 'Outcomes',
-        originalMethod: 'Original method',
-        technicalTraits: 'Technical traits',
-        mappedModule: 'Mapped module',
-        aiCapability: 'AI capability',
+        originalMethod: 'WanFlow original',
+        moduleMethod: 'How this chain lands',
+        moduleSupport: 'What gets left behind',
         contact: 'Contact',
       };
 
@@ -106,17 +104,21 @@ export default function MarketingSolutionsPage() {
                         ))}
                       </div>
                     </div>
-                    <div className="mkt-proof-label-grid">
-                      <span className="mkt-proof-tag">
-                        <strong>{labels.originalMethod}</strong>
-                        <span>{item.originalMethod}</span>
-                      </span>
-                      {item.technicalTraits.map((trait) => (
-                        <span key={trait} className="mkt-proof-tag">
-                          <strong>{labels.technicalTraits}</strong>
-                          <span>{trait}</span>
-                        </span>
-                      ))}
+                    <div className="mkt-proof-callout">
+                      <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
+                      <p className="mkt-proof-callout-title">
+                        {locale === 'zh' ? `WanFlow 原创：${item.originalMethod}` : `WanFlow original: ${item.originalMethod}`}
+                      </p>
+                      <p className="mkt-proof-callout-body">
+                        {locale === 'zh'
+                          ? `不是把流程拆给不同人硬接，而是把 ${item.technicalTraits.join('、')} 这些能力先接成一条能长期运行的业务链`
+                          : `Instead of stitching the work together manually, WanFlow turns ${item.technicalTraits.join(', ')} into one operating chain that can keep running.`}
+                      </p>
+                      <div className="mkt-trait-row">
+                        {item.technicalTraits.map((trait) => (
+                          <span key={trait} className="mkt-trait-chip">{trait}</span>
+                        ))}
+                      </div>
                     </div>
                     <div className="mkt-industry-visual">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
@@ -146,37 +148,66 @@ export default function MarketingSolutionsPage() {
                       {item.modules.map((module, index) => (
                         <article key={module.title} className="mkt-industry-module-card">
                           <div className="flex items-start justify-between gap-3">
-                            <span className="mkt-card-index">0{index + 1}</span>
+                            <div className="space-y-3">
+                              <span className="mkt-card-index">0{index + 1}</span>
+                              <p className="mkt-module-impact">{module.outcome}</p>
+                            </div>
                             <span className="mkt-chip mkt-chip-subtle !min-h-[2rem] !px-3 !text-[0.66rem] !tracking-[0.12em]">
                               {module.mappedModule}
                             </span>
                           </div>
                           <h4 className="zh-card-title mt-4 text-[1.16rem] font-semibold text-[var(--mk-text-0)]">{module.title}</h4>
                           <p className="mkt-copy mt-3 text-sm">{module.body}</p>
-                          <div className="mkt-proof-label-grid mt-4">
-                            <span className="mkt-proof-tag">
-                              <strong>{labels.mappedModule}</strong>
-                              <span>{module.mappedModule}</span>
-                            </span>
-                            <span className="mkt-proof-tag">
-                              <strong>{labels.aiCapability}</strong>
-                              <span>{module.aiCapability}</span>
-                            </span>
-                            <span className="mkt-proof-tag">
-                              <strong>{labels.technicalTraits}</strong>
-                              <span>{module.technicalTrait}</span>
-                            </span>
-                            <span className="mkt-proof-tag">
-                              <strong>{labels.originalMethod}</strong>
-                              <span>{module.originalMethod}</span>
-                            </span>
+                          <div className="mkt-proof-callout mkt-proof-callout-compact mt-4">
+                            <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
+                            <p className="mkt-proof-callout-title">
+                              {locale === 'zh' ? `WanFlow 原创：${module.originalMethod}` : `WanFlow original: ${module.originalMethod}`}
+                            </p>
+                            <p className="mkt-proof-callout-body">
+                              {locale === 'zh'
+                                ? `WanFlow 会把 ${module.aiCapability} 接进真实任务，再用 ${module.technicalTrait} 把稳定性、边界和执行节奏控住，让 ${module.mappedModule} 不只是一个模块名，而是一条能持续复用的交付链`
+                                : `WanFlow connects ${module.aiCapability} into live work, then uses ${module.technicalTrait} to keep pace, boundaries, and stability under control so ${module.mappedModule} becomes a reusable delivery chain instead of a label.`}
+                            </p>
+                            <div className="mkt-trait-row mt-3">
+                              <span className="mkt-trait-chip">{module.aiCapability}</span>
+                              <span className="mkt-trait-chip">{module.technicalTrait}</span>
+                            </div>
+                          </div>
+                          <div className="mkt-module-story mt-4">
+                            <p className="mkt-proof-callout-label">{labels.moduleMethod}</p>
+                            <ol className="mkt-number-list mt-3">
+                              <li className="mkt-number-item">
+                                <span className="mkt-number-badge">1</span>
+                                <span>
+                                  {locale === 'zh'
+                                    ? `先把 ${module.aiCapability} 接进高频业务动作里`
+                                    : `Start by placing ${module.aiCapability} inside the highest-frequency business actions.`}
+                                </span>
+                              </li>
+                              <li className="mkt-number-item">
+                                <span className="mkt-number-badge">2</span>
+                                <span>
+                                  {locale === 'zh'
+                                    ? `再用 ${module.technicalTrait} 守住边界、时效和可追踪性`
+                                    : `Use ${module.technicalTrait} to hold the line on boundaries, cycle time, and traceability.`}
+                                </span>
+                              </li>
+                              <li className="mkt-number-item">
+                                <span className="mkt-number-badge">3</span>
+                                <span>
+                                  {locale === 'zh'
+                                    ? `最后沉淀成可重复调用的 ${module.mappedModule} 交付骨架`
+                                    : `Leave behind a reusable ${module.mappedModule} delivery backbone.`}
+                                </span>
+                              </li>
+                            </ol>
                           </div>
                           <div className="mkt-module-image-slot mt-4">
                             <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.moduleImageSlot}</p>
                             <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
                           </div>
                           <div className="mt-4">
-                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
+                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.moduleSupport}</p>
                             <ol className="mkt-number-list mt-3">
                               {module.deliverables.map((deliverable, deliverableIndex) => (
                                 <li key={deliverable} className="mkt-number-item">
@@ -186,7 +217,6 @@ export default function MarketingSolutionsPage() {
                               ))}
                             </ol>
                           </div>
-                          <p className="mkt-module-outcome mt-4">{module.outcome}</p>
                         </article>
                       ))}
                     </div>
