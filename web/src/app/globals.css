@@ -1679,6 +1679,29 @@ html[lang='zh-CN'] .mkt-industry-sector {
   color: rgba(33, 77, 104, 0.82);
 }
 
+.mkt-team-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.mkt-team-avatar-shell {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(86, 125, 149, 0.18);
+  background: linear-gradient(180deg, rgba(245, 249, 252, 0.98), rgba(232, 241, 247, 0.92));
+  box-shadow: 0 16px 30px rgba(20, 37, 52, 0.08);
+}
+
+.mkt-team-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .mkt-button-on-image {
   border-color: rgba(87, 121, 144, 0.18);
   background: rgba(248, 251, 253, 0.62);

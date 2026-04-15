@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale } from '@/components/shared/locale-provider';
 import { FinalCtaBand, SectionHeading } from '@/components/marketing/primitives';
@@ -13,10 +14,10 @@ export default function MarketingAboutPage() {
   const finalEyebrow = locale === 'zh' ? '与 WanFlow 沟通' : 'Talk to WanFlow';
   const labels = locale === 'zh'
     ? {
-        trust: '信任理由',
+        summary: '公司概览',
       }
     : {
-        trust: 'Trust signals',
+        summary: 'Company snapshot',
       };
 
   return (
@@ -44,9 +45,9 @@ export default function MarketingAboutPage() {
                 </div>
               </div>
               <aside className="mkt-about-aside">
-                <p className="mkt-kicker mkt-about-side-kicker">{labels.trust}</p>
+                <p className="mkt-kicker mkt-about-side-kicker">{copy.about.summary.eyebrow ?? labels.summary}</p>
                 <div className="space-y-3">
-                  {copy.about.trust.items.slice(0, 2).map((item) => (
+                  {copy.about.summary.items.map((item) => (
                     <div key={item} className="border-t border-[rgba(31,63,82,0.14)] pt-3 first:border-t-0 first:pt-0">
                       <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
                     </div>
@@ -79,52 +80,29 @@ export default function MarketingAboutPage() {
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={115} className="space-y-6">
-          <SectionHeading eyebrow={copy.about.principles.eyebrow} title={copy.about.principles.title} />
-          <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-3">
-            {copy.about.principles.items.map((item, index) => (
-              <article key={item.title} className={index === 1 ? 'mkt-card mkt-card-highlight px-5 py-5' : 'mkt-card px-5 py-5'}>
-                <h3 className="zh-card-title text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3">{item.body}</p>
+        <MotionReveal as="section" delay={120} className="space-y-6">
+          <SectionHeading eyebrow={copy.about.team.eyebrow} title={copy.about.team.title} body={copy.about.team.body} />
+          <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {copy.about.team.members.map((member, index) => (
+              <article key={member.name} className={index === 0 ? 'mkt-card mkt-card-highlight mkt-team-card px-5 py-5' : 'mkt-card mkt-team-card px-5 py-5'}>
+                <div className="mkt-team-avatar-shell">
+                  <Image
+                    src={member.imageSrc}
+                    alt={member.name}
+                    width={96}
+                    height={96}
+                    className="mkt-team-avatar"
+                  />
+                </div>
+                <span className="mkt-card-index">{member.role}</span>
+                <h3 className="zh-card-title mt-4 text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{member.name}</h3>
+                <p className="mkt-copy mt-3">{member.summary}</p>
               </article>
             ))}
           </div>
         </MotionReveal>
 
-        <MotionReveal as="section" delay={140} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
-          <SectionHeading eyebrow={copy.about.collaborationModel.eyebrow} title={copy.about.collaborationModel.title} />
-          <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {copy.about.collaborationModel.items.map((item) => (
-              <article key={item.title} className="mkt-card px-5 py-5">
-                <div className="mkt-flow-marker">{item.title.slice(0, 1)}</div>
-                <h3 className="zh-card-title mt-4 text-[1.1rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3 text-sm">{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </MotionReveal>
-
-        <MotionReveal as="section" delay={165} className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
-          <SectionHeading eyebrow={copy.about.trust.eyebrow} title={copy.about.trust.title} />
-          <div className="mkt-stagger-grid mt-6 grid gap-3 lg:grid-cols-12">
-            {copy.about.trust.items.map((item, index) => (
-              <article
-                key={item}
-                className={[
-                  'mkt-card px-5 py-5',
-                  index === 0 ? 'lg:col-span-5' : '',
-                  index === 1 ? 'lg:col-span-3' : '',
-                  index === 2 ? 'lg:col-span-4' : '',
-                ].filter(Boolean).join(' ')}
-              >
-                <span className="mkt-card-index">{labels.trust}</span>
-                <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
-              </article>
-            ))}
-          </div>
-        </MotionReveal>
-
-        <MotionReveal delay={185}>
+        <MotionReveal delay={160}>
           <FinalCtaBand
             eyebrow={finalEyebrow}
             title={copy.about.finalCta.title}

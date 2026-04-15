@@ -11,25 +11,23 @@ export default function MarketingSolutionsPage() {
   const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const { locale } = useLocale();
   const labels = locale === 'zh'
-    ? {
+      ? {
         industryLabel: '行业',
         industriesAside: '适用行业',
         industriesEyebrow: '行业解决方案',
         industriesTitle: '按行业看，WanFlow 具体能帮企业把什么做顺',
-        industriesBody: '不讲抽象技术概念，直接看常见业务场景、我们通常怎么做，以及最后通常能看到什么改善。',
+        industriesBody: '不聊空概念，直接看每个行业里最容易卡住、最费人、也最影响结果的那几段业务。',
         modulesEyebrow: '交付底座',
         modulesTitle: '一套项目做下来，通常会留下这几类长期能力',
-        modulesBody: '客户看到的不该只是一次上线，而应该是后面还能继续跑、继续扩展、继续优化的一套交付基础。',
+        modulesBody: '客户要的不是一次演示，而是一套以后还能继续跑、继续扩、继续优化的底子。',
         modulesInIndustry: '常见业务场景',
         railHint: '左右滑动查看更多场景',
-        imageSlot: '行业主视觉建议',
-        moduleImageSlot: '场景配图建议',
         stats: '典型改善区间',
-        deliverables: '最终会沉淀什么',
+        deliverables: '最终会留下什么',
         outcomes: '常见结果',
-        originalMethod: 'WanFlow 的做法',
-        whatWeDo: 'WanFlow 一般会这样推进',
-        moduleOutcome: '这个场景通常能带来什么改善',
+        originalMethod: '这一段怎么接顺',
+        whatWeDo: '落地方式',
+        moduleOutcome: '常见改善',
         contact: '联系我们',
       }
     : {
@@ -43,8 +41,6 @@ export default function MarketingSolutionsPage() {
         modulesBody: 'The output should not be a one-time launch. It should be a working base that teams can keep expanding and improving.',
         modulesInIndustry: 'Typical business scenarios',
         railHint: 'Swipe sideways for more scenarios',
-        imageSlot: 'Industry visual direction',
-        moduleImageSlot: 'Scenario visual direction',
         stats: 'Typical impact range',
         deliverables: 'What gets left behind',
         outcomes: 'Typical outcomes',
@@ -110,14 +106,13 @@ export default function MarketingSolutionsPage() {
                       <p className="mkt-proof-callout-title">{item.originalMethod}</p>
                       <p className="mkt-proof-callout-body">
                         {locale === 'zh'
-                          ? `我们通常不会先堆工具，而是先把 ${item.technicalTraits.join('、')} 这些关键环节接顺，让业务团队先把最卡的链路跑起来，再继续往下扩。`
+                          ? `${item.technicalTraits.join('、')} 这些地方一旦不稳，业务就会一直回退。WanFlow 会先把这几段接住，再把 AI 和多智能体真正接进去。`
                           : `We do not start by stacking tools. We start by connecting the key operating links around ${item.technicalTraits.join(', ')} so the team can get the blocked workflow running first and then keep expanding.`}
                       </p>
                     </div>
                     <div className="mkt-industry-visual">
-                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.imageSlot}</p>
                       {(item as { imageSrc?: string }).imageSrc ? (
-                        <div className="relative mt-4 overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[16/10]">
+                        <div className="relative overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[16/10]">
                           <Image
                             src={(item as { imageSrc?: string }).imageSrc!}
                             alt={item.imageTitle}
@@ -164,7 +159,7 @@ export default function MarketingSolutionsPage() {
                             <p className="mkt-proof-callout-title">{module.originalMethod}</p>
                             <p className="mkt-proof-callout-body">
                               {locale === 'zh'
-                                ? `先把最影响时效和质量的节点理顺，再把 ${module.aiCapability} 接进去，同时用 ${module.technicalTrait} 把边界、节奏和可追踪性守住。`
+                                ? `${module.aiCapability} 负责把速度提起来，${module.technicalTrait} 负责把边界、稳定性和可追踪性守住。`
                                 : `We first fix the operating nodes that most affect speed and quality, then bring in ${module.aiCapability} and use ${module.technicalTrait} to keep boundaries, rhythm, and traceability under control.`}
                             </p>
                           </div>
@@ -172,14 +167,13 @@ export default function MarketingSolutionsPage() {
                             <p className="mkt-proof-callout-label">{labels.moduleOutcome}</p>
                             <p className="mkt-copy mt-3 text-sm">
                               {locale === 'zh'
-                                ? '这个场景通常会先体现在时效、准确率、回退率、人工负荷或跨团队协同成本上的改善。'
+                                ? '通常先能看到时效、回退率、人工负荷和跨团队协同成本往下走。'
                                 : 'This usually shows up first in cycle time, accuracy, rework rate, manual load, or coordination cost.'}
                             </p>
                           </div>
                           <div className="mkt-module-image-slot mt-4">
-                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.moduleImageSlot}</p>
                             {(module as { imageSrc?: string }).imageSrc ? (
-                              <div className="relative mt-3 overflow-hidden rounded-[0.9rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[4/3]">
+                              <div className="relative overflow-hidden rounded-[0.9rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[4/3]">
                                 <Image
                                   src={(module as { imageSrc?: string }).imageSrc!}
                                   alt={module.imageTitle}
@@ -189,7 +183,7 @@ export default function MarketingSolutionsPage() {
                                 />
                               </div>
                             ) : (
-                              <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
+                              <p className="text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
                             )}
                           </div>
                           <div className="mt-4">
