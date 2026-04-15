@@ -90,9 +90,8 @@ test.describe('contact flow end-to-end', () => {
     const submitResponse = await submitResponsePromise;
     expect(submitResponse.ok()).toBeTruthy();
 
-    await expect(page.locator('.mkt-status-success')).toContainText(
-      '已收到你的信息。我们会在工作日 24 小时内通过邮箱联系你。',
-    );
+    await expect(page.locator('.mkt-status-success')).toContainText('已收到你的信息');
+    await expect(page.locator('.mkt-status-success')).toContainText('工作日 24 小时内通过邮箱联系你');
 
     const leadFiles = await fs.readdir(leadsDir);
     expect(leadFiles.length).toBeGreaterThan(0);

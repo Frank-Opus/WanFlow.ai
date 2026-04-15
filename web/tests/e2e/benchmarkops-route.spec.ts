@@ -20,8 +20,13 @@ test.describe('benchmarkops canonical route', () => {
     }
   });
 
-  test('home page keeps the canonical benchmarkops entry point', async ({ page }) => {
+  test('home page hides benchmarkops entry but other marketing pages keep the canonical route', async ({ page }) => {
     await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    await expect(page.locator('a[href="/dataflow/proofbench"]')).toHaveCount(0);
+
+    await page.goto('/contact');
     await page.waitForLoadState('networkidle');
 
     expect(await page.locator('a[href="/dataflow/proofbench"]').count()).toBeGreaterThan(0);

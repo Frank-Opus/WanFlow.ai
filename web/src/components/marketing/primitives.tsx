@@ -27,8 +27,8 @@ export function PageHero({
         <div className="mkt-hero-copy max-w-[58rem] space-y-7">
           <p className="mkt-kicker mkt-hero-stage mkt-hero-stage-1">{eyebrow}</p>
           <div className="mkt-hero-stage mkt-hero-stage-2 space-y-5">
-            <h1 className="mkt-display max-w-[11.5ch] text-balance xl:max-w-[13ch] 2xl:max-w-[13.5ch]">{title}</h1>
-            <p className="mkt-copy max-w-2xl text-base sm:text-[1.08rem] xl:max-w-[48rem]">{body}</p>
+            <h1 className="mkt-display max-w-full text-balance sm:max-w-[11.5ch] xl:max-w-[13ch] 2xl:max-w-[13.5ch]">{title}</h1>
+            <p className="mkt-copy max-w-full text-base sm:max-w-2xl sm:text-[1.08rem] xl:max-w-[48rem]">{body}</p>
           </div>
           <div className="mkt-hero-actions mkt-hero-stage mkt-hero-stage-3 flex flex-wrap gap-3">
             <Link href={primary.href} className="mkt-button-primary">
@@ -67,8 +67,8 @@ export function SectionHeading({
   return (
     <div className={align === 'center' ? 'mx-auto max-w-[52rem] text-center' : 'max-w-[52rem]'}>
       <p className="mkt-kicker">{eyebrow}</p>
-      <h2 className="mkt-title mt-5 text-balance">{title}</h2>
-      {body ? <p className="mkt-copy mt-5 max-w-[44rem] text-[0.99rem] sm:text-base">{body}</p> : null}
+      <h2 className="mkt-title mt-5 max-w-full text-balance">{title}</h2>
+      {body ? <p className="mkt-copy mt-5 max-w-full text-[0.99rem] sm:max-w-[44rem] sm:text-base">{body}</p> : null}
     </div>
   );
 }
@@ -91,8 +91,8 @@ export function FinalCtaBand({
       <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-10 xl:gap-12">
         <div className="space-y-5">
           <p className="mkt-kicker">{eyebrow}</p>
-          <h2 className="mkt-title max-w-[18ch] text-balance">{title}</h2>
-          <p className="mkt-copy max-w-[48rem] text-[0.99rem] sm:text-base">{body}</p>
+          <h2 className="mkt-title max-w-full text-balance sm:max-w-[18ch]">{title}</h2>
+          <p className="mkt-copy max-w-full text-[0.99rem] sm:max-w-[48rem] sm:text-base">{body}</p>
         </div>
         <div className="mkt-cta-actions flex flex-wrap gap-3 lg:justify-end lg:pb-1">
           <Link href={primary.href} className="mkt-button-primary">

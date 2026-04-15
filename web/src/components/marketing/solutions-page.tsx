@@ -13,13 +13,13 @@ export default function MarketingSolutionsPage() {
   const labels = locale === 'zh'
       ? {
         industryLabel: '行业',
-        industriesAside: '适用行业',
+        industriesAside: '案例行业',
         industriesEyebrow: '行业解决方案',
-        industriesTitle: '按行业看，WanFlow 具体能帮企业把什么做顺',
-        industriesBody: '不聊空概念，直接看每个行业里最容易卡住、最费人、也最影响结果的那几段业务。',
+        industriesTitle: '看行业里最难跑顺的那几段，WanFlow 怎么把它真正接起来',
+        industriesBody: '每个行业都不是一个抽象标签。我们直接拆最影响结果的业务链，讲清楚什么该自动、什么要人兜底，以及系统最后怎么长期跑下去。',
         modulesEyebrow: '交付底座',
-        modulesTitle: '一套项目做下来，通常会留下这几类长期能力',
-        modulesBody: '客户要的不是一次演示，而是一套以后还能继续跑、继续扩、继续优化的底子。',
+        modulesTitle: '项目做完以后，企业真正会留下来的五类长期能力',
+        modulesBody: '不是上线一个页面就结束，而是把数据、流程、多智能体和运营闭环沉成以后还能继续扩的底盘。',
         modulesInIndustry: '常见业务场景',
         railHint: '左右滑动查看更多场景',
         stats: '典型改善区间',
@@ -30,15 +30,15 @@ export default function MarketingSolutionsPage() {
         moduleOutcome: '常见改善',
         contact: '联系我们',
       }
-    : {
+      : {
         industryLabel: 'Industry',
         industriesAside: 'Industries',
         industriesEyebrow: 'Industry solutions',
-        industriesTitle: 'What WanFlow helps enterprise teams get running, industry by industry',
-        industriesBody: 'Skip the abstract AI language and look directly at the business scenarios, what we do, and the results teams usually care about.',
+        industriesTitle: 'See the hardest operating links in each industry and how WanFlow reconnects them',
+        industriesBody: 'These are not abstract industry labels. Each section points to the business chain that usually breaks first, what should be automated, where humans should stay in control, and how the system keeps running after launch.',
         modulesEyebrow: 'Delivery base',
-        modulesTitle: 'A real project should leave behind capabilities that keep running',
-        modulesBody: 'The output should not be a one-time launch. It should be a working base that teams can keep expanding and improving.',
+        modulesTitle: 'A real project should leave behind five durable operating capabilities',
+        modulesBody: 'The goal is not one launch moment. It is a base the team can keep extending across data, workflows, multi-agent execution, and optimization.',
         modulesInIndustry: 'Typical business scenarios',
         railHint: 'Swipe sideways for more scenarios',
         stats: 'Typical impact range',
@@ -86,12 +86,12 @@ export default function MarketingSolutionsPage() {
                 className="mkt-industry-strip mkt-panel px-5 py-5 sm:px-6 sm:py-6 lg:px-7 lg:py-7"
               >
                 <div className="grid gap-6 xl:grid-cols-[minmax(22rem,0.92fr)_minmax(0,1.08fr)] xl:items-start">
-                  <div className="space-y-5">
-                    <div className="space-y-3">
+                  <div className="min-w-0 space-y-5">
+                    <div className="min-w-0 space-y-3">
                       <p className="mkt-kicker">{labels.industryLabel}</p>
                       <p className="mkt-industry-sector">{item.title}</p>
                       <h3 className="mkt-industry-title">{item.headline}</h3>
-                      <p className="mkt-copy text-[0.98rem] sm:text-[1.02rem]">{item.summary}</p>
+                      <p className="mkt-industry-summary mkt-copy text-[0.98rem] sm:text-[1.02rem]">{item.summary}</p>
                     </div>
                     <div className="space-y-3">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.stats}</p>
@@ -112,7 +112,7 @@ export default function MarketingSolutionsPage() {
                     </div>
                     <div className="mkt-industry-visual">
                       {(item as { imageSrc?: string }).imageSrc ? (
-                        <div className="relative overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[16/10]">
+                        <div className="mkt-industry-media-frame relative overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[16/10]">
                           <Image
                             src={(item as { imageSrc?: string }).imageSrc!}
                             alt={item.imageTitle}
@@ -140,7 +140,7 @@ export default function MarketingSolutionsPage() {
                       </ol>
                     </div>
                   </div>
-                  <div className="space-y-3">
+                  <div className="min-w-0 space-y-3">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.modulesInIndustry}</p>
                       <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
