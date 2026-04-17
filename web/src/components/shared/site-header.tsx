@@ -80,17 +80,7 @@ export default function SiteHeader() {
     };
   }, [copy.nav, pathname]);
 
-  const isMarketingRoute = copy.nav.some((item) => (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)));
   const isHomePage = pathname === '/';
-  const desktopWorkbenchCta = !isHomePage ? (
-    <Link href="/dataflow/proofbench" className={isMarketingRoute ? 'mkt-button-secondary mkt-button-compact' : 'mkt-button-primary mkt-button-compact'}>
-      {copy.common.workbenchCta}
-    </Link>
-  ) : (
-    <span aria-hidden="true" className="mkt-button-secondary mkt-button-compact invisible pointer-events-none select-none">
-      {copy.common.workbenchCta}
-    </span>
-  );
 
   return (
     <>
@@ -107,7 +97,7 @@ export default function SiteHeader() {
                 alt={copy.site.brandFull}
                 width={340}
                 height={100}
-                className="h-auto w-[164px] sm:w-[186px]"
+                className="h-auto w-[140px] sm:w-[158px]"
                 priority
               />
             </Link>
@@ -149,7 +139,6 @@ export default function SiteHeader() {
           </nav>
 
           <div className="hidden items-center gap-2 xl:flex">
-            {desktopWorkbenchCta}
             {(['zh', 'en'] as const).map((lang) => {
               const active = locale === lang;
               return (
@@ -205,11 +194,6 @@ export default function SiteHeader() {
                 <Link href="/contact" className="mkt-button-primary">
                   {copy.common.primaryCta}
                 </Link>
-                {!isHomePage ? (
-                  <Link href="/dataflow/proofbench" className="mkt-button-secondary">
-                    {copy.common.workbenchCta}
-                  </Link>
-                ) : null}
                 {(['zh', 'en'] as const).map((lang) => {
                   const active = locale === lang;
                   return (

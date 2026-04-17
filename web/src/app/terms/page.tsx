@@ -44,8 +44,8 @@ export default function TermsPage() {
       <div className="mkt-shell">
         <section className="mkt-panel mkt-grid-lines px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
           <div className="max-w-4xl space-y-5">
-            <p className="mkt-kicker">Terms</p>
-            <h1 className="mkt-title">服务条款</h1>
+            <p className="mkt-kicker mkt-section-kicker-large">Terms</p>
+            <h1 className="mkt-title mkt-subpage-title">服务条款</h1>
             <p className="mkt-copy text-base">
               以下条款说明你访问 WanFlow 官网、使用公开联系入口以及基于本站信息发起业务沟通时适用的基本规则。
             </p>
@@ -56,7 +56,7 @@ export default function TermsPage() {
           <div className="max-w-4xl space-y-6">
             {sections.map((section) => (
               <article key={section.title} className="border-t border-[var(--mk-line-1)] pt-6 first:border-t-0 first:pt-0">
-                <h2 className="zh-card-title text-xl font-semibold text-[var(--mk-text-0)]">{section.title}</h2>
+                <h2 className="zh-card-title mkt-card-heading-lg">{section.title}</h2>
                 <p className="mkt-copy mt-3 text-sm sm:text-base">{section.body}</p>
               </article>
             ))}

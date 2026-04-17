@@ -44,8 +44,8 @@ export default function PrivacyPage() {
       <div className="mkt-shell">
         <section className="mkt-panel mkt-grid-lines px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
           <div className="max-w-4xl space-y-5">
-            <p className="mkt-kicker">Privacy</p>
-            <h1 className="mkt-title">隐私政策</h1>
+            <p className="mkt-kicker mkt-section-kicker-large">Privacy</p>
+            <h1 className="mkt-title mkt-subpage-title">隐私政策</h1>
             <p className="mkt-copy text-base">
               本站由上海万流归智科技有限公司运营。以下内容用于说明 WanFlow 官网在业务沟通场景下如何收集、使用和保护你的信息。
             </p>
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
           <div className="max-w-4xl space-y-6">
             {sections.map((section) => (
               <article key={section.title} className="border-t border-[var(--mk-line-1)] pt-6 first:border-t-0 first:pt-0">
-                <h2 className="zh-card-title text-xl font-semibold text-[var(--mk-text-0)]">{section.title}</h2>
+                <h2 className="zh-card-title mkt-card-heading-lg">{section.title}</h2>
                 <p className="mkt-copy mt-3 text-sm sm:text-base">{section.body}</p>
               </article>
             ))}

@@ -24,12 +24,42 @@ test('PageHero renders hero copy, CTAs, and optional aside rail', () => {
   assert.match(html, /Proof rail/);
 });
 
+test('PageHero applies custom eyebrow class when provided', () => {
+  const html = renderToStaticMarkup(
+    <PageHero
+      eyebrow="Enterprise AI"
+      eyebrowClassName="mkt-section-kicker-large"
+      title="Operate the whole delivery chain."
+      body="One system for data, process, and model operations."
+      primary={{ href: '/contact', label: 'Talk to WanFlow' }}
+    />,
+  );
+
+  assert.match(html, /class="mkt-kicker mkt-section-kicker-large mkt-hero-stage mkt-hero-stage-1"/);
+});
+
 test('SectionHeading omits body markup when no body is provided', () => {
   const html = renderToStaticMarkup(<SectionHeading eyebrow="Overview" title="Built for delivery" />);
 
   assert.match(html, /Overview/);
   assert.match(html, /Built for delivery/);
+  assert.match(html, /class="mkt-title mt-5 max-w-full text-balance"/);
   assert.doesNotMatch(html, /mkt-copy/);
+});
+
+test('SectionHeading large size adds larger title classes', () => {
+  const html = renderToStaticMarkup(
+    <SectionHeading eyebrow="Platform" title="Command the whole workflow" size="large" />,
+  );
+
+  assert.match(
+    html,
+    /class="mkt-kicker mkt-section-kicker-large"/,
+  );
+  assert.match(
+    html,
+    /class="mkt-title mt-3 max-w-full text-balance text-\[1\.82rem\] leading-\[1\.06\] sm:text-\[2\.18rem\] lg:text-\[2\.7rem\]"/,
+  );
 });
 
 test('FinalCtaBand renders both primary and secondary actions', () => {
@@ -46,6 +76,24 @@ test('FinalCtaBand renders both primary and secondary actions', () => {
   assert.match(html, /Book intro/);
   assert.match(html, /Open BenchmarkOps/);
   assert.match(html, /href="\/dataflow\/proofbench"/);
+});
+
+test('FinalCtaBand large size applies section hierarchy classes', () => {
+  const html = renderToStaticMarkup(
+    <FinalCtaBand
+      eyebrow="Next step"
+      title="Bring the operators in."
+      body="Start with the real workflow, not a deck."
+      primary={{ href: '/contact', label: 'Book intro' }}
+      size="large"
+    />,
+  );
+
+  assert.match(html, /class="mkt-kicker mkt-section-kicker-large"/);
+  assert.match(
+    html,
+    /class="mkt-title mt-3 max-w-full text-balance sm:max-w-\[20ch\] text-\[1\.92rem\] leading-\[1\.06\] sm:text-\[2\.32rem\] lg:text-\[2\.95rem\]"/,
+  );
 });
 
 test('WorkbenchProofCard keeps the canonical BenchmarkOps route', () => {

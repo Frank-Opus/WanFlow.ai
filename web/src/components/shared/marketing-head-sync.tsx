@@ -12,11 +12,11 @@ function getRouteMeta(pathname: string, locale: 'zh' | 'en') {
     return locale === 'zh'
       ? {
           title: '行业解决方案 | WanFlow',
-          description: '查看 WanFlow 面向金融、制造、零售、医疗和企业运营等行业的 AI 解决方案，以及对应的数据、流程和多智能体交付能力。',
+          description: '查看 WanFlow 面向金融、制造、零售、汽车零部件和企业运营等行业的 AI 解决方案，以及对应的数据、流程和多智能体交付能力。',
         }
       : {
           title: 'Industry Solutions | WanFlow',
-          description: 'See how WanFlow serves finance, manufacturing, retail, healthcare, and enterprise operations with practical AI delivery combinations.',
+          description: 'See how WanFlow serves finance, manufacturing, retail, automotive parts, and enterprise operations with practical AI delivery systems.',
         };
   }
 
@@ -24,11 +24,11 @@ function getRouteMeta(pathname: string, locale: 'zh' | 'en') {
     return locale === 'zh'
       ? {
           title: '真实案例 | WanFlow',
-          description: '查看 WanFlow 在金融、制造、零售、汽车零部件和企业共享服务等场景中的匿名真实案例，以及对应的交付内容与量化结果。',
+          description: '查看 WanFlow 在金融、制造、零售、汽车零部件和企业共享服务等场景中的真实案例，以及对应的交付内容与量化结果。',
         }
       : {
           title: 'Real Cases | WanFlow',
-          description: 'Review anonymized WanFlow delivery cases across finance, manufacturing, retail, automotive parts, and enterprise shared services.',
+          description: 'Review WanFlow delivery cases across finance, manufacturing, retail, automotive parts, and enterprise shared services.',
         };
   }
 

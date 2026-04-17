@@ -10,6 +10,7 @@ import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 export default function MarketingCasesPage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
+  const featuredCases = copy.cases.cards.slice(0, 3);
   const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
   const labels = locale === 'zh'
       ? {
@@ -22,8 +23,8 @@ export default function MarketingCasesPage() {
         projectBuild: '交付内容',
         whyWorked: '系统形态',
         caseGrid: '真实案例',
-        caseGridTitle: '来自真实交付项目的匿名案例',
-        caseGridBody: '以下内容均按客户保密要求做匿名处理，只保留业务问题、交付内容和最终结果。',
+        caseGridTitle: '来自真实交付项目的案例',
+        caseGridBody: '重点看业务问题、交付内容和最终结果。',
         nextStep: '下一步',
       }
     : {
@@ -36,8 +37,8 @@ export default function MarketingCasesPage() {
         projectBuild: 'Delivery scope',
         whyWorked: 'How the system runs',
         caseGrid: 'Real cases',
-        caseGridTitle: 'Anonymized cases from real delivery work',
-        caseGridBody: 'All cases are anonymized for client confidentiality and focus only on the business problem, delivery scope, and outcome.',
+        caseGridTitle: 'Cases from real delivery work',
+        caseGridBody: 'Focus on the business problem, delivery scope, and outcome.',
         nextStep: 'Next step',
       };
 
@@ -47,15 +48,16 @@ export default function MarketingCasesPage() {
         <MotionReveal delay={0} initiallyVisible>
           <PageHero
             eyebrow={copy.cases.intro.eyebrow}
+            eyebrowClassName="mkt-section-kicker-large"
             title={copy.cases.intro.title}
             body={copy.cases.intro.body}
             primary={{ href: '/contact', label: copy.common.primaryCta }}
             secondary={{ href: '/solutions', label: navLabel('/solutions') }}
             aside={
               <div className="space-y-4">
-                <p className="mkt-kicker">{labels.caseGrid}</p>
+                <p className="mkt-kicker mkt-section-kicker-large">{labels.caseGrid}</p>
                 <div className="grid gap-2">
-                  {copy.cases.cards.slice(0, 4).map((item) => (
+                  {featuredCases.map((item) => (
                     <span key={item.title} className="mkt-chip w-fit">{item.sector}</span>
                   ))}
                 </div>
@@ -66,9 +68,9 @@ export default function MarketingCasesPage() {
         </MotionReveal>
 
         <MotionReveal as="section" delay={100} initiallyVisible className="space-y-6">
-          <SectionHeading eyebrow={labels.caseGrid} title={labels.caseGridTitle} body={labels.caseGridBody} />
+          <SectionHeading eyebrow={labels.caseGrid} title={labels.caseGridTitle} body={labels.caseGridBody} size="large" />
           <div className="space-y-4">
-            {copy.cases.cards.map((item) => {
+            {featuredCases.map((item) => {
               const caseImageSrc = 'imageSrc' in item ? item.imageSrc : undefined;
 
               return (
@@ -79,11 +81,11 @@ export default function MarketingCasesPage() {
                   <div className="grid gap-6 xl:grid-cols-[minmax(0,1.06fr)_minmax(18rem,0.94fr)]">
                     <div className="space-y-4">
                       <div className="space-y-3">
-                        <p className="mkt-kicker">{item.sector}</p>
-                        <h3 className="zh-card-title text-[1.28rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
+                        <p className="mkt-kicker mkt-section-kicker-large">{item.sector}</p>
+                        <h3 className="zh-card-title mkt-card-heading-lg">{item.title}</h3>
                       </div>
                       <div className="space-y-3">
-                        <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.stats}</p>
+                        <p className="mkt-meta-label">{labels.stats}</p>
                         <div className="mkt-stat-row">
                           {item.stats.map((stat) => (
                             <span key={stat} className="mkt-stat-chip">{stat}</span>
@@ -125,26 +127,26 @@ export default function MarketingCasesPage() {
                     </div>
                     <div className="space-y-4">
                       <div className="mkt-case-image-slot">
-                        <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.image}</p>
+                        <p className="mkt-meta-label">{labels.image}</p>
                         {caseImageSrc ? (
                           <>
-                            <div className="relative mt-3 aspect-[16/10] overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-[rgba(248,251,253,0.92)]">
+                            <div className="mkt-case-image-frame relative mt-3 aspect-[16/10] overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-[rgba(248,251,253,0.92)]">
                               <Image
                                 src={caseImageSrc}
                                 alt={item.imageTitle}
                                 fill
-                                className="object-contain p-3"
+                                className="mkt-case-image"
                                 sizes="(min-width: 1280px) 36vw, (min-width: 768px) 42vw, 100vw"
                               />
                             </div>
-                            <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{item.imageTitle}</p>
+                            <p className="mkt-card-heading-sm mt-3">{item.imageTitle}</p>
                           </>
                         ) : (
-                          <p className="mt-3 text-sm font-semibold text-[var(--mk-text-0)]">{item.imageTitle}</p>
+                          <p className="mkt-card-heading-sm mt-3">{item.imageTitle}</p>
                         )}
                       </div>
                       <div>
-                        <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
+                        <p className="mkt-meta-label">{labels.deliverables}</p>
                         <ol className="mkt-number-list mt-3">
                           {item.deliverables.map((deliverable, index) => (
                             <li key={deliverable} className="mkt-number-item">
@@ -173,6 +175,7 @@ export default function MarketingCasesPage() {
             body={copy.cases.finalCta.body}
             primary={{ href: '/contact', label: copy.common.primaryCta }}
             secondary={{ href: '/solutions', label: navLabel('/solutions') }}
+            size="large"
           />
         </MotionReveal>
       </div>

@@ -26,14 +26,15 @@ export default function MarketingContactPage() {
         <MotionReveal delay={0} initiallyVisible>
           <PageHero
             eyebrow={copy.contact.hero.eyebrow}
+            eyebrowClassName="mkt-section-kicker-large"
             title={copy.contact.hero.title}
             body={copy.contact.hero.body}
             primary={{ href: '/contact', label: copy.common.primaryCta }}
             secondary={{ href: '/solutions', label: navLabel('/solutions') }}
             aside={
               <div className="space-y-4">
-                <p className="mkt-kicker">{labels.reach}</p>
-                <h2 className="zh-card-title text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.contact.side.responseTitle}</h2>
+                <p className="mkt-kicker mkt-section-kicker-large">{labels.reach}</p>
+                <h2 className="zh-card-title mkt-card-heading-lg">{copy.contact.side.responseTitle}</h2>
                 <div className="space-y-3">
                   {copy.contact.side.contactItems.map((item) => (
                     <div key={item} className="border-t border-[var(--mk-line-1)] pt-3 first:border-t-0 first:pt-0">
@@ -53,7 +54,7 @@ export default function MarketingContactPage() {
         >
           <div className="mkt-stagger-grid grid gap-5 xl:grid-cols-2">
             <section className="mkt-card px-6 py-6">
-              <p className="mkt-kicker">{copy.contact.side.title}</p>
+              <p className="mkt-kicker mkt-section-kicker-large">{copy.contact.side.title}</p>
               <div className="mt-4 space-y-3">
                 {copy.contact.side.reasons.map((reason) => (
                   <article key={reason} className="mkt-list-row">
@@ -65,7 +66,7 @@ export default function MarketingContactPage() {
             </section>
 
             <section className="mkt-card px-6 py-6">
-              <p className="mkt-kicker">{copy.contact.side.responseTitle}</p>
+              <p className="mkt-kicker mkt-section-kicker-large">{copy.contact.side.responseTitle}</p>
               <p className="mkt-copy mt-4 text-sm">{copy.contact.side.responseBody}</p>
               <div className="mt-4 space-y-3 text-sm text-[var(--mk-text-1)]">
                 {copy.contact.side.contactItems.map((item) => (
@@ -78,11 +79,11 @@ export default function MarketingContactPage() {
             </section>
 
             <section className="mkt-card px-6 py-6 xl:col-span-2">
-              <p className="mkt-kicker">{labels.faq}</p>
+              <p className="mkt-kicker mkt-section-kicker-large">{labels.faq}</p>
               <div className="mt-4 space-y-4">
                 {copy.contact.faq.map((item) => (
                   <article key={item.question} className="border-t border-[var(--mk-line-1)] pt-4 first:border-t-0 first:pt-0">
-                    <h3 className="zh-card-title text-base font-semibold text-[var(--mk-text-0)]">{item.question}</h3>
+                    <h3 className="zh-card-title mkt-card-heading-sm">{item.question}</h3>
                     <p className="mkt-copy mt-2 text-sm">{item.answer}</p>
                   </article>
                 ))}

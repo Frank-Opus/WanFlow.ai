@@ -56,13 +56,14 @@ export default function MarketingSolutionsPage() {
         <MotionReveal delay={0} intensity="hero" initiallyVisible>
           <PageHero
             eyebrow={copy.solutions.problemFrame.eyebrow}
+            eyebrowClassName="mkt-section-kicker-large"
             title={copy.solutions.problemFrame.title}
             body={copy.solutions.problemFrame.body}
             primary={{ href: '/contact', label: copy.common.primaryCta }}
             secondary={{ href: '/cases', label: navLabel('/cases') }}
             aside={
               <div className="space-y-4">
-                <p className="mkt-kicker">{labels.industriesAside}</p>
+                <p className="mkt-kicker mkt-section-kicker-large">{labels.industriesAside}</p>
                 <div className="grid gap-2">
                   {copy.solutions.industries.slice(0, 4).map((item) => (
                     <span key={item.title} className="mkt-chip w-fit">{item.title}</span>
@@ -78,6 +79,7 @@ export default function MarketingSolutionsPage() {
             eyebrow={labels.industriesEyebrow}
             title={labels.industriesTitle}
             body={labels.industriesBody}
+            size="large"
           />
           <div className="space-y-4">
             {copy.solutions.industries.map((item) => (
@@ -88,13 +90,13 @@ export default function MarketingSolutionsPage() {
                 <div className="grid gap-6 xl:grid-cols-[minmax(22rem,0.92fr)_minmax(0,1.08fr)] xl:items-start">
                   <div className="min-w-0 space-y-5">
                     <div className="min-w-0 space-y-3">
-                      <p className="mkt-kicker">{labels.industryLabel}</p>
+                      <p className="mkt-kicker mkt-section-kicker-large">{labels.industryLabel}</p>
                       <p className="mkt-industry-sector">{item.title}</p>
                       <h3 className="mkt-industry-title">{item.headline}</h3>
                       <p className="mkt-industry-summary mkt-copy text-[0.98rem] sm:text-[1.02rem]">{item.summary}</p>
                     </div>
                     <div className="space-y-3">
-                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.stats}</p>
+                      <p className="mkt-meta-label">{labels.stats}</p>
                       <div className="mkt-stat-row">
                         {item.stats.map((stat) => (
                           <span key={stat} className="mkt-stat-chip">{stat}</span>
@@ -117,19 +119,19 @@ export default function MarketingSolutionsPage() {
                             src={(item as { imageSrc?: string }).imageSrc!}
                             alt={item.imageTitle}
                             fill
-                            className="object-cover object-top"
+                            className="mkt-solution-image object-cover object-top"
                             sizes="(min-width: 1280px) 40vw, 100vw"
                           />
                         </div>
                       ) : (
                         <div className="mt-4 space-y-3">
-                          <h4 className="text-base font-semibold text-[var(--mk-text-0)] sm:text-[1.05rem]">{item.imageTitle}</h4>
+                          <h4 className="mkt-card-heading-sm">{item.imageTitle}</h4>
                           <p className="mkt-copy text-sm">{item.imageHint}</p>
                         </div>
                       )}
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
+                      <p className="mkt-meta-label">{labels.outcomes}</p>
                       <ol className="mkt-number-list mt-3">
                         {item.outcomes.map((outcome, index) => (
                           <li key={outcome} className="mkt-number-item">
@@ -142,7 +144,7 @@ export default function MarketingSolutionsPage() {
                   </div>
                   <div className="min-w-0 space-y-3">
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.modulesInIndustry}</p>
+                      <p className="mkt-meta-label">{labels.modulesInIndustry}</p>
                       <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
                     </div>
                     <div className="mkt-industry-rail">
@@ -152,7 +154,7 @@ export default function MarketingSolutionsPage() {
                             <span className="mkt-card-index">0{index + 1}</span>
                             <p className="mkt-module-impact">{module.outcome}</p>
                           </div>
-                          <h4 className="zh-card-title mt-4 text-[1.16rem] font-semibold text-[var(--mk-text-0)]">{module.title}</h4>
+                          <h4 className="zh-card-title mkt-card-heading mt-4">{module.title}</h4>
                           <p className="mkt-copy mt-3 text-sm">{module.body}</p>
                           <div className="mkt-proof-callout mkt-proof-callout-compact mt-4">
                             <p className="mkt-proof-callout-label">{labels.whatWeDo}</p>
@@ -178,16 +180,16 @@ export default function MarketingSolutionsPage() {
                                   src={(module as { imageSrc?: string }).imageSrc!}
                                   alt={module.imageTitle}
                                   fill
-                                  className="object-cover object-top"
+                                  className="mkt-solution-image object-cover object-top"
                                   sizes="(min-width: 1280px) 24vw, (min-width: 768px) 40vw, 84vw"
                                 />
                               </div>
                             ) : (
-                              <p className="text-sm font-semibold text-[var(--mk-text-0)]">{module.imageTitle}</p>
+                              <p className="mkt-card-heading-sm">{module.imageTitle}</p>
                             )}
                           </div>
                           <div className="mt-4">
-                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
+                            <p className="mkt-meta-label">{labels.deliverables}</p>
                             <ol className="mkt-number-list mt-3">
                               {module.deliverables.map((deliverable, deliverableIndex) => (
                                 <li key={deliverable} className="mkt-number-item">
@@ -208,7 +210,7 @@ export default function MarketingSolutionsPage() {
         </MotionReveal>
 
         <MotionReveal as="section" delay={95} intensity="strong" initiallyVisible className="space-y-6">
-          <SectionHeading eyebrow={labels.modulesEyebrow} title={labels.modulesTitle} body={labels.modulesBody} />
+          <SectionHeading eyebrow={labels.modulesEyebrow} title={labels.modulesTitle} body={labels.modulesBody} size="large" />
           <div className="mkt-stagger-grid grid gap-4 lg:grid-cols-12">
             {copy.solutions.modules.map((module, index) => (
               <article
@@ -221,11 +223,11 @@ export default function MarketingSolutionsPage() {
                 ].filter(Boolean).join(' ')}
               >
                 <span className="mkt-card-index">0{index + 1}</span>
-                <h2 className="zh-card-title mt-4 text-[1.42rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{module.title}</h2>
+                <h2 className="zh-card-title mkt-card-heading-lg mt-4">{module.title}</h2>
                 <p className="mkt-copy mt-3">{module.body}</p>
                 <div className="mt-5 grid gap-5 md:grid-cols-2">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.deliverables}</p>
+                    <p className="mkt-meta-label">{labels.deliverables}</p>
                     <ol className="mkt-number-list mt-3">
                       {module.deliverables.map((item, index) => (
                         <li key={item} className="mkt-number-item">
@@ -236,7 +238,7 @@ export default function MarketingSolutionsPage() {
                     </ol>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--mk-text-2)]">{labels.outcomes}</p>
+                    <p className="mkt-meta-label">{labels.outcomes}</p>
                     <ol className="mkt-number-list mt-3">
                       {module.outcomes.map((item, index) => (
                         <li key={item} className="mkt-number-item">
@@ -259,6 +261,7 @@ export default function MarketingSolutionsPage() {
             body={copy.solutions.finalCta.body}
             primary={{ href: '/contact', label: copy.common.primaryCta }}
             secondary={{ href: '/cases', label: navLabel('/cases') }}
+            size="large"
           />
         </MotionReveal>
       </div>
