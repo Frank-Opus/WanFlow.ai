@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
+import { requirePlatformSession } from '@/lib/auth/guards';
 import { createProblemItem, getProjectBundle } from '@/lib/platform-store';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function GET(_: Request, context: { params: Promise<{ projectId: string }> }) {
+  const auth = await requirePlatformSession();
+  if (!auth.ok) {
+    return auth.response;
+  }
   const { projectId } = await context.params;
   const bundle = await getProjectBundle(projectId);
   if (!bundle) {
@@ -14,6 +19,10 @@ export async function GET(_: Request, context: { params: Promise<{ projectId: st
 }
 
 export async function POST(request: Request, context: { params: Promise<{ projectId: string }> }) {
+  const auth = await requirePlatformSession();
+  if (!auth.ok) {
+    return auth.response;
+  }
   const { projectId } = await context.params;
   const body = (await request.json().catch(() => ({}))) as {
     sourceFileId?: string | null;
@@ -48,6 +57,11 @@ export async function POST(request: Request, context: { params: Promise<{ projec
     },
     itemSchemaVersion: 'v1',
     reviewStatus: 'draft',
+    actor: {
+      id: auth.session.user.id,
+      name: auth.session.user.name,
+      role: auth.session.user.role,
+    },
   });
 
   return NextResponse.json({ item }, { status: 201 });

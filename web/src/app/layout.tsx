@@ -1,37 +1,18 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Mono, IBM_Plex_Sans, Sora } from 'next/font/google';
 import { LocaleProvider } from '@/components/shared/locale-provider';
 import MarketingHeadSync from '@/components/shared/marketing-head-sync';
 import SiteFooter from '@/components/shared/site-footer';
 import SiteHeader from '@/components/shared/site-header';
 import './globals.css';
 
-const sora = Sora({
-  subsets: ['latin'],
-  variable: '--font-display',
-  weight: ['400', '500', '600', '700', '800'],
-});
-
-const plexSans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  variable: '--font-body',
-  weight: ['400', '500', '600', '700'],
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  weight: ['400', '500', '600'],
-});
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://wanflow.ai';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://wanflowai.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: 'WanFlow',
-  title: 'WanFlow | 数据驱动的 AI 运营与交付伙伴',
-  description: 'WanFlow 万物归流为企业提供 AI 数据标注、自动化数据处理、流程自动化、Process as a Service 与模型运营服务。',
-  keywords: ['WanFlow', '万物归流', 'AI 数据标注', '自动化数据处理', '流程自动化', 'Process as a Service', '模型运营服务'],
+  title: 'WanFlow | 企业 AI 运营与交付伙伴',
+  description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级多智能体、人机协同交付和模型运营闭环真正接进业务里',
+  keywords: ['WanFlow', '万物归流', '数据标注与治理', '流程编排与自动化', '企业级多智能体', '人机协同交付', '模型运营与持续优化'],
   category: 'technology',
   robots: {
     index: true,
@@ -50,14 +31,14 @@ export const metadata: Metadata = {
     apple: '/brand/logo-mark.png',
   },
   openGraph: {
-    title: 'WanFlow | Data-driven AI operations for enterprise delivery',
-    description: 'AI data labeling, automated data processing, workflow automation, Process as a Service, and model operations services for enterprise teams.',
+    title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
+    description: 'Data labeling and governance, workflow orchestration, enterprise multi-agent systems, human-in-the-loop delivery, and continuous model optimization for enterprise teams.',
     images: ['/brand/logo-wide.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WanFlow | Data-driven AI operations for enterprise delivery',
-    description: 'AI data labeling, automated data processing, workflow automation, Process as a Service, and model operations services for enterprise teams.',
+    title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
+    description: 'Data labeling and governance, workflow orchestration, enterprise multi-agent systems, human-in-the-loop delivery, and continuous model optimization for enterprise teams.',
     images: ['/brand/logo-wide.png'],
   },
 };
@@ -65,7 +46,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${sora.variable} ${plexSans.variable} ${plexMono.variable} min-h-screen antialiased`}>
+      <body className="min-h-screen antialiased">
         <LocaleProvider>
           <MarketingHeadSync />
           <div className="flex min-h-screen flex-col">

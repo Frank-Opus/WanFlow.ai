@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useCopy } from '@/components/shared/locale-provider';
-import { seededArtifact, siteMeta } from '@/lib/proofbench';
+import { seededArtifact, siteMeta } from '@/lib/benchmarkops';
 
 export function Hero() {
   const text = useCopy();
@@ -30,7 +30,7 @@ export function Hero() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href="/proofbench" className="btn-primary focus-ring rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em]">
+            <Link href="/dataflow/proofbench" className="btn-primary focus-ring rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em]">
               {text.home.heroPrimary}
             </Link>
             <a href="#system" className="btn-secondary focus-ring rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em]">

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useCopy } from '@/components/shared/locale-provider';
-import { productStats } from '@/lib/proofbench';
+import { productStats } from '@/lib/benchmarkops';
 
 export function CapabilityGrid() {
   const text = useCopy();
@@ -14,7 +14,7 @@ export function CapabilityGrid() {
           <p className="eyebrow">{text.home.systemEyebrow}</p>
           <h2 className="display-face mt-3 text-4xl text-ink sm:text-5xl">{text.home.systemTitle}</h2>
         </div>
-        <Link href="/proofbench" className="btn-secondary focus-ring inline-flex w-fit rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em]">
+        <Link href="/dataflow/proofbench" className="btn-secondary focus-ring inline-flex w-fit rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em]">
           {text.home.systemCta}
         </Link>
       </div>
@@ -24,7 +24,7 @@ export function CapabilityGrid() {
           {text.home.pillars.map((pillar, index) => (
             <article key={pillar.title} className="panel rounded-[28px] p-6 transition hover:-translate-y-1">
               <p className="mono-face text-xs text-[var(--brass)]">0{index + 1}</p>
-              <h3 className="mt-6 text-2xl font-semibold text-ink">{pillar.title}</h3>
+              <h3 className="zh-card-title mt-6 text-2xl font-semibold text-ink">{pillar.title}</h3>
               <p className="mt-4 text-sm leading-7 text-[var(--mist)]">{pillar.body}</p>
             </article>
           ))}

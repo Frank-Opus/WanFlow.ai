@@ -1,0 +1,106 @@
+<style>
+.palette { display:grid; gap:16px; }
+@media (min-width: 980px) { .palette { grid-template-columns: 1.1fr .9fr; } }
+.board { border:1px solid rgba(104,163,196,.18); background:rgba(5,20,31,.8); padding:18px; }
+.swatches { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+.swatch { border:1px solid rgba(104,163,196,.14); overflow:hidden; }
+.swatch-color { height:84px; }
+.swatch-body { padding:12px; }
+.swatch h4 { margin:0 0 6px; color:#eefbff; font-size:15px; }
+.swatch p { margin:0; color:#95afc1; font-size:12px; line-height:1.6; }
+.tokens { display:grid; gap:10px; margin-top:14px; }
+.token { display:grid; grid-template-columns:140px 1fr; gap:12px; padding-top:10px; border-top:1px solid rgba(104,163,196,.14); }
+.token b { color:#dff7ff; font-size:12px; text-transform:uppercase; letter-spacing:.16em; }
+.token span { color:#97b0c1; font-size:13px; line-height:1.6; }
+.mock { border:1px solid rgba(95,224,255,.18); background:linear-gradient(135deg, rgba(8,24,36,.98), rgba(2,10,17,.98)); min-height:520px; display:flex; flex-direction:column; }
+.mock-top { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid rgba(104,163,196,.12); color:#91aabd; font-size:11px; text-transform:uppercase; letter-spacing:.18em; }
+.mock-body { padding:24px 20px 20px; display:grid; gap:22px; }
+.hero { display:grid; gap:18px; }
+.hero h1 { margin:0; font-size:62px; line-height:.92; letter-spacing:-.06em; color:#f4fcff; max-width:8ch; }
+.hero p { margin:0; color:#9ab3c3; max-width:36ch; font-size:14px; line-height:1.65; }
+.cta { display:flex; gap:10px; flex-wrap:wrap; }
+.btnA, .btnB { padding:10px 14px; font-size:12px; font-weight:800; }
+.btnA { background:#59ddff; color:#072633; }
+.btnB { border:1px solid rgba(89,221,255,.34); color:#e1f8ff; }
+.rule { height:1px; background:linear-gradient(90deg, rgba(89,221,255,.8), rgba(89,221,255,0)); }
+.block-grid { display:grid; gap:12px; }
+@media (min-width: 700px) { .block-grid { grid-template-columns: 1fr 1fr; } }
+.block { border:1px solid rgba(104,163,196,.14); background:rgba(6,22,34,.72); padding:14px; }
+.block h5 { margin:0 0 8px; color:#ebf9ff; font-size:13px; text-transform:uppercase; letter-spacing:.12em; }
+.block p { margin:0; color:#8ea8bb; font-size:12px; line-height:1.6; }
+.note-list { display:grid; gap:10px; }
+.note-item { border-left:2px solid rgba(89,221,255,.36); padding-left:12px; color:#9bb4c4; font-size:13px; line-height:1.6; }
+</style>
+
+<h2>设计第 2 部分：视觉语言与品牌配色</h2>
+<p class="subtitle">这里我不复制 ClickHouse 的黄绿色，而是复制它的“工业化秩序、强分区、大字号、硬朗节奏”，再换成更适合 WanFlow 的数据型 AI 品牌色。</p>
+
+<div class="palette">
+  <div class="board">
+    <div class="label">WanFlow Color System</div>
+    <div class="swatches" style="margin-top:14px">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#041722"></div>
+        <div class="swatch-body">
+          <h4>Harbor Navy</h4>
+          <p>#041722。作为主背景，不纯黑，带一点深海与数据机房感，用来建立企业级基础设施气质。</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0c2433"></div>
+        <div class="swatch-body">
+          <h4>Deep Current</h4>
+          <p>#0C2433。用于分层面板和深色区块，让页面有层次，而不是一整片黑。</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#59ddff"></div>
+        <div class="swatch-body">
+          <h4>Data Cyan</h4>
+          <p>#59DDFF。主品牌高亮色，承担按钮、关键线条、重点数据和选中状态。</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2fb5bf"></div>
+        <div class="swatch-body">
+          <h4>Mineral Teal</h4>
+          <p>#2FB5BF。作为次高亮，用于模块分层、图形辅助和柔化 cyan 的攻击性。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tokens">
+      <div class="token"><b>点缀色</b><span>只保留少量低饱和证据金作为案例数字或 proof 小标签，不做大面积主色，避免像咨询公司或金融网站。</span></div>
+      <div class="token"><b>标题风格</b><span>中文主标题走超大号、超紧字距、近乎海报式排版；英文仅做轻量标签，不做双语并列主标题。</span></div>
+      <div class="token"><b>组件质感</b><span>卡片更方、更硬、更像工业面板；减少“圆润 SaaS 卡片感”，保留少量圆角但不做软萌。</span></div>
+      <div class="token"><b>分区方式</b><span>用明显的横向分割线、大块深浅背景切换和粗粝留白，复制 ClickHouse 的 section 节奏，而不是复制它的颜色。</span></div>
+    </div>
+  </div>
+
+  <div class="mock">
+    <div class="mock-top"><span>Visual Preview</span><span>CN-led / Infra Warmth</span></div>
+    <div class="mock-body">
+      <div class="hero">
+        <div class="label">Brand statement</div>
+        <h1>让 AI 交付 真正跑成系统</h1>
+        <p>整体基调会更像现代基础设施品牌：冷静、硬朗、可信；但文案不会过度冷漠，仍保留企业服务公司的沟通温度。</p>
+        <div class="cta"><div class="btnA">预约咨询</div><div class="btnB">查看解决方案</div></div>
+      </div>
+      <div class="rule"></div>
+      <div class="block-grid">
+        <div class="block"><h5>Typography</h5><p>大标题更猛，正文更克制，标签更轻，靠版式而不是靠堆渐变制造科技感。</p></div>
+        <div class="block"><h5>Panels</h5><p>深浅分层的工业面板配合细线框，形成像系统界面又像品牌官网的混合质感。</p></div>
+        <div class="block"><h5>Motion</h5><p>只做少量线性 reveal、分段上浮和滚动出现，不做花哨漂浮粒子。</p></div>
+        <div class="block"><h5>Brand Feel</h5><p>不是通用 AI 蓝紫风，而是“数据流、执行骨架、企业协同”的理性科技风。</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:22px">
+  <div class="note-list">
+    <div class="note-item">这套颜色会明显区别于 ClickHouse，但视觉强度和秩序感会继承它。</div>
+    <div class="note-item">默认中文界面，英文只做轻量辅助标签，符合你选的 A。</div>
+    <div class="note-item">最终效果会比你现在这版更深、更硬朗、更像“企业级 AI 运营基础设施”。</div>
+  </div>
+</div>

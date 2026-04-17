@@ -1,0 +1,110 @@
+<style>
+.compare { display:grid; gap:18px; }
+@media (min-width: 1100px) { .compare { grid-template-columns: repeat(3, 1fr); } }
+.preview { border:1px solid rgba(88,126,154,.18); overflow:hidden; background:#eef5f7; }
+.top { display:flex; justify-content:space-between; padding:12px 14px; font-size:11px; text-transform:uppercase; letter-spacing:.16em; color:#6e8796; border-bottom:1px solid rgba(88,126,154,.16); }
+.body { padding:18px; display:grid; gap:14px; min-height:360px; }
+.body h3 { margin:0; font-size:15px; color:#15222d; }
+.body p { margin:0; font-size:12px; line-height:1.6; color:#536979; }
+.hero { padding:18px; }
+.hero-title { font-size:42px; line-height:.94; letter-spacing:-.05em; font-weight:900; max-width:7ch; }
+.hero-copy { max-width:30ch; font-size:13px; line-height:1.65; }
+.row { display:grid; gap:10px; }
+.block { padding:12px; border:1px solid rgba(88,126,154,.16); }
+.btns { display:flex; gap:8px; flex-wrap:wrap; }
+.btnA, .btnB { padding:8px 12px; font-size:12px; font-weight:700; }
+.tag { display:inline-block; margin-left:8px; padding:4px 8px; font-size:10px; text-transform:uppercase; letter-spacing:.14em; border-radius:999px; }
+.note { color:#6e8696; font-size:13px; }
+</style>
+
+<h2>配色修正：不走黑底，改成更高级的深色系或浅色系</h2>
+<p class="subtitle">你这个反馈很关键。我理解成：不要“接近纯黑”的背景。那我们可以保留 ClickHouse 的结构节奏，但把底色改成更有品牌感的非黑背景。</p>
+
+<div class="compare cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>方案 A：深海蓝底 <span class="tag" style="background:rgba(50,181,191,.12); color:#2c95a0; border:1px solid rgba(50,181,191,.18)">推荐</span></h3>
+      <p class="note">不是黑，是带蓝调的深海背景。仍然有基础设施感，但更高级，也更像 WanFlow。</p>
+    </div>
+    <div class="card-image">
+      <div class="preview" style="background:#f1f7f8">
+        <div class="top" style="background:#edf4f6"><span>Harbor Blue</span><span>#0d2230</span></div>
+        <div class="hero" style="background:#0d2230; color:#f4fbff; border-bottom:1px solid rgba(124,180,203,.18)">
+          <div class="hero-title">让 AI 交付 真正跑成系统</div>
+          <p class="hero-copy" style="color:#b8cfda; margin-top:12px">深色但不发黑，像海港、机房、流体数据网络。</p>
+          <div class="btns" style="margin-top:14px"><div class="btnA" style="background:#5fd9ef; color:#0b2330">预约咨询</div><div class="btnB" style="border:1px solid rgba(95,217,239,.35); color:#eaf9ff">查看方案</div></div>
+        </div>
+        <div class="body">
+          <div class="row">
+            <div class="block" style="background:#163041"><h3 style="color:#effaff">Platform Layer</h3><p style="color:#aac2cf">保留强结构感，但整体更蓝、更透气。</p></div>
+            <div class="block" style="background:#f6fbfc"><h3>Proof Layer</h3><p>深浅对撞会更明显。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>方案 B：雾灰蓝底</h3>
+      <p class="note">整体更亮、更国际化，少一点压迫感。像高端科技咨询官网和企业 AI 品牌的中间态。</p>
+    </div>
+    <div class="card-image">
+      <div class="preview" style="background:#e9f0f3">
+        <div class="top" style="background:#e8eef1"><span>Mist Blue</span><span>#dfe9ed</span></div>
+        <div class="hero" style="background:#dfe9ed; color:#13212b; border-bottom:1px solid rgba(62,102,127,.16)">
+          <div class="hero-title" style="color:#11212c">让 AI 交付 真正跑成系统</div>
+          <p class="hero-copy" style="color:#496272; margin-top:12px">大标题依然强，但整体更亮，品牌显得更成熟克制。</p>
+          <div class="btns" style="margin-top:14px"><div class="btnA" style="background:#1f4c67; color:#f0fbff">预约咨询</div><div class="btnB" style="border:1px solid rgba(31,76,103,.25); color:#1f4c67">查看方案</div></div>
+        </div>
+        <div class="body">
+          <div class="row">
+            <div class="block" style="background:#f7fbfc"><h3>Platform Layer</h3><p>不黑，阅读更轻松，但基础设施感会减弱一点。</p></div>
+            <div class="block" style="background:#cfdde4"><h3>Proof Layer</h3><p>更像品牌官网而非系统界面。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>方案 C：深青灰底</h3>
+      <p class="note">介于 A 和 B 之间，少黑感、少蓝感，多一点矿物质和工业感。</p>
+    </div>
+    <div class="card-image">
+      <div class="preview" style="background:#eff5f4">
+        <div class="top" style="background:#edf3f2"><span>Mineral Slate</span><span>#20343b</span></div>
+        <div class="hero" style="background:#20343b; color:#f3fcfb; border-bottom:1px solid rgba(133,176,183,.18)">
+          <div class="hero-title">让 AI 交付 真正跑成系统</div>
+          <p class="hero-copy" style="color:#c0d4d6; margin-top:12px">更中性、更工业，少一点黑，少一点纯蓝。</p>
+          <div class="btns" style="margin-top:14px"><div class="btnA" style="background:#6bd4d9; color:#183037">预约咨询</div><div class="btnB" style="border:1px solid rgba(107,212,217,.35); color:#eefcfc">查看方案</div></div>
+        </div>
+        <div class="body">
+          <div class="row">
+            <div class="block" style="background:#2b434b"><h3 style="color:#f2fafa">Platform Layer</h3><p style="color:#bdd1d4">适合做更工业、更克制的面板系统。</p></div>
+            <div class="block" style="background:#f6fbfb"><h3>Proof Layer</h3><p>整体没有那么强烈的互联网蓝科技感。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px">
+  <div class="pros-cons split">
+    <div class="pros">
+      <h4>如果你想保留“科技基础设施”气质</h4>
+      <ul>
+        <li>A 最稳，依然强，但已经不是黑底</li>
+        <li>C 会更特别，更像工业和运营系统</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>如果你想明显摆脱深色压迫感</h4>
+      <ul>
+        <li>B 最亮，但会少一点 ClickHouse 那种力量感</li>
+      </ul>
+    </div>
+  </div>
+</div>

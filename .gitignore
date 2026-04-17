@@ -8,8 +8,13 @@ __pycache__/
 # Node / Next.js
 web/node_modules/
 web/.next/
+web/.next-dev/
 web/.vercel/
 web/*.tsbuildinfo
+web/playwright-report/
+web/test-results/
+web/.lighthouse/
+web/.playwright-runtime/
 
 # Local environment
 .env
@@ -17,11 +22,15 @@ web/*.tsbuildinfo
 *.local
 
 # Runtime state and logs
-platform-data/
-runs/
+/platform-data/
+/runs/
 *.log
+deploy/docker/wanflow-web.env
 
 # OS / editor
 .DS_Store
 .vscode/
 .idea/
+
+# Local git worktrees
+.worktrees/

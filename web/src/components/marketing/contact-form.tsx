@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useMarketingCopy } from '@/components/marketing/primitives';
+import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 type FormState = {
   name: string;
@@ -85,8 +85,8 @@ export default function ContactForm() {
   return (
     <form className="mkt-form-panel" onSubmit={handleSubmit} noValidate>
       <div className="space-y-3">
-        <p className="mkt-kicker">{copy.contact.form.title}</p>
-        <h2 className="mkt-title text-[2rem] sm:text-[2.4rem]">{copy.contact.form.body}</h2>
+        <p className="mkt-kicker mkt-section-kicker-large">{copy.contact.form.title}</p>
+        <h2 className="mkt-title mkt-subpage-title">{copy.contact.form.body}</h2>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

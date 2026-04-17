@@ -1,6 +1,6 @@
 # WanFlow 正式交付与发布说明
 
-最后更新：2026-04-07
+最后更新：2026-04-11
 
 ## 1. 交付定位
 
@@ -21,8 +21,8 @@
 - 核心引擎：`src/math_eval_framework/`
 - Web 平台：`web/`
 - 平台运行数据：`platform-data/`
-- 部署脚本：`deploy/systemd/`
-- 项目文档：`README.md`、`docs/project-status-and-roadmap.md`、`docs/deployment/systemd-linux.md`
+- 部署脚本：`deploy/systemd/`、`deploy/docker/`
+- 项目文档：`README.md`、`docs/project-status-and-roadmap.md`、`docs/deployment/docker-hkz.md`、`docs/deployment/systemd-linux.md`
 - 样例与归档：`examples/`、`samples/`、`LOGO/`
 
 不建议把 `platform-data/`、`deploy/`、`web/`、`src/` 从交付包中拆开。
@@ -30,12 +30,14 @@
 ## 3. 当前主机的运行基线
 
 - 固定端口：`3010`
-- systemd 用户服务：`wanflow-web`
+- 当前正式公网推荐运行方式：`docker compose + host Caddy`
 - 当前健康接口：`http://127.0.0.1:3010/api/health`
-- 当前运行目录：`/home/wanguancheng/AProj/WanFlow/Data-Centric`
+- 当前正式域名：`https://wanflowai.com`
+- 当前平台入口：`/dataflow/proofbench`
 
-当前系统服务已切到：
+备用路径仍保留：
 
+- systemd 服务名：`wanflow-web`
 - `WorkingDirectory=/home/wanguancheng/AProj/WanFlow/Data-Centric/web`
 - `ExecStart=/home/wanguancheng/AProj/WanFlow/Data-Centric/deploy/systemd/start-wanflow-web.sh`
 
@@ -61,30 +63,64 @@
 
 - `http://35.220.164.252:3888/v1/`
 
+### Standard auth environment variables
+
+- `WANFLOW_SESSION_COOKIE`
+- `WANFLOW_SESSION_SECRET`
+- `WANFLOW_SESSION_TTL_SECONDS`
+- `WANFLOW_ADMIN_EMAIL`
+- `WANFLOW_ADMIN_PASSWORD`
+- `WANFLOW_ADMIN_NAME`
+- `WANFLOW_ADMIN_ROLE`
+- `WANFLOW_CONTACT_NOTIFY_TO`
+- `WANFLOW_CONTACT_EMAIL_MODE`
+- `WANFLOW_CONTACT_SMTP_HOST`
+- `WANFLOW_CONTACT_SMTP_PORT`
+- `WANFLOW_CONTACT_SMTP_SECURE`
+- `WANFLOW_CONTACT_SMTP_USER`
+- `WANFLOW_CONTACT_SMTP_PASS`
+- `WANFLOW_CONTACT_SMTP_FROM`
+- `WANFLOW_AUTH_ENABLE_OAUTH`
+- `WANFLOW_AUTH_SSO_HINT`
+
+标准版当前使用 credentials auth，同时在 provider 配置中预留了 OAuth / enterprise SSO 扩展位。
+联系表单如果要自动转发到邮箱，需要额外配置 SMTP；对于 `163.com` 邮箱，应填写 SMTP 授权码而不是网页登录密码。
+
 ## 5. 发布前必跑验证
 
 按下面顺序执行，不要跳步：
 
 ```bash
-cd /home/wanguancheng/AProj/WanFlow/Data-Centric
-python3 -m pytest tests -q
-
 cd /home/wanguancheng/AProj/WanFlow/Data-Centric/web
 npm run build
-npm run smoke:platform
+npm run test:unit
+npx playwright test --workers=1
 
+cd /home/wanguancheng/AProj/WanFlow/Data-Centric
+docker build -t wanflow-web:local .
+```
+
+如果要做服务器前的容器级联调，再补一轮：
+
+```bash
+cp deploy/docker/wanflow-web.env.example deploy/docker/wanflow-web.env
+# 填好真实配置后
+docker compose --env-file deploy/docker/wanflow-web.env -f docker-compose.prod.yml up -d --build
 curl http://127.0.0.1:3010/api/health
-curl http://127.0.0.1:3010/api/platform/projects
-systemctl --user status wanflow-web --no-pager
+curl -I http://127.0.0.1:3010/
+curl -I http://127.0.0.1:3010/dataflow/proofbench
+docker compose --env-file deploy/docker/wanflow-web.env -f docker-compose.prod.yml down
 ```
 
 必须确认：
 
-- Python 测试退出码为 `0`
 - Web 构建退出码为 `0`
-- smoke 脚本退出码为 `0`
+- 前端单测退出码为 `0`
+- Playwright 退出码为 `0`
+- Docker 镜像构建成功
+- 容器健康检查通过
 - 健康接口返回 `status: ok`
-- `platformDir` 指向当前交付目录下的 `platform-data/`
+- `/dataflow/proofbench` 未登录时正确跳转登录页
 
 ## 6. 已覆盖的真实链路
 
@@ -126,9 +162,9 @@ systemctl --user status wanflow-web --no-pager
 
 1. 拷贝整个 `Data-Centric/`
 2. 安装 Python 依赖与 `web/` Node 依赖
-3. 配置环境变量文件
-4. 跑 `npm run build`
-5. 安装或更新 `wanflow-web` systemd 服务
+3. 配置 `deploy/docker/wanflow-web.env`
+4. 执行 `docker compose --env-file deploy/docker/wanflow-web.env -f docker-compose.prod.yml up -d --build`
+5. 配置或更新宿主机 Caddy 指向 `127.0.0.1:3010`
 6. 固定在 `3010` 端口验证，不新增测试端口
 
 ## 9. 当前版本管理边界

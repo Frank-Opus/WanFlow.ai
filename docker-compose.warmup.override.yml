@@ -1,0 +1,5 @@
+services:
+  wanflow-web:
+    container_name: wanflow-web-warmup
+    ports:
+      - "127.0.0.1:3011:3011"

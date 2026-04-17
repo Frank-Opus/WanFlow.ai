@@ -11,24 +11,24 @@ function getRouteMeta(pathname: string, locale: 'zh' | 'en') {
   if (pathname.startsWith('/solutions')) {
     return locale === 'zh'
       ? {
-          title: '解决方案 | WanFlow',
-          description: '查看 WanFlow 如何用 AI 数据标注、自动化数据处理、流程自动化与模型运营服务构建企业 AI 执行链。',
+          title: '行业解决方案 | WanFlow',
+          description: '查看 WanFlow 面向金融、制造、零售、汽车零部件和企业运营等行业的 AI 解决方案，以及对应的数据、流程和多智能体交付能力。',
         }
       : {
-          title: 'Solutions | WanFlow',
-          description: 'See how WanFlow connects AI data labeling, automated data processing, workflow automation, and model operations into one enterprise execution system.',
+          title: 'Industry Solutions | WanFlow',
+          description: 'See how WanFlow serves finance, manufacturing, retail, automotive parts, and enterprise operations with practical AI delivery systems.',
         };
   }
 
   if (pathname.startsWith('/cases')) {
     return locale === 'zh'
       ? {
-          title: '案例 | WanFlow',
-          description: '查看 WanFlow 以匿名化方式展示的企业 AI 数据治理、流程自动化与模型运营案例结构。',
+          title: '真实案例 | WanFlow',
+          description: '查看 WanFlow 在金融、制造、零售、汽车零部件和企业共享服务等场景中的真实案例，以及对应的交付内容与量化结果。',
         }
       : {
-          title: 'Cases | WanFlow',
-          description: 'Review anonymized WanFlow case structures across enterprise AI data governance, workflow automation, and model operations.',
+          title: 'Real Cases | WanFlow',
+          description: 'Review WanFlow delivery cases across finance, manufacturing, retail, automotive parts, and enterprise shared services.',
         };
   }
 

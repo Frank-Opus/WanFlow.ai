@@ -1,0 +1,119 @@
+<style>
+.comp-grid { display:grid; gap:20px; }
+@media (min-width: 1100px) { .comp-grid { grid-template-columns: repeat(3, 1fr); } }
+.mini-page { background:#03131f; border:1px solid rgba(104, 163, 196, 0.22); min-height:360px; display:flex; flex-direction:column; }
+.mini-top { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-bottom:1px solid rgba(104, 163, 196, 0.16); color:#8da8bb; font-size:11px; letter-spacing:.18em; text-transform:uppercase; }
+.mini-body { padding:20px 18px 18px; display:flex; flex-direction:column; gap:16px; }
+.mega { font-size:44px; line-height:.95; font-weight:900; letter-spacing:-.05em; color:#f3fbff; max-width:9ch; }
+.mega.soft { font-size:38px; line-height:1; }
+.mega.tight { font-size:48px; max-width:8ch; }
+.sub { color:#96adbe; font-size:13px; line-height:1.55; max-width:34ch; }
+.pills { display:flex; gap:8px; flex-wrap:wrap; }
+.pillA, .pillB { padding:8px 12px; border-radius:4px; font-size:12px; font-weight:700; }
+.pillA { background:#5fe0ff; color:#05202c; }
+.pillB { border:1px solid rgba(95,224,255,.35); color:#d8f7ff; }
+.bars { display:grid; gap:10px; margin-top:8px; }
+.bar { border:1px solid rgba(104, 163, 196, 0.18); background:rgba(6, 24, 36, 0.72); padding:12px; }
+.bar strong { display:block; color:#f3fbff; font-size:12px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
+.bar span { color:#87a5b9; font-size:12px; line-height:1.5; }
+.metric-row { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; }
+.metric { border-top:1px solid rgba(95,224,255,.22); padding-top:10px; }
+.metric b { display:block; font-size:24px; color:#f3fbff; }
+.metric em { display:block; margin-top:4px; color:#7d98aa; font-style:normal; font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
+.rec-tag { display:inline-block; margin-left:8px; padding:4px 8px; font-size:11px; border-radius:999px; background:rgba(95,224,255,.12); color:#87ebff; border:1px solid rgba(95,224,255,.22); }
+.note { color:#9db5c5; font-size:13px; }
+</style>
+
+<h2>WanFlow 官网改版方向对比</h2>
+<p class="subtitle">我按你的选择做了 3 条路线。它们都保留 WanFlow 配色，不照搬 ClickHouse 黄绿；差别在于“复制模板的力度”和“企业服务温度”的比例。</p>
+
+<div class="comp-grid cards">
+  <div class="card" data-choice="1" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>方案 1：基础设施宣言 <span class="rec-tag">推荐</span></h3>
+      <p class="note">最接近 ClickHouse 的骨架与节奏。首屏像品牌宣言，后面用平台、能力、证明、案例一层层压上去。</p>
+    </div>
+    <div class="card-image">
+      <div class="mini-page">
+        <div class="mini-top"><span>WanFlow</span><span>CN First</span></div>
+        <div class="mini-body">
+          <div class="mega tight">让 AI 交付真正跑成系统</div>
+          <div class="sub">超大标题先建立气势，正文极少。首屏不堆服务点，改为后续 section 分层展开。</div>
+          <div class="pills"><div class="pillA">预约咨询</div><div class="pillB">查看解决方案</div></div>
+          <div class="metric-row">
+            <div class="metric"><b>5</b><em>核心模块</em></div>
+            <div class="metric"><b>Ops</b><em>运营闭环</em></div>
+            <div class="metric"><b>PaaS</b><em>流程服务</em></div>
+          </div>
+          <div class="bars">
+            <div class="bar"><strong>Platform Layer</strong><span>平台/执行骨架段，承接首屏宣言</span></div>
+            <div class="bar"><strong>Proof Layer</strong><span>中后段带出 BenchmarkOps 和交付证明</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="2" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>方案 2：科技杂志型官网</h3>
+      <p class="note">仍然高级，但更偏 editorial。版式更松、叙事更优雅，对 ClickHouse 的“压迫感”继承较少。</p>
+    </div>
+    <div class="card-image">
+      <div class="mini-page">
+        <div class="mini-top"><span>WanFlow</span><span>Editorial</span></div>
+        <div class="mini-body">
+          <div class="mega soft">把复杂 AI 流程，组织成可交付体系</div>
+          <div class="sub">更像高端品牌官网，更多留白、更少硬边界，更强调叙事阅读感。</div>
+          <div class="bars">
+            <div class="bar"><strong>Story Block</strong><span>首屏下面先讲愿景与方法论</span></div>
+            <div class="bar"><strong>Services Grid</strong><span>服务模块更整齐，更像咨询公司官网</span></div>
+            <div class="bar"><strong>Cases</strong><span>案例更靠前，品牌温度更强</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="3" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>方案 3：双轨叙事</h3>
+      <p class="note">前半像基础设施品牌，后半像服务交付公司。平衡最好，但对 ClickHouse 的“复制感”略弱于方案 1。</p>
+    </div>
+    <div class="card-image">
+      <div class="mini-page">
+        <div class="mini-top"><span>WanFlow</span><span>Hybrid</span></div>
+        <div class="mini-body">
+          <div class="mega">数据、流程、模型 归于同一条执行链</div>
+          <div class="sub">Hero 仍然重气势，但中段很快转入服务能力和客户沟通视角。</div>
+          <div class="bars">
+            <div class="bar"><strong>Infra Hero</strong><span>首屏重宣言与结构</span></div>
+            <div class="bar"><strong>Service Layer</strong><span>中段更明确地讲服务、协作与交付</span></div>
+            <div class="bar"><strong>Trust Layer</strong><span>案例 + 平台证明并列出现</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:26px">
+  <div class="pros-cons split">
+    <div class="pros">
+      <h4>我推荐方案 1 的原因</h4>
+      <ul>
+        <li>最符合你“完全学习、参考、复制 ClickHouse 模板”的要求</li>
+        <li>最适合超强品牌宣言式 hero</li>
+        <li>更容易把 WanFlow 做成“数据驱动 AI 基础设施 + 服务温度”的新气质</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>需要接受的代价</h4>
+      <ul>
+        <li>页面会比现在更强势、更黑、更有压迫感</li>
+        <li>首屏信息量会更少，销售解释延后</li>
+        <li>要重做首页和内页的整体节奏，不能只是局部修饰</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,81 +1,467 @@
 'use client';
 
-import { FinalCtaBand, PageHero, SectionHeading, useMarketingCopy } from '@/components/marketing/primitives';
+import { useEffect, useRef, useState } from 'react';
+import Autoplay from 'embla-carousel-autoplay';
+import useEmblaCarousel from 'embla-carousel-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useLocale } from '@/components/shared/locale-provider';
+import { FinalCtaBand, SectionHeading } from '@/components/marketing/primitives';
+import MotionReveal from '@/components/shared/motion-reveal';
+import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
+
+type CredentialGroupKey = 'papers' | 'patents' | 'softwareCopyright';
+type CredentialPreviewItem = {
+  title: string;
+  venue: string;
+  year: string;
+  description: string;
+  status?: string;
+  tag?: string;
+  previewCode: string;
+  previewStamp: string;
+};
+type CredentialCardItem = CredentialPreviewItem & {
+  categoryLabel: string;
+  group: CredentialGroupKey;
+};
+
+const credentialGroups: CredentialGroupKey[] = ['papers', 'patents', 'softwareCopyright'];
+
+function buildMixedCredentialItems(credentials: {
+  tabs: Record<CredentialGroupKey, string>;
+  papers: readonly CredentialPreviewItem[];
+  patents: readonly CredentialPreviewItem[];
+  softwareCopyright: readonly CredentialPreviewItem[];
+}) {
+  const groupedItems = credentialGroups.map((group) =>
+    credentials[group].map((item) => ({
+      ...item,
+      group,
+      categoryLabel: credentials.tabs[group],
+    })),
+  );
+  const totalRounds = Math.max(...groupedItems.map((items) => items.length));
+  const mixedItems: CredentialCardItem[] = [];
+
+  for (let round = 0; round < totalRounds; round += 1) {
+    for (const items of groupedItems) {
+      const nextItem = items[round];
+
+      if (nextItem) mixedItems.push(nextItem);
+    }
+  }
+
+  return mixedItems;
+}
+
+function getCoverflowClass(index: number, activeIndex: number, total: number) {
+  let distance = index - activeIndex;
+
+  if (total > 0) {
+    const wrappedDistance = distance > 0 ? distance - total : distance + total;
+
+    if (Math.abs(wrappedDistance) < Math.abs(distance)) {
+      distance = wrappedDistance;
+    }
+  }
+
+  if (distance === 0) return 'mkt-credentials-slide-active';
+  if (distance === -1) return 'mkt-credentials-slide-prev';
+  if (distance === 1) return 'mkt-credentials-slide-next';
+  if (distance < 0) return 'mkt-credentials-slide-far-prev';
+  return 'mkt-credentials-slide-far-next';
+}
+
+function CredentialPreview({
+  item,
+  group,
+}: {
+  item: CredentialPreviewItem;
+  group: CredentialGroupKey;
+}) {
+  const isPaper = group === 'papers';
+  const isSoftwareCopyright = group === 'softwareCopyright';
+
+  return (
+    <div
+      className={
+        isPaper
+          ? 'mkt-credential-preview mkt-credential-preview-paper'
+          : isSoftwareCopyright
+            ? 'mkt-credential-preview mkt-credential-preview-copyright'
+            : 'mkt-credential-preview mkt-credential-preview-patent'
+      }
+      aria-hidden="true"
+    >
+      <div className="mkt-credential-preview-sheet">
+        <div className="mkt-credential-preview-header">
+          <span className="mkt-credential-preview-chip">{item.previewCode}</span>
+          <span className="mkt-credential-preview-chip mkt-credential-preview-chip-muted">{item.year}</span>
+        </div>
+
+        <div className="mkt-credential-preview-title-stack">
+          {[0, 1, 2].map((index) => (
+            <span
+              key={`title-${index}`}
+              className={index === 0 ? 'mkt-credential-preview-bar mkt-credential-preview-bar-strong' : 'mkt-credential-preview-bar'}
+            />
+          ))}
+        </div>
+
+        <div className="mkt-credential-preview-meta-row">
+          <span className="mkt-credential-preview-meta-chip" />
+          <span className="mkt-credential-preview-meta-chip mkt-credential-preview-meta-chip-long" />
+          <span className="mkt-credential-preview-meta-chip" />
+        </div>
+
+        {isPaper ? (
+          <>
+            <div className="mkt-credential-preview-columns">
+              {[0, 1].map((column) => (
+                <div key={`column-${column}`} className="mkt-credential-preview-column">
+                  {[0, 1, 2, 3].map((line) => (
+                    <span
+                      key={`paper-${column}-${line}`}
+                      className={line === 3 ? 'mkt-credential-preview-bar mkt-credential-preview-bar-short' : 'mkt-credential-preview-bar'}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="mkt-credential-preview-figure">
+              <span className="mkt-credential-preview-figure-panel" />
+              <div className="mkt-credential-preview-figure-lines">
+                {[0, 1, 2].map((line) => (
+                  <span key={`figure-${line}`} className="mkt-credential-preview-bar mkt-credential-preview-bar-fine" />
+                ))}
+              </div>
+            </div>
+          </>
+        ) : isSoftwareCopyright ? (
+          <>
+            <div className="mkt-credential-preview-copyright-top">
+              <div className="mkt-credential-preview-copyright-badge">
+                <span className="mkt-credential-preview-copyright-badge-core" />
+              </div>
+              <div className="mkt-credential-preview-copyright-stack">
+                {[0, 1, 2].map((line) => (
+                  <span
+                    key={`copyright-top-${line}`}
+                    className={line === 0 ? 'mkt-credential-preview-bar mkt-credential-preview-bar-strong' : 'mkt-credential-preview-bar'}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mkt-credential-preview-copyright-grid">
+              <div className="mkt-credential-preview-pane">
+                {[0, 1, 2, 3].map((line) => (
+                  <span
+                    key={`copyright-left-${line}`}
+                    className={line === 3 ? 'mkt-credential-preview-bar mkt-credential-preview-bar-short' : 'mkt-credential-preview-bar'}
+                  />
+                ))}
+              </div>
+              <div className="mkt-credential-preview-copyright-ledger">
+                {[0, 1, 2].map((row) => (
+                  <div key={`copyright-ledger-${row}`} className="mkt-credential-preview-copyright-ledger-row">
+                    <span className="mkt-credential-preview-meta-chip" />
+                    <span className="mkt-credential-preview-meta-chip mkt-credential-preview-meta-chip-long" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="mkt-credential-preview-patent-top">
+              <div className="mkt-credential-preview-patent-box">
+                {[0, 1, 2].map((line) => (
+                  <span
+                    key={`patent-left-${line}`}
+                    className={line === 2 ? 'mkt-credential-preview-bar mkt-credential-preview-bar-short' : 'mkt-credential-preview-bar'}
+                  />
+                ))}
+              </div>
+              <div className="mkt-credential-preview-patent-box">
+                {[0, 1, 2, 3].map((line) => (
+                  <span
+                    key={`patent-right-${line}`}
+                    className={line === 0 ? 'mkt-credential-preview-bar mkt-credential-preview-bar-strong' : 'mkt-credential-preview-bar'}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mkt-credential-preview-patent-grid">
+              {[0, 1].map((panel) => (
+                <div key={`panel-${panel}`} className="mkt-credential-preview-pane">
+                  {[0, 1, 2, 3].map((line) => (
+                    <span
+                      key={`claim-${panel}-${line}`}
+                      className={line === 3 ? 'mkt-credential-preview-bar mkt-credential-preview-bar-fine' : 'mkt-credential-preview-bar'}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="mkt-credential-preview-footer">
+          <span className="mkt-credential-preview-footer-label">{item.venue}</span>
+          <span className="mkt-credential-preview-stamp">{item.previewStamp}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function MarketingAboutPage() {
   const copy = useMarketingCopy();
+  const { locale } = useLocale();
+  const autoplay = useRef(
+    Autoplay({
+      delay: 2600,
+      playOnInit: true,
+      stopOnMouseEnter: false,
+      stopOnFocusIn: false,
+      stopOnInteraction: false,
+    }),
+  );
+  const [viewportRef, emblaApi] = useEmblaCarousel({
+    align: 'center',
+    loop: true,
+    containScroll: false,
+  }, [autoplay.current]);
+  const credentials = copy.about.credentials;
+  const credentialItems = buildMixedCredentialItems(credentials);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [selectedSnap, setSelectedSnap] = useState(0);
+  const navLabel = (href: string) => copy.nav.find((item) => item.href === href)?.label ?? href;
+  const finalEyebrow = locale === 'zh' ? '与 WanFlow 沟通' : 'Talk to WanFlow';
+  const labels = locale === 'zh'
+    ? {
+        summary: '公司概览',
+      }
+    : {
+        summary: 'Company snapshot',
+      };
+  const currentSnap = selectedSnap;
+  const shouldAutoplay = () => {
+    if (typeof window === 'undefined') return false;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isAutomatedBrowser = navigator.webdriver;
+
+    return !reducedMotion && !isAutomatedBrowser;
+  };
+  const resumeAutoplay = () => {
+    if (!shouldAutoplay()) return;
+
+    autoplay.current.play();
+  };
+  const restartAutoplay = () => {
+    if (!shouldAutoplay()) return;
+
+    autoplay.current.stop();
+    autoplay.current.reset();
+    autoplay.current.play();
+  };
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    if (!shouldAutoplay()) {
+      autoplay.current.stop();
+    } else {
+      requestAnimationFrame(() => {
+        resumeAutoplay();
+      });
+    }
+
+    const syncCarousel = () => {
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
+      setSelectedSnap(emblaApi.selectedScrollSnap());
+    };
+
+    syncCarousel();
+    emblaApi.on('select', syncCarousel);
+    emblaApi.on('reInit', syncCarousel);
+
+    return () => {
+      autoplay.current.stop();
+      emblaApi.off('select', syncCarousel);
+      emblaApi.off('reInit', syncCarousel);
+    };
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    emblaApi.reInit();
+    emblaApi.scrollTo(0, true);
+
+    requestAnimationFrame(() => {
+      restartAutoplay();
+    });
+  }, [emblaApi, credentialItems.length]);
 
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <PageHero
-          eyebrow={copy.about.hero.eyebrow}
-          title={copy.about.hero.title}
-          body={copy.about.hero.body}
-          primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: copy.nav[2].label }}
-          aside={
-            <div className="mkt-proof-panel">
-              <p className="mkt-kicker">{copy.about.trust.eyebrow}</p>
-              <h3 className="mt-4 text-[1.5rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{copy.about.trust.title}</h3>
+        <MotionReveal delay={0} intensity="hero">
+          <section
+            className="mkt-about-hero mkt-panel overflow-hidden"
+            style={{
+              backgroundImage: "url('/about/office-hero.png')",
+            }}
+          >
+            <div className="mkt-about-hero-inner">
+              <div className="mkt-about-copy mkt-about-copy-panel mkt-hero-stage mkt-hero-stage-1">
+                <p className="mkt-kicker mkt-section-kicker-large mkt-about-kicker">{copy.about.hero.eyebrow}</p>
+                <h1 className="mkt-display mkt-about-title">{copy.about.hero.title}</h1>
+                <p className="mkt-copy mkt-about-body max-w-[42rem] text-base sm:text-[1.05rem]">{copy.about.hero.body}</p>
+                <div className="mkt-hero-actions flex flex-wrap gap-3">
+                  <Link href="/contact" className="mkt-button-primary">
+                    {copy.common.primaryCta}
+                  </Link>
+                  <Link href="/cases" className="mkt-button-secondary mkt-button-on-image">
+                    {navLabel('/cases')}
+                  </Link>
+                </div>
+              </div>
+              <aside className="mkt-about-aside mkt-hero-stage mkt-hero-stage-2">
+                <p className="mkt-kicker mkt-section-kicker-large mkt-about-side-kicker">{copy.about.summary.eyebrow ?? labels.summary}</p>
+                <div className="space-y-3">
+                  {copy.about.summary.items.map((item) => (
+                    <div key={item} className="border-t border-[rgba(31,63,82,0.14)] pt-3 first:border-t-0 first:pt-0">
+                      <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </aside>
             </div>
-          }
-        />
+          </section>
+        </MotionReveal>
 
-        <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
+        <MotionReveal as="section" delay={70} className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+            <SectionHeading eyebrow={copy.about.identity.eyebrow} title={copy.about.identity.title} size="large" />
+            <div className="space-y-5">
+              {copy.about.identity.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="mkt-copy text-base sm:text-[1.03rem]">{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </MotionReveal>
+
+        <MotionReveal as="section" delay={90} className="mkt-panel mkt-editorial-band px-6 py-7 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-            <SectionHeading eyebrow={copy.about.story.eyebrow} title={copy.about.story.title} />
+            <SectionHeading eyebrow={copy.about.positioning.eyebrow} title={copy.about.positioning.title} size="large" />
             <div className="space-y-4">
-              {copy.about.story.paragraphs.map((paragraph) => (
+              {copy.about.positioning.paragraphs.map((paragraph) => (
                 <p key={paragraph} className="mkt-copy text-base sm:text-[1.02rem]">{paragraph}</p>
               ))}
             </div>
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
-          <SectionHeading eyebrow={copy.about.principles.eyebrow} title={copy.about.principles.title} />
-          <div className="grid gap-4 lg:grid-cols-3">
-            {copy.about.principles.items.map((item) => (
-              <article key={item.title} className="mkt-card px-5 py-5">
-                <h3 className="text-[1.18rem] font-semibold tracking-[-0.03em] text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3">{item.body}</p>
+        <MotionReveal as="section" delay={120} className="space-y-6">
+          <SectionHeading eyebrow={copy.about.team.eyebrow} title={copy.about.team.title} body={copy.about.team.body} size="large" />
+          <div className="mkt-stagger-grid grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {copy.about.team.members.map((member, index) => (
+              <article key={member.name} className={index === 0 ? 'mkt-card mkt-card-highlight mkt-team-card px-5 py-5' : 'mkt-card mkt-team-card px-5 py-5'}>
+                <div className="mkt-team-avatar-shell">
+                  <Image
+                    src={member.imageSrc}
+                    alt={member.name}
+                    width={96}
+                    height={96}
+                    className="mkt-team-avatar"
+                  />
+                </div>
+                <span className="mkt-card-index">{member.role}</span>
+                <h3 className="zh-card-title mkt-card-heading mt-4">{member.name}</h3>
+                <p className="mkt-copy mt-3">{member.summary}</p>
               </article>
             ))}
           </div>
-        </section>
+        </MotionReveal>
 
-        <section className="space-y-6">
-          <SectionHeading eyebrow={copy.about.model.eyebrow} title={copy.about.model.title} />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {copy.about.model.items.map((item) => (
-              <article key={item.title} className="mkt-card px-5 py-5">
-                <div className="mkt-flow-marker">{item.title.slice(0, 1)}</div>
-                <h3 className="mt-4 text-[1.1rem] font-semibold text-[var(--mk-text-0)]">{item.title}</h3>
-                <p className="mkt-copy mt-3 text-sm">{item.body}</p>
-              </article>
-            ))}
+        <MotionReveal as="section" delay={140} className="mkt-panel mkt-editorial-band mkt-credentials-section px-6 py-7 sm:px-8 lg:px-10">
+          <div className="mkt-credentials-head">
+            <SectionHeading eyebrow={credentials.eyebrow} title={credentials.title} body={credentials.body} size="large" />
           </div>
-        </section>
 
-        <section className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
-          <SectionHeading eyebrow={copy.about.trust.eyebrow} title={copy.about.trust.title} />
-          <div className="mt-6 grid gap-3 lg:grid-cols-3">
-            {copy.about.trust.items.map((item) => (
-              <article key={item} className="mkt-card px-5 py-5">
-                <p className="mkt-copy text-sm text-[var(--mk-text-0)]">{item}</p>
-              </article>
-            ))}
+          <div className="mkt-credentials-stage">
+            <button
+              type="button"
+              className="mkt-credentials-arrow mkt-credentials-arrow-left"
+              onClick={() => {
+                restartAutoplay();
+                emblaApi?.scrollPrev();
+              }}
+              disabled={!canScrollPrev}
+              aria-label={credentials.controls.previous}
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+            <div className="mkt-credentials-viewport" ref={viewportRef}>
+              <div className="mkt-credentials-track">
+                {credentialItems.map((item, index) => (
+                  <article
+                    key={`${item.group}-${item.title}`}
+                    className={`mkt-credentials-slide ${getCoverflowClass(index, currentSnap, credentialItems.length)}`}
+                  >
+                    <div className="mkt-card mkt-credentials-card px-5 py-5 sm:px-6 sm:py-6">
+                      <CredentialPreview item={item} group={item.group} />
+                      <div className="mkt-credentials-card-top">
+                        <div className="space-y-3">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="mkt-trait-chip">{item.categoryLabel}</span>
+                            <p className="mkt-proof-callout-label">{item.venue}</p>
+                          </div>
+                          <h3 className="mkt-credentials-card-title">{item.title}</h3>
+                        </div>
+                        <div className="mkt-credentials-year">{item.year}</div>
+                      </div>
+                      <p className="mkt-copy mt-4 text-sm sm:text-[0.98rem]">{item.description}</p>
+                      <div className="mkt-credentials-card-footer">
+                        {item.tag ? <span className="mkt-trait-chip">{item.tag}</span> : <span />}
+                        {item.status ? <span className="mkt-credentials-status">{item.status}</span> : null}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <button
+              type="button"
+              className="mkt-credentials-arrow mkt-credentials-arrow-right"
+              onClick={() => {
+                restartAutoplay();
+                emblaApi?.scrollNext();
+              }}
+              disabled={!canScrollNext}
+              aria-label={credentials.controls.next}
+            >
+              <span aria-hidden="true">→</span>
+            </button>
           </div>
-        </section>
+        </MotionReveal>
 
-        <FinalCtaBand
-          eyebrow="Talk to WanFlow"
-          title={copy.about.finalCta.title}
-          body={copy.about.finalCta.body}
-          primary={{ href: '/contact', label: copy.common.primaryCta }}
-          secondary={{ href: '/cases', label: copy.nav[2].label }}
-        />
+        <MotionReveal delay={180}>
+          <FinalCtaBand
+            eyebrow={finalEyebrow}
+            title={copy.about.finalCta.title}
+            body={copy.about.finalCta.body}
+            primary={{ href: '/contact', label: copy.common.primaryCta }}
+            secondary={{ href: '/cases', label: navLabel('/cases') }}
+            size="large"
+          />
+        </MotionReveal>
       </div>
     </main>
   );

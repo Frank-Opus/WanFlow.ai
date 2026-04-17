@@ -28,15 +28,17 @@
 - Python 评测引擎：`src/math_eval_framework/`
 - 平台数据存储：`platform-data/`
 - Web 平台：`web/`
-- Linux systemd 部署：`deploy/systemd/`
+- Docker 部署：`deploy/docker/`
+- Linux systemd 备用部署：`deploy/systemd/`
 - 样例与归档：`samples/`
 
 ## 先看哪些文档
 
 1. 项目全景与规划：`docs/project-status-and-roadmap.md`
-2. Linux 部署：`docs/deployment/systemd-linux.md`
-3. 正式交付与发布：`docs/release-and-delivery.md`
-4. 最近一轮前端审计与验证：`subtask_1_full_site_audit_remediation_20260406.md`
+2. Docker + HKZ 部署：`docs/deployment/docker-hkz.md`
+3. Linux systemd 备用部署：`docs/deployment/systemd-linux.md`
+4. 正式交付与发布：`docs/release-and-delivery.md`
+5. 最近一轮前端审计与验证：`subtask_1_full_site_audit_remediation_20260406.md`
 
 ## 当前运行状态
 
@@ -54,7 +56,7 @@ curl http://127.0.0.1:3010/api/health
 
 - `cd web && npm run build`
 - 首页 `/`
-- 工作台 `/proofbench`
+- 工作台 `/dataflow/proofbench`
 - 项目列表接口 `/api/platform/projects`
 - 健康接口 `/api/health`
 
