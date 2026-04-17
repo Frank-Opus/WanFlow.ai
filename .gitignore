@@ -34,3 +34,6 @@ deploy/docker/wanflow-web.env
 
 # Local git worktrees
 .worktrees/
+
+# Local brainstorm runtime state
+.superpowers/brainstorm/**/state/
