@@ -1,9 +1,13 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import MarketingCasesPage from '@/components/marketing/cases-page';
 
 export const metadata: Metadata = {
-  title: '真实案例 | WanFlow',
-  description: '查看 WanFlow 在金融、制造、零售、汽车零部件和企业共享服务等场景中的真实案例，以及对应的交付内容与量化结果。',
+  title: 'WanFlow 真实案例 | 企业AI运营与交付落地成果',
+  description:
+    '查看 WanFlow 在金融、制造、零售与企业运营场景中的真实AI交付案例，了解实施路径、交付结果与可复用方法。',
+  alternates: {
+    canonical: '/cases',
+  },
 };
 
 export default function CasesPage() {

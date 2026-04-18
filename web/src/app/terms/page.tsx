@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '服务条款 | WanFlow',
   description: 'WanFlow 官网服务条款，说明站点使用、咨询提交和业务沟通的基本规则。',
+  alternates: {
+    canonical: '/terms',
+  },
 };
 
 const sections = [

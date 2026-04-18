@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { LocaleProvider } from '@/components/shared/locale-provider';
 import MarketingHeadSync from '@/components/shared/marketing-head-sync';
 import SiteFooter from '@/components/shared/site-footer';
@@ -10,9 +10,21 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://wanflowai.com';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: 'WanFlow',
-  title: 'WanFlow | 企业 AI 运营与交付伙伴',
-  description: 'WanFlow 万物归流帮助企业把数据标注与治理、流程编排与自动化、企业级多智能体、人机协同交付和模型运营闭环真正接进业务里',
-  keywords: ['WanFlow', '万物归流', '数据标注与治理', '流程编排与自动化', '企业级多智能体', '人机协同交付', '模型运营与持续优化'],
+  title: '企业AI运营与交付体系 | WanFlow 万流归智',
+  description:
+    'WanFlow 帮助企业把数据治理、流程自动化、多智能体协同与模型运营接入真实业务。查看行业方案与案例，预约咨询并获取可落地的AI交付路径。',
+  alternates: {
+    canonical: '/',
+  },
+  keywords: [
+    'WanFlow',
+    '企业AI运营',
+    '企业AI交付',
+    '数据治理',
+    '流程自动化',
+    '多智能体',
+    '模型运营',
+  ],
   category: 'technology',
   robots: {
     index: true,
@@ -31,14 +43,17 @@ export const metadata: Metadata = {
     apple: '/brand/logo-mark.png',
   },
   openGraph: {
-    title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
-    description: 'Data labeling and governance, workflow orchestration, enterprise multi-agent systems, human-in-the-loop delivery, and continuous model optimization for enterprise teams.',
+    title: '企业AI运营与交付体系 | WanFlow',
+    description:
+      '数据治理、流程自动化、多智能体协同与模型运营一体化交付。了解 WanFlow 的行业方案、真实案例与落地方法。',
+    url: '/',
     images: ['/brand/logo-wide.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WanFlow | Enterprise AI Delivery & Operations Partner',
-    description: 'Data labeling and governance, workflow orchestration, enterprise multi-agent systems, human-in-the-loop delivery, and continuous model optimization for enterprise teams.',
+    title: '企业AI运营与交付体系 | WanFlow',
+    description:
+      '数据治理、流程自动化、多智能体协同与模型运营一体化交付。了解 WanFlow 的行业方案、真实案例与落地方法。',
     images: ['/brand/logo-wide.png'],
   },
 };
