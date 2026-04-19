@@ -1,6 +1,7 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useLocale } from '@/components/shared/locale-provider';
 import { useMarketingCopy } from '@/components/marketing/use-marketing-copy';
 
 type FormState = {
@@ -23,13 +24,33 @@ const initialState: FormState = {
 
 export default function ContactForm() {
   const copy = useMarketingCopy();
+  const { locale } = useLocale();
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [serverMessage, setServerMessage] = useState('');
+  const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'submitError'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const statusRef = useRef<HTMLParagraphElement | null>(null);
 
   const interestOptions = useMemo(() => copy.contact.form.interests, [copy]);
   const timelineOptions = useMemo(() => copy.contact.form.timelines, [copy]);
+  const localLabels = locale === 'zh'
+    ? {
+        interestPlaceholder: '请选择合作方向',
+        timelinePlaceholder: '请选择预期节奏',
+        sent: '已发送',
+      }
+    : {
+        interestPlaceholder: 'Select an area of interest',
+        timelinePlaceholder: 'Select your expected timeline',
+        sent: 'Sent',
+      };
+
+  useEffect(() => {
+    if (submitState !== 'success') return;
+
+    statusRef.current?.focus();
+  }, [submitState, submitMessage]);
 
   function validate(current: FormState) {
     const nextErrors: Partial<Record<keyof FormState, string>> = {};
@@ -40,18 +61,28 @@ export default function ContactForm() {
     return nextErrors;
   }
 
+  function focusFirstInvalidField(nextErrors: Partial<Record<keyof FormState, string>>) {
+    const firstField = (Object.keys(nextErrors)[0] ?? '') as keyof FormState | '';
+
+    if (!firstField) return;
+
+    formRef.current?.querySelector<HTMLElement>(`[name="${firstField}"]`)?.focus();
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate(form);
     setErrors(nextErrors);
+
     if (Object.keys(nextErrors).length > 0) {
-      setStatus('error');
-      setServerMessage(copy.contact.form.error);
+      setSubmitState('idle');
+      setSubmitMessage('');
+      focusFirstInvalidField(nextErrors);
       return;
     }
 
-    setStatus('submitting');
-    setServerMessage('');
+    setSubmitState('submitting');
+    setSubmitMessage('');
 
     try {
       const response = await fetch('/api/contact', {
@@ -65,25 +96,45 @@ export default function ContactForm() {
         throw new Error(payload.message || copy.contact.form.error);
       }
 
-      setStatus('success');
-      setServerMessage(copy.contact.form.success);
+      setSubmitState('success');
+      setSubmitMessage(copy.contact.form.success);
       setForm(initialState);
       setErrors({});
     } catch (error) {
-      setStatus('error');
-      setServerMessage(error instanceof Error ? error.message : copy.contact.form.error);
+      setSubmitState('submitError');
+      setSubmitMessage(error instanceof Error ? error.message : copy.contact.form.error);
     }
   }
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
+
     if (errors[key]) {
       setErrors((current) => ({ ...current, [key]: undefined }));
     }
+
+    if (submitState !== 'idle') {
+      setSubmitState('idle');
+      setSubmitMessage('');
+    }
   }
 
+  const buttonText =
+    submitState === 'submitting'
+      ? copy.contact.form.submitting
+      : submitState === 'success'
+        ? localLabels.sent
+        : copy.contact.form.submit;
+  const buttonIcon =
+    submitState === 'submitting'
+      ? <span className="mkt-button-spinner" aria-hidden="true" />
+      : submitState === 'success'
+        ? <span aria-hidden="true" className="text-sm leading-none">✓</span>
+        : null;
+  const showSubmitStatus = submitState === 'success' || submitState === 'submitError';
+
   return (
-    <form className="mkt-form-panel" onSubmit={handleSubmit} noValidate>
+    <form ref={formRef} className="mkt-form-panel" onSubmit={handleSubmit} noValidate>
       <div className="space-y-3">
         <p className="mkt-kicker mkt-section-kicker-large">{copy.contact.form.title}</p>
         <h2 className="mkt-title mkt-subpage-title">{copy.contact.form.body}</h2>
@@ -141,7 +192,9 @@ export default function ContactForm() {
             className="mkt-input"
             name="interest"
           >
-            <option value="">--</option>
+            <option value="" disabled>
+              {localLabels.interestPlaceholder}
+            </option>
             {interestOptions.map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -158,7 +211,9 @@ export default function ContactForm() {
             className="mkt-input"
             name="timeline"
           >
-            <option value="">--</option>
+            <option value="" disabled>
+              {localLabels.timelinePlaceholder}
+            </option>
             {timelineOptions.map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -182,18 +237,28 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-4 pt-2">
-        <button type="submit" className="mkt-button-primary w-fit" disabled={status === 'submitting'}>
-          {status === 'submitting' ? copy.contact.form.submitting : copy.contact.form.submit}
+        <button
+          type="submit"
+          className={`mkt-button-primary w-fit transition-shadow duration-200 ${
+            submitState === 'success' ? 'shadow-[0_16px_30px_rgba(48,104,82,0.16)]' : ''
+          }`}
+          disabled={submitState === 'submitting'}
+        >
+          {buttonIcon}
+          <span>{buttonText}</span>
         </button>
         <p id="contact-privacy" className="mkt-copy text-sm">
           {copy.contact.form.privacy}
         </p>
-        {status !== 'idle' ? (
+        {showSubmitStatus ? (
           <p
-            role={status === 'error' ? 'alert' : 'status'}
-            className={status === 'success' ? 'mkt-status-success' : 'mkt-status-error'}
+            ref={statusRef}
+            tabIndex={-1}
+            role={submitState === 'submitError' ? 'alert' : 'status'}
+            className={submitState === 'success' ? 'mkt-status-success' : 'mkt-status-error'}
           >
-            {serverMessage}
+            <span className="mkt-status-icon" aria-hidden="true">{submitState === 'success' ? '✓' : '!'}</span>
+            <span>{submitMessage}</span>
           </p>
         ) : null}
       </div>

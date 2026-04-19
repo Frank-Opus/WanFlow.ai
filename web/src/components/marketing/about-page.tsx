@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
@@ -219,19 +219,22 @@ function CredentialPreview({
 export default function MarketingAboutPage() {
   const copy = useMarketingCopy();
   const { locale } = useLocale();
+  const [isCompactCarousel, setIsCompactCarousel] = useState(false);
+  const [isViewportReady, setIsViewportReady] = useState(false);
+  const autoplayResumeTimer = useRef<number | null>(null);
   const autoplay = useRef(
     Autoplay({
       delay: 2600,
       playOnInit: true,
       stopOnMouseEnter: false,
       stopOnFocusIn: false,
-      stopOnInteraction: false,
+      stopOnInteraction: true,
     }),
   );
   const [viewportRef, emblaApi] = useEmblaCarousel({
-    align: 'center',
+    align: isCompactCarousel ? 'start' : 'center',
     loop: true,
-    containScroll: false,
+    containScroll: isCompactCarousel ? 'trimSnaps' : false,
   }, [autoplay.current]);
   const credentials = copy.about.credentials;
   const credentialItems = buildMixedCredentialItems(credentials);
@@ -247,6 +250,19 @@ export default function MarketingAboutPage() {
     : {
         summary: 'Company snapshot',
       };
+  const credentialLabels = locale === 'zh'
+    ? {
+        position: (current: number, total: number) => `资质 ${current + 1} / ${total}`,
+        mobileHint: '移动端以单卡展示，支持左右滑动或底部分页点跳转，自动轮播已暂停以便阅读。',
+        desktopHint: '可使用箭头或底部分页点切换；手动操作后，自动轮播会明显延后再恢复。',
+        dot: (index: number, title: string) => `查看第 ${index + 1} 项：${title}`,
+      }
+    : {
+        position: (current: number, total: number) => `Credential ${current + 1} / ${total}`,
+        mobileHint: 'Mobile uses a single-card view. Swipe horizontally or use the pagination dots below. Autoplay is paused for easier reading.',
+        desktopHint: 'Use the arrows or pagination dots to browse. After manual navigation, autoplay waits noticeably longer before resuming.',
+        dot: (index: number, title: string) => `View item ${index + 1}: ${title}`,
+      };
   const currentSnap = selectedSnap;
   const shouldAutoplay = () => {
     if (typeof window === 'undefined') return false;
@@ -254,12 +270,18 @@ export default function MarketingAboutPage() {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isAutomatedBrowser = navigator.webdriver;
 
-    return !reducedMotion && !isAutomatedBrowser;
+    return isViewportReady && !reducedMotion && !isAutomatedBrowser && !isCompactCarousel;
   };
   const resumeAutoplay = () => {
     if (!shouldAutoplay()) return;
 
     autoplay.current.play();
+  };
+  const clearAutoplayResumeTimer = () => {
+    if (autoplayResumeTimer.current === null) return;
+
+    window.clearTimeout(autoplayResumeTimer.current);
+    autoplayResumeTimer.current = null;
   };
   const restartAutoplay = () => {
     if (!shouldAutoplay()) return;
@@ -268,11 +290,41 @@ export default function MarketingAboutPage() {
     autoplay.current.reset();
     autoplay.current.play();
   };
+  const pauseAutoplayAfterInteraction = (delayMs = 7200) => {
+    autoplay.current.stop();
+    clearAutoplayResumeTimer();
+
+    if (!shouldAutoplay()) return;
+
+    autoplayResumeTimer.current = window.setTimeout(() => {
+      autoplay.current.reset();
+      autoplay.current.play();
+      autoplayResumeTimer.current = null;
+    }, delayMs);
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const syncCompactMode = (event?: MediaQueryListEvent) => {
+      setIsCompactCarousel(event ? event.matches : mediaQuery.matches);
+      setIsViewportReady(true);
+    };
+
+    syncCompactMode();
+    mediaQuery.addEventListener('change', syncCompactMode);
+
+    return () => {
+      mediaQuery.removeEventListener('change', syncCompactMode);
+    };
+  }, []);
 
   useEffect(() => {
     if (!emblaApi) return;
 
     if (!shouldAutoplay()) {
+      clearAutoplayResumeTimer();
       autoplay.current.stop();
     } else {
       requestAnimationFrame(() => {
@@ -291,27 +343,29 @@ export default function MarketingAboutPage() {
     emblaApi.on('reInit', syncCarousel);
 
     return () => {
+      clearAutoplayResumeTimer();
       autoplay.current.stop();
       emblaApi.off('select', syncCarousel);
       emblaApi.off('reInit', syncCarousel);
     };
-  }, [emblaApi]);
+  }, [emblaApi, isCompactCarousel]);
 
   useEffect(() => {
     if (!emblaApi) return;
 
+    clearAutoplayResumeTimer();
     emblaApi.reInit();
     emblaApi.scrollTo(0, true);
 
     requestAnimationFrame(() => {
       restartAutoplay();
     });
-  }, [emblaApi, credentialItems.length]);
+  }, [emblaApi, credentialItems.length, isCompactCarousel]);
 
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
-        <MotionReveal delay={0} intensity="hero">
+        <MotionReveal delay={0} intensity="hero" initiallyVisible>
           <section
             className="mkt-about-hero mkt-panel overflow-hidden"
             style={{
@@ -400,7 +454,7 @@ export default function MarketingAboutPage() {
               type="button"
               className="mkt-credentials-arrow mkt-credentials-arrow-left"
               onClick={() => {
-                restartAutoplay();
+                pauseAutoplayAfterInteraction();
                 emblaApi?.scrollPrev();
               }}
               disabled={!canScrollPrev}
@@ -408,40 +462,68 @@ export default function MarketingAboutPage() {
             >
               <span aria-hidden="true">←</span>
             </button>
-            <div className="mkt-credentials-viewport" ref={viewportRef}>
-              <div className="mkt-credentials-track">
-                {credentialItems.map((item, index) => (
-                  <article
-                    key={`${item.group}-${item.title}`}
-                    className={`mkt-credentials-slide ${getCoverflowClass(index, currentSnap, credentialItems.length)}`}
-                  >
-                    <div className="mkt-card mkt-credentials-card px-5 py-5 sm:px-6 sm:py-6">
-                      <CredentialPreview item={item} group={item.group} />
-                      <div className="mkt-credentials-card-top">
-                        <div className="space-y-3">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className="mkt-trait-chip">{item.categoryLabel}</span>
-                            <p className="mkt-proof-callout-label">{item.venue}</p>
+            <div
+              className="mkt-credentials-viewport"
+              ref={viewportRef}
+              style={isCompactCarousel ? { paddingBlock: '0', paddingInline: '0.15rem' } : undefined}
+            >
+              <div
+                className="mkt-credentials-track"
+                style={isCompactCarousel ? { marginInline: '0' } : undefined}
+              >
+                {credentialItems.map((item, index) => {
+                  const slideStyle: CSSProperties | undefined = isCompactCarousel
+                    ? {
+                        flex: '0 0 100%',
+                        minHeight: 'auto',
+                        paddingInline: '0',
+                      }
+                    : undefined;
+                  const cardStyle: CSSProperties | undefined = isCompactCarousel
+                    ? {
+                        transform: 'none',
+                        opacity: 1,
+                        filter: 'none',
+                      }
+                    : undefined;
+
+                  return (
+                    <article
+                      key={`${item.group}-${item.title}`}
+                      className={`mkt-credentials-slide ${isCompactCarousel ? '' : getCoverflowClass(index, currentSnap, credentialItems.length)}`}
+                      style={slideStyle}
+                    >
+                      <div
+                        className="mkt-card mkt-credentials-card px-5 py-5 sm:px-6 sm:py-6"
+                        style={cardStyle}
+                      >
+                        <CredentialPreview item={item} group={item.group} />
+                        <div className="mkt-credentials-card-top">
+                          <div className="space-y-3">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="mkt-trait-chip">{item.categoryLabel}</span>
+                              <p className="mkt-proof-callout-label">{item.venue}</p>
+                            </div>
+                            <h3 className="mkt-credentials-card-title">{item.title}</h3>
                           </div>
-                          <h3 className="mkt-credentials-card-title">{item.title}</h3>
+                          <div className="mkt-credentials-year">{item.year}</div>
                         </div>
-                        <div className="mkt-credentials-year">{item.year}</div>
+                        <p className="mkt-copy mkt-credentials-card-body mt-4 text-sm sm:text-[0.98rem]">{item.description}</p>
+                        <div className="mkt-credentials-card-footer">
+                          {item.tag ? <span className="mkt-trait-chip">{item.tag}</span> : <span />}
+                          {item.status ? <span className="mkt-credentials-status">{item.status}</span> : null}
+                        </div>
                       </div>
-                      <p className="mkt-copy mt-4 text-sm sm:text-[0.98rem]">{item.description}</p>
-                      <div className="mkt-credentials-card-footer">
-                        {item.tag ? <span className="mkt-trait-chip">{item.tag}</span> : <span />}
-                        {item.status ? <span className="mkt-credentials-status">{item.status}</span> : null}
-                      </div>
-                    </div>
-                  </article>
-                ))}
+                    </article>
+                  );
+                })}
               </div>
             </div>
             <button
               type="button"
               className="mkt-credentials-arrow mkt-credentials-arrow-right"
               onClick={() => {
-                restartAutoplay();
+                pauseAutoplayAfterInteraction();
                 emblaApi?.scrollNext();
               }}
               disabled={!canScrollNext}
@@ -449,6 +531,45 @@ export default function MarketingAboutPage() {
             >
               <span aria-hidden="true">→</span>
             </button>
+          </div>
+
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-1">
+              <p className="mkt-kicker text-[0.72rem] tracking-[0.16em] text-[var(--mk-text-1)]">
+                {credentialLabels.position(currentSnap, credentialItems.length)}
+              </p>
+              <p className="mkt-copy text-xs text-[var(--mk-text-1)] sm:text-sm">
+                {credentialItems[currentSnap]?.categoryLabel}
+                {' · '}
+                {credentialItems[currentSnap]?.title}
+              </p>
+              <p className="mkt-copy text-xs text-[var(--mk-text-1)] sm:text-sm">
+                {isCompactCarousel ? credentialLabels.mobileHint : credentialLabels.desktopHint}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2" aria-label={credentials.title}>
+              {credentialItems.map((item, index) => {
+                const isActive = index === currentSnap;
+
+                return (
+                  <button
+                    key={`${item.group}-${item.title}-dot`}
+                    type="button"
+                    onClick={() => {
+                      pauseAutoplayAfterInteraction(isCompactCarousel ? 14000 : 7200);
+                      emblaApi?.scrollTo(index);
+                    }}
+                    aria-label={credentialLabels.dot(index, item.title)}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`h-2.5 w-2.5 rounded-full border transition-all duration-200 ${
+                      isActive
+                        ? 'border-[rgba(45,86,112,0.28)] bg-[var(--mk-brand-4)] shadow-[0_0_0_4px_rgba(45,86,112,0.10)]'
+                        : 'border-[rgba(45,86,112,0.16)] bg-[rgba(45,86,112,0.18)] hover:bg-[rgba(45,86,112,0.3)]'
+                    }`}
+                  />
+                );
+              })}
+            </div>
           </div>
         </MotionReveal>
 

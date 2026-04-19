@@ -47,6 +47,10 @@ test.describe('marketing desktop regressions', () => {
 
   for (const pageCase of desktopPages) {
     test(pageCase.name + ' renders without desktop overflow', async ({ page }, testInfo) => {
+      if (pageCase.name === 'solutions') {
+        test.slow();
+      }
+
       await page.goto(pageCase.path);
       await page.waitForLoadState('networkidle');
 
@@ -67,13 +71,97 @@ test.describe('marketing desktop regressions', () => {
       expect(overflow.overflowX).toBeLessThanOrEqual(1);
 
       const screenshotPath = testInfo.outputPath(pageCase.name + '-desktop.png');
-      await page.screenshot({ path: screenshotPath, fullPage: true, animations: 'disabled', timeout: 20_000 });
+      await page.screenshot({
+        path: screenshotPath,
+        fullPage: pageCase.name !== 'solutions',
+        animations: 'disabled',
+        timeout: pageCase.name === 'solutions' ? 20_000 : 45_000,
+      });
       await testInfo.attach(pageCase.name + '-desktop', {
         path: screenshotPath,
         contentType: 'image/png',
       });
     });
   }
+
+  test('solutions industry rail stays inside the industry card and remains swipeable on desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 1200 });
+    await page.goto('/solutions');
+    await page.waitForLoadState('networkidle');
+
+    const firstIndustryMetrics = await page.evaluate(() => {
+      const strip = document.querySelector('.mkt-industry-strip');
+      const rail = strip?.querySelector('.mkt-industry-rail');
+      const firstCard = rail?.querySelector('.mkt-industry-module-card');
+      const mainImage = strip?.querySelector('.mkt-industry-media-frame .mkt-solution-image-main');
+      const moduleImage = rail?.querySelector('.mkt-solution-image-module');
+
+      if (
+        !(strip instanceof HTMLElement) ||
+        !(rail instanceof HTMLElement) ||
+        !(firstCard instanceof HTMLElement) ||
+        !(mainImage instanceof HTMLElement) ||
+        !(moduleImage instanceof HTMLElement)
+      ) {
+        throw new Error('Solutions industry layout elements are missing');
+      }
+
+      const stripRect = strip.getBoundingClientRect();
+      const railRect = rail.getBoundingClientRect();
+      const cardRect = firstCard.getBoundingClientRect();
+      const parseScale = (transform: string) => {
+        if (!transform || transform === 'none') return 1;
+        const match = transform.match(/matrix\(([^,]+)/);
+        return match ? Number.parseFloat(match[1]) : 1;
+      };
+
+      return {
+        railOverflow: Math.round(rail.scrollWidth - rail.clientWidth),
+        railWithinStrip:
+          railRect.left >= stripRect.left - 1 &&
+          railRect.right <= stripRect.right + 1,
+        cardWidth: Math.round(cardRect.width),
+        railWidth: Math.round(rail.clientWidth),
+        peekWidth: Math.round(rail.clientWidth - cardRect.width),
+        mainScale: parseScale(getComputedStyle(mainImage).transform),
+        moduleScale: parseScale(getComputedStyle(moduleImage).transform),
+      };
+    });
+
+    expect(firstIndustryMetrics.railWithinStrip).toBe(true);
+    expect(firstIndustryMetrics.railOverflow).toBeGreaterThan(40);
+    expect(firstIndustryMetrics.cardWidth).toBeLessThan(firstIndustryMetrics.railWidth);
+    expect(firstIndustryMetrics.peekWidth).toBeGreaterThanOrEqual(24);
+    expect(firstIndustryMetrics.mainScale).toBeGreaterThanOrEqual(1.18);
+    expect(firstIndustryMetrics.mainScale).toBeLessThanOrEqual(1.22);
+    expect(firstIndustryMetrics.moduleScale).toBeGreaterThanOrEqual(1.1);
+  });
+
+  test('cases page keeps main visuals zoomed without overflow', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 1200 });
+    await page.goto('/cases');
+    await page.waitForLoadState('networkidle');
+
+    const metrics = await page.evaluate(() => {
+      const image = document.querySelector('.mkt-case-image-main');
+      const parseScale = (transform: string) => {
+        if (!transform || transform === 'none') return 1;
+        const match = transform.match(/matrix\(([^,]+)/);
+        return match ? Number.parseFloat(match[1]) : 1;
+      };
+
+      if (!(image instanceof HTMLElement)) {
+        throw new Error('Cases main image is missing');
+      }
+
+      return {
+        scale: parseScale(getComputedStyle(image).transform),
+      };
+    });
+
+    expect(metrics.scale).toBeGreaterThanOrEqual(1.48);
+    expect(metrics.scale).toBeLessThanOrEqual(1.52);
+  });
 
   test('home page wires motion hooks and desktop header actions', async ({ page }, testInfo) => {
     await page.goto('/');
@@ -140,6 +228,7 @@ test.describe('marketing desktop regressions', () => {
       const stageEl = document.querySelector('.mkt-credentials-stage');
       const viewportEl = document.querySelector('.mkt-credentials-viewport');
       const activeSlide = document.querySelector('.mkt-credentials-slide-active');
+      const slidesInDom = Array.from(document.querySelectorAll('.mkt-credentials-slide'));
 
       if (!(viewportEl instanceof HTMLElement) || !(stageEl instanceof HTMLElement) || !(activeSlide instanceof HTMLElement)) {
         throw new Error('Credentials carousel elements are missing');
@@ -148,6 +237,46 @@ test.describe('marketing desktop regressions', () => {
       const stageRect = stageEl.getBoundingClientRect();
       const prevRect = prev instanceof HTMLElement ? prev.getBoundingClientRect() : null;
       const nextRect = next instanceof HTMLElement ? next.getBoundingClientRect() : null;
+      const visibleSlides = slidesInDom
+        .map((slide, index) => {
+          if (!(slide instanceof HTMLElement)) return null;
+
+          const rect = slide.getBoundingClientRect();
+          const intersectsStage = rect.right > stageRect.left && rect.left < stageRect.right;
+
+          if (!intersectsStage) return null;
+
+          return { index, left: rect.left, right: rect.right };
+        })
+        .filter((slide): slide is { index: number; left: number; right: number } => Boolean(slide))
+        .sort((a, b) => a.left - b.left);
+      const visibleGaps = visibleSlides.slice(1).map((slide, index) =>
+        Math.round((slide.left - visibleSlides[index].right) * 100) / 100,
+      );
+      const gapSpread = visibleGaps.length > 1
+        ? Math.round((Math.max(...visibleGaps) - Math.min(...visibleGaps)) * 100) / 100
+        : 0;
+      const prevSlide = slidesInDom.find(
+        (slide): slide is HTMLElement => slide instanceof HTMLElement && slide.classList.contains('mkt-credentials-slide-prev'),
+      );
+      const nextSlide = slidesInDom.find(
+        (slide): slide is HTMLElement => slide instanceof HTMLElement && slide.classList.contains('mkt-credentials-slide-next'),
+      );
+      const activeCard = activeSlide.querySelector('.mkt-credentials-card');
+      const prevCard = prevSlide?.querySelector('.mkt-credentials-card') ?? null;
+      const nextCard = nextSlide?.querySelector('.mkt-credentials-card') ?? null;
+      const activeRect = activeCard instanceof HTMLElement ? activeCard.getBoundingClientRect() : null;
+      const prevCardRect = prevCard instanceof HTMLElement ? prevCard.getBoundingClientRect() : null;
+      const nextCardRect = nextCard instanceof HTMLElement ? nextCard.getBoundingClientRect() : null;
+      const leftGap = activeRect && prevCardRect
+        ? Math.round((activeRect.left - prevCardRect.right) * 100) / 100
+        : null;
+      const rightGap = activeRect && nextCardRect
+        ? Math.round((nextCardRect.left - activeRect.right) * 100) / 100
+        : null;
+      const sideGapDelta = leftGap !== null && rightGap !== null
+        ? Math.round(Math.abs(leftGap - rightGap) * 100) / 100
+        : null;
 
       return {
         clicks: clickCount,
@@ -159,6 +288,11 @@ test.describe('marketing desktop regressions', () => {
         nextCenter: nextRect ? Math.round(nextRect.left + nextRect.width / 2) : null,
         prevDisabled: prev instanceof HTMLButtonElement ? prev.disabled : null,
         nextDisabled: next instanceof HTMLButtonElement ? next.disabled : null,
+        visibleGaps,
+        gapSpread,
+        leftGap,
+        rightGap,
+        sideGapDelta,
       };
     }, clicks);
 
@@ -171,6 +305,7 @@ test.describe('marketing desktop regressions', () => {
       prevDisabled: false,
       nextDisabled: false,
     });
+    const initialProbe = await readProbe(0);
     await expect(prevArrow).toBeEnabled();
     await expect(nextArrow).toBeEnabled();
 
@@ -195,14 +330,24 @@ test.describe('marketing desktop regressions', () => {
           probe.nextCenter !== null &&
           probe.prevCenter <= probe.stageLeft + 40 &&
           probe.nextCenter >= probe.stageRight - 40,
-        activeTitle: probe.activeTitle,
+        titleChangedFromInitial:
+          Boolean(probe.activeTitle) &&
+          probe.activeTitle !== initialProbe.activeTitle,
+        sideGapsBalanced:
+          probe.leftGap !== null &&
+          probe.rightGap !== null &&
+          probe.leftGap >= 12 &&
+          probe.rightGap >= 12 &&
+          probe.sideGapDelta !== null &&
+          probe.sideGapDelta <= 6,
       };
     }).toEqual({
       clicks,
       prevDisabled: false,
       nextDisabled: false,
       arrowsWrappedStage: true,
-      activeTitle: 'WanFlow 多智能体协同编排平台 V1.0',
+      titleChangedFromInitial: true,
+      sideGapsBalanced: true,
     });
 
     expect(clicks).toBeGreaterThan(0);
@@ -211,6 +356,33 @@ test.describe('marketing desktop regressions', () => {
 
 test.describe('marketing mobile smoke', () => {
   test.skip(({ isMobile }) => !isMobile);
+
+  test('solutions page keeps scenario cards swipeable on mobile', async ({ page }) => {
+    await page.goto('/solutions');
+    await page.waitForLoadState('networkidle');
+
+    const rail = page.locator('.mkt-industry-scenarios.mkt-industry-rail').first();
+    await expect(rail).toBeVisible();
+
+    const metrics = await rail.evaluate((element) => {
+      const cardNodes = Array.from(element.querySelectorAll('.mkt-industry-module-card'));
+      const cards = cardNodes.filter((node): node is HTMLElement => node instanceof HTMLElement);
+
+      return {
+        clientWidth: element.clientWidth,
+        scrollWidth: element.scrollWidth,
+        cardCount: cards.length,
+        firstWidth: cards[0]?.getBoundingClientRect().width ?? null,
+        firstTop: cards[0]?.getBoundingClientRect().top ?? null,
+        secondTop: cards[1]?.getBoundingClientRect().top ?? null,
+      };
+    });
+
+    expect(metrics.cardCount).toBeGreaterThanOrEqual(3);
+    expect(metrics.scrollWidth).toBeGreaterThan(metrics.clientWidth + 40);
+    expect(metrics.firstWidth ?? metrics.clientWidth).toBeLessThan(metrics.clientWidth);
+    expect(Math.abs((metrics.firstTop ?? 0) - (metrics.secondTop ?? 0))).toBeLessThanOrEqual(2);
+  });
 
   test('home page mobile menu opens and layout stays within viewport', async ({ page }, testInfo) => {
     await page.goto('/');

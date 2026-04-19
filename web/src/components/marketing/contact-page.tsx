@@ -28,6 +28,7 @@ export default function MarketingContactPage() {
             eyebrow={copy.contact.hero.eyebrow}
             eyebrowClassName="mkt-section-kicker-large"
             title={copy.contact.hero.title}
+            titleClassName="mkt-display-subpage"
             body={copy.contact.hero.body}
             primary={{ href: '/contact', label: copy.common.primaryCta }}
             secondary={{ href: '/solutions', label: navLabel('/solutions') }}
@@ -65,7 +66,7 @@ export default function MarketingContactPage() {
               </div>
             </section>
 
-            <section className="mkt-card px-6 py-6">
+            <section className="mkt-card hidden px-6 py-6 md:block">
               <p className="mkt-kicker mkt-section-kicker-large">{copy.contact.side.responseTitle}</p>
               <p className="mkt-copy mt-4 text-sm">{copy.contact.side.responseBody}</p>
               <div className="mt-4 space-y-3 text-sm text-[var(--mk-text-1)]">
