@@ -109,63 +109,63 @@ export default function MarketingHomePage() {
           />
         </MotionReveal>
 
-        <MotionReveal as="section" delay={60} intensity="strong" className="mkt-panel mkt-editorial-band px-6 py-8 sm:px-8 lg:px-10">
-          <div className="mkt-card mb-6 px-5 py-5 sm:px-6 sm:py-6">
-            <p className="mkt-kicker mkt-section-kicker-large">
-              {locale === 'zh' ? '关键结论' : 'Key takeaways'}
-            </p>
-            <p className="mkt-copy mt-2 text-sm">
-              {locale === 'zh'
-                ? '更新日期：2026-04-18。WanFlow 提供企业 AI 运营与交付体系，核心价值在于把数据治理、流程自动化、多智能体协同与模型运营接入真实业务流程。'
-                : 'Updated: 2026-04-18. WanFlow delivers an enterprise AI operating system by connecting data governance, workflow automation, multi-agent collaboration, and model operations.'}
-            </p>
-            <ul className="mkt-copy mt-3 list-disc space-y-1 pl-5 text-sm">
-              <li>{locale === 'zh' ? '覆盖金融、制造、零售、医疗与企业运营场景' : 'Coverage spans finance, manufacturing, retail, healthcare, and enterprise operations.'}</li>
-              <li>{locale === 'zh' ? '强调可追踪交付与持续优化闭环' : 'Delivery is designed for traceability and continuous optimization.'}</li>
-              <li>{locale === 'zh' ? '支持预约咨询并在业务日 24 小时内响应' : 'Consultation requests are handled within 24 business hours.'}</li>
-            </ul>
-            <div className="mt-4 overflow-x-auto">
-              <table className="min-w-full border-collapse text-sm">
-                <thead>
-                  <tr>
-                    <th className="border border-[var(--mk-line-1)] px-3 py-2 text-left">{locale === 'zh' ? '指标' : 'Metric'}</th>
-                    <th className="border border-[var(--mk-line-1)] px-3 py-2 text-left">{locale === 'zh' ? '方法' : 'Method'}</th>
-                    <th className="border border-[var(--mk-line-1)] px-3 py-2 text-left">{locale === 'zh' ? '目标结果' : 'Target outcome'}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-[var(--mk-line-1)] px-3 py-2">{locale === 'zh' ? '线索响应时效' : 'Lead response window'}</td>
-                    <td className="border border-[var(--mk-line-1)] px-3 py-2">{locale === 'zh' ? '流程编排 + 协同路由' : 'Workflow orchestration + routing'}</td>
-                    <td className="border border-[var(--mk-line-1)] px-3 py-2">{locale === 'zh' ? '业务日 24 小时内' : 'Within 24 business hours'}</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-[var(--mk-line-1)] px-3 py-2">{locale === 'zh' ? '交付闭环' : 'Delivery loop'}</td>
-                    <td className="border border-[var(--mk-line-1)] px-3 py-2">{locale === 'zh' ? '数据治理 + 模型运营' : 'Data governance + model operations'}</td>
-                    <td className="border border-[var(--mk-line-1)] px-3 py-2">{locale === 'zh' ? '持续优化迭代' : 'Continuous optimization'}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <MotionReveal as="section" delay={60} intensity="strong" className="mkt-panel px-6 py-8 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <SectionHeading
-              eyebrow={copy.home.platformView.eyebrow}
-              title={copy.home.platformView.title}
-              body={copy.home.platformView.body}
+              eyebrow={locale === 'zh' ? '业务速览' : 'Business snapshot'}
+              title={locale === 'zh' ? '企业 AI 运营与交付概览' : 'Enterprise AI operations snapshot'}
+              body={locale === 'zh'
+                ? 'WanFlow 围绕数据治理、流程自动化、多智能体协同与模型运营，帮助企业建立稳定、可复用的执行链路，并以统一术语、清晰输入输出和可验证指标支撑跨团队决策与规模化落地'
+                : 'WanFlow aligns data governance, workflow automation, multi-agent collaboration, and model operations to build a stable, reusable execution chain with consistent terminology, clear input-output mapping, and verifiable indicators for cross-team decisions and scaled delivery'}
               size="large"
             />
-            <div className="mkt-stagger-grid grid gap-3 md:grid-cols-2">
-              {copy.home.platformView.bullets.map((bullet, index) => (
-                <article
-                  key={bullet}
-                  className={index === 0 ? 'mkt-split-callout px-5 py-5 md:col-span-2' : 'mkt-rail-card px-5 py-5'}
-                >
-                  <span className="mkt-card-index">{labels.flow} 0{index + 1}</span>
-                  <p className="mkt-card-heading-sm mt-4">{bullet}</p>
-                </article>
-              ))}
+            <div className="mkt-card px-5 py-5 sm:px-6 sm:py-6">
+              <p className="mkt-kicker mkt-section-kicker-large">
+                {locale === 'zh' ? '执行骨架' : 'Execution spine'}
+              </p>
+              <p className="mkt-copy mt-3 text-sm text-[var(--mk-text-1)]">{copy.home.platformView.body}</p>
+              <ul className="mkt-copy mt-4 space-y-2 text-sm text-[var(--mk-text-0)]">
+                {copy.home.platformView.bullets.map((bullet, index) => (
+                  <li key={bullet} className="flex gap-2">
+                    <span className="mkt-card-index shrink-0">{labels.flow} 0{index + 1}</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </div>
+          <div className="mkt-snapshot-table-wrap mt-6 overflow-x-auto">
+            <table className="mkt-snapshot-table min-w-full border-collapse text-sm">
+              <colgroup className="mkt-snapshot-colgroup">
+                <col className="mkt-snapshot-col mkt-snapshot-col-focus" />
+                <col className="mkt-snapshot-col mkt-snapshot-col-io" />
+                <col className="mkt-snapshot-col mkt-snapshot-col-kpi" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th className="mkt-snapshot-th text-left">{locale === 'zh' ? '客户关注' : 'Client concern'}</th>
+                  <th className="mkt-snapshot-th text-left">{locale === 'zh' ? '输入到输出' : 'Input to output'}</th>
+                  <th className="mkt-snapshot-th text-left">{locale === 'zh' ? 'KPI / 周期' : 'KPI / timeline'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '响应时效' : 'Response speed'}</td>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '咨询需求 -> 诊断建议与行动清单' : 'Consultation request -> diagnostic recommendations and action plan'}</td>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '24 小时内首轮回复 · 1 个工作日确认计划' : 'Initial response within 24 hours · plan confirmation in 1 business day'}</td>
+                </tr>
+                <tr>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '项目推进' : 'Project progress'}</td>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '业务目标与现状 -> 里程碑方案与阶段交付' : 'Business goals and baseline -> milestone plan and phased delivery'}</td>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '里程碑按期率 >95% · 2-6 周首期落地' : 'Milestone on-time rate >95% · first phase in 2-6 weeks'}</td>
+                </tr>
+                <tr>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '交付结果' : 'Delivery outcome'}</td>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '数据与流程基础 -> 可复用的 AI 运营闭环' : 'Data and workflow foundation -> reusable AI operations loop'}</td>
+                  <td className="mkt-snapshot-td">{locale === 'zh' ? '关键流程稳定运行 · 持续迭代优化' : 'Stable operation of critical workflows · continuous iteration'}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </MotionReveal>
 
@@ -264,10 +264,10 @@ export default function MarketingHomePage() {
         <MotionReveal as="section" delay={140} intensity="strong" className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <SectionHeading
             eyebrow={locale === 'zh' ? 'FAQ' : 'FAQ'}
-            title={locale === 'zh' ? '常见问题（便于 AI 直接提取）' : 'Frequently asked questions'}
+            title={locale === 'zh' ? '常见问题' : 'Frequently asked questions'}
             body={locale === 'zh'
-              ? '以下问答与首页结构化数据保持一致，用于提升可提取性与引用准确性。'
-              : 'These Q&A pairs are aligned with structured data to improve extractability and citation accuracy.'}
+              ? '以下问答围绕服务范围、合作方式与交付节奏，帮助你快速了解 WanFlow 的合作路径。'
+              : 'These answers cover service scope, collaboration model, and delivery cadence to help teams evaluate engagement quickly.'}
             size="large"
           />
           <div className="mt-6 space-y-4">
@@ -282,30 +282,48 @@ export default function MarketingHomePage() {
 
         <MotionReveal as="section" delay={145} intensity="strong" className="mkt-panel px-6 py-7 sm:px-8 lg:px-10">
           <SectionHeading
-            eyebrow={locale === 'zh' ? '参考依据' : 'References'}
-            title={locale === 'zh' ? '方法与治理参考' : 'Method and governance references'}
+            eyebrow={locale === 'zh' ? '治理框架' : 'Governance framework'}
+            title={locale === 'zh' ? '治理与实施标准' : 'Governance and implementation standards'}
             body={locale === 'zh'
-              ? '以下公开标准与研究用于支撑企业 AI 运营治理、风险控制与评估流程设计。'
-              : 'The following public standards and research are used as references for enterprise AI governance and evaluation design.'}
+              ? '我们参考以下公开标准与研究，作为企业 AI 项目治理、风险控制与交付评估的实践基线。'
+              : 'These public standards and research references provide practical baselines for enterprise AI governance, risk control, and delivery evaluation.'}
             size="large"
           />
-          <ul className="mkt-copy mt-5 list-disc space-y-2 pl-5 text-sm">
+          <ul className="mt-5 list-disc space-y-2 pl-5 text-sm text-[var(--mk-text-1)]">
             <li>
-              <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noreferrer" className="underline">
+              <a
+                href="https://www.nist.gov/itl/ai-risk-management-framework"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-[var(--mk-brand-2)] underline-offset-4 transition-colors duration-200 text-[var(--mk-brand-4)] hover:text-[var(--mk-brand-1)]"
+              >
                 NIST AI Risk Management Framework (AI RMF 1.0)
               </a>
             </li>
             <li>
-              <a href="https://www.iso.org/standard/81230.html" target="_blank" rel="noreferrer" className="underline">
+              <a
+                href="https://www.iso.org/standard/81230.html"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-[var(--mk-brand-2)] underline-offset-4 transition-colors duration-200 text-[var(--mk-brand-4)] hover:text-[var(--mk-brand-1)]"
+              >
                 ISO/IEC 42001:2023 - AI Management System
               </a>
             </li>
             <li>
-              <a href="https://arxiv.org/abs/2308.11432" target="_blank" rel="noreferrer" className="underline">
+              <a
+                href="https://arxiv.org/abs/2308.11432"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-[var(--mk-brand-2)] underline-offset-4 transition-colors duration-200 text-[var(--mk-brand-4)] hover:text-[var(--mk-brand-1)]"
+              >
                 AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation
               </a>
             </li>
           </ul>
+          <p className="mt-4 text-right text-xs text-[var(--mk-text-2)]">
+            {locale === 'zh' ? '内容版本更新：4-20' : 'Content version updated: 4-20'}
+          </p>
         </MotionReveal>
 
         <MotionReveal delay={150} intensity="strong">
