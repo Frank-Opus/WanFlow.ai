@@ -14,7 +14,30 @@ type MotionRevealProps = HTMLAttributes<HTMLElement> & {
   rootMargin?: string;
 };
 
-export default function MotionReveal({
+function MotionRevealStatic({
+  as: Tag = 'div',
+  children,
+  className,
+  delay = 0,
+  intensity = 'base',
+  initiallyVisible = false,
+  style,
+  ...rest
+}: MotionRevealProps) {
+  return (
+    <Tag
+      data-in-view="true"
+      data-initially-visible={initiallyVisible ? 'true' : 'false'}
+      className={['mkt-reveal', `mkt-reveal-${intensity}`, className].filter(Boolean).join(' ')}
+      style={{ '--reveal-delay': `${delay}ms`, ...style } as CSSProperties}
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+function MotionRevealObserved({
   as: Tag = 'div',
   children,
   className,
@@ -67,6 +90,7 @@ export default function MotionReveal({
     <Tag
       ref={ref}
       data-in-view={visible ? 'true' : 'false'}
+      data-initially-visible={initiallyVisible ? 'true' : 'false'}
       className={['mkt-reveal', `mkt-reveal-${intensity}`, className].filter(Boolean).join(' ')}
       style={{ '--reveal-delay': `${delay}ms`, ...style } as CSSProperties}
       {...rest}
@@ -74,4 +98,12 @@ export default function MotionReveal({
       {children}
     </Tag>
   );
+}
+
+export default function MotionReveal(props: MotionRevealProps) {
+  if (props.initiallyVisible) {
+    return <MotionRevealStatic {...props} />;
+  }
+
+  return <MotionRevealObserved {...props} />;
 }

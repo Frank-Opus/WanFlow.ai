@@ -21,7 +21,10 @@ export default function MarketingSolutionsPage() {
         modulesTitle: '项目做完以后，企业真正会留下来的五类长期能力',
         modulesBody: '不是上线一个页面就结束，而是把数据、流程、多智能体和运营闭环沉成以后还能继续扩的底盘。',
         modulesInIndustry: '常见业务场景',
-        railHint: '左右滑动查看更多场景',
+        industrySceneMap: '先看当前最该优先落地的一段，再左右滑动查看另外两段协同链路。',
+        railHint: '左右滑动查看 3 个场景',
+        primaryScene: '优先落地场景',
+        supportingScenes: '协同场景',
         stats: '典型改善区间',
         deliverables: '最终会留下什么',
         outcomes: '常见结果',
@@ -40,7 +43,10 @@ export default function MarketingSolutionsPage() {
         modulesTitle: 'A real project should leave behind five durable operating capabilities',
         modulesBody: 'The goal is not one launch moment. It is a base the team can keep extending across data, workflows, multi-agent execution, and optimization.',
         modulesInIndustry: 'Typical business scenarios',
-        railHint: 'Swipe sideways for more scenarios',
+        industrySceneMap: 'Start with the most important execution chain, then swipe sideways to review the other supporting scenarios.',
+        railHint: 'Swipe to view all 3 scenarios',
+        primaryScene: 'Primary scenario',
+        supportingScenes: 'Supporting scenarios',
         stats: 'Typical impact range',
         deliverables: 'What gets left behind',
         outcomes: 'Typical outcomes',
@@ -50,6 +56,82 @@ export default function MarketingSolutionsPage() {
         contact: 'Contact',
       };
 
+  const renderIndustryModuleCard = (
+    module: (typeof copy.solutions.industries)[number]['modules'][number],
+    index: number,
+    variant: 'featured' | 'supporting' = 'supporting',
+  ) => (
+    <article
+      key={module.title}
+      className="mkt-industry-module-card min-w-0"
+    >
+      <div className="space-y-3">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <span className="mkt-card-index">0{index + 1}</span>
+          <div className="mkt-industry-module-meta">
+            <span className="mkt-industry-module-label">
+              {variant === 'featured' ? labels.primaryScene : labels.supportingScenes}
+            </span>
+            <p className="mkt-module-impact">{module.outcome}</p>
+          </div>
+        </div>
+      </div>
+      <h4 className="zh-card-title mkt-card-heading mt-4">{module.title}</h4>
+      <p className="mkt-copy mt-3 text-sm">{module.body}</p>
+      <div className="mkt-proof-callout mkt-proof-callout-compact mt-4">
+        <p className="mkt-proof-callout-label">{labels.whatWeDo}</p>
+        <p className="mkt-proof-callout-title">{module.originalMethod}</p>
+        <p className="mkt-proof-callout-body">
+          {locale === 'zh'
+            ? `${module.aiCapability} 负责把速度提起来，${module.technicalTrait} 负责把边界、稳定性和可追踪性守住。`
+            : `We first fix the operating nodes that most affect speed and quality, then bring in ${module.aiCapability} and use ${module.technicalTrait} to keep boundaries, rhythm, and traceability under control.`}
+        </p>
+      </div>
+      <div className="mkt-module-story mt-4">
+        <p className="mkt-proof-callout-label">{labels.moduleOutcome}</p>
+        <p className="mkt-copy mt-3 text-sm">
+          {locale === 'zh'
+            ? '通常先能看到时效、回退率、人工负荷和跨团队协同成本往下走。'
+            : 'This usually shows up first in cycle time, accuracy, rework rate, manual load, or coordination cost.'}
+        </p>
+      </div>
+      <div className="mkt-module-image-slot mt-4">
+        {(module as { imageSrc?: string }).imageSrc ? (
+          <div className="mkt-module-image-frame relative aspect-[4/3] overflow-hidden rounded-[0.9rem] border border-[rgba(86,125,149,0.18)] bg-white">
+            <Image
+              src={(module as { imageSrc?: string }).imageSrc!}
+              alt={module.imageTitle}
+              fill
+              className="mkt-solution-image mkt-solution-image-module object-cover object-top"
+              loading="eager"
+              sizes={variant === 'featured'
+                ? '(min-width: 1280px) 26vw, (min-width: 768px) 40vw, 84vw'
+                : '(min-width: 1280px) 18vw, (min-width: 768px) 40vw, 84vw'}
+            />
+          </div>
+        ) : (
+          <div className="mkt-module-image-fallback">
+            <p className="mkt-card-heading-sm">{module.imageTitle}</p>
+            <p className="mkt-copy mt-2 text-sm text-[var(--mk-text-2)]">
+              {locale === 'zh' ? '该模块展示图正在补充中。' : 'Module visual is being prepared.'}
+            </p>
+          </div>
+        )}
+      </div>
+      <div className="mt-4">
+        <p className="mkt-meta-label">{labels.deliverables}</p>
+        <ol className="mkt-number-list mt-3">
+          {module.deliverables.map((deliverable, deliverableIndex) => (
+            <li key={deliverable} className="mkt-number-item">
+              <span className="mkt-number-badge">{deliverableIndex + 1}</span>
+              <span>{deliverable}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </article>
+  );
+
   return (
     <main id="main-content" className="marketing-main">
       <div className="mkt-shell">
@@ -58,6 +140,7 @@ export default function MarketingSolutionsPage() {
             eyebrow={copy.solutions.problemFrame.eyebrow}
             eyebrowClassName="mkt-section-kicker-large"
             title={copy.solutions.problemFrame.title}
+            titleClassName="mkt-display-subpage"
             body={copy.solutions.problemFrame.body}
             primary={{ href: '/contact', label: copy.common.primaryCta }}
             secondary={{ href: '/cases', label: navLabel('/cases') }}
@@ -82,130 +165,88 @@ export default function MarketingSolutionsPage() {
             size="large"
           />
           <div className="space-y-4">
-            {copy.solutions.industries.map((item) => (
-              <article
-                key={item.title}
-                className="mkt-industry-strip mkt-panel px-5 py-5 sm:px-6 sm:py-6 lg:px-7 lg:py-7"
-              >
-                <div className="grid gap-6 xl:grid-cols-[minmax(22rem,0.92fr)_minmax(0,1.08fr)] xl:items-start">
-                  <div className="min-w-0 space-y-5">
-                    <div className="min-w-0 space-y-3">
-                      <p className="mkt-kicker mkt-section-kicker-large">{labels.industryLabel}</p>
-                      <p className="mkt-industry-sector">{item.title}</p>
-                      <h3 className="mkt-industry-title">{item.headline}</h3>
-                      <p className="mkt-industry-summary mkt-copy text-[0.98rem] sm:text-[1.02rem]">{item.summary}</p>
-                    </div>
-                    <div className="space-y-3">
-                      <p className="mkt-meta-label">{labels.stats}</p>
-                      <div className="mkt-stat-row">
-                        {item.stats.map((stat) => (
-                          <span key={stat} className="mkt-stat-chip">{stat}</span>
-                        ))}
+            {copy.solutions.industries.map((item) => {
+              return (
+                <article
+                  key={item.title}
+                  className="mkt-industry-strip mkt-panel px-5 py-5 sm:px-6 sm:py-6 lg:px-7 lg:py-7"
+                >
+                  <div className="mkt-industry-layout">
+                    <div className="min-w-0 space-y-5">
+                      <div className="min-w-0 space-y-3">
+                        <p className="mkt-kicker mkt-section-kicker-large">{labels.industryLabel}</p>
+                        <p className="mkt-industry-sector">{item.title}</p>
+                        <h3 className="mkt-industry-title">{item.headline}</h3>
+                        <p className="mkt-industry-summary mkt-copy text-[0.98rem] sm:text-[1.02rem]">{item.summary}</p>
+                      </div>
+                      <div className="space-y-3">
+                        <p className="mkt-meta-label">{labels.stats}</p>
+                        <div className="mkt-stat-row">
+                          {item.stats.map((stat) => (
+                            <span key={stat} className="mkt-stat-chip">{stat}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="mkt-proof-callout">
+                        <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
+                        <p className="mkt-proof-callout-title">{item.originalMethod}</p>
+                        <p className="mkt-proof-callout-body">
+                          {locale === 'zh'
+                            ? `${item.technicalTraits.join('、')} 这些地方一旦不稳，业务就会一直回退。WanFlow 会先把这几段接住，再把 AI 和多智能体真正接进去。`
+                            : `We do not start by stacking tools. We start by connecting the key operating links around ${item.technicalTraits.join(', ')} so the team can get the blocked workflow running first and then keep expanding.`}
+                        </p>
+                      </div>
+                      <div className="mkt-industry-visual">
+                        {(item as { imageSrc?: string }).imageSrc ? (
+                          <div className="mkt-industry-media-frame relative aspect-[16/10] overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-white">
+                            <Image
+                              src={(item as { imageSrc?: string }).imageSrc!}
+                              alt={item.imageTitle}
+                              fill
+                              className="mkt-solution-image mkt-solution-image-main object-cover object-top"
+                              loading="eager"
+                              sizes="(min-width: 1280px) 40vw, 100vw"
+                            />
+                          </div>
+                        ) : (
+                          <div className="mt-4 space-y-3">
+                            <h4 className="mkt-card-heading-sm">{item.imageTitle}</h4>
+                            <p className="mkt-copy text-sm">{item.imageHint}</p>
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <p className="mkt-meta-label">{labels.outcomes}</p>
+                        <ol className="mkt-number-list mt-3">
+                          {item.outcomes.map((outcome, index) => (
+                            <li key={outcome} className="mkt-number-item">
+                              <span className="mkt-number-badge">{index + 1}</span>
+                              <span>{outcome}</span>
+                            </li>
+                          ))}
+                        </ol>
                       </div>
                     </div>
-                    <div className="mkt-proof-callout">
-                      <p className="mkt-proof-callout-label">{labels.originalMethod}</p>
-                      <p className="mkt-proof-callout-title">{item.originalMethod}</p>
-                      <p className="mkt-proof-callout-body">
-                        {locale === 'zh'
-                          ? `${item.technicalTraits.join('、')} 这些地方一旦不稳，业务就会一直回退。WanFlow 会先把这几段接住，再把 AI 和多智能体真正接进去。`
-                          : `We do not start by stacking tools. We start by connecting the key operating links around ${item.technicalTraits.join(', ')} so the team can get the blocked workflow running first and then keep expanding.`}
-                      </p>
-                    </div>
-                    <div className="mkt-industry-visual">
-                      {(item as { imageSrc?: string }).imageSrc ? (
-                        <div className="mkt-industry-media-frame relative overflow-hidden rounded-[1rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[16/10]">
-                          <Image
-                            src={(item as { imageSrc?: string }).imageSrc!}
-                            alt={item.imageTitle}
-                            fill
-                            className="mkt-solution-image object-cover object-top"
-                            sizes="(min-width: 1280px) 40vw, 100vw"
-                          />
+                    <div className="min-w-0 space-y-3">
+                      <div className="space-y-3">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                          <div className="space-y-2">
+                            <p className="mkt-meta-label">{labels.modulesInIndustry}</p>
+                            <p className="max-w-[34rem] text-sm text-[var(--mk-text-2)]">{labels.industrySceneMap}</p>
+                          </div>
+                          <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
                         </div>
-                      ) : (
-                        <div className="mt-4 space-y-3">
-                          <h4 className="mkt-card-heading-sm">{item.imageTitle}</h4>
-                          <p className="mkt-copy text-sm">{item.imageHint}</p>
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <p className="mkt-meta-label">{labels.outcomes}</p>
-                      <ol className="mkt-number-list mt-3">
-                        {item.outcomes.map((outcome, index) => (
-                          <li key={outcome} className="mkt-number-item">
-                            <span className="mkt-number-badge">{index + 1}</span>
-                            <span>{outcome}</span>
-                          </li>
-                        ))}
-                      </ol>
+                      </div>
+                      <div className="mkt-industry-scenarios mkt-industry-rail">
+                        {item.modules.map((module, index) =>
+                          renderIndustryModuleCard(module, index, index === 0 ? 'featured' : 'supporting'),
+                        )}
+                      </div>
                     </div>
                   </div>
-                  <div className="min-w-0 space-y-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="mkt-meta-label">{labels.modulesInIndustry}</p>
-                      <p className="text-xs text-[var(--mk-text-2)]">{labels.railHint}</p>
-                    </div>
-                    <div className="mkt-industry-rail">
-                      {item.modules.map((module, index) => (
-                        <article key={module.title} className="mkt-industry-module-card">
-                          <div className="space-y-3">
-                            <span className="mkt-card-index">0{index + 1}</span>
-                            <p className="mkt-module-impact">{module.outcome}</p>
-                          </div>
-                          <h4 className="zh-card-title mkt-card-heading mt-4">{module.title}</h4>
-                          <p className="mkt-copy mt-3 text-sm">{module.body}</p>
-                          <div className="mkt-proof-callout mkt-proof-callout-compact mt-4">
-                            <p className="mkt-proof-callout-label">{labels.whatWeDo}</p>
-                            <p className="mkt-proof-callout-title">{module.originalMethod}</p>
-                            <p className="mkt-proof-callout-body">
-                              {locale === 'zh'
-                                ? `${module.aiCapability} 负责把速度提起来，${module.technicalTrait} 负责把边界、稳定性和可追踪性守住。`
-                                : `We first fix the operating nodes that most affect speed and quality, then bring in ${module.aiCapability} and use ${module.technicalTrait} to keep boundaries, rhythm, and traceability under control.`}
-                            </p>
-                          </div>
-                          <div className="mkt-module-story mt-4">
-                            <p className="mkt-proof-callout-label">{labels.moduleOutcome}</p>
-                            <p className="mkt-copy mt-3 text-sm">
-                              {locale === 'zh'
-                                ? '通常先能看到时效、回退率、人工负荷和跨团队协同成本往下走。'
-                                : 'This usually shows up first in cycle time, accuracy, rework rate, manual load, or coordination cost.'}
-                            </p>
-                          </div>
-                          <div className="mkt-module-image-slot mt-4">
-                            {(module as { imageSrc?: string }).imageSrc ? (
-                              <div className="relative overflow-hidden rounded-[0.9rem] border border-[rgba(86,125,149,0.18)] bg-white aspect-[4/3]">
-                                <Image
-                                  src={(module as { imageSrc?: string }).imageSrc!}
-                                  alt={module.imageTitle}
-                                  fill
-                                  className="mkt-solution-image object-cover object-top"
-                                  sizes="(min-width: 1280px) 24vw, (min-width: 768px) 40vw, 84vw"
-                                />
-                              </div>
-                            ) : (
-                              <p className="mkt-card-heading-sm">{module.imageTitle}</p>
-                            )}
-                          </div>
-                          <div className="mt-4">
-                            <p className="mkt-meta-label">{labels.deliverables}</p>
-                            <ol className="mkt-number-list mt-3">
-                              {module.deliverables.map((deliverable, deliverableIndex) => (
-                                <li key={deliverable} className="mkt-number-item">
-                                  <span className="mkt-number-badge">{deliverableIndex + 1}</span>
-                                  <span>{deliverable}</span>
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
-                        </article>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </MotionReveal>
 

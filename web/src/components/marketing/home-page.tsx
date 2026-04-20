@@ -14,11 +14,15 @@ export default function MarketingHomePage() {
         flow: '骨架',
         brief: '核心概览',
         outcome: '结果',
+        openSolutions: '进入行业解决方案页',
+        openCases: '进入真实案例页',
       }
     : {
         flow: 'Spine',
         brief: 'Key Overview',
         outcome: 'Outcome',
+        openSolutions: 'Open the solutions page',
+        openCases: 'Open the cases page',
       };
   const faqItems = locale === 'zh'
     ? [
@@ -220,11 +224,39 @@ export default function MarketingHomePage() {
 
         <MotionReveal as="section" delay={130} intensity="strong" className="mkt-panel px-6 py-6 sm:px-8 sm:py-7 lg:px-10">
           <div className="mkt-home-entry-grid">
-            <Link href="/solutions" className="mkt-home-entry-card mkt-home-entry-card-primary">
-              <span>{solutionsLabel}</span>
+            <Link
+              href="/solutions"
+              aria-label={labels.openSolutions}
+              className="group mkt-home-entry-card mkt-home-entry-card-primary touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(214,244,255,0.9)] focus-visible:ring-offset-4 focus-visible:ring-offset-[rgba(22,58,75,0.3)] active:translate-y-px active:scale-[0.992]"
+            >
+              <span className="mkt-home-entry-card-surface flex w-full items-center justify-center">
+                <span className="mkt-home-entry-card-body flex min-w-0 flex-col items-center gap-1.5">
+                  <span className="mkt-home-entry-card-label transition-transform duration-200 group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5 group-active:translate-y-0">
+                    {solutionsLabel}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="mkt-home-entry-card-feedback h-1.5 w-10 rounded-full bg-white/0 transition-all duration-200 group-hover:bg-white/18 group-focus-visible:bg-white/30 group-active:w-8"
+                  />
+                </span>
+              </span>
             </Link>
-            <Link href="/cases" className="mkt-home-entry-card">
-              <span>{casesLabel}</span>
+            <Link
+              href="/cases"
+              aria-label={labels.openCases}
+              className="group mkt-home-entry-card touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(47,143,184,0.42)] focus-visible:ring-offset-4 focus-visible:ring-offset-[rgba(242,248,251,0.92)] active:translate-y-px active:scale-[0.992]"
+            >
+              <span className="mkt-home-entry-card-surface flex w-full items-center justify-center">
+                <span className="mkt-home-entry-card-body flex min-w-0 flex-col items-center gap-1.5">
+                  <span className="mkt-home-entry-card-label transition-transform duration-200 group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5 group-active:translate-y-0">
+                    {casesLabel}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="mkt-home-entry-card-feedback h-1.5 w-10 rounded-full bg-[var(--mk-brand-1)]/0 transition-all duration-200 group-hover:bg-[var(--mk-brand-1)]/12 group-focus-visible:bg-[var(--mk-brand-1)]/18 group-active:w-8"
+                  />
+                </span>
+              </span>
             </Link>
           </div>
         </MotionReveal>

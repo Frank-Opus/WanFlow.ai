@@ -14,6 +14,7 @@ export function PageHero({
   secondary,
   aside,
   eyebrowClassName,
+  titleClassName,
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -22,8 +23,12 @@ export function PageHero({
   secondary?: LinkTarget;
   aside?: ReactNode;
   eyebrowClassName?: string;
+  titleClassName?: string;
 }) {
   const eyebrowClass = eyebrowClassName ? `mkt-kicker ${eyebrowClassName}` : 'mkt-kicker';
+  const heroTitleClassName = ['mkt-display', 'max-w-full', 'text-balance', 'sm:max-w-[11.5ch]', 'xl:max-w-[13ch]', '2xl:max-w-[13.5ch]', titleClassName]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <section className="mkt-panel mkt-panel-strong mkt-grid-lines overflow-hidden px-6 py-9 sm:px-8 lg:px-12 lg:py-12 xl:px-14 xl:py-14">
@@ -31,7 +36,7 @@ export function PageHero({
         <div className="mkt-hero-copy max-w-[58rem] space-y-7">
           <p className={`${eyebrowClass} mkt-hero-stage mkt-hero-stage-1`}>{eyebrow}</p>
           <div className="mkt-hero-stage mkt-hero-stage-2 space-y-5">
-            <h1 className="mkt-display max-w-full text-balance sm:max-w-[11.5ch] xl:max-w-[13ch] 2xl:max-w-[13.5ch]">{title}</h1>
+            <h1 className={heroTitleClassName}>{title}</h1>
             <p className="mkt-copy max-w-full text-base sm:max-w-2xl sm:text-[1.08rem] xl:max-w-[48rem]">{body}</p>
           </div>
           <div className="mkt-hero-actions mkt-hero-stage mkt-hero-stage-3 flex flex-wrap gap-3">
