@@ -1,18 +1,12 @@
 ﻿import type { Metadata } from 'next';
 import MarketingHomePage from '@/components/marketing/home-page';
+import { createMarketingPageMetadata } from '@/lib/marketing-metadata';
 import { siteContact } from '@/lib/marketing';
 
 const PAGE_PUBLISHED = '2026-04-18';
 const PAGE_MODIFIED = '2026-04-18';
 
-export const metadata: Metadata = {
-  title: '企业AI运营与交付伙伴：数据治理到模型运营闭环 | WanFlow',
-  description:
-    'WanFlow 将数据治理、流程自动化、多智能体与模型运营连接为企业AI交付体系。查看行业方案与真实案例，预约咨询获取可执行落地路径。',
-  alternates: {
-    canonical: '/',
-  },
-};
+export const metadata: Metadata = createMarketingPageMetadata('/');
 
 export default function HomePage() {
   const organizationSchema = {
