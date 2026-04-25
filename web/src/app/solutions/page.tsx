@@ -1,10 +1,8 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import MarketingSolutionsPage from '@/components/marketing/solutions-page';
+import { createMarketingPageMetadata } from '@/lib/marketing-metadata';
 
-export const metadata: Metadata = {
-  title: '行业解决方案 | WanFlow',
-  description: '查看 WanFlow 面向金融、制造、零售、汽车零部件和企业运营等行业的 AI 解决方案，以及对应的数据、流程和多智能体交付能力。',
-};
+export const metadata: Metadata = createMarketingPageMetadata('/solutions');
 
 export default function SolutionsPage() {
   return <MarketingSolutionsPage />;

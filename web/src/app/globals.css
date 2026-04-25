@@ -1034,6 +1034,108 @@ html[lang='zh-CN'] .mkt-copy {
   letter-spacing: 0.01em;
 }
 
+.mkt-snapshot-table-wrap {
+  border: 1px solid var(--mk-line-1);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(246, 252, 255, 0.72));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+}
+
+.mkt-snapshot-table {
+  width: 100%;
+  min-width: 100%;
+  color: var(--mk-text-0);
+  table-layout: fixed;
+}
+
+.mkt-snapshot-col-focus {
+  width: 20%;
+}
+
+.mkt-snapshot-col-io {
+  width: 43%;
+}
+
+.mkt-snapshot-col-kpi {
+  width: 37%;
+}
+
+.mkt-snapshot-table thead tr {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, white 88%, var(--mk-brand-2)),
+    color-mix(in oklch, white 93%, var(--mk-brand-1))
+  );
+}
+
+.mkt-snapshot-th {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--mk-line-2);
+  color: color-mix(in oklch, var(--mk-brand-4) 70%, var(--mk-text-0) 30%);
+  font-size: 0.79rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+html[lang='zh-CN'] .mkt-snapshot-th {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+.mkt-snapshot-td {
+  padding: 0.84rem 1rem;
+  border-top: 1px solid var(--mk-line-1);
+  color: var(--mk-text-1);
+  font-size: 0.98rem;
+  line-height: 1.52;
+}
+
+.mkt-snapshot-table th + th,
+.mkt-snapshot-table td + td {
+  border-left: 1px solid var(--mk-line-1);
+}
+
+.mkt-snapshot-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.mkt-snapshot-table tbody tr:hover {
+  background: color-mix(in oklch, white 92%, var(--mk-brand-2));
+}
+
+.mkt-snapshot-table tbody td:first-child {
+  color: var(--mk-text-0);
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .mkt-snapshot-table {
+    min-width: 46rem;
+    table-layout: auto;
+  }
+
+  .mkt-snapshot-th,
+  .mkt-snapshot-td {
+    padding: 0.74rem 0.8rem;
+  }
+
+  .mkt-snapshot-th {
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+  }
+
+  html[lang='zh-CN'] .mkt-snapshot-th {
+    font-size: 0.88rem;
+  }
+
+  .mkt-snapshot-td {
+    font-size: 0.92rem;
+  }
+}
+
 .mkt-button-primary,
 .mkt-button-secondary,
 .mkt-menu-button,

@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '隐私政策 | WanFlow',
   description: 'WanFlow 隐私政策，说明联系表单、站点访问与业务沟通信息的收集、使用与保护方式。',
+  alternates: {
+    canonical: '/privacy',
+  },
 };
 
 const sections = [
